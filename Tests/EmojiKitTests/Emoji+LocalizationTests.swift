@@ -12,10 +12,6 @@ import XCTest
 
 final class Emoji_LocalizationTests: XCTestCase {
     
-    let english = Locale(identifier: "en-US")
-    let swedish = Locale(identifier: "sv")
-    let finnish = Locale(identifier: "fi")
-    
     func testLocalizationKeyIsValid() {
         let value = Emoji("😀").localizationKey
         XCTAssertEqual(value, "😀")
@@ -23,15 +19,15 @@ final class Emoji_LocalizationTests: XCTestCase {
     
     func testLocalizedNameIsValidForManyLocales() {
         let emoji = Emoji("😀")
-        XCTAssertEqual(emoji.localizedName(for: english), "Grinning Face")
-        XCTAssertEqual(emoji.localizedName(for: swedish), "Leende ansikte")
+        XCTAssertEqual(emoji.localizedName(for: .english), "Grinning Face")
+        XCTAssertEqual(emoji.localizedName(for: .swedish), "Leende ansikte")
     }
     
     func testLocalizedNameHasCurrentLocaleFallback() {
         let emoji = Emoji("😀")
-        XCTAssertEqual(emoji.localizedName(for: english), "Grinning Face")
+        XCTAssertEqual(emoji.localizedName(for: .english), "Grinning Face")
         XCTAssertEqual(
-            emoji.localizedName(for: finnish),
+            emoji.localizedName(for: .finnish),
             emoji.localizedName(for: .current)
         )
     }
