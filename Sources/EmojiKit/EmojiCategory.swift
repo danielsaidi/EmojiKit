@@ -200,34 +200,43 @@ extension EmojiCategory {
 
 #Preview {
     
-    NavigationView {
-        #if os(macOS)
-        Color.clear
-        #endif
-
-        ScrollView(.vertical) {
-            VStack {
-                ForEach(EmojiCategory.all) { cat in
-                    DisclosureGroup {
-                        LazyVGrid(
-                            columns: [GridItem(.adaptive(minimum: 30))],
-                            spacing: 10
-                        ) {
-                            ForEach(cat.emojis) {
-                                Text($0.char)
-                                    .font(.title)
+    struct Preview: View {
+        
+        var columns = [GridItem(.adaptive(minimum: 30))]
+        
+        var body: some View {
+            NavigationView {
+#if os(macOS)
+                Color.clear
+#endif
+                
+                ScrollView(.vertical) {
+                    VStack {
+                        ForEach(EmojiCategory.all) { cat in
+                            DisclosureGroup {
+                                LazyVGrid(
+                                    columns: columns,
+                                    spacing: 10
+                                ) {
+                                    ForEach(cat.emojis) {
+                                        Text($0.char)
+                                            .font(.title)
+                                    }
+                                }
+                                .padding(.top)
+                            } label: {
+                                cat.emojiIconLabel
                             }
+                            
+                            Divider()
                         }
-                        .padding(.top)
-                    } label: {
-                        cat.emojiIconLabel
                     }
-                    
-                    Divider()
+                    .padding()
                 }
+                .navigationTitle("Emoji Category")
             }
-            .padding()
         }
-        .navigationTitle("Emoji Category")
     }
+    
+    return Preview()
 }
