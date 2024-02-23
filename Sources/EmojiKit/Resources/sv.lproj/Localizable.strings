@@ -3,31 +3,34 @@
  EmojiKit
  
  Created by Daniel Saidi on 2021-02-15.
- Copyright © 2021 Daniel Saidi. All rights reserved.
+ Copyright © 2021-2024 Daniel Saidi. All rights reserved.
  */
 
-"locale" = "en";
+"locale" = "sv";
 
-"EmojiCategory.frequent" = "Frequently Used";
-"EmojiCategory.smileys" = "Smileys & People";
-"EmojiCategory.animals" = "Animals & Nature";
-"EmojiCategory.food" = "Food & Drink";
-"EmojiCategory.activities" = "Activity";
-"EmojiCategory.travels" = "Travel & Places";
-"EmojiCategory.objects" = "Objects";
-"EmojiCategory.symbols" = "Symbols";
-"EmojiCategory.flags" = "Flags";
+"EmojiCategory.frequent" = "Ofta använda";
+"EmojiCategory.smileys" = "Smileys och människor";
+"EmojiCategory.animals" = "Djur och natur";
+"EmojiCategory.food" = "Mat och dryck";
+"EmojiCategory.activities" = "Aktivitet";
+"EmojiCategory.travels" = "Resor och platser";
+"EmojiCategory.objects" = "Objekt";
+"EmojiCategory.symbols" = "Symboler";
+"EmojiCategory.flags" = "Flaggor";
 
-"😀" = "Grinning Face";
-"😃" = "Smiling Face with Open Mouth";
-"😄" = "Smiling Face with Open Mouth and Smiling Eyes";
-"😁" = "Grinning Face with Smiling Eyes";
-"😆" = "Smiling Face with Open Mouth and Tightly-Closed Eyes";
-"🥹" = "Face Holding Back Tears";
-"😅" = "Smiling Face with Open Mouth and Cold Sweat";
-"😂" = "Face with Tears of Joy";
-"🤣" = "Rolling on the Floor Laughing";
-"🥲" = "Smiling Face with Tear";
+"😀" = "Leende ansikte";
+"😃" = "Leende ansikte med öppen mun";
+"😄" = "Leende ansikte med öppen mun och leende ögon";
+"😁" = "Leende ansikte med leende ögon";
+"😆" = "Leende ansikte med öppen mun och stängda ögon";
+"🥹" = "Ansikte med tillbakahållna tårar";
+"😅" = "Leende ansikte med öppen mun och kallsvett";
+"😂" = "Ansikte med glädjetårar";
+"🤣" = "Rullande på marken skrattande";
+"🥲" = "Leende ansikte med tår";
+
+// MARK: - TODO
+
 "☺️" = "White Smiling Face";
 "😊" = "Smiling Face with Smiling Eyes";
 "😇" = "Smiling Face with Halo";
