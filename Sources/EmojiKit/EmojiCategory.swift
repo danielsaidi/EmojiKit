@@ -104,6 +104,31 @@ public extension EmojiCategory {
         }
     }
     
+    /// An emoji-based icon that represents the category.
+    var emojiIcon: String {
+        switch self {
+        case .frequent: "🕘"
+        case .smileysAndPeople: "😀"
+        case .animalsAndNature: "🐻"
+        case .foodAndDrink: "🍔"
+        case .activity: "⚽️"
+        case .travelAndPlaces: "🏢"
+        case .objects: "💡"
+        case .symbols: "💱"
+        case .flags: "🏳️"
+        case .custom: "-"
+        }
+    }
+    
+    /// An emoji-based label that represents the category.
+    var emojiIconLabel: some View {
+        Label {
+            Text(localizedName)
+        } icon: {
+            Text(emojiIcon)
+        }
+    }
+    
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
         if let cached = Self.emojisCache[self] { return cached }
@@ -161,7 +186,6 @@ extension EmojiCategory {
         case .objects: Self.objectsChars
         case .symbols: Self.symbolsChars
         case .flags: Self.flagsChars
-            
         case .custom(_, _, let emojis, _): emojis
         }
     }
@@ -174,30 +198,36 @@ extension EmojiCategory {
     }
 }
 
-#if os(iOS)
-struct Emojis_Category_Previews: PreviewProvider {
+#Preview {
     
-    static var columns = [GridItem(.adaptive(minimum: 30))]
-    
-    static var previews: some View {
+    NavigationView {
+        #if os(macOS)
+        Color.clear
+        #endif
+
         ScrollView(.vertical) {
             VStack {
                 ForEach(EmojiCategory.all) { cat in
                     DisclosureGroup {
-                        ScrollView {
-                            LazyVGrid(columns: columns) {
-                                ForEach(cat.emojis) {
-                                    Text($0.char)
-                                        .font(.title)
-                                }
+                        LazyVGrid(
+                            columns: [GridItem(.adaptive(minimum: 30))],
+                            spacing: 10
+                        ) {
+                            ForEach(cat.emojis) {
+                                Text($0.char)
+                                    .font(.title)
                             }
                         }
+                        .padding(.top)
                     } label: {
-                        Text(cat.id)
+                        cat.emojiIconLabel
                     }
-                }.padding()
+                    
+                    Divider()
+                }
             }
+            .padding()
         }
+        .navigationTitle("Emoji Category")
     }
 }
-#endif

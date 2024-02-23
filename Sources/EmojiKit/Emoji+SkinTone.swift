@@ -282,7 +282,7 @@ private extension Array where Element == String {
 }
 
 
-struct Emoji_SkinTonePreviews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -302,7 +302,5 @@ struct Emoji_SkinTonePreviews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
