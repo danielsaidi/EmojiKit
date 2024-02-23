@@ -264,8 +264,13 @@ public extension EmojiVersion {
 
 public extension Emoji {
     
-    /// If this emoji is unavailable for the current runtime.
-    var isUnavailable: Bool {
+    /// If the emoji is available in the current runtime.
+    var isAvailableInCurrentRuntime: Bool {
+        !isUnavailableInCurrentRuntime
+    }
+    
+    /// If the emoji is unavailable in the current runtime.
+    var isUnavailableInCurrentRuntime: Bool {
         EmojiVersion.currentUnavailableEmojisDictionary[char] != nil
     }
 }

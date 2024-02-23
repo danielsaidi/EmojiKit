@@ -9,11 +9,11 @@
 "locale" = "sv";
 
 "EmojiCategory.frequent" = "Ofta använda";
-"EmojiCategory.smileys" = "Smileys och människor";
-"EmojiCategory.animals" = "Djur och natur";
-"EmojiCategory.food" = "Mat och dryck";
-"EmojiCategory.activities" = "Aktivitet";
-"EmojiCategory.travels" = "Resor och platser";
+"EmojiCategory.smileysAndPeople" = "Smileys och människor";
+"EmojiCategory.animalsAndNature" = "Djur och natur";
+"EmojiCategory.foodAndDrink" = "Mat och dryck";
+"EmojiCategory.activity" = "Aktivitet";
+"EmojiCategory.travelAndPlaces" = "Resor och platser";
 "EmojiCategory.objects" = "Objekt";
 "EmojiCategory.symbols" = "Symboler";
 "EmojiCategory.flags" = "Flaggor";

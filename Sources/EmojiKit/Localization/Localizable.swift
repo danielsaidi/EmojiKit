@@ -1,5 +1,5 @@
 //
-//  Emoji+Localization.swift
+//  Localizable.swift
 //  EmojiKit
 //
 //  Created by Daniel Saidi on 2022-12-12.
@@ -7,21 +7,21 @@
 //
 
 import Foundation
-import SwiftUI
 
-public extension Emoji {
+public protocol Localizable {
     
     /// The `Localizable.strings` key to use when localizing.
-    var localizationKey: String {
-        char
-    }
+    var localizationKey: String { get }
+}
 
-    /// The localized emoji name for the current `Locale`.
+public extension Localizable {
+    
+    /// The localized name for the current `Locale`.
     var localizedName: String {
         localizedName(for: .current)
     }
     
-    /// The localized emoji name for a certain `Locale`.
+    /// The localized name for a certain `Locale`.
     func localizedName(for locale: Locale) -> String {
         let key = localizationKey
         let bundle = Bundle.module

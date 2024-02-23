@@ -132,7 +132,8 @@ final class Emoji_VersionTests: XCTestCase {
         XCTAssertEqual(EmojiVersion.currentUnavailableEmojis.count, 0)
     }
     
-    func testCanCheckIfEmojiIsUnavailableInCurrentVersion() {
-        XCTAssertFalse(Emoji("💯").isUnavailable)
+    func testCanCheckIfEmojiIsAvailableInCurrentVersion() {
+        XCTAssertTrue(Emoji("💯").isAvailableInCurrentRuntime)
+        XCTAssertFalse(Emoji("💯").isUnavailableInCurrentRuntime)
     }
 }

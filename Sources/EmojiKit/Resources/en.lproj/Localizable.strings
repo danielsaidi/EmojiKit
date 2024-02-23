@@ -9,11 +9,11 @@
 "locale" = "en";
 
 "EmojiCategory.frequent" = "Frequently Used";
-"EmojiCategory.smileys" = "Smileys & People";
-"EmojiCategory.animals" = "Animals & Nature";
-"EmojiCategory.food" = "Food & Drink";
-"EmojiCategory.activities" = "Activity";
-"EmojiCategory.travels" = "Travel & Places";
+"EmojiCategory.smileysAndPeople" = "Smileys & People";
+"EmojiCategory.animalsAndNature" = "Animals & Nature";
+"EmojiCategory.foodAndDrink" = "Food & Drink";
+"EmojiCategory.activity" = "Activity";
+"EmojiCategory.travelAndPlaces" = "Travel & Places";
 "EmojiCategory.objects" = "Objects";
 "EmojiCategory.symbols" = "Symbols";
 "EmojiCategory.flags" = "Flags";
