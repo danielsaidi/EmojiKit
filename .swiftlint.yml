@@ -1,0 +1,13 @@
+disabled_rules:
+  - identifier_name
+  - large_tuple
+  - line_length
+  - nesting
+  - todo
+  - trailing_whitespace
+  - type_name
+  - vertical_whitespace
+
+included:
+  - Sources
+  - Tests
