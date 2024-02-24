@@ -1,45 +1,20 @@
 # Release Notes
 
-LicenseKit honors semantic versioning to great extent:
+EmojiKit will use semver after 1.0. 
 
-* Only remove deprecated code in `major` versions.
-* Only deprecate code in `minor` and `patch` versions.
-* Avoid breaking changes in `minor` and `patch` versions.
-* Code can be marked as deprecated at any time.
-
-Breaking changes *can* still occur in minor versions and patches, if the alternative is to not be able to release important new features or fixes.
+Until then, minor updates may remove deprecated features and introduce breaking changes.
 
 
 
 ## 0.3
 
-This version improves the grid and grid picker's focus and keyboard support. Due to the required changes to get this to work, the APIs have many breaking changes.
+This version makes the EmojiKit foundation open-source.
 
-This version also localizes emoji categories.
+As such, there are many breaking changes in this version, too many to list here.
 
-### ✨ New Features
+The biggest changes is this release is moving out some types from within the `EmojiType`, since the library is now smaller and no longer needs these API surface area optimizations.
 
-* `Emoji.Category` is now properly localized.
-* `Emoji.Category` has a new `custom` category type.
-* `Emoji.Grid` can now also use a selection binding.
-* `Emoji.Grid` now provides an index to the view builder.
-* `Emoji.Grid` now automatically highlights its selection.
-* `Emoji.GridItem` is a new view for standard emoji grid items.
-* `Emoji.GridSelection` is a new struct for managing grid selection.
-
-### 💡 Adjustments
-
-* `Emoji.Grid` uses a view param struct instead of a tuple.
-* `Emoji.GridPicker` uses the same view builders as the grid.
-
-### 🗑️ Deprecations
-
-* `Emoji.Picker` has been renamed to `GridPicker`.
-* `LazyHGrid` and `LazyVGrid` extensions have been removed. 
-
-### 💥 Breaking Changes
-
-* `Emoji.Grid` and `Emoji.GridPicker` has many breaking changes.
+EmojiKit also no longer contains UI components or assets. These will be available as a Pro add-on, and will include grids, pickers and vectorized assets.
 
 
 
