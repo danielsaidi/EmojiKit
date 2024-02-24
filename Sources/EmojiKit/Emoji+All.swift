@@ -26,6 +26,7 @@ public extension Collection where Element == Emoji {
     }
 }
 
+#if os(iOS) || os(macOS)
 #Preview {
     
     struct Preview: View {
@@ -75,3 +76,4 @@ private extension View {
         }
     }
 }
+#endif

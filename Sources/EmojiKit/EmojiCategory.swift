@@ -198,6 +198,7 @@ extension EmojiCategory {
     }
 }
 
+#if os(iOS) || os(macOS)
 #Preview {
     
     struct Preview: View {
@@ -240,3 +241,4 @@ extension EmojiCategory {
     
     return Preview()
 }
+#endif

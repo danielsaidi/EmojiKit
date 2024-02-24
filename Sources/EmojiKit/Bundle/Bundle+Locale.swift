@@ -17,7 +17,11 @@ extension Bundle {
 
     func bundlePath(for locale: Locale) -> String? {
         let localeId = locale.identifier
+        #if os(visionOS)
+        let language = locale.language.languageCode?.identifier
+        #else
         let language = locale.languageCode
+        #endif
         let idPath = bundlePath(named: localeId)
         let languagePath = bundlePath(named: language)
         return idPath ?? languagePath
