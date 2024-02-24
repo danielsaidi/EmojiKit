@@ -56,6 +56,7 @@ For more information, demo apps, issue tracking, etc., visit the [project reposi
 - <doc:EmojiVersion-Article>
 - <doc:Extensions-Article>
 - <doc:Localization-Article>
+- <doc:SkinTones-Article>
 
 ### Essentials
 

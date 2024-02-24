@@ -1,18 +1,18 @@
 # Emoji Category
 
-This article describes the EmojiKit ``EmojiCategory`` model.
+This article describes the EmojiKit emoji category model.
 
-EmojiKit has an ``EmojiCategory`` enum that defines all standard emoji categories, for instance:
+EmojiKit has an ``EmojiCategory`` enum that defines all emoji categories, for instance:
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
 try EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
 ```
 
-You can use ``EmojiCategory/all`` to get a list of all available categories:
+You can use ``EmojiCategory/all`` to get a list of all available categories, in the default sort order:
 
 ```swift
 EmojiCategory.all      // [.frequent, .smileyAndPeople, ...]
 ```
 
-Categories use the ``EmojiVersion`` information to filter out emojis that are unavailable to the runtime.
+Categories use ``EmojiVersion`` to filter out emojis that are unavailable to the runtime.

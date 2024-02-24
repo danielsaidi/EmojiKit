@@ -1,6 +1,6 @@
 # Emoji
 
-This article describes the EmojiKit ``Emoji`` model.
+This article describes the EmojiKit emoji model.
 
 EmojiKit has an ``Emoji`` struct that lets you work with emojis in a structured way:
 
@@ -25,7 +25,7 @@ You can use ``Emoji/all`` to get a list of all emojis from all categories, that 
 let emojis = Emoji.all          // 😀😃😄😁😆🥹😅😂🤣🥲...
 ```
 
-The ``Emoji`` type also serves as a namespace for most EmojiKit features, which means that most types are wrapped within this struct.
+The ``Emoji`` type is also extended with more capabilities, such as <doc:Localization-Article> and <doc:SkinTones-Article>.
 
 
 

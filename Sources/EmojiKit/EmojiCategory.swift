@@ -191,10 +191,9 @@ extension EmojiCategory {
     }
     
     static var frequentChars: String {
-        ""
-        // TODO Emoji.frequentEmojiProvider?.emojis
-        // TODO     .map { $0.char }
-        // TODO     .joined(separator: "") ?? ""
+        Emoji.frequentEmojiProvider.emojis
+            .map { $0.char }
+            .joined(separator: "")
     }
 }
 

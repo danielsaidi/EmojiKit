@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import EmojiKit
 
 extension Locale {
     
@@ -14,13 +15,8 @@ extension Locale {
     static let finnish = Locale(identifier: "fi")
     static let swedish = Locale(identifier: "sv")
 }
-/*
+
 extension String {
     
-    static let mostRecentPersistencyKey = Emoji.MostRecentProvider.defaultsKey
-    
-    var unicodeNameOverride: String? {
-        Emoji(self).unicodeNameOverride
-    }
+    static let mostRecentPersistencyKey = MostRecentEmojiProvider.defaultsKey
 }
-*/

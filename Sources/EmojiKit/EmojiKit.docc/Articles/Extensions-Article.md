@@ -2,7 +2,7 @@
 
 This article describes extensions that EmojiKit provides.
 
-EmojiKit has String and Character extensions that can be used to detect and handle emojis, for instance:
+EmojiKit has emoji-related String and Character extensions, for instance:
 
 ```swift
 "Hello!".containsEmoji          // false
@@ -15,7 +15,7 @@ EmojiKit has String and Character extensions that can be used to detect and hand
 "👍".isSingleEmoji              // true
 ```
 
-These extensions are used to power many features in the library, but can be used stand-alone as well.
+These extensions power many features in the library, but can be used stand-alone as well.
 
 
 

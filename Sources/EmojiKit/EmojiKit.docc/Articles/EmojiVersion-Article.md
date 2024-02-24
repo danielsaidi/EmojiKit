@@ -1,8 +1,8 @@
 # Emoji Version
 
-This article describes the EmojiKit ``EmojiVersion`` model.
+This article describes the EmojiKit emoji version model.
 
-EmojiKit has an ``EmojiVersion`` type that defines Emoji versions, and their platform availability and included emojis.
+EmojiKit has an ``EmojiVersion`` type that defines all currently available Emoji versions, their platform availability and included emojis.
 
 
 ## How to access emoji versions
@@ -39,7 +39,7 @@ version.version  // 13.0
 This lets you figure out exactly which version you can use for a certain OS and platform version.
 
 
-## Version Information
+## Information
 
 An emoji version defines in which OS versions it became available:
 
