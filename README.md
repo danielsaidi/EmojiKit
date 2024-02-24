@@ -13,7 +13,7 @@
 
 ## About EmojiKit
 
-EmojiKit is a Swift-based SDK that helps you use emojis in Swift-based software on all major Apple platforms (iOS, macOS, tvOS, watchOS, and visionOS).
+EmojiKit is a Swift-based SDK that lets you use emojis in Swift-based software on all major Apple platforms (iOS, macOS, tvOS, watchOS, and visionOS).
 
 <p align="center">
     <img src ="Resources/Demo.gif" width="650" />
@@ -27,11 +27,11 @@ EmojiKit provides you with all you need to work with emojis, including categorie
 
 EmojiKit provides a bunch of emoji-specific features:
 
-* 😀 [Emojis][Features] - EmojiKit lets you use emojis in a structured way.
-* 🐻 [Categories][Features] - EmojiKit defines all standard emoji categories.
-* 🇸🇪 [Localization][Features] - EmojiKit supports localizing all emojis and categories.
-* 👍🏾 [Skin Tones][Features] - EmojiKit provides skin tone information for all emojis that support if.
-* 📦 [Version Information][Features] - EmojiKit defines all emoji versions, including their OS availability.
+* 😀 [Emojis][Emoji] - EmojiKit defines a structured emoji model.
+* 🐻 [Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
+* 📦 [Version Information][EmojiVersion] - EmojiKit defines all emoji versions and their OS support.
+* 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
+* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides skin tone information for all emojis that support it.
 
 
 
@@ -72,7 +72,7 @@ Feel free to reach out if you have any questions or need help any way:
 
 ## License
 
-EmojiKit is closed source. See the [LICENSE][License] file for more info.
+KeyboardKit is available under the MIT license. See the [LICENSE][License] file for more info.
 
 
 
@@ -83,7 +83,14 @@ EmojiKit is closed source. See the [LICENSE][License] file for more info.
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
 [Documentation]: https://kankoda.github.io/EmojiKit/documentation/emojikit/
-[Getting-Started]: https://kankoda.github.io/EmojiKit/documentation/emojikit/getting-started
-[License]: https://github.com/EmojiKit/EmojiKit/blob/main/LICENSE
 
-[Features]: https://kankoda.github.io/EmojiKit/documentation/emojikit/features
+[Getting-Started]: https://kankoda.github.io/EmojiKit/documentation/emojikit/getting-started
+
+[Emoji]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emoji-article
+[EmojiCategory]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emojicategory-article
+[EmojiVersion]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emojiversion-article
+[Extensions]: https://kankoda.github.io/EmojiKit/documentation/emojikit/extension-article
+[Localization]: https://kankoda.github.io/EmojiKit/documentation/emojikit/localization-article
+[SkinTones]: https://kankoda.github.io/EmojiKit/documentation/emojikit/skintones-article
+
+[License]: https://github.com/EmojiKit/EmojiKit/blob/main/LICENSE

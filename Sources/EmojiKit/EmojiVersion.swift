@@ -179,7 +179,7 @@ public extension EmojiVersion {
         )
     }
     
-    /// The ``Emoji/Version`` that is used by the current OS.
+    /// The ``EmojiVersion`` that is used by the current OS.
     static var current: Self {
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {
             return .v15
