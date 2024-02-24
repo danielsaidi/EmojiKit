@@ -10,7 +10,7 @@ import SwiftUI
 
 public extension Emoji {
 
-    /// Get all emojis from all categories.
+    /// Get all available emojis from all categories.
     static var all: [Emoji] {
         EmojiCategory.all.flatMap {
             $0.emojis
@@ -20,7 +20,7 @@ public extension Emoji {
 
 public extension Collection where Element == Emoji {
 
-    /// Get all emojis from all categories.
+    /// Get all available emojis from all categories.
     static var all: [Element] {
         Element.all
     }

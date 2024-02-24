@@ -8,8 +8,6 @@
 
 import Foundation
 
-@testable import EmojiKit
-
 extension Locale {
     
     static let english = Locale(identifier: "en-US")
