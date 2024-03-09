@@ -1,6 +1,19 @@
-# Getting started
+# Getting Started
 
 This article describes how to get started with EmojiKit.
+
+@Metadata {
+    
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
+    
+    @PageColor(blue)
+}
+
+EmojiKit is very easy to use. It's mostly based on very basic models, like ``Emoji`` and ``EmojiCategory``, which will provide you with all the information you need to create sophisticated emoji-based apps and software.
 
 
 
@@ -25,7 +38,7 @@ You can read more in the <doc:Emoji-Article> article.
 
 ## Emoji Categories
 
-EmojiKit has an ``EmojiCategory`` struct that defines all standard emoji categories:
+EmojiKit has an ``EmojiCategory`` enum that defines all standard emoji categories and their included emojis:
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
@@ -38,19 +51,26 @@ You can read more in the <doc:EmojiCategory-Article> article.
 
 ## Emoji Versions
 
-EmojiKit has an ``EmojiVersion`` type that defines Emoji versions, and their platform availability and included emojis:
+EmojiKit has an ``EmojiVersion`` type that defines all emoji versions, as well as their platform availability and included emojis:
 
 ```swift
 let version = Emoji.Version.current
 let v15 = Emoji.Version.v15
+v15.emojis      // 🫨🫸🫷🪿🫎🪼🫏🪽🪻🫛🫚🪇🪈🪮🪭🩷🩵🩶🪯🛜
 ```
-
-An emoji version defines in which OS version it was released, and what emojis that was released in that version.
 
 You can read more in the <doc:EmojiVersion-Article> article.
 
 
 
-## Read More 
+## Further Reading
 
-See the various articles for more information, such as <doc:Extensions-Article>, <doc:Localization-Article> and <doc:SkinTones-Article>.
+@Links(visualStyle: detailedGrid) {
+    
+    - <doc:Emoji-Article>
+    - <doc:EmojiCategory-Article>
+    - <doc:EmojiVersion-Article>
+    - <doc:Extensions-Article>
+    - <doc:Localization-Article>
+    - <doc:SkinTones-Article>
+}

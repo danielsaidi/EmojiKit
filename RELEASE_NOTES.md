@@ -10,11 +10,13 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version makes the EmojiKit foundation open-source.
 
-As such, there are many breaking changes in this version, too many to list here.
+As such, there are a few breaking changes in this version.
 
-The biggest changes is this release is moving out some types from within the `EmojiType`, since the library is now smaller and no longer needs these API surface area optimizations.
+The biggest changes is that there are no longer any throwing SDK features, which will make it a lot easier to use.
 
-EmojiKit also no longer contains UI components or assets. These will be available as a Pro add-on, and will include grids, pickers and vectorized assets.
+This version also moves types out from the `Emoji` type, since the SDK is smaller and don't need any surface area optimizations.
+
+This version also removes UI components and assets. These will be available as Pro add-ons in a future update.
 
 
 

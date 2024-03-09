@@ -13,31 +13,13 @@
 
 ## About EmojiKit
 
-EmojiKit is a Swift-based SDK that lets you use emojis in Swift-based software on all major Apple platforms (iOS, macOS, tvOS, watchOS, and visionOS).
+EmojiKit is a Swift SDK that lets you use emojis and other emoji-based features on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS).
 
 <p align="center">
-    <img src ="Resources/Demo.gif" width="650" />
+    <img src ="Resources/Demo.gif" width="750" />
 </p>
 
-EmojiKit provides you with all you need to work with emojis, including categories, skin tone variants, unicode and version information, localization support, etc.
-
-
-
-## Features
-
-EmojiKit provides a bunch of emoji-specific features:
-
-* 😀 [Emojis][Emoji] - EmojiKit defines a structured emoji model.
-* 🐻 [Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
-* 📦 [Version Information][EmojiVersion] - EmojiKit defines all emoji versions and their OS support.
-* 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
-* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides skin tone information for all emojis that support it.
-
-
-
-## Getting started
-
-The [online documentation][Documentation] has a [getting-started guide][Getting-Started] that helps you get started.
+EmojiKit provides you with all you need to work with emojis, including emoji models, standard categories, support for localization & skin tones, unicode & version information, etc.
 
 
 
@@ -49,13 +31,34 @@ EmojiKit can be installed with the Swift Package Manager:
 https://github.com/Kankoda/EmojiKit.git
 ```
 
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
+
+## Features
+
+EmojiKit provides a bunch of emoji-specific features:
+
+* 😀 [Emojis][Emoji] - EmojiKit defines a structured emoji model.
+* 🐻 [Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
+* 📦 [Version Info][EmojiVersion] - EmojiKit defines all emoji versions and their emojis.
+* 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
+* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides skin tone information for all emojis that support it.
 
 
 
-## Demo Application
+## Getting started
 
-The demo app lets you try out the library on iOS and macOS. Just open and run the `Demo` project.
+The [online documentation][Documentation] has a [getting-started guide][Getting-Started] that helps you get started.
+
+
+
+## Documentation
+
+The [online documentation][Documentation] has more information, articles, code examples, etc. 
+
+
+
+## Sponsor my work
+
+You can [sponsor this project][Sponsors] on GitHub Sponsors, [reach out][Email] for paid support, or sign up for a commercial license to help support this project. Your support makes it possible to put more work into this project.
 
 
 
@@ -72,7 +75,7 @@ Feel free to reach out if you have any questions or need help any way:
 
 ## License
 
-KeyboardKit is available under the MIT license. See the [LICENSE][License] file for more info.
+EmojiKit is available under the MIT license. See the [LICENSE][License] file for more info.
 
 
 

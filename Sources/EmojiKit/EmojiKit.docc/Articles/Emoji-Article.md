@@ -2,13 +2,24 @@
 
 This article describes the EmojiKit emoji model.
 
+@Metadata {
+    
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
+    
+    @PageColor(blue)
+}
+
 EmojiKit has an ``Emoji`` struct that lets you work with emojis in a structured way:
 
 ```swift
 let emoji = Emoji("😀")
 ```
 
-This type has unicode-specific properties that are used for identity and naming:
+``Emoji`` has unicode-specific properties that can be used for identity and naming:
 
 ```swift
 Emoji("👍").unicodeIdentifier   // \\N{THUMBS UP SIGN}
@@ -19,13 +30,13 @@ Emoji("👍🏿").unicodeName         // Thumbs Up Sign
 Emoji("🚀").unicodeName         // Rocket
 ```
 
-You can use ``Emoji/all`` to get a list of all emojis from all categories, that are available to the currently exeucting runtime:
+You can use ``Emoji/all`` to get a list of all emojis from all categories available to the current runtime:
 
 ```swift
 let emojis = Emoji.all          // 😀😃😄😁😆🥹😅😂🤣🥲...
 ```
 
-The ``Emoji`` type is also extended with more capabilities, such as <doc:Localization-Article> and <doc:SkinTones-Article>.
+The ``Emoji`` type has a lot more capabilities, such as support for <doc:Localization-Article> and <doc:SkinTones-Article>, which are described in separate articles.
 
 
 

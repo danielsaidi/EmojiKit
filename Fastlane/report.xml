@@ -5,34 +5,296 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.000295">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000304">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000101">
+      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.000103">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to ios version_validate lane" time="9.8e-05">
+      <testcase classname="fastlane.lanes" name="02: Switch to ios version_validate lane" time="9.9e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: ensure_git_status_clean" time="0.021212">
+      <testcase classname="fastlane.lanes" name="03: ensure_git_status_clean" time="0.016023">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: ensure_git_branch" time="0.013391">
+      <testcase classname="fastlane.lanes" name="04: ensure_git_branch" time="0.013724">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: swiftlint" time="0.955494">
+      <testcase classname="fastlane.lanes" name="05: swiftlint" time="0.155118">
         
-          <failure message="/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:229:in `chdir&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:229:in `execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:35:in `block (2 levels) in parsing_binding&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:204:in `try_switch_to_lane&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:146:in `trigger_action_by_name&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:17:in `block (2 levels) in parsing_binding&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:49:in `block in execute&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:45:in `chdir&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:45:in `execute&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/command.rb:187:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/command.rb:157:in `run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:354:in `run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:43:in `start&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/bin/fastlane:23:in `&lt;top (required)&gt;&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/fastlane:25:in `load&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/fastlane:25:in `&lt;main&gt;&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/ruby_executable_hooks:22:in `eval&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/ruby_executable_hooks:22:in `&lt;main&gt;&apos;&#10;&#10;SwiftLint finished with errors (exit code: 0)" />
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: swift test" time="19.421992">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: Switch to ios docc lane" time="0.000118">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: cd .. &amp;&amp; rm -rf .build/docs" time="0.011384">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: Switch to ios docc_platform lane" time="0.000199">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: cd .. &amp;&amp; mkdir -p .build/docs" time="0.007993">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: Switch to ios docc_delete_derived_data lane" time="0.000208">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec rm -Rf {} \; || true" time="19.654782">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="13: cd .. &amp;&amp; xcodebuild docbuild \
+      -scheme EmojiKit \
+      -destination &apos;generic/platform=iOS&apos;" time="6.383498">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="14: cd .. &amp;&amp; \
+      find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec cp -R {} .build/docs \;" time="19.042232">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="15: cd .. &amp;&amp; \
+      mv .build/docs/EmojiKit.doccarchive .build/docs/EmojiKit_ios.doccarchive" time="0.015293">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="16: Switch to ios docc_platform lane" time="0.00014">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="17: cd .. &amp;&amp; mkdir -p .build/docs" time="0.007132">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="18: Switch to ios docc_delete_derived_data lane" time="0.000152">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="19: find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec rm -Rf {} \; || true" time="18.83405">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="20: cd .. &amp;&amp; xcodebuild docbuild \
+      -scheme EmojiKit \
+      -destination &apos;generic/platform=OS X&apos;" time="4.704342">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="21: cd .. &amp;&amp; \
+      find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec cp -R {} .build/docs \;" time="18.687671">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="22: cd .. &amp;&amp; \
+      mv .build/docs/EmojiKit.doccarchive .build/docs/EmojiKit_osx.doccarchive" time="0.010208">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="23: Switch to ios docc_platform lane" time="0.000207">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="24: cd .. &amp;&amp; mkdir -p .build/docs" time="0.007409">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="25: Switch to ios docc_delete_derived_data lane" time="0.000188">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="26: find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec rm -Rf {} \; || true" time="18.472226">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="27: cd .. &amp;&amp; xcodebuild docbuild \
+      -scheme EmojiKit \
+      -destination &apos;generic/platform=tvOS&apos;" time="7.767269">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="28: cd .. &amp;&amp; \
+      find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec cp -R {} .build/docs \;" time="18.757444">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="29: cd .. &amp;&amp; \
+      mv .build/docs/EmojiKit.doccarchive .build/docs/EmojiKit_tvos.doccarchive" time="0.012137">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="30: Switch to ios docc_platform lane" time="0.000128">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="31: cd .. &amp;&amp; mkdir -p .build/docs" time="0.00759">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="32: Switch to ios docc_delete_derived_data lane" time="0.00023">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="33: find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec rm -Rf {} \; || true" time="18.747606">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="34: cd .. &amp;&amp; xcodebuild docbuild \
+      -scheme EmojiKit \
+      -destination &apos;generic/platform=watchOS&apos;" time="10.54631">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="35: cd .. &amp;&amp; \
+      find ~/Library/Developer/Xcode/DerivedData \
+      -name &quot;EmojiKit.doccarchive&quot; \
+      -exec cp -R {} .build/docs \;" time="18.768227">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="36: cd .. &amp;&amp; \
+      mv .build/docs/EmojiKit.doccarchive .build/docs/EmojiKit_watchos.doccarchive" time="0.012418">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="37: Switch to ios docc_web_platform lane" time="0.000135">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="38: cd .. &amp;&amp; $(xcrun --find docc) process-archive \
+      transform-for-static-hosting .build/docs/EmojiKit_ios.doccarchive \
+      --output-path  .build/docs/web_ios \
+      --hosting-base-path EmojiKit" time="0.943489">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="39: Switch to ios docc_web_platform lane" time="0.000151">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="40: cd .. &amp;&amp; $(xcrun --find docc) process-archive \
+      transform-for-static-hosting .build/docs/EmojiKit_osx.doccarchive \
+      --output-path  .build/docs/web_osx \
+      --hosting-base-path EmojiKit" time="0.166717">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="41: Switch to ios docc_web_platform lane" time="0.000156">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="42: cd .. &amp;&amp; $(xcrun --find docc) process-archive \
+      transform-for-static-hosting .build/docs/EmojiKit_tvos.doccarchive \
+      --output-path  .build/docs/web_tvos \
+      --hosting-base-path EmojiKit" time="0.166922">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="43: Switch to ios docc_web_platform lane" time="0.000146">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="44: cd .. &amp;&amp; $(xcrun --find docc) process-archive \
+      transform-for-static-hosting .build/docs/EmojiKit_watchos.doccarchive \
+      --output-path  .build/docs/web_watchos \
+      --hosting-base-path EmojiKit" time="0.161859">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="45: version_bump_podspec" time="0.00156">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="46: git_commit" time="0.045877">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="47: add_git_tag" time="0.026412">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="48: push_git_tags" time="1.967519">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="49: push_to_git_remote" time="1.916534">
         
       </testcase>
     

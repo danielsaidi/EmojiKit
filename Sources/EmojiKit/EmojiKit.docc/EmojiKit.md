@@ -1,15 +1,16 @@
 # ``EmojiKit``
 
-EmojiKit lets you use emojis in your Swift-based software.
+EmojiKit is a Swift SDK that lets you use emojis on all major Apple platforms.
+
 
 
 ## Overview
 
 ![EmojiKit logo](Logo.png)
 
-EmojiKit is a Swift-based SDK that lets you use emojis in Swift-based software on all major Apple platforms (iOS, macOS, tvOS, watchOS, and visionOS).
+EmojiKit is a Swift SDK that lets you use emojis on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS).
 
-EmojiKit provides you with all you need to work with emojis, including categories, skin tone variants, unicode and version information, localization support, etc.
+EmojiKit provides you with all you need to work with emojis, including emoji models, standard categories, support for localization & skin tones, unicode & version information, etc.
 
 
 
@@ -21,25 +22,27 @@ EmojiKit can be installed with the Swift Package Manager:
 https://github.com/Kankoda/EmojiKit.git
 ```
 
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
+## Getting started
 
-## Gettings Started
-
-See the <doc:Getting-Started> article for information on how to get started with EmojiKit.
-
-
-
-## License
-
-KeyboardKit is available under the MIT license.
+@Links(visualStyle: detailedGrid) {
+    
+    - <doc:Getting-Started>
+    - <doc:Emoji-Article>
+}
 
 
 
 ## Repository
 
-For more information, demo apps, issue tracking, etc., visit the [project repository][GitHub].
+For more information, source code, etc., visit the [project repository](https://github.com/kankoda/emojikit).
+
+
+
+## License
+
+EmojiKit is available under the MIT license.
 
 
 
@@ -63,7 +66,3 @@ For more information, demo apps, issue tracking, etc., visit the [project reposi
 - ``Emoji``
 - ``EmojiCategory``
 - ``EmojiVersion``
-
-
-[GitHub]: https://github.com/Kankoda/EmojiKit
-[Website]: https://kankoda.com/emojikit

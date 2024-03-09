@@ -2,7 +2,18 @@
 
 This article describes the EmojiKit skin tone support.
 
-KeyboardKit defines skin tone variations for emojis that have such variations:
+@Metadata {
+    
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
+    
+    @PageColor(blue)
+}
+
+KeyboardKit defines skin tone variations for all supported emojis:
 
 ```swift
 Emoji("👍").hasSkinToneVariants     // true
@@ -12,6 +23,6 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 Emoji("👍").skinToneVariantActions  // The above variants as keyboard actions
 ```
 
-Skin tones will automatically be added as secondary actions when using the Pro emoji pickers. 
+Skin tones will automatically be added as secondary actions when using the EmojiKit Pro emoji pickers. 
 
 > Note: Skin tone support for emojis with multiple skin tone components are currently not supported, such as two persons kissing.

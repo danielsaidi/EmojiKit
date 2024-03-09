@@ -1,8 +1,19 @@
 # Extensions
 
-This article describes extensions that EmojiKit provides.
+This article describes EmojiKit's native type extensions.
 
-EmojiKit has emoji-related String and Character extensions, for instance:
+@Metadata {
+    
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
+    
+    @PageColor(blue)
+}
+
+EmojiKit has emoji-related extensions to native types, like String and Character:
 
 ```swift
 "Hello!".containsEmoji          // false
@@ -15,7 +26,7 @@ EmojiKit has emoji-related String and Character extensions, for instance:
 "👍".isSingleEmoji              // true
 ```
 
-These extensions power many features in the library, but can be used stand-alone as well.
+These extensions power many features in the library, but can be used stand-alone utilifties as well.
 
 
 

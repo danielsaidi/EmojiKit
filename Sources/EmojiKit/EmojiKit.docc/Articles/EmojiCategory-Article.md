@@ -2,17 +2,28 @@
 
 This article describes the EmojiKit emoji category model.
 
-EmojiKit has an ``EmojiCategory`` enum that defines all emoji categories, for instance:
+@Metadata {
+    
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
+    
+    @PageColor(blue)
+}
+
+EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories:
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
 try EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
 ```
 
-You can use ``EmojiCategory/all`` to get a list of all available categories, in the default sort order:
+You can use ``EmojiCategory/all`` to get a list of all available categories, in the native, default sort order:
 
 ```swift
 EmojiCategory.all      // [.frequent, .smileyAndPeople, ...]
 ```
 
-Categories use ``EmojiVersion`` to filter out emojis that are unavailable to the runtime.
+``EmojiCategory`` uses ``EmojiVersion`` to filter out emojis that are unavailable to the runtime, which means that your users will only see emojis they can use.
