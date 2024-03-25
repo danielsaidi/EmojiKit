@@ -71,11 +71,13 @@ private extension View {
         _ isSelected: Bool
     ) -> AnyShapeStyle {
         #if os(iOS) || os(macOS)
-        isSelected
-            ? AnyShapeStyle(.selection)
-            : AnyShapeStyle(.clear)
+        if isSelected {
+            return .init(.selection)
+        } else {
+            return .init(.clear)
+        }
         #else
-        AnyShapeStyle(.clear)
+            .init(.clear)
         #endif
     }
 }
