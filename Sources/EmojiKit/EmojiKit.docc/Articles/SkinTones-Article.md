@@ -13,7 +13,7 @@ This article describes the EmojiKit skin tone support.
     @PageColor(blue)
 }
 
-KeyboardKit defines skin tone variations for all supported emojis:
+``Emoji`` has skin tone-specific properties that define skin tone variants for all supported emojis:
 
 ```swift
 Emoji("👍").hasSkinToneVariants     // true

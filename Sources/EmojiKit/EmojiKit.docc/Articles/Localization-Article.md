@@ -13,7 +13,7 @@ This article describes the EmojiKit localization engine.
     @PageColor(blue)
 }
 
-EmojiKit supports localizing emojis in the current locale, as well as any supported locale:
+``Emoji`` can be localized in any supported locale that has defined translations:
 
 ```swift
 let english = Locale(identifier: "en-US")

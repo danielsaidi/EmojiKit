@@ -58,6 +58,7 @@ An emoji version also defines all emojis that were introduced in that version, a
 
 ```swift
 let version = EmojiVersion.v14
+
 version.emojis            // 🫠🫢🫣🫡🫥🫤🥹...
 version.laterVersions     // [.v15]
 version.olderVersions     // [.v13_1, .v13, .v12_1, ...]

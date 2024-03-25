@@ -13,7 +13,7 @@ This article describes EmojiKit's native type extensions.
     @PageColor(blue)
 }
 
-EmojiKit has emoji-related extensions to native types, like String and Character:
+There are emoji-related extensions to native types, like String and Character:
 
 ```swift
 "Hello!".containsEmoji          // false

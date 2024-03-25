@@ -63,6 +63,28 @@ You can read more in the <doc:EmojiVersion-Article> article.
 
 
 
+## Views
+
+EmojiKit has views that let you list and select emojis:
+
+@TabNavigator {
+    
+    @Tab("EmojiGrid") {
+        @Row {
+            @Column {
+                EmojiKit has an ``EmojiGrid`` that can be used to list and pick emojis in a horizontal or vertical grid.        
+            }
+            @Column {
+                ![EmojiGrid](emojigrid.jpg)       
+            }
+        }
+    }
+}
+
+You can read more in the <doc:Views-Article> article.
+
+
+
 ## Further Reading
 
 @Links(visualStyle: detailedGrid) {

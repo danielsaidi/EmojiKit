@@ -6,32 +6,31 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.4
+
+This version adds a new EmojiGrid component.
+
+### ✨ New Features
+
+* `EmojiGrid` is a new grid component.
+* `EmojiGridStyle` is a new, environment-based style.
+* `Emoji` has more nested components that are used by the grid. 
+
+
+
 ## 0.3
 
 This version makes the EmojiKit foundation open-source.
 
-As such, there are a few breaking changes in this version.
+The biggest changes in this version, is that there are no longer any throwing SDK features. This version also moves types out from the `Emoji` type, since the SDK is smaller than before.
 
-The biggest changes is that there are no longer any throwing SDK features, which will make it a lot easier to use.
-
-This version also moves types out from the `Emoji` type, since the SDK is smaller and don't need any surface area optimizations.
-
-This version also removes UI components and assets. These will be available as Pro add-ons in a future update.
+This version also removes UI components and assets. These will be available in future updates.
 
 
 
 ## 0.2
 
 This update tweaks a few things in EmojiKit.
-
-### ✨ New Features
-
-* `Emoji.GridConfiguration` can now be created with just a font size.
-* `LazyHGrid` and `LazyVGrid` has new EmojiKit-based initializers.
-
-### 💡 Adjustments
-
-* `Image` extensions replace individual assets with a category-based function.
 
 ### 🐛 Bug Fixes
 

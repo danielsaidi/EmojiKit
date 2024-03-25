@@ -13,7 +13,7 @@ This article describes the EmojiKit emoji category model.
     @PageColor(blue)
 }
 
-EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories:
+EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories and their included emojis:
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...

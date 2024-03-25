@@ -15,6 +15,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios build
+
+```sh
+[bundle exec] fastlane ios build
+```
+
+
+
+### ios test_ios
+
+```sh
+[bundle exec] fastlane ios test_ios
+```
+
+
+
 ### ios version
 
 ```sh
@@ -30,38 +46,6 @@ Create a new version
 ```
 
 Validate that the repo is valid for release
-
-### ios docc
-
-```sh
-[bundle exec] fastlane ios docc
-```
-
-Build documentation for all platforms
-
-### ios docc_platform
-
-```sh
-[bundle exec] fastlane ios docc_platform
-```
-
-Build documentation for a single platform
-
-### ios docc_delete_derived_data
-
-```sh
-[bundle exec] fastlane ios docc_delete_derived_data
-```
-
-Delete documentation derived data (may be historic duplicates)
-
-### ios docc_web_platform
-
-```sh
-[bundle exec] fastlane ios docc_web_platform
-```
-
-Build static documentation website for a single platform
 
 ----
 
