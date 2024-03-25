@@ -77,7 +77,7 @@ public extension EmojiGridStyle {
     ///
     /// You can set this style to affect the global default.
     static var standard: Self = {
-        #if os(iOS) || os(macOS) || os(watchOS)
+        #if os(iOS) || os(macOS) || os(watchOS) || os(visionOS)
         Self.init()
         #elseif os(tvOS)
         Self.init(font: .largeTitle, itemSize: 80, itemSpacing: 10)
@@ -105,7 +105,7 @@ extension EmojiGridStyle {
     static var sizeBase: Double {
         #if os(tvOS)
         80
-        #elseif os(iOS)
+        #elseif os(iOS) || os(visionOS)
         40
         #else
         30
