@@ -39,10 +39,12 @@ https://github.com/Kankoda/EmojiKit.git
 EmojiKit provides a bunch of emoji-specific features:
 
 * 😀 [Emojis][Emoji] - EmojiKit defines a structured emoji model.
-* 🐻 [Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
-* 📦 [Version Info][EmojiVersion] - EmojiKit defines all emoji versions and their emojis.
+* 🐻 [Emoji Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
+* 📦 [Emoji Versions][EmojiVersion] - EmojiKit defines all emoji versions and their emojis.
+* 🧩 [Extensions][Extensions] - EmojiKit extends native types with emoji support.
 * 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
-* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides skin tone information for all emojis that support it.
+* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides emoji skin tone information.
+* 🖼️ [Views][Views] - EmojiKit has emoji-specific grids and pickers.
 
 
 
@@ -97,5 +99,6 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 [Extensions]: https://kankoda.github.io/EmojiKit/documentation/emojikit/extension-article
 [Localization]: https://kankoda.github.io/EmojiKit/documentation/emojikit/localization-article
 [SkinTones]: https://kankoda.github.io/EmojiKit/documentation/emojikit/skintones-article
+[Views]: https://kankoda.github.io/EmojiKit/documentation/emojikit/views-article
 
 [License]: https://github.com/EmojiKit/EmojiKit/blob/main/LICENSE
