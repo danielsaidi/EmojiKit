@@ -141,17 +141,18 @@ public extension EmojiCategory {
     
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
-        if let cached = Self.emojisCache[self] { return cached }
-        let emojis = emojisString
-            .replacingOccurrences(of: "\n", with: "")
-            .compactMap {
-                let emoji = Emoji(String($0))
-                return emoji.isAvailableInCurrentRuntime ? emoji : nil
-            }
-        if self != .frequent {
-            Self.emojisCache[self] = emojis
+        switch self {
+        case .frequent: []
+        case .smileysAndPeople: Self.emojisForSmileysAndPeople
+        case .animalsAndNature: Self.emojisForAnimalsAndNature
+        case .foodAndDrink: Self.emojisForFoodAndDrink
+        case .activity: Self.emojisForActivity
+        case .travelAndPlaces: Self.emojisForTravelAndPlaces
+        case .objects: Self.emojisForObjects
+        case .symbols: Self.emojisForSymbols
+        case .flags: Self.emojisForFlags
+        case .custom(_, _, _, _): emojiStringEmojis
         }
-        return emojis
     }
     
     /// Whether or not the category has any emojis.
@@ -161,6 +162,30 @@ public extension EmojiCategory {
 }
 
 extension EmojiCategory {
+    
+    var emojiString: String {
+        switch self {
+        case .frequent: ""
+        case .smileysAndPeople: Self.smileysAndPeopleChars
+        case .animalsAndNature: Self.animalsAndNatureChars
+        case .foodAndDrink: Self.foodAndDrinkChars
+        case .activity: Self.activityChars
+        case .travelAndPlaces: Self.travelAndPlacesChars
+        case .objects: Self.objectsChars
+        case .symbols: Self.symbolsChars
+        case .flags: Self.flagsChars
+        case .custom(_, _, let emojis, _): emojis
+        }
+    }
+    
+    var emojiStringEmojis: [Emoji] {
+        emojiString
+            .replacingOccurrences(of: "\n", with: "")
+            .compactMap {
+                let emoji = Emoji(String($0))
+                return emoji.isAvailableInCurrentRuntime ? emoji : nil
+            }
+    }
     
     /// Get the emoji at a certain index, if any.
     func emoji(at index: Int) -> Emoji? {
@@ -183,22 +208,41 @@ extension EmojiCategory {
 
 extension EmojiCategory {
     
-    static var emojisCache = [EmojiCategory: [Emoji]]()
-    
-    var emojisString: String {
-        switch self {
-        case .frequent: ""
-        case .smileysAndPeople: Self.smileysAndPeopleChars
-        case .animalsAndNature: Self.animalsAndNatureChars
-        case .foodAndDrink: Self.foodAndDrinkChars
-        case .activity: Self.activityChars
-        case .travelAndPlaces: Self.travelAndPlacesChars
-        case .objects: Self.objectsChars
-        case .symbols: Self.symbolsChars
-        case .flags: Self.flagsChars
-        case .custom(_, _, let emojis, _): emojis
-        }
-    }
+    static let emojisForSmileysAndPeople: [Emoji] = {
+        EmojiCategory.smileysAndPeople.emojiStringEmojis
+        
+    }()
+    static let emojisForAnimalsAndNature: [Emoji] = {
+        EmojiCategory.animalsAndNature.emojiStringEmojis
+        
+    }()
+    static let emojisForFoodAndDrink: [Emoji] = {
+        EmojiCategory.foodAndDrink.emojiStringEmojis
+        
+    }()
+    static let emojisForActivity: [Emoji] = {
+        EmojiCategory.activity.emojiStringEmojis
+        
+    }()
+    static let emojisForTravelAndPlaces: [Emoji] = {
+        EmojiCategory.travelAndPlaces.emojiStringEmojis
+        
+    }()
+    static let emojisForObjects: [Emoji] = {
+        EmojiCategory.objects.emojiStringEmojis
+        
+    }()
+    static let emojisForSymbols: [Emoji] = {
+        EmojiCategory.symbols.emojiStringEmojis
+        
+    }()
+    static let emojisForFlags: [Emoji] = {
+        EmojiCategory.flags.emojiStringEmojis
+        
+    }()
+    static let emojisForSmileys: [Emoji] = {
+        EmojiCategory.smileysAndPeople.emojiStringEmojis
+    }()
 }
 
 #if os(iOS) || os(macOS)

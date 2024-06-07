@@ -22,6 +22,7 @@ The various views, like `EmojiGrid` and the new `EmojiScrollGrid`, will also aut
 
 * `Emoji` now conforms to `Hashable`.
 * `Emoji.GridSelection` now conforms to `Hashable`.
+* `EmojiCategory` is refactored to have a concurrent-safe cache.
 * `EmojiScrollGrid` is a new grid that auto-scrolls to the selection.
 * `MostRecentEmojiProvider` now lets you use a custom persistency key.
 * `ScrollViewProxy` can now scroll to a specific `Emoji.GridSelection`.
