@@ -16,7 +16,9 @@ A side-effect of this is that the `.frequent` emoji category no longer defines a
 
 While this may seem more complicated, it *is* actually better, since it lets us use different providers instead of relying on a single instance. It's also more obvious when using the SDK.
 
-The various views, like `EmojiGrid` and the new `EmojiScrollGrid`, will also automatically use a `MostRecentEmojiProvider` which lets you completely ignore this architectural change in most cases.  
+The various views, like `EmojiGrid` and the new `EmojiScrollGrid`, will also automatically use a `MostRecentEmojiProvider` which lets you completely ignore this architectural change in most cases.
+
+This version also adds a demo app to the repository, to make it easier to play around with it.  
 
 ### ✨ New Features
 

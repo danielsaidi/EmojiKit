@@ -58,13 +58,21 @@ The [online documentation][Documentation] has a [getting-started guide][Getting-
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, articles, code examples, etc. 
+The [online documentation][Documentation] has more information, articles, code examples, etc.
 
 
 
-## Sponsor my work
+## Demo Application
 
-You can [sponsor this project][Sponsors] on GitHub Sponsors, [reach out][Email] for paid support, or sign up for a commercial license to help support this project. Your support makes it possible to put more work into this project.
+The demo app lets you explore the library. To try it out, just open and run the `Demo` project. 
+
+
+
+## Support my work
+
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
+
+Your support makes it possible for me to put more work into these projects and make them the best they can be.
 
 
 
@@ -86,13 +94,15 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 
 
 [Email]: mailto:info@kankoda.com
+
 [Website]: https://kankoda.com/emojikit
+[GitHub]: https://github.com/danielsaidi
 [Twitter]: https://twitter.com/kankodahq
 [Mastodon]: https://mastodon.social/@kankoda
+[OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
 [Documentation]: https://kankoda.github.io/EmojiKit/documentation/emojikit/
-
 [Getting-Started]: https://kankoda.github.io/EmojiKit/documentation/emojikit/getting-started
 
 [Emoji]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emoji-article
