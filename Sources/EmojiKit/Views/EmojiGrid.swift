@@ -37,6 +37,10 @@ import SwiftUI
 ///
 /// You can wrap this view in a `ScrollViewReader` to scroll
 /// to any emoji or category `id`.
+///
+/// > Important: When emojis are listed in category sections,
+/// you must use ``Emoji/id(in:)`` to get a category-related
+/// id for any emoji that you want to scroll to.
 public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     /// Create an emoji grid with multiple category sections.
@@ -267,11 +271,11 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
                     EmojiGrid(
                         axis: axis,
                         selection: $selection,
-                        frequentEmojiProvider: provider,
+                        // frequentEmojiProvider: provider,
                         section: { $0.view },
                         item: { params in
                             Button {
-                                select(params.emoji, cat: params.category, with: proxy)
+                                select(params.emoji, cat: params.category)
                             } label: {
                                 params.view
                             }
@@ -280,17 +284,24 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
                     )
                     .padding(5)
                 }
+                .onAppear {
+                    proxy.scrollTo(selection.emoji)
+                }
+                .onChange(of: selection) {
+                    print($0)
+                    if let emoji = $0.emoji, let cat = $0.category {
+                        proxy.scrollTo(emoji.id(in: cat))
+                    }
+                }
             }
         }
         
         func select(
             _ emoji: Emoji,
-            cat: EmojiCategory,
-            with proxy: ScrollViewProxy
+            cat: EmojiCategory
         ) {
             provider.registerEmoji(emoji)
             selection = .init(emoji: emoji, category: cat)
-            proxy.scrollTo(emoji)
         }
         
         var body: some View {

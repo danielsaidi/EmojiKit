@@ -1,5 +1,5 @@
 //
-//  ScrollViewProxy.swift
+//  ScrollViewProxy+Emoji.swift
 //  EmojiKit
 //
 //  Created by Daniel Saidi on 2024-03-25.

@@ -91,7 +91,8 @@ public extension Emoji {
     /// category, e.g. when listing multiple categories that
     /// can contain the same emoji.
     func id(in category: EmojiCategory) -> String {
-        "\(category.id).\(id)"
+        if category.id.isEmpty { return id }
+        return "\(category.id).\(id)"
     }
 }
 
