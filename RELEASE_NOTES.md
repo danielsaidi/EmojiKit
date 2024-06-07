@@ -21,6 +21,7 @@ While this may seem more complicated, it *is* actually a better system design, s
 * `Emoji` now conforms to `Hashable`.
 * `Emoji.GridSelection` now conforms to `Hashable`.
 * `MostRecentEmojiProvider` now lets you use a custom persistency key.
+* `ScrollViewProxy` can now scroll to a specific `Emoji.GridSelection`.
 
 ### 💡 Changes
 

@@ -19,4 +19,13 @@ public extension ScrollViewProxy {
     func scrollTo(_ category: EmojiCategory) {
         scrollTo(category.id)
     }
+    
+    /// Scroll to a certain emoji grid selection.
+    func scrollTo(_ selection: Emoji.GridSelection) {
+        guard
+            let emoji = selection.emoji,
+            let cat = selection.category
+        else { return }
+        scrollTo(emoji.id(in: cat))
+    }
 }

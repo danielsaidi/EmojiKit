@@ -258,7 +258,7 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
     struct Preview: View {
         
         @State
-        var selection = Emoji.GridSelection()
+        var selection = Emoji.GridSelection(emoji: .init("👼"), category: .smileysAndPeople)
         
         @State
         var provider = MostRecentEmojiProvider()
@@ -285,13 +285,10 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
                     .padding(5)
                 }
                 .onAppear {
-                    proxy.scrollTo(selection.emoji)
+                    proxy.scrollTo(selection)
                 }
                 .onChange(of: selection) {
-                    print($0)
-                    if let emoji = $0.emoji, let cat = $0.category {
-                        proxy.scrollTo(emoji.id(in: cat))
-                    }
+                    proxy.scrollTo($0)
                 }
             }
         }
