@@ -188,28 +188,17 @@ public extension EmojiVersion {
     }
     
     /// All currently unavailable emojis.
-    static var currentUnavailableEmojis: [Emoji] {
-        if let emojis = _currentUnavailableEmojis { return emojis }
-        let emojis = current.unavailableEmojis
-        _currentUnavailableEmojis = emojis
-        return emojis
-    }
+    static let currentUnavailableEmojis: [Emoji] = {
+        current.unavailableEmojis
+    }()
     
     /// All currently unavailable emojis, performance cached.
-    static var _currentUnavailableEmojis: [Emoji]?
-    
-    /// All currently unavailable emojis.
-    static var currentUnavailableEmojisDictionary: [String: Emoji] {
-        if let dict = _currentUnavailableEmojisDictionary { return dict }
+    static let currentUnavailableEmojisDictionary: [String: Emoji] = {
         let emojis = currentUnavailableEmojis
         let values = emojis.map { ($0.char, $0) }
         let dict = Dictionary(uniqueKeysWithValues: values)
-        _currentUnavailableEmojisDictionary = dict
         return dict
-    }
-    
-    /// All currently unavailable emojis, performance cached.
-    static var _currentUnavailableEmojisDictionary: [String: Emoji]?
+    }()
 
     /// All emoji versions that are defined in the library.
     static var all: [Self] {
