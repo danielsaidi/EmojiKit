@@ -14,14 +14,17 @@ import SwiftUI
 /// or a list of emojis. If multiple categories are provided,
 /// the view will add a section title for each category.
 ///
+/// If you pass in a custom `frequentEmojiProvider`, it will
+/// be used to populate the ``EmojiCategory/frequent`` emoji
+/// category. If you don't pass in a provider, this category
+/// will not be displayed.
+///
 /// The `section` and `content` view builders can be used to
 /// customize the section titles and the grid item views. To
 /// use the standard views, just return `{ $0.view }`.
 ///
 /// You can provide a `selection` to automatically highlight
-/// the currently selected item. You don't need to provide a
-/// selection, for instance when the grid is only used as an
-/// emoji picker.
+/// the currently selected item.
 ///
 /// You can style this component with ``emojiGridStyle(_:)``:
 ///
@@ -36,46 +39,52 @@ import SwiftUI
 /// to any emoji or category `id`.
 public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
-    /// Create an emoji grid with multiple categories.
+    /// Create an emoji grid with multiple category sections.
     ///
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - categories: The categories to list, by default `.all`.
     ///   - selection: The current grid selection, if any.
+    ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         categories: [EmojiCategory] = .all,
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        frequentEmojiProvider: (any FrequentEmojiProvider)? = nil,
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
         self.categories = categories
         self.axis = axis
+        self.frequentEmojiProvider = frequentEmojiProvider
         self.section = section
         self.item = item
         self._selection = selection
     }
     
-    /// Create an emoji grid.
+    /// Create an emoji grid with a single section.
     ///
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: The emojis to list.
     ///   - selection: The current grid selection, if any.
+    ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        frequentEmojiProvider: (any FrequentEmojiProvider)? = nil,
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
         let chars = emojis.map { $0.char }.joined()
         self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.axis = axis
+        self.frequentEmojiProvider = frequentEmojiProvider
         self.section = section
         self.item = item
         self._selection = selection
@@ -86,6 +95,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     private let categories: [EmojiCategory]
     private let axis: Axis.Set
+    private let frequentEmojiProvider: (any FrequentEmojiProvider)?
     private let section: SectionViewBuilder
     private let item: ItemViewBuilder
     
@@ -155,7 +165,7 @@ private extension EmojiGrid {
     
     func gridContent() -> some View {
         ForEach(categories) { category in
-            if category.hasEmojis {
+            if hasEmojis(for: category) {
                 Section {
                     gridContent(for: category)
                 } header: {
@@ -169,7 +179,7 @@ private extension EmojiGrid {
     func gridContent(
         for category: EmojiCategory
     ) -> some View {
-        let emojis = category.emojis
+        let emojis = emojis(for: category)
         ForEach(Array(emojis.enumerated()), id: \.offset) {
             let isSelected = isSelected($0.element, in: category)
             item(
@@ -207,6 +217,21 @@ private extension EmojiGrid {
 
 private extension EmojiGrid {
     
+    func emojis(
+        for category: EmojiCategory
+    ) -> [Emoji] {
+        switch category {
+        case .frequent: frequentEmojiProvider?.emojis ?? []
+        default: category.emojis
+        }
+    }
+    
+    func hasEmojis(
+        for category: EmojiCategory
+    ) -> Bool {
+        !emojis(for: category).isEmpty
+    }
+    
     func isSelected(
         _ emoji: Emoji,
         in category: EmojiCategory
@@ -231,6 +256,9 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
         @State
         var selection = Emoji.GridSelection()
         
+        @State
+        var provider = MostRecentEmojiProvider()
+        
         func grid(
             _ axis: Axis.Set
         ) -> some View {
@@ -239,6 +267,7 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
                     EmojiGrid(
                         axis: axis,
                         selection: $selection,
+                        frequentEmojiProvider: provider,
                         section: { $0.view },
                         item: { params in
                             Button {
@@ -259,6 +288,7 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
             cat: EmojiCategory,
             with proxy: ScrollViewProxy
         ) {
+            provider.registerEmoji(emoji)
             selection = .init(emoji: emoji, category: cat)
             proxy.scrollTo(emoji)
         }
@@ -273,5 +303,5 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
     }
     
     return Preview()
-        .emojiGridStyle(.extraLarge)
+        // .emojiGridStyle(.extraLarge)
 }

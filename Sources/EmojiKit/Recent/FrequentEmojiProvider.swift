@@ -13,10 +13,6 @@ import Foundation
 ///
 /// Call ``registerEmoji(_:)`` whenever an emoji is used, to
 /// register the emoji and update the provider.
-///
-/// The ``Emoji/frequentEmojiProvider`` is automatically set
-/// to a ``MostRecentEmojiProvider``, but you can replace it
-/// with a custom provider at any time.
 public protocol FrequentEmojiProvider {
     
     /// A list of frequently used emojis.

@@ -28,9 +28,14 @@ public class MostRecentEmojiProvider: FrequentEmojiProvider {
         self.defaultsKey = defaultsKey
     }
     
-    private let defaults: UserDefaults
-    private let defaultsKey: String
-    private let maxCount: Int
+    /// The max number of emojis to remember.
+    public let defaults: UserDefaults
+    
+    /// The store used to persist emojis.
+    public let defaultsKey: String
+    
+    /// The store key used to persist emojis.
+    public let maxCount: Int
 }
 
 public extension MostRecentEmojiProvider {

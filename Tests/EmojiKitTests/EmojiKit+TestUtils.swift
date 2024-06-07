@@ -18,5 +18,5 @@ extension Locale {
 
 extension String {
     
-    static let mostRecentPersistencyKey = MostRecentEmojiProvider.defaultsKey
+    static let mostRecentPersistencyKey = MostRecentEmojiProvider().defaultsKey
 }

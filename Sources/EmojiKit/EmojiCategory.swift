@@ -16,14 +16,17 @@ import SwiftUI
 ///
 /// The ``EmojiCategory/frequent`` category is a placeholder
 /// that defines an ``id``, ``title``, ``icon`` etc. for the
-/// category. It has no emojis, since that would require one
-/// shared list of emojis, which isn't concurrent-safe.
+/// category. The category however has no emojis, since that
+/// would require a single list, which is unflexible.
 ///
-/// Instead, use an ``FequentEmojiProvider`` to get frequent
-/// emojis for the category, then use the same provider when
-/// you want to update the list. The various view components
-/// in EmojiKit, such as ``EmojiGrid`` lets you to pass in a
-/// provider, and will use that provider when you tap emojis.
+/// Instead, use a ``FequentEmojiProvider`` to get a list of
+/// frequently used emojis and present them for the category.
+/// Then call ``FrequentEmojiProvider/registerEmoji(_:)`` to
+/// automatically update this category when an emoji is used.
+///
+/// Various EmojiKit views, like the ``EmojiGrid``, lets you
+/// pass in a custom provider, and will automatically use it
+/// to register emojis when the user interacts with an emoji.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
     
     case frequent
