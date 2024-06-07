@@ -8,17 +8,15 @@
 
 import Foundation
 
-/**
- This protocol can be implemented by types that can return a
- list of frequently used emojis.
- 
- Call `registerEmoji` when an emoji is used, to register the
- emoji and update the provider.
- 
- The ``Emoji/frequentEmojiProvider`` is automatically set to
- a ``MostRecentEmojiProvider`` but you can replace it with a
- custom provider at any time.
-*/
+/// This protocol can be implemented by any type that can be
+/// used to get a list of frequently used emojis.
+///
+/// Call ``registerEmoji(_:)`` whenever an emoji is used, to
+/// register the emoji and update the provider.
+///
+/// The ``Emoji/frequentEmojiProvider`` is automatically set
+/// to a ``MostRecentEmojiProvider``, but you can replace it
+/// with a custom provider at any time.
 public protocol FrequentEmojiProvider {
     
     /// A list of frequently used emojis.

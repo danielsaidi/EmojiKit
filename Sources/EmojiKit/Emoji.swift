@@ -8,10 +8,8 @@
 
 import Foundation
 
-/**
- This type represents an emoji and serves as a namespace for
- emoji-related types and functionality.
- */
+/// This type represents an emoji character and is used as a
+/// namespace for emoji-related types and functionality.
 public struct Emoji: Equatable, Codable, Identifiable {
     
     /// Create an emoji from a certain character.

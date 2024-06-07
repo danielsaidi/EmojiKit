@@ -8,17 +8,14 @@
 
 import Foundation
 
-/**
- This enum defines all the Emoji versions that are currently
- supported by macOS.
- 
- You can use ``all`` to get all available emoji versions, or
- use any of the platform- or OS-based ones to get the latest
- version supported by that runtime.
- 
- ``EmojiCategory`` will automatically remove all emojis that
- are not available for the current runtime.
- */
+/// This enum defines all supported Emoji versions, that are
+/// currently available to macOS.
+///
+/// The static ``EmojiVersion/all`` property will return all
+/// versions while ``EmojiVersion/allAvailable`` will return
+/// all versions available to the current runtime. This will
+/// be used to let ``EmojiCategory`` just return emojis that
+/// are available to the current runtime.
 public struct EmojiVersion: Equatable {
     
     init(

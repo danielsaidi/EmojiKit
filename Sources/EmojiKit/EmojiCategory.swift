@@ -8,15 +8,17 @@
 
 import SwiftUI
 
-/**
- This enum defines the standard emoji categories, as well as
- their emojis.
- 
- The static ``EmojiCategory/all`` property provides you with
- all standard emoji categories. The ``EmojiCategory/frequent``
- category uses ``Emoji/frequentEmojiProvider`` to get a list
- of the most frequently used emojis to list in that category.
- */
+/// This enum defines the standard emoji categories, as well
+/// as their emojis.
+///
+/// The static ``EmojiCategory/all`` property can be used to
+/// get all standard categories.
+///
+/// The ``EmojiCategory/frequent`` category uses the current
+/// ``Emoji/frequentEmojiProvider`` to get the most frequent
+/// emojis, based on the logic of the provider. For instance,
+/// a ``MostRecentEmojiProvider`` just adds an emoji topmost
+/// when ``FrequentEmojiProvider/registerEmoji(_:)`` is used.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
     
     case frequent

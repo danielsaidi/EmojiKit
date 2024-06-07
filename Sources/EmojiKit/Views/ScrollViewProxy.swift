@@ -15,7 +15,6 @@ public extension ScrollViewProxy {
         scrollTo(emoji.id)
     }
     
-    
     /// Scroll to a certain emoji category.
     func scrollTo(_ category: EmojiCategory) {
         scrollTo(category.id)

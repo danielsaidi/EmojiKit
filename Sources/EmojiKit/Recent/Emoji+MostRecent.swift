@@ -8,18 +8,15 @@
 
 import SwiftUI
 
-/**
- This provider can be used to get most recently used emojis.
- */
+/// This emoji provider can be used to get the most recently
+/// used emojis.
 public class MostRecentEmojiProvider: FrequentEmojiProvider {
     
-    /**
-     Create an instance of the provider.
-     
-     - Parameters:
-       - maxCount: The max number of emojis to remember, by default `30`.
-       - defaults: The store used to persist emojis.
-     */
+    /// Create an instance of the provider.
+    ///
+    /// - Parameters:
+    ///   - maxCount: The max number of emojis to remember, by default `30`.
+    ///   - defaults: The store used to persist emojis.
     public init(
         maxCount: Int = 30,
         defaults: UserDefaults = .standard
