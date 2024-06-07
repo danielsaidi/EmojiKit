@@ -14,11 +14,16 @@ import SwiftUI
 /// The static ``EmojiCategory/all`` property can be used to
 /// get all standard categories.
 ///
-/// The ``EmojiCategory/frequent`` category uses the current
-/// ``Emoji/frequentEmojiProvider`` to get the most frequent
-/// emojis, based on the logic of the provider. For instance,
-/// a ``MostRecentEmojiProvider`` just adds an emoji topmost
-/// when ``FrequentEmojiProvider/registerEmoji(_:)`` is used.
+/// The ``EmojiCategory/frequent`` category is a placeholder
+/// that defines an ``id``, ``title``, ``icon`` etc. for the
+/// category. It has no emojis, since that would require one
+/// shared list of emojis, which isn't concurrent-safe.
+///
+/// Instead, use an ``FequentEmojiProvider`` to get frequent
+/// emojis for the category, then use the same provider when
+/// you want to update the list. The various view components
+/// in EmojiKit, such as ``EmojiGrid`` lets you to pass in a
+/// provider, and will use that provider when you tap emojis.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
     
     case frequent
@@ -178,7 +183,7 @@ extension EmojiCategory {
     
     var emojisString: String {
         switch self {
-        case .frequent: Self.frequentChars
+        case .frequent: ""
         case .smileysAndPeople: Self.smileysAndPeopleChars
         case .animalsAndNature: Self.animalsAndNatureChars
         case .foodAndDrink: Self.foodAndDrinkChars
@@ -189,12 +194,6 @@ extension EmojiCategory {
         case .flags: Self.flagsChars
         case .custom(_, _, let emojis, _): emojis
         }
-    }
-    
-    static var frequentChars: String {
-        Emoji.frequentEmojiProvider.emojis
-            .map { $0.char }
-            .joined(separator: "")
     }
 }
 
@@ -207,9 +206,9 @@ extension EmojiCategory {
         
         var body: some View {
             NavigationView {
-#if os(macOS)
+                #if os(macOS)
                 Color.clear
-#endif
+                #endif
                 
                 ScrollView(.vertical) {
                     VStack {

@@ -28,9 +28,3 @@ public protocol FrequentEmojiProvider {
     /// Reset the underlying data source.
     func reset()
 }
-
-public extension Emoji {
-    
-    /// The standard frequent emoji provider.
-    static var frequentEmojiProvider: FrequentEmojiProvider = MostRecentEmojiProvider()
-}
