@@ -18,7 +18,9 @@ While this may seem more complicated, it *is* actually a better system design, s
 
 ### ✨ New Features
 
-* `MostRecentEmojiProvider` now lets you define a custom persistency key.
+* `Emoji` now conforms to `Hashable`.
+* `Emoji.GridSelection` now conforms to `Hashable`.
+* `MostRecentEmojiProvider` now lets you use a custom persistency key.
 
 ### 💡 Changes
 

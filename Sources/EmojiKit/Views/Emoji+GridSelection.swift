@@ -11,7 +11,7 @@ import SwiftUI
 public extension Emoji {
     
     /// This struct can be used to handle grid selections.
-    struct GridSelection: Equatable {
+    struct GridSelection: Equatable, Hashable {
         
         /// Create a grid selection value.
         ///

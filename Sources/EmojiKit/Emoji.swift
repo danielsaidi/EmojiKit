@@ -10,7 +10,7 @@ import Foundation
 
 /// This type represents an emoji character and is used as a
 /// namespace for emoji-related types and functionality.
-public struct Emoji: Equatable, Codable, Identifiable, Sendable {
+public struct Emoji: Equatable, Codable, Hashable, Identifiable, Sendable {
     
     /// Create an emoji from a certain character.
     public init(_ char: Character) {
