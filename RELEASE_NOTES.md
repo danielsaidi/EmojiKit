@@ -6,6 +6,18 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.5
+
+This adds support for strict concurrency.
+
+This requires the library to remove the shared frequent emoji provider, and instead lets you inject such a provider into the views that uses one. 
+
+### ✨ New Features
+
+* `MostRecentEmojiProvider` now lets you define a custom persistency key.
+
+
+
 ## 0.4
 
 This version adds a new EmojiGrid component.

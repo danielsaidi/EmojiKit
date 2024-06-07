@@ -1,5 +1,5 @@
 //
-//  Emoji+MostRecent.swift
+//  MostRecentEmojiProvider.swift
 //  EmojiKit
 //
 //  Created by Daniel Saidi on 2023-10-31.
@@ -16,21 +16,21 @@ public class MostRecentEmojiProvider: FrequentEmojiProvider {
     ///
     /// - Parameters:
     ///   - maxCount: The max number of emojis to remember, by default `30`.
-    ///   - defaults: The store used to persist emojis.
+    ///   - defaults: The store used to persist emojis, by default `.standard`.
+    ///   - defaultsKey: The store key used to persist emojis, by default an EmojiKit-specific value.
     public init(
         maxCount: Int = 30,
-        defaults: UserDefaults = .standard
+        defaults: UserDefaults = .standard,
+        defaultsKey: String = "com.emojikit.MostRecentEmojiProvider.emojis"
     ) {
         self.maxCount = maxCount
         self.defaults = defaults
-        self.key = Self.defaultsKey
+        self.defaultsKey = defaultsKey
     }
     
     private let defaults: UserDefaults
+    private let defaultsKey: String
     private let maxCount: Int
-    private let key: String
-    
-    static let defaultsKey = "com.emojikit.MostRecentEmojiProvider.emojis"
 }
 
 public extension MostRecentEmojiProvider {
@@ -42,7 +42,7 @@ public extension MostRecentEmojiProvider {
     
     /// The persisted emoji characters.
     var emojiChars: [String] {
-        defaults.stringArray(forKey: key) ?? []
+        defaults.stringArray(forKey: defaultsKey) ?? []
     }
     
     /// Register that an emoji has been used.
@@ -51,12 +51,12 @@ public extension MostRecentEmojiProvider {
         emojis.insert(emoji, at: 0)
         let result = Array(emojis.prefix(maxCount))
         let chars = result.map { $0.char }
-        defaults.set(chars, forKey: key)
+        defaults.set(chars, forKey: defaultsKey)
         defaults.synchronize()
     }
     
     /// Reset the underlying data source.
     func reset() {
-        defaults.set([Emoji](), forKey: key)
+        defaults.set([Emoji](), forKey: defaultsKey)
     }
 }
