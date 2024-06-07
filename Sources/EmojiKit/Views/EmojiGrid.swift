@@ -94,8 +94,8 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         self._selection = selection
     }
     
-    public typealias ItemViewBuilder = (Emoji.ItemParameters) -> ItemView
-    public typealias SectionViewBuilder = (Emoji.SectionParameters) -> SectionView
+    public typealias ItemViewBuilder = (Emoji.GridItemParameters) -> ItemView
+    public typealias SectionViewBuilder = (Emoji.GridSectionParameters) -> SectionView
     
     private let categories: [EmojiCategory]
     private let axis: Axis.Set
@@ -117,7 +117,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
 public extension Emoji {
     
     /// This struct defines item view builder parameters.
-    struct ItemParameters {
+    struct GridItemParameters {
         
         /// The emoji to present.
         public let emoji: Emoji
@@ -136,7 +136,7 @@ public extension Emoji {
     }
     
     /// This struct defines section view builder parameters.
-    struct SectionParameters {
+    struct GridSectionParameters {
         
         /// The category that is to be presented.
         public let category: EmojiCategory
@@ -245,7 +245,7 @@ private extension EmojiGrid {
     }
 }
 
-struct EmojiPreviewButtonStyle: ButtonStyle {
+struct EmojiGridPreviewButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -279,7 +279,7 @@ struct EmojiPreviewButtonStyle: ButtonStyle {
                             } label: {
                                 params.view
                             }
-                            .buttonStyle(EmojiPreviewButtonStyle())
+                            .buttonStyle(EmojiGridPreviewButtonStyle())
                         }
                     )
                     .padding(5)

@@ -13,7 +13,7 @@ This article describes EmojiKit's native type extensions.
     @PageColor(blue)
 }
 
-There are emoji-related extensions to native types, like String and Character:
+There are emoji-related extensions to native types, like ``Swift/String`` and ``Swift/Character``:
 
 ```swift
 "Hello!".containsEmoji          // false
@@ -27,6 +27,8 @@ There are emoji-related extensions to native types, like String and Character:
 ```
 
 These extensions power many features in the library, but can be used stand-alone utilifties as well.
+
+EmojiKit also extends the native ``SwiftUI/ScrollViewProxy`` with ways to scroll to ``Emoji``, ``EmojiCategory``, and ``Emoji/GridSelection`` values.
 
 
 

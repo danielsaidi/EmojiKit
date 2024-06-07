@@ -21,7 +21,9 @@ EmojiKit is a Swift SDK that lets you use emojis and other emoji-based features 
     <img src ="Resources/Demo.gif" width="750" />
 </p>
 
-EmojiKit provides you with all you need to work with emojis, including emoji models, standard categories, support for localization & skin tones, unicode & version information, etc.
+EmojiKit has all you need to work with emojis, including standard categories, support for localization & skin tones, unicode & version information, grids & pickers, etc.
+
+EmojiKit also provides convenient views like `EmojiGrid` and `EmojiScrollGrid` to let you build emoji-based lists, grids, pickers, etc. in no time.
 
 
 
@@ -44,7 +46,7 @@ EmojiKit provides a bunch of emoji-specific features:
 * 🧩 [Extensions][Extensions] - EmojiKit extends native types with emoji support.
 * 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
 * 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides emoji skin tone information.
-* 🖼️ [Views][Views] - EmojiKit has emoji-specific grids and pickers.
+* 🖼️ [Views][Views] - EmojiKit has emoji-specific views, like grids and pickers.
 
 
 

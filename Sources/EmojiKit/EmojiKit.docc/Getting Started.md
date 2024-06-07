@@ -13,7 +13,7 @@ This article describes how to get started with EmojiKit.
     @PageColor(blue)
 }
 
-EmojiKit is very easy to use. It's mostly based on very basic models, like ``Emoji`` and ``EmojiCategory``, which will provide you with all the information you need to create sophisticated emoji-based apps and software.
+EmojiKit is easy to use. It's based on basic models, like ``Emoji`` and ``EmojiCategory``, which provides you with all the information you need to create sophisticated emoji-based apps and software.
 
 
 
@@ -73,6 +73,17 @@ EmojiKit has views that let you list and select emojis:
         @Row {
             @Column {
                 EmojiKit has an ``EmojiGrid`` that can be used to list and pick emojis in a horizontal or vertical grid.        
+            }
+            @Column {
+                ![EmojiGrid](emojigrid.jpg)       
+            }
+        }
+    }
+        
+    @Tab("EmojiScrollGrid") {
+        @Row {
+            @Column {
+                EmojiKit has an ``EmojiScrollGrid`` that wraps an ``EmojiGrid`` and automatically scrolls to the current selection.        
             }
             @Column {
                 ![EmojiGrid](emojigrid.jpg)       
