@@ -33,9 +33,9 @@ public extension Emoji {
 public extension Emoji.GridItemStyle {
     
     /// This standard emoji grid item style.
-    static var standard: Self = {
-        Self.init()
-    }()
+    static var standard: Self {
+        .init()
+    }
 }
 
 public extension View {
@@ -52,7 +52,9 @@ private extension Emoji.GridItemStyle {
 
     struct Key: EnvironmentKey {
 
-        static var defaultValue: Emoji.GridItemStyle = .standard
+        static var defaultValue: Emoji.GridItemStyle {
+            .standard
+        }
     }
 }
 

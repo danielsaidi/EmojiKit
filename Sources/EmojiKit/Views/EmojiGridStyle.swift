@@ -74,30 +74,38 @@ public struct EmojiGridStyle {
 public extension EmojiGridStyle {
     
     /// This standard emoji grid style.
-    ///
-    /// You can set this style to affect the global default.
-    static var standard: Self = {
+    static var standard: Self {
         #if os(iOS) || os(macOS) || os(watchOS) || os(visionOS)
-        Self.init()
+        .init()
         #elseif os(tvOS)
-        Self.init(font: .largeTitle, itemSize: 80, itemSpacing: 10)
+        .init(font: .largeTitle, itemSize: 80, itemSpacing: 10)
         #endif
-    }()
+    }
     
     /// A small size emoji grid style.
-    static let small = Self(fontSize: sizeBase)
+    static var small: Self {
+        .init(fontSize: sizeBase)
+    }
     
     /// A medium size emoji grid style.
-    static let medium = Self(fontSize: sizeBase + (1 * sizeStep))
+    static var medium: Self {
+        .init(fontSize: sizeBase + (1 * sizeStep))
+    }
     
     /// A large size emoji grid style.
-    static let large = Self(fontSize: sizeBase + (2 * sizeStep))
+    static var large: Self {
+        .init(fontSize: sizeBase + (2 * sizeStep))
+    }
     
     /// An extra large size emoji grid style.
-    static let extraLarge = Self(fontSize: sizeBase + (3 * sizeStep))
+    static var extraLarge: Self {
+        .init(fontSize: sizeBase + (3 * sizeStep))
+    }
     
     /// An extra, extra large size emoji grid style.
-    static let extraExtraLarge = Self(fontSize: sizeBase + (4 * sizeStep))
+    static var extraExtraLarge: Self {
+        .init(fontSize: sizeBase + (4 * sizeStep))
+    }
 }
 
 extension EmojiGridStyle {
@@ -144,7 +152,9 @@ private extension EmojiGridStyle {
 
     struct Key: EnvironmentKey {
 
-        static var defaultValue: EmojiGridStyle = .standard
+        static var defaultValue: EmojiGridStyle {
+            .standard
+        }
     }
 }
 
