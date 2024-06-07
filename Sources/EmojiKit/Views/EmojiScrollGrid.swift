@@ -17,20 +17,20 @@ import SwiftUI
 /// customize, and style the grid.
 public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     
-    /// Create an emoji scroll grid with multiple categories.
+    /// Create an emoji grid with multiple category sections.
     ///
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - categories: The categories to list, by default `.all`.
     ///   - selection: The current grid selection, if any.
-    ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
+    ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         categories: [EmojiCategory] = .all,
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        frequentEmojiProvider: (any FrequentEmojiProvider)? = nil,
+        frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
@@ -42,7 +42,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         self._selection = selection
     }
     
-    /// Create an emoji scroll grid with a single section.
+    /// Create an emoji grid with a single section.
     ///
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
@@ -55,7 +55,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        frequentEmojiProvider: (any FrequentEmojiProvider)? = nil,
+        frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
@@ -111,10 +111,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     struct Preview: View {
         
         @State
-        var selection = Emoji.GridSelection(emoji: .init("👼"), category: .smileysAndPeople)
-        
-        @State
-        var provider = MostRecentEmojiProvider()
+        var selection = Emoji.GridSelection()
         
         func grid(
             _ axis: Axis.Set
@@ -139,7 +136,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
             _ emoji: Emoji,
             cat: EmojiCategory
         ) {
-            provider.registerEmoji(emoji)
             selection = .init(emoji: emoji, category: cat)
         }
         

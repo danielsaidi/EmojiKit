@@ -10,11 +10,13 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version adds support for strict concurrency.
 
-The strict concurrency change required the library to remove the shared `FrequentEmojiProvider`, and instead let you provide your own instance.
+The strict concurrency change required the library to remove the shared `FrequentEmojiProvider`.
 
-A side-effect of this is that the `.frequent` emoji category no longer defines emojis in itself, but is instead only used as a placeholder that defines the id, title, icon, etc. for the category.
+A side-effect of this is that the `.frequent` emoji category no longer defines any emojis, and is now only used as a placeholder to defines the id, title, icon, etc. for that category.
 
-While this may seem more complicated, it *is* actually a better system design, since it lets us inject different providers instead of relying on a shared single instance. This is more flexible and obvious when you use the SDK.  
+While this may seem more complicated, it *is* actually better, since it lets us use different providers instead of relying on a single instance. It's also more obvious when using the SDK.
+
+The various views, like `EmojiGrid` and the new `EmojiScrollGrid`, will also automatically use a `MostRecentEmojiProvider` which lets you completely ignore this architectural change in most cases.  
 
 ### ✨ New Features
 
