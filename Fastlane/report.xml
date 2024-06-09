@@ -5,117 +5,34 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000248">
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.00044">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: default_platform" time="0.000611">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="8.7e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: Switch to ios version_validate lane" time="9.7e-05">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios version_validate lane" time="0.000101">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: ensure_git_status_clean" time="0.020015">
+      <testcase classname="fastlane.lanes" name="3: ensure_git_status_clean" time="0.012823">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: ensure_git_branch" time="0.01328">
+      <testcase classname="fastlane.lanes" name="4: ensure_git_branch" time="0.009149">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: swiftlint" time="0.551434">
+      <testcase classname="fastlane.lanes" name="5: swiftlint" time="0.318883">
         
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="06: Switch to ios build lane" time="0.003853">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="07: cd .. &amp;&amp; xcodebuild -scheme EmojiKit -derivedDataPath .build -destination &apos;generic/platform=iOS&apos;;" time="2.4586">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="08: Switch to ios build lane" time="0.000135">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="09: cd .. &amp;&amp; xcodebuild -scheme EmojiKit -derivedDataPath .build -destination &apos;generic/platform=OS X&apos;;" time="3.068206">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="10: Switch to ios build lane" time="0.000168">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="11: cd .. &amp;&amp; xcodebuild -scheme EmojiKit -derivedDataPath .build -destination &apos;generic/platform=tvOS&apos;;" time="2.014985">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="12: Switch to ios build lane" time="0.000124">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="13: cd .. &amp;&amp; xcodebuild -scheme EmojiKit -derivedDataPath .build -destination &apos;generic/platform=watchOS&apos;;" time="3.046149">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="14: Switch to ios build lane" time="0.000118">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="15: cd .. &amp;&amp; xcodebuild -scheme EmojiKit -derivedDataPath .build -destination &apos;generic/platform=xrOS&apos;;" time="3.318127">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="16: Switch to ios test_ios lane" time="0.000198">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="17: cd .. &amp;&amp; xcodebuild test -scheme EmojiKit -derivedDataPath .build -destination &apos;platform=iOS Simulator,name=iPhone 15,OS=17.2&apos; -enableCodeCoverage YES;" time="41.836216">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="18: version_bump_podspec" time="0.001851">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="19: git_commit" time="0.032568">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="20: add_git_tag" time="0.044265">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="21: push_git_tags" time="1.859716">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="22: push_to_git_remote" time="1.887995">
+          <failure message="/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:229:in `chdir&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:44:in `block (2 levels) in parsing_binding&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:204:in `try_switch_to_lane&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:146:in `trigger_action_by_name&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:30:in `block (2 levels) in parsing_binding&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:45:in `chdir&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/runner.rb:45:in `execute&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/commander-4.6.0/lib/commander/command.rb:187:in `call&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/commander-4.6.0/lib/commander/command.rb:157:in `run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/commands_generator.rb:354:in `run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/commands_generator.rb:43:in `start&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/gems/fastlane-2.214.0/bin/fastlane:23:in `&lt;top (required)&gt;&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/bin/fastlane:25:in `load&apos;&#10;/opt/homebrew/Cellar/fastlane/2.214.0/libexec/bin/fastlane:25:in `&lt;main&gt;&apos;&#10;&#10;SwiftLint finished with errors (exit code: 0)" />
         
       </testcase>
     

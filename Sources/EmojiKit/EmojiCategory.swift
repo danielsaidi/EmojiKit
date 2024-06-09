@@ -151,7 +151,7 @@ public extension EmojiCategory {
         case .objects: Self.emojisForObjects
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
-        case .custom(_, _, _, _): emojiStringEmojis
+        case .custom: emojiStringEmojis
         }
     }
     
