@@ -140,11 +140,19 @@ private extension EmojiGrid {
         }
     }
 
+    @discardableResult
     func pickEmoji(_ emoji: Emoji) {
         frequentEmojiProvider?.registerEmoji(emoji)
         action(emoji)
     }
 
+    @discardableResult
+    func pickAndSelectEmoji(_ emoji: Emoji, in category: EmojiCategory) -> Bool {
+        selection = .init(emoji: emoji, category: category)
+        return pickSelectedEmoji()
+    }
+
+    @discardableResult
     func pickSelectedEmoji() -> Bool {
         guard let emoji = selection.emoji else { return false }
         pickEmoji(emoji)
@@ -223,21 +231,24 @@ private extension EmojiGrid {
     ) -> some View {
         let emojis = emojis(for: category)
         ForEach(Array(emojis.enumerated()), id: \.offset) {
-            let isSelected = isSelected($0.element, in: category)
+            let emoji = $0.element
+            let offset = $0.offset
+            let isSelected = isSelected(emoji, in: category)
             item(
                 .init(
-                    emoji: $0.element,
+                    emoji: emoji,
                     category: category,
-                    categoryIndex: $0.offset,
+                    categoryIndex: offset,
                     isSelected: isSelected,
                     view: Emoji.GridItem(
-                        $0.element,
+                        emoji,
                         isSelected: isSelected
                     )
                 )
             )
             .font(style.font)
-            .id($0.element.id(in: category))
+            .onTapGesture { pickAndSelectEmoji(emoji, in: category) }
+            .id(emoji.id(in: category))
         }
     }
     
