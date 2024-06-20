@@ -76,21 +76,19 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - emojis: The emojis to list.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
-    ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
-        @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
-    ) {
+    ) where SectionView == Emoji.GridSectionTitle {
         let chars = emojis.map { $0.char }.joined()
         self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.axis = axis
         self.frequentEmojiProvider = frequentEmojiProvider
-        self.section = section
+        self.section = { $0.view }
         self.item = item
         self._selection = selection
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// This enum defines all supported Emoji versions, that are
 /// currently available to macOS.
@@ -21,6 +22,7 @@ public struct EmojiVersion: Equatable {
     init(
         version: Double,
         emojis: String,
+        emojisRaw: String = "",
         iOS: Double,
         macOS: Double,
         tvOS: Double,
@@ -32,7 +34,10 @@ public struct EmojiVersion: Equatable {
             let emojis = emoji.hasSkinToneVariants ? skintones : [emoji]
             return emojis.contains(emoji) ? emojis : [emoji] + emojis
         }
-        self.emojis = allEmojis
+        let allEmojisRaw = emojisRaw.map(String.init).map {
+            Emoji($0)
+        }
+        self.emojis = allEmojis + allEmojisRaw
         self.version = version
         self.iOS = iOS
         self.macOS = macOS
@@ -102,7 +107,8 @@ public extension EmojiVersion {
     static var v15_1: Self {
         .init(
             version: 15.1,
-            emojis: "🙂‍↕️🙂‍↔️👩‍🦽‍➡️🧑‍🦽‍➡️👨‍🦽‍➡️👩‍🦼‍➡️🧑‍🦼‍➡️👨‍🦼‍➡️🚶‍♀️‍➡️🚶‍➡️🚶‍♂️‍➡️👩‍🦯‍➡️🧑‍🦯‍➡️👨‍🦯‍➡️🧎‍♀️‍➡️🧎‍➡️🧎‍♂️‍➡️🏃‍♀️‍➡️🏃‍➡️🏃‍♂️‍➡️🐦‍🔥🍋‍🟩🍄‍🟫⛓️‍💥🧑‍🧑‍🧒🧑‍🧒‍🧒🧑‍🧒🧑‍🧑‍🧒‍🧒",
+            emojis: "🙂‍↕️🙂‍↔️👩‍🦽‍➡️🧑‍🦽‍➡️👨‍🦽‍➡️👩‍🦼‍➡️🧑‍🦼‍➡️👨‍🦼‍➡️🚶‍♀️‍➡️🚶‍➡️🚶‍♂️‍➡️👩‍🦯‍➡️🧑‍🦯‍➡️👨‍🦯‍➡️🧎‍♀️‍➡️🧎‍➡️🧎‍♂️‍➡️🏃‍♀️‍➡️🏃‍➡️🏃‍♂️‍➡️🐦‍🔥🍋‍🟩🍄‍🟫⛓️‍💥",
+            emojisRaw: "🧑‍🧑‍🧒🧑‍🧒‍🧒🧑‍🧒🧑‍🧑‍🧒‍🧒",
             iOS: 17.4,
             macOS: 14.4,
             tvOS: 17.4,
@@ -272,5 +278,25 @@ public extension Emoji {
     /// If the emoji is unavailable in the current runtime.
     var isUnavailableInCurrentRuntime: Bool {
         EmojiVersion.currentUnavailableEmojisDictionary[char] != nil
+    }
+}
+
+#Preview {
+    ZStack {
+        Color.black.opacity(0.1).ignoresSafeArea()
+
+        VStack(alignment: .leading) {
+            Text("Emoji 15.1")
+                .font(.title.bold())
+            EmojiGrid(
+                emojis: EmojiVersion.v15_1.emojis
+            ) {
+                $0.view
+            }
+            .padding()
+            .background(Color.white)
+            .clipShape(.rect(cornerRadius: 10))
+        }
+        .padding()
     }
 }
