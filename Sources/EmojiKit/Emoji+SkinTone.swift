@@ -234,8 +234,7 @@ private extension String {
 
     static let emojiReferenceSize = "👍".emojiSize
 
-    static let emojiSkinToneModifiers =
-        ["🏻", "🏼", "🏽", "🏾", "🏿"]
+    static let emojiSkinToneModifiers = ["🏻", "🏼", "🏽", "🏾", "🏿"]
 
     var emojiSize: CGSize {
         let greatestFinite = CGFloat.greatestFiniteMagnitude
