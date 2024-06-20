@@ -10,34 +10,24 @@ import SwiftUI
 
 /// This view can be used to list emojis in a grid.
 ///
-/// The grid can be created with either a list of categories
-/// or a list of emojis. If multiple categories are provided,
-/// the view will add a section title for each category.
+/// Use the ``EmojiScrollGrid`` if you want to wrap the grid
+/// in a `ScrollView` that auto-scrolls to the `selection`.
 ///
-/// You can provide a `selection` to automatically highlight
-/// the current selection.  Use the ``EmojiScrollGrid`` when
-/// you want to auto-scroll to the current selection.
+/// The grid can be created with either a list of categories
+/// or emojis. If multiple categories are provided, the grid
+/// will add a section title to each category. For now, this
+/// is only done for the vertical scroll axis.
 ///
 /// The `section` and `content` view builders can be used to
-/// customize the section titles and the grid item views. To
-/// use the standard view, just return `0.view`. The builder
-/// parameters provide you with more properties, to help you
-/// customize your views.
+/// customize the section titles and grid items. Just return
+/// `0.view` to use the standard view, or use the parameters
+/// to access contextual information for the view.
 ///
-/// You can style this component with ``emojiGridStyle(_:)``:
+/// You can style this component with ``emojiGridStyle(_:)``,
+/// for instance to determine the size of each grid item.
 ///
-/// ```swift
-/// EmojiGrid(...) {
-///     $0.view
-/// }
-/// .emojiGridStyle(.large)
-/// ```
-///
-/// The grid will use the `frequentEmojiProvider` to get all
-/// emojis for the ``EmojiCategory/frequent`` emoji category,
-/// then call ``FrequentEmojiProvider/registerEmoji(_:)`` to
-/// automatically register any selected emojis. If you don't
-/// want the grid to do this, just pass in `nil`.
+/// This grid will use a `frequentEmojiProvider` to populate
+/// the ``EmojiCategory/frequent`` category.
 ///
 /// > Important: When emojis are listed in category sections,
 /// you must use ``Emoji/id(in:)`` to get a category-related

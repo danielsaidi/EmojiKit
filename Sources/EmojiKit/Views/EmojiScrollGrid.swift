@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-/// This view wraps an ``EmojiGrid`` in a scroll view.
-///
-/// This view automatically scrolls to its current selection,
-/// both when it's loaded and whenever the selection changes.
+/// This scroll grid wraps an ``EmojiGrid`` in a `ScrollView`
+/// and automatically scrolls to the current `selection`.
 ///
 /// See the ``EmojiGrid`` for more information on how to use,
-/// customize, and style the grid.
+/// customize, and style this grid.
 public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     
     /// Create an emoji grid with multiple category sections.
@@ -49,21 +47,19 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     ///   - emojis: The emojis to list.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
-    ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
-        @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
-    ) {
+    ) where SectionView == Emoji.GridSectionTitle {
         let chars = emojis.map { $0.char }.joined()
         self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.axis = axis
         self.frequentEmojiProvider = frequentEmojiProvider
-        self.section = section
+        self.section = { $0.view }
         self.item = item
         self._selection = selection
     }

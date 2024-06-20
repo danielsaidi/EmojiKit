@@ -130,15 +130,6 @@ public extension EmojiCategory {
         }
     }
     
-    /// An emoji-based label that represents the category.
-    var emojiIconLabel: some View {
-        Label {
-            Text(localizedName)
-        } icon: {
-            Text(emojiIcon)
-        }
-    }
-    
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
         switch self {
@@ -262,18 +253,17 @@ extension EmojiCategory {
                     VStack {
                         ForEach(EmojiCategory.all) { cat in
                             DisclosureGroup {
-                                LazyVGrid(
-                                    columns: columns,
-                                    spacing: 10
-                                ) {
-                                    ForEach(cat.emojis) {
-                                        Text($0.char)
-                                            .font(.title)
-                                    }
-                                }
+                                EmojiGrid(
+                                    emojis: cat.emojis, 
+                                    item: { $0.view }
+                                )
                                 .padding(.top)
                             } label: {
-                                cat.emojiIconLabel
+                                Label {
+                                    Text(cat.localizedName)
+                                } icon: {
+                                    Text(cat.emojiIcon)
+                                }
                             }
                             
                             Divider()
