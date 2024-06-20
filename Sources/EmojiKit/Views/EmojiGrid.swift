@@ -41,6 +41,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.all`.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
+    ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
@@ -48,12 +49,14 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .all,
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
+        action: @escaping EmojiAction = { _ in },
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
         self.categories = categories
         self.axis = axis
         self.frequentEmojiProvider = frequentEmojiProvider
+        self.action = action
         self.section = section
         self.item = item
         self._selection = selection
@@ -66,42 +69,86 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - emojis: The emojis to list.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
+    ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - item: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
+        action: @escaping EmojiAction = { _ in },
         @ViewBuilder item: @escaping ItemViewBuilder
     ) where SectionView == Emoji.GridSectionTitle {
         let chars = emojis.map { $0.char }.joined()
         self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.axis = axis
         self.frequentEmojiProvider = frequentEmojiProvider
+        self.action = action
         self.section = { $0.view }
         self.item = item
         self._selection = selection
     }
     
+    public typealias EmojiAction = (Emoji) -> Void
     public typealias ItemViewBuilder = (Emoji.GridItemParameters) -> ItemView
     public typealias SectionViewBuilder = (Emoji.GridSectionParameters) -> SectionView
     
     private let categories: [EmojiCategory]
     private let axis: Axis.Set
     private let frequentEmojiProvider: (any FrequentEmojiProvider)?
+    private let action: EmojiAction
     private let section: SectionViewBuilder
     private let item: ItemViewBuilder
-    
+
     @Binding
     private var selection: Emoji.GridSelection
     
     @Environment(\.emojiGridStyle)
     private var style
-    
+
+    @State
+    private var isPopoverPresented = false
+
     public var body: some View {
-        grid
-            .prefersFocusable(true)
-            .prefersFocusEffectDisabled(!style.prefersFocusEffect)
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
+            grid
+                .focusable(true)
+                .focusEffectDisabled(!style.prefersFocusEffect)
+                .onKeyPress {
+                    var result: Bool
+                    switch $0.key {
+                    case .return: result = handleReturn($0)
+                    default: result = false
+                    }
+                    return result ? .handled : .ignored
+                }
+        } else {
+            grid
+        }
+    }
+}
+
+private extension EmojiGrid {
+
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
+    func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
+        if press.modifiers.contains(.option) {
+            print("Open skintone popover")
+            return true
+        } else {
+            return pickSelectedEmoji()
+        }
+    }
+
+    func pickEmoji(_ emoji: Emoji) {
+        frequentEmojiProvider?.registerEmoji(emoji)
+        action(emoji)
+    }
+
+    func pickSelectedEmoji() -> Bool {
+        guard let emoji = selection.emoji else { return false }
+        pickEmoji(emoji)
+        return true
     }
 }
 

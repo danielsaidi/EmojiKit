@@ -10,15 +10,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var selection = Emoji.GridSelection()
-    
+    @State private var selection = Emoji.GridSelection(emoji: .init("🙄"), category: .smileysAndPeople)
+
+    @FocusState var focusState1
+    @FocusState var focusState2
+
     var body: some View {
         NavigationStack {
             VStack {
                 grid(.vertical)
+                    .focused($focusState1)
                 grid(.horizontal)
+                    .focused($focusState2)
             }
         }
+        // .emojiGridStyle(.medium)
     }
 }
 
@@ -36,18 +42,12 @@ private extension ContentView {
             frequentEmojiProvider: MostRecentEmojiProvider(),
             section: { $0.view },
             item: { params in
-                Button("\(params.emoji.char)") {
-                    selection = .init(
-                        emoji: params.emoji,
-                        category: params.category
+                params.view
+                    .background(
+                        ContainerRelativeShape()
+                            .fill(fillStyle(params.isSelected))
                     )
-                }
-                .aspectRatio(1, contentMode: .fill)
-                .background(
-                    ContainerRelativeShape()
-                        .fill(fillStyle(params.isSelected))
-                )
-                .containerShape(.rect(cornerRadius: 7))
+                    .containerShape(.rect(cornerRadius: 7))
             }
         )
     }
