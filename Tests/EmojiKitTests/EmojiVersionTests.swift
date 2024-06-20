@@ -109,9 +109,9 @@ final class Emoji_VersionTests: XCTestCase {
 
     func testCanSpecifyOlderAndLaterVersions() throws {
         XCTAssertEqual(EmojiVersion.v14.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1])
-        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15])
+        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15, .v15_1])
         XCTAssertEqual(EmojiVersion.v15.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1, .v14])
-        XCTAssertEqual(EmojiVersion.v15.laterVersions, [])
+        XCTAssertEqual(EmojiVersion.v15_1.laterVersions, [])
     }
     
     func testCanSpecifyUnavailableEmojis() throws {
@@ -124,7 +124,7 @@ final class Emoji_VersionTests: XCTestCase {
     }
     
     func testCurrentIsTheLatestOne() throws {
-        XCTAssertEqual(EmojiVersion.current, .v15)
+        XCTAssertEqual(EmojiVersion.current, .v15_1)
     }
     
     func testCurrentUnavailableEmojisIsEmpty() throws {

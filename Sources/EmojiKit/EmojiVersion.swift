@@ -98,7 +98,18 @@ public struct EmojiVersion: Equatable {
 // MARK: - Public functions
 
 public extension EmojiVersion {
-    
+
+    static var v15_1: Self {
+        .init(
+            version: 15.1,
+            emojis: "🙂‍↕️🙂‍↔️👩‍🦽‍➡️🧑‍🦽‍➡️👨‍🦽‍➡️👩‍🦼‍➡️🧑‍🦼‍➡️👨‍🦼‍➡️🚶‍♀️‍➡️🚶‍➡️🚶‍♂️‍➡️👩‍🦯‍➡️🧑‍🦯‍➡️👨‍🦯‍➡️🧎‍♀️‍➡️🧎‍➡️🧎‍♂️‍➡️🏃‍♀️‍➡️🏃‍➡️🏃‍♂️‍➡️🐦‍🔥🍋‍🟩🍄‍🟫⛓️‍💥🧑‍🧑‍🧒🧑‍🧒‍🧒🧑‍🧒🧑‍🧑‍🧒‍🧒",
+            iOS: 17.4,
+            macOS: 14.4,
+            tvOS: 17.4,
+            watchOS: 10.4
+        )
+    }
+
     static var v15: Self {
         .init(
             version: 15.0,
@@ -178,6 +189,9 @@ public extension EmojiVersion {
     
     /// The ``EmojiVersion`` that is used by the current OS.
     static var current: Self {
+        if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, *) {
+            return .v15_1
+        }
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {
             return .v15
         } 
@@ -202,7 +216,7 @@ public extension EmojiVersion {
 
     /// All emoji versions that are defined in the library.
     static var all: [Self] {
-        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15]
+        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1]
     }
     
     /// All emoji versions that are available to the runtime.
