@@ -100,10 +100,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     public var body: some View {
         grid
-            .onChange(of: selection) {
-                guard let emoji = $0.emoji else { return }
-                frequentEmojiProvider?.registerEmoji(emoji)
-            }
     }
 }
 
