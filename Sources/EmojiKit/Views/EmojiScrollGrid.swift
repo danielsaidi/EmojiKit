@@ -93,7 +93,10 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
                 .padding(5)
             }
             .onAppear {
-                proxy.scrollTo(selection)
+                Task {
+                    try await Task.sleep(nanoseconds: 100_000_000)
+                    proxy.scrollTo(selection)
+                }
             }
             .onChange(of: selection) {
                 proxy.scrollTo($0)

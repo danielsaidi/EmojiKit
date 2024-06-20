@@ -18,20 +18,46 @@ import SwiftUI
 /// styles, like ``large`` or ``extraLarge``. You can modify
 /// these style, and create completely custom styles as well.
 ///
+/// When ``prefersFocusEffect`` is `true`, the grid will get
+/// a blue square around itself, to indicate if it has focus.
+/// This is not really needed, since the selected emoji will
+/// already be marked with a blue square, but it's up to you.
+///
 /// When defining custom styles, make sure that the style is
 /// adjusted for different platforms.
 public struct EmojiGridStyle {
-    
+
+    /// Create a style with an identical font and item size.
+    ///
+    /// - Parameters:
+    ///   - fontSize: The font size to use, by default `30`.
+    ///   - itemSpacing: The grid item spacing, by default `5`.
+    ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
+    public init(
+        fontSize: CGFloat = 30,
+        itemSpacing: CGFloat = 5,
+        prefersFocusEffect: Bool = false
+    ) {
+        self.init(
+            font: .system(size: fontSize),
+            itemSize: fontSize,
+            itemSpacing: itemSpacing,
+            prefersFocusEffect: prefersFocusEffect
+        )
+    }
+
     /// Create a style with an individual font and item size.
     ///
     /// - Parameters:
     ///   - font: The font to use, by default `.title`.
     ///   - itemSize: The item size to use, by default `30`.
     ///   - itemSpacing: The grid item spacing, by default `5`.
+    ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
     public init(
         font: Font? = .title,
         itemSize: CGFloat = 30,
-        itemSpacing: CGFloat = 5
+        itemSpacing: CGFloat = 5,
+        prefersFocusEffect: Bool = false
     ) {
         self.font = font
         self.itemSize = itemSize
@@ -40,22 +66,7 @@ public struct EmojiGridStyle {
             .adaptive(minimum: itemSize),
             spacing: itemSpacing
         )]
-    }
-    
-    /// Create a style with an identical font and item size.
-    ///
-    /// - Parameters:
-    ///   - fontSize: The font size to use, by default `30`.
-    ///   - itemSpacing: The grid item spacing, by default `5`.
-    public init(
-        fontSize: CGFloat = 30,
-        itemSpacing: CGFloat = 5
-    ) {
-        self.init(
-            font: .system(size: fontSize),
-            itemSize: fontSize,
-            itemSpacing: itemSpacing
-        )
+        self.prefersFocusEffect = prefersFocusEffect
     }
     
     /// The font to use.
@@ -69,6 +80,9 @@ public struct EmojiGridStyle {
     
     /// The grid items.
     public var items: [GridItem]
+
+    /// Whether the grid should disable its focus effect.
+    public var prefersFocusEffect: Bool
 }
 
 public extension EmojiGridStyle {

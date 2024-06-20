@@ -100,6 +100,8 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     public var body: some View {
         grid
+            .prefersFocusable(true)
+            .prefersFocusEffectDisabled(!style.prefersFocusEffect)
     }
 }
 
@@ -273,8 +275,8 @@ struct EmojiGridPreviewButtonStyle: ButtonStyle {
                 .onAppear {
                     proxy.scrollTo(selection)
                 }
-                .onChange(of: selection) {
-                    proxy.scrollTo($0)
+                .onChange(of: selection) { selection in
+                    proxy.scrollTo(selection)
                 }
             }
         }
