@@ -42,43 +42,11 @@ public extension Emoji {
             Text(emoji.char)
                 .clipShape(.containerRelative)
                 .aspectRatio(1, contentMode: .fill)
-                .selectionBackground(isSelected, style)
-        }
-    }
-}
-
-private extension View {
-    
-    @ViewBuilder
-    func selectionBackground(
-        _ isSelected: Bool,
-        _ style: Emoji.GridItemStyle
-    ) -> some View {
-        if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-            self.background(
-                    ContainerRelativeShape()
-                        .fill(fillStyle(isSelected))
-                        .aspectRatio(1, contentMode: .fill)
+                .selectionBackground(
+                    isSelected: isSelected,
+                    cornerRadius: style.cornerRadius
                 )
-            .containerShape(.rect(cornerRadius: style.cornerRadius))
-        } else {
-            self
         }
-    }
-    
-    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-    func fillStyle(
-        _ isSelected: Bool
-    ) -> AnyShapeStyle {
-        #if os(iOS) || os(macOS)
-        if isSelected {
-            return .init(.selection)
-        } else {
-            return .init(.clear)
-        }
-        #else
-            .init(.clear)
-        #endif
     }
 }
 

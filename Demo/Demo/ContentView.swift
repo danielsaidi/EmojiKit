@@ -20,11 +20,12 @@ struct ContentView: View {
             VStack {
                 grid(.vertical)
                     .focused($focusState1)
+                Divider()
                 grid(.horizontal)
                     .focused($focusState2)
             }
         }
-        // .emojiGridStyle(.medium)
+        .emojiGridStyle(.small)
     }
 }
 
@@ -40,32 +41,11 @@ private extension ContentView {
             categories: .all,
             selection: $selection,
             frequentEmojiProvider: MostRecentEmojiProvider(),
+            action: { print($0) },
             section: { $0.view },
-            item: { params in
-                params.view
-                    .background(
-                        ContainerRelativeShape()
-                            .fill(fillStyle(params.isSelected))
-                    )
-                    .containerShape(.rect(cornerRadius: 7))
-            }
+            item: { $0.view }
         )
     }
-    
-    /*
-    
-    private var fillStyle: AnyShapeStyle {
-        #if os(iOS) || os(macOS)
-        isSelected
-            ? AnyShapeStyle(.selection)
-            : AnyShapeStyle(.clear)
-        #else
-        AnyShapeStyle(.clear)
-        #endif
-    }
-    */
-    
-    
 }
 
 #Preview {

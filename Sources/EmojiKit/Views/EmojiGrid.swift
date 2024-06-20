@@ -107,7 +107,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private var style
 
     @State
-    private var isPopoverPresented = false
+    private var popoverSelection: Emoji.GridSelection?
 
     public var body: some View {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
@@ -132,12 +132,12 @@ private extension EmojiGrid {
 
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
     func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
-        if press.modifiers.contains(.option) {
-            print("Open skintone popover")
+        if press.modifiers.isEmpty { return pickSelectedEmoji() }
+        if press.modifiers == .option {
+            popoverSelection = selection
             return true
-        } else {
-            return pickSelectedEmoji()
         }
+        return false
     }
 
     @discardableResult
@@ -148,7 +148,7 @@ private extension EmojiGrid {
 
     @discardableResult
     func pickAndSelectEmoji(_ emoji: Emoji, in category: EmojiCategory) -> Bool {
-        selection = .init(emoji: emoji, category: category)
+        selectEmoji(emoji, in: category)
         return pickSelectedEmoji()
     }
 
@@ -157,6 +157,10 @@ private extension EmojiGrid {
         guard let emoji = selection.emoji else { return false }
         pickEmoji(emoji)
         return true
+    }
+
+    func selectEmoji(_ emoji: Emoji, in category: EmojiCategory) {
+        selection = .init(emoji: emoji, category: category)
     }
 }
 
@@ -231,27 +235,33 @@ private extension EmojiGrid {
     ) -> some View {
         let emojis = emojis(for: category)
         ForEach(Array(emojis.enumerated()), id: \.offset) {
-            let emoji = $0.element
-            let offset = $0.offset
-            let isSelected = isSelected(emoji, in: category)
-            item(
-                .init(
-                    emoji: emoji,
-                    category: category,
-                    categoryIndex: offset,
-                    isSelected: isSelected,
-                    view: Emoji.GridItem(
-                        emoji,
-                        isSelected: isSelected
-                    )
-                )
-            )
-            .font(style.font)
-            .onTapGesture { pickAndSelectEmoji(emoji, in: category) }
-            .id(emoji.id(in: category))
+            gridContent(for: category, emoji: $0.element, offset: $0.offset)
         }
     }
-    
+
+    @ViewBuilder
+    func gridContent(
+        for category: EmojiCategory,
+        emoji: Emoji,
+        offset: Int
+    ) -> some View {
+        item(
+            .init(
+                emoji: emoji,
+                category: category,
+                categoryIndex: offset,
+                isSelected: isSelected(emoji, in: category),
+                view: Emoji.GridItem(
+                    emoji,
+                    isSelected: isSelected(emoji, in: category)
+                )
+            )
+        )
+        .font(style.font)
+        .onTapGesture { pickAndSelectEmoji(emoji, in: category) }
+        .id(emoji.id(in: category))
+    }
+
     @ViewBuilder
     func gridTitle(
         for category: EmojiCategory
