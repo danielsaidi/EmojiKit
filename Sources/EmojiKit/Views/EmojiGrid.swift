@@ -147,20 +147,30 @@ private extension EmojiGrid {
     }
 
     @discardableResult
-    func pickAndSelectEmoji(_ emoji: Emoji, in category: EmojiCategory) -> Bool {
-        selectEmoji(emoji, in: category)
-        return pickSelectedEmoji()
-    }
-
-    @discardableResult
     func pickSelectedEmoji() -> Bool {
         guard let emoji = selection.emoji else { return false }
         pickEmoji(emoji)
         return true
     }
 
-    func selectEmoji(_ emoji: Emoji, in category: EmojiCategory) {
+    func selectEmoji(
+        _ emoji: Emoji,
+        in category: EmojiCategory,
+        withSkintonePopover: Bool = false
+    ) {
         selection = .init(emoji: emoji, category: category)
+        if withSkintonePopover {
+            popoverSelection = selection
+        }
+    }
+
+    @discardableResult
+    func selectAndPickEmoji(
+        _ emoji: Emoji,
+        in category: EmojiCategory
+    ) -> Bool {
+        selectEmoji(emoji, in: category)
+        return pickSelectedEmoji()
     }
 }
 
@@ -245,20 +255,30 @@ private extension EmojiGrid {
         emoji: Emoji,
         offset: Int
     ) -> some View {
-        item(
-            .init(
-                emoji: emoji,
-                category: category,
-                categoryIndex: offset,
-                isSelected: isSelected(emoji, in: category),
-                view: Emoji.GridItem(
-                    emoji,
-                    isSelected: isSelected(emoji, in: category)
-                )
+        let params = Emoji.GridItemParameters(
+            emoji: emoji,
+            category: category,
+            categoryIndex: offset,
+            isSelected: isSelected(emoji, in: category),
+            view: Emoji.GridItem(
+                emoji,
+                isSelected: isSelected(emoji, in: category)
             )
         )
+        EmojiGridItemWrapper(
+            params: params,
+            action: { emoji, cat in pickEmoji(emoji) },
+            popoverSelection: $popoverSelection, 
+            content: { item(params) }
+        )
         .font(style.font)
-        .onTapGesture { pickAndSelectEmoji(emoji, in: category) }
+        .onTapGesture {
+            if popoverSelection != nil { return }
+            selectAndPickEmoji(emoji, in: category)
+        }
+        .onLongPressGesture {
+            selectEmoji(emoji, in: category, withSkintonePopover: true)
+        }
         .id(emoji.id(in: category))
     }
 

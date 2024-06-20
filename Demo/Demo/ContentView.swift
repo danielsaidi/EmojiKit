@@ -25,6 +25,7 @@ struct ContentView: View {
                     .focused($focusState2)
             }
         }
+        .tint(.orange)
         .emojiGridStyle(.small)
     }
 }
