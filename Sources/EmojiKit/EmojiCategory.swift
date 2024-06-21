@@ -65,6 +65,23 @@ public extension EmojiCategory {
     }
 }
 
+public extension Array where Element == EmojiCategory {
+
+    /// Get the category after the provided category.
+    func category(after category: Element) -> Element? {
+        guard let index = firstIndex(of: category) else { return nil }
+        let newIndex = index + 1
+        return newIndex < count ? self[newIndex] : nil
+    }
+
+    /// Get the category before the provided category.
+    func category(before category: Element) -> Element? {
+        guard let index = firstIndex(of: category) else { return nil }
+        let newIndex = index - 1
+        return newIndex >= 0 ? self[newIndex] : nil
+    }
+}
+
 public extension Collection where Element == EmojiCategory {
 
     /// Get an ordered list of all standard categories.
@@ -178,22 +195,9 @@ extension EmojiCategory {
             }
     }
     
-    /// Get the emoji at a certain index, if any.
-    func emoji(at index: Int) -> Emoji? {
-        let isValid = index >= 0 && index < emojis.count
-        return isValid ? emojis[index] : nil
-    }
-    
-    /// The first index of a certain emoji, if any.
-    func firstIndex(of emoji: Emoji) -> Int? {
-        emojis.firstIndex {
-            $0.neutralSkinToneVariant == emoji.neutralSkinToneVariant
-        }
-    }
-    
     /// Whether or not the category contains a certain emoji.
     func hasEmoji(_ emoji: Emoji) -> Bool {
-        firstIndex(of: emoji) != nil
+        emojis.firstIndex(of: emoji) != nil
     }
 }
 
@@ -201,36 +205,36 @@ extension EmojiCategory {
     
     static let emojisForSmileysAndPeople: [Emoji] = {
         EmojiCategory.smileysAndPeople.emojiStringEmojis
-        
     }()
+
     static let emojisForAnimalsAndNature: [Emoji] = {
         EmojiCategory.animalsAndNature.emojiStringEmojis
-        
     }()
+
     static let emojisForFoodAndDrink: [Emoji] = {
         EmojiCategory.foodAndDrink.emojiStringEmojis
-        
     }()
+
     static let emojisForActivity: [Emoji] = {
         EmojiCategory.activity.emojiStringEmojis
-        
     }()
+
     static let emojisForTravelAndPlaces: [Emoji] = {
         EmojiCategory.travelAndPlaces.emojiStringEmojis
-        
     }()
+
     static let emojisForObjects: [Emoji] = {
         EmojiCategory.objects.emojiStringEmojis
-        
     }()
+
     static let emojisForSymbols: [Emoji] = {
         EmojiCategory.symbols.emojiStringEmojis
-        
     }()
+
     static let emojisForFlags: [Emoji] = {
         EmojiCategory.flags.emojiStringEmojis
-        
     }()
+
     static let emojisForSmileys: [Emoji] = {
         EmojiCategory.smileysAndPeople.emojiStringEmojis
     }()

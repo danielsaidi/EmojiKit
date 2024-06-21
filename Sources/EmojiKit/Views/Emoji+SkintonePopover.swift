@@ -32,11 +32,10 @@ public extension Emoji {
         public var body: some View {
             HStack {
                 button(for: emoji.neutralSkinToneVariant)
-                if let variants = try? emoji.skinToneVariants.dropFirst() {
-                    Divider().padding(5)
-                    ForEach(variants) {
-                        button(for: $0)
-                    }
+                let variants = emoji.skinToneVariants.dropFirst()
+                Divider().padding(5)
+                ForEach(variants) {
+                    button(for: $0)
                 }
             }
             .padding(5)

@@ -13,6 +13,9 @@ import SwiftUI
 ///
 /// See the ``EmojiGrid`` for more information on how to use,
 /// customize, and style this grid.
+///
+/// > Important: When emojis are listed in category sections,
+/// you must use ``Emoji/id(in:)`` to scroll to an emoji.
 public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     
     /// Create an emoji grid with multiple category sections.
@@ -88,27 +91,30 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     private var style
     
     public var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView(axis) {
-                EmojiGrid(
-                    axis: axis,
-                    categories: categories,
-                    selection: $selection,
-                    frequentEmojiProvider: frequentEmojiProvider,
-                    action: action,
-                    section: section,
-                    item: item
-                )
-                .padding(5)
-            }
-            .onAppear {
-                Task {
-                    try await Task.sleep(nanoseconds: 100_000_000)
-                    proxy.scrollTo(selection)
+        GeometryReader { geo in
+            ScrollViewReader { proxy in
+                ScrollView(axis) {
+                    EmojiGrid(
+                        axis: axis,
+                        categories: categories,
+                        selection: $selection,
+                        frequentEmojiProvider: frequentEmojiProvider,
+                        geometryProxy: geo,
+                        action: action,
+                        section: section,
+                        item: item
+                    )
+                    .padding(style.padding)
                 }
-            }
-            .onChange(of: selection) {
-                proxy.scrollTo($0)
+                .onAppear {
+                    Task {
+                        try await Task.sleep(nanoseconds: 100_000_000)
+                        proxy.scrollTo(selection)
+                    }
+                }
+                .onChange(of: selection) {
+                    proxy.scrollTo($0)
+                }
             }
         }
     }

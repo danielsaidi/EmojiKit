@@ -10,28 +10,41 @@ import SwiftUI
 
 /// This view can be used to list emojis in a grid.
 ///
-/// Use the ``EmojiScrollGrid`` if you want to wrap the grid
-/// in a `ScrollView` that auto-scrolls to the `selection`.
+/// You can use an ``EmojiScrollGrid`` to wrap the grid in a
+/// `ScrollView` that auto-scrolls to any new selections and
+/// injects a `geometryProxy` to enable arrow-key selections.
 ///
-/// The grid can be created with either a list of categories
-/// or emojis. If multiple categories are provided, the grid
-/// will add a section title to each category. For now, this
-/// is only done for the vertical scroll axis.
+/// This grid can display a list of categories, or a list of
+/// emojis. If multiple categories are provided, it will add
+/// a section title to each category.
 ///
 /// The `section` and `content` view builders can be used to
 /// customize the section titles and grid items. Just return
-/// `0.view` to use the standard view, or use the parameters
-/// to access contextual information for the view.
+/// `0.view` to use the standard views.
 ///
-/// You can style this component with ``emojiGridStyle(_:)``,
-/// for instance to determine the size of each grid item.
+/// You can use the ``emojiGridStyle(_:)`` modifier to apply
+/// a custom grid style, to customize item size, padding etc.
 ///
-/// This grid will use a `frequentEmojiProvider` to populate
-/// the ``EmojiCategory/frequent`` category.
+/// You can tap/click on any emojis to select it and trigger
+/// the provided emoji `action`. You can use arrow/move keys
+/// to move the `selection`, without triggering the `action`.
 ///
-/// > Important: When emojis are listed in category sections,
-/// you must use ``Emoji/id(in:)`` to get a category-related
-/// id for any emoji that you want to scroll to.
+/// Here's a list of all supported keys and key combinations:
+///
+///   - `arrows`: Move the current selection.
+///   - `enter/return`: Pick/trigger the current emoji.
+///   - `enter/return`+`opt`: Show a skin tone popover.
+///   - `escape`: Reset the current selection.
+///   - `space`: Select an emoji within a skin tone popover.
+///   - `tab`: Move selection within a skin tone popover.
+///
+/// The skin tone popover currently requires that you change
+/// selection with tab and selects an emoji with space. This
+/// popover should have the same key bindings as the grid.
+///
+/// If you pass in a `frequentEmojiProvider`, this grid will
+/// use it to populate a ``EmojiCategory/frequent`` category,
+/// and automatically register all picked emojis.
 public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     /// Create an emoji grid with multiple category sections.
@@ -41,6 +54,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.all`.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
+    ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
@@ -49,6 +63,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .all,
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
+        geometryProxy: GeometryProxy? = nil,
         action: @escaping EmojiAction = { _ in },
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
@@ -56,6 +71,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         self.categories = categories
         self.axis = axis
         self.frequentEmojiProvider = frequentEmojiProvider
+        self.geometryProxy = geometryProxy
         self.action = action
         self.section = section
         self.item = item
@@ -69,6 +85,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - emojis: The emojis to list.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
+    ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - item: A grid item view builder.
     public init(
@@ -76,17 +93,21 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         emojis: [Emoji],
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
+        geometryProxy: GeometryProxy? = nil,
         action: @escaping EmojiAction = { _ in },
         @ViewBuilder item: @escaping ItemViewBuilder
     ) where SectionView == Emoji.GridSectionTitle {
         let chars = emojis.map { $0.char }.joined()
-        self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
-        self.axis = axis
-        self.frequentEmojiProvider = frequentEmojiProvider
-        self.action = action
-        self.section = { $0.view }
-        self.item = item
-        self._selection = selection
+        self.init(
+            axis: axis,
+            categories: [.custom(id: "", name: "", emojis: chars, iconName: "")],
+            selection: selection,
+            frequentEmojiProvider: frequentEmojiProvider,
+            geometryProxy: geometryProxy,
+            action: action,
+            section: { $0.view },
+            item: item
+        )
     }
     
     public typealias EmojiAction = (Emoji) -> Void
@@ -96,6 +117,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private let categories: [EmojiCategory]
     private let axis: Axis.Set
     private let frequentEmojiProvider: (any FrequentEmojiProvider)?
+    private let geometryProxy: GeometryProxy?
     private let action: EmojiAction
     private let section: SectionViewBuilder
     private let item: ItemViewBuilder
@@ -105,6 +127,9 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     
     @Environment(\.emojiGridStyle)
     private var style
+
+    @Environment(\.layoutDirection)
+    private var layoutDirection
 
     @State
     private var popoverSelection: Emoji.GridSelection?
@@ -117,18 +142,38 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
                 .onKeyPress {
                     var result: Bool
                     switch $0.key {
+                    case .downArrow: result = handleDirection(.down)
+                    case .leftArrow: result = handleDirection(.left)
+                    case .escape: result = handleEscape()
                     case .return: result = handleReturn($0)
+                    case .rightArrow: result = handleDirection(.right)
+                    case .upArrow: result = handleDirection(.up)
                     default: result = false
                     }
                     return result ? .handled : .ignored
                 }
+                #if os(tvOS)
+                .onMoveCommand(perform: selectEmoji)
+                #endif
+                .padding(style.padding)
         } else {
             grid
+                .padding(style.padding)
         }
     }
 }
 
 private extension EmojiGrid {
+
+    func handleDirection(_ direction: Emoji.GridDirection) -> Bool {
+        selectEmoji(with: direction)
+        return true
+    }
+
+    func handleEscape() -> Bool {
+        selection.reset()
+        return true
+    }
 
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
     func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
@@ -151,20 +196,72 @@ private extension EmojiGrid {
     func selectEmoji(
         _ emoji: Emoji,
         in category: EmojiCategory,
-        withSkintonePopover: Bool = false
+        pick: Bool = false,
+        skintonePopover: Bool = false
     ) {
         selection = .init(emoji: emoji, category: category)
-        if withSkintonePopover {
-            popoverSelection = selection
+        if pick { _ = pickSelectedEmoji() }
+        if skintonePopover { popoverSelection = selection }
+    }
+
+    #if os(macOS) || os(tvOS)
+    func selectEmoji(
+        with direction: MoveCommandDirection
+    ) {
+        selectEmoji(with: direction.emojiGridDirection)
+    }
+    #endif
+
+    func selectEmoji(
+        with direction: Emoji.GridDirection
+    ) {
+        guard let geo = geometryProxy else { return }
+        let layoutDirection = direction.transform(for: layoutDirection)
+        let navDirection = layoutDirection.navigationDirection(for: axis)
+        if selection.isEmpty { return selectFirstCategory() }
+        guard
+            let category = selection.category,
+            let emoji = selection.emoji
+        else { return }
+
+        let emojis = emojis(for: category)
+        guard
+            let index = emojis.firstIndex(of: emoji)
+        else { return }
+
+        let itemsPerRow = geo.itemsPerRow(
+            for: axis,
+            style: style
+        )
+
+        let newIndex = layoutDirection.destinationIndex(
+            for: axis,
+            currentIndex: index,
+            itemsPerRow: itemsPerRow
+        )
+
+        if let emoji = emojis.emoji(at: newIndex) {
+            selectEmoji(emoji, in: category)
+        } else if navDirection == .back {
+            guard
+                let cat = categories.category(before: category),
+                let emoji = self.emojis(for: cat).last
+            else { return }
+            selectEmoji(emoji, in: cat)
+        } else {
+            guard
+                let cat = categories.category(after: category),
+                let emoji = self.emojis(for: cat).first
+            else { return }
+            selectEmoji(emoji, in: cat)
         }
     }
 
-    func selectAndPickEmoji(
-        _ emoji: Emoji,
-        in category: EmojiCategory
-    ) -> Bool {
-        selectEmoji(emoji, in: category)
-        return pickSelectedEmoji()
+    func selectFirstCategory() {
+        let firstNonEmpty = categories.first { !emojis(for: $0).isEmpty }
+        guard let category = firstNonEmpty else { return }
+        let emoji = emojis(for: category).first
+        selection.select(emoji: emoji, in: category)
     }
 
     func showPopoverForSelection() -> Bool {
@@ -273,10 +370,10 @@ private extension EmojiGrid {
         .font(style.font)
         .onTapGesture {
             if popoverSelection != nil { return }
-            selectAndPickEmoji(emoji, in: category)
+            selectEmoji(emoji, in: category, pick: true)
         }
         .onLongPressGesture {
-            selectEmoji(emoji, in: category, withSkintonePopover: true)
+            selectEmoji(emoji, in: category, skintonePopover: true)
         }
         .id(emoji.id(in: category))
     }

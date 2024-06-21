@@ -9,15 +9,20 @@
 import SwiftUI
 
 /// This internal view is used to apply additional modifiers
-/// to the emoji grid item
+/// to the emoji grid item, to allow for view-specific state.
 struct EmojiGridItemWrapper<ItemView: View>: View {
 
     let params: Emoji.GridItemParameters
     let action: (Emoji, EmojiCategory) -> Void
-    @Binding var popoverSelection: Emoji.GridSelection?
-    @ViewBuilder let content: () -> ItemView
 
-    @State private var isPopoverPresented = false
+    @Binding 
+    var popoverSelection: Emoji.GridSelection?
+
+    @ViewBuilder 
+    let content: () -> ItemView
+
+    @State
+    private var isPopoverPresented = false
 
     var body: some View {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {

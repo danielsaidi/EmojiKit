@@ -30,19 +30,53 @@ public extension Emoji {
         }
         
         /// The currently selected emoji.
-        public let emoji: Emoji?
-        
+        public var emoji: Emoji?
+
         /// The currently selected category.
-        public let category: EmojiCategory?
+        public var category: EmojiCategory?
     }
 }
 
 public extension Emoji.GridSelection {
-    
+
+    /// Whether the selection has a current selection.
+    var hasSelection: Bool {
+        !isEmpty
+    }
+
+    /// Whether the selection has no current selection.
+    var isEmpty: Bool {
+        emoji == nil && category == nil
+    }
+
+    /// Whether or not the selection matches the parameters.
     func matches(
         emoji: Emoji?,
         category: EmojiCategory? = nil
     ) -> Bool {
         self.emoji == emoji && self.category == category
+    }
+
+    /// Whether a certain emoji is selected.
+    func isSelected(
+        emoji: Emoji?,
+        in category: EmojiCategory? = nil
+    ) -> Bool {
+        self.emoji == emoji && self.category == category
+    }
+
+    /// Reset the current selection.
+    mutating func reset() {
+        self.emoji = nil
+        self.category = nil
+    }
+
+    /// Select a certain emoji in a certain category.
+    mutating func select(
+        emoji: Emoji?,
+        in category: EmojiCategory?
+    ) {
+        self.emoji = emoji
+        self.category = category
     }
 }

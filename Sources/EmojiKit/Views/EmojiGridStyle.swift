@@ -32,16 +32,19 @@ public struct EmojiGridStyle {
     /// - Parameters:
     ///   - fontSize: The font size to use, by default `30`.
     ///   - itemSpacing: The grid item spacing, by default `5`.
+    ///   - padding: The padding to apply to the grid, by default `5`.
     ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
     public init(
         fontSize: CGFloat = 30,
         itemSpacing: CGFloat = 5,
+        padding: Double = 5,
         prefersFocusEffect: Bool = false
     ) {
         self.init(
             font: .system(size: fontSize),
             itemSize: fontSize,
             itemSpacing: itemSpacing,
+            padding: padding,
             prefersFocusEffect: prefersFocusEffect
         )
     }
@@ -52,11 +55,13 @@ public struct EmojiGridStyle {
     ///   - font: The font to use, by default `.title`.
     ///   - itemSize: The item size to use, by default `30`.
     ///   - itemSpacing: The grid item spacing, by default `5`.
+    ///   - padding: The padding to apply to the grid, by default `5`.
     ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
     public init(
         font: Font? = .title,
         itemSize: CGFloat = 30,
         itemSpacing: CGFloat = 5,
+        padding: Double = 5,
         prefersFocusEffect: Bool = false
     ) {
         self.font = font
@@ -66,6 +71,7 @@ public struct EmojiGridStyle {
             .adaptive(minimum: itemSize),
             spacing: itemSpacing
         )]
+        self.padding = padding
         self.prefersFocusEffect = prefersFocusEffect
     }
     
@@ -80,6 +86,9 @@ public struct EmojiGridStyle {
     
     /// The grid items.
     public var items: [GridItem]
+
+    /// The padding to apply to the grid.
+    public var padding: Double
 
     /// Whether the grid should disable its focus effect.
     public var prefersFocusEffect: Bool

@@ -31,3 +31,20 @@ public extension Emoji {
     /// The emoji's unique identifier.
     var id: String { char }
 }
+
+
+public extension Array where Element == Emoji {
+
+    /// Get the emoji at a certain index, if any.
+    func emoji(at index: Int) -> Emoji? {
+        let isValid = index >= 0 && index < count
+        return isValid ? self[index] : nil
+    }
+
+    /// The first index of a certain emoji, if any.
+    func firstIndex(of emoji: Emoji) -> Int? {
+        firstIndex {
+            $0.neutralSkinToneVariant == emoji.neutralSkinToneVariant
+        }
+    }
+}
