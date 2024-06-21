@@ -22,18 +22,18 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
     var body: some View {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
             content()
-                .popover(isPresented: $isPopoverPresented) {
-                    Emoji.SkintonePopover(emoji: params.emoji) { emoji in
-                        action(emoji, params.category)
-                        isPopoverPresented = false
-                    }
-                }
                 .onChange(of: isPopoverPresented) { isPresented in
                     if isPresented { return }
                     popoverSelection = nil
                 }
                 .onChange(of: popoverSelection) {
                     isPopoverPresented = hasSkinToneVariants && isSelected
+                }
+                .popover(isPresented: $isPopoverPresented) {
+                    Emoji.SkintonePopover(emoji: params.emoji) { emoji in
+                        action(emoji, params.category)
+                        isPopoverPresented = false
+                    }
                 }
         } else {
             content()

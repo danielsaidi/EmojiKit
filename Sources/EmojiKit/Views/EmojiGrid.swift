@@ -133,20 +133,15 @@ private extension EmojiGrid {
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
     func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
         if press.modifiers.isEmpty { return pickSelectedEmoji() }
-        if press.modifiers == .option {
-            popoverSelection = selection
-            return true
-        }
+        if press.modifiers == .option { return showPopoverForSelection() }
         return false
     }
 
-    @discardableResult
     func pickEmoji(_ emoji: Emoji) {
         frequentEmojiProvider?.registerEmoji(emoji)
         action(emoji)
     }
 
-    @discardableResult
     func pickSelectedEmoji() -> Bool {
         guard let emoji = selection.emoji else { return false }
         pickEmoji(emoji)
@@ -164,13 +159,17 @@ private extension EmojiGrid {
         }
     }
 
-    @discardableResult
     func selectAndPickEmoji(
         _ emoji: Emoji,
         in category: EmojiCategory
     ) -> Bool {
         selectEmoji(emoji, in: category)
         return pickSelectedEmoji()
+    }
+
+    func showPopoverForSelection() -> Bool {
+        popoverSelection = selection
+        return true
     }
 }
 
