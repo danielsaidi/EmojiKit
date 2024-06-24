@@ -35,12 +35,25 @@ EmojiKit has an ``EmojiGrid`` that can be used to list and pick emojis in a hori
     }
 }
 
-The grid can list ``Emoji`` or ``EmojiCategory`` collections. If multiple categories are listed, a section title is added before each category.
+These grids can display a list of ``EmojiCategory`` values, or a list of ``Emoji`` items. If multiple categories are provided, they add a section title to each category.
 
-The view can be styled with a ``EmojiGridStyle``, which can be applied with the ``SwiftUI/View/emojiGridStyle(_:)`` view modifier. There are many predefined styles, such as ``EmojiGridStyle/standard``, ``EmojiGridStyle/small``, ``EmojiGridStyle/large``, etc. 
+The `section` and `content` view builders can be used to customize the section titles and grid items. Just return `0.view` to use the standard views.
 
-You can customize each view in the grid, by returning a custom view in the item builder. To use the standard view, just return `$0.view`.
+You can pass in a `query` to filter which emojis to list. You can tap/click on any emojis to select it and trigger the provided emoji `action`. You can use arrow/move keys to move the `selection`, without triggering the `action`.
 
-The grid will by default use a ``MostRecentEmojiProvider`` provider to get emojis for the ``EmojiCategory/frequent`` category. You can replace this provider with a custom one if you want.
+You can use the ``emojiGridStyle(_:)`` modifier to apply a custom grid style, to customize item size, padding etc.
 
-The grid automatically calls ``FrequentEmojiProvider/registerEmoji(_:)`` whenever its selection changes, to automatically update the ``EmojiCategory/frequent`` category.
+You can tap/click on any emojis to select it and trigger the provided emoji `action`. You can use arrow/move keys to move the `selection`, without triggering the `action`.
+
+Here's a list of all supported keys and key combinations:
+
+- `arrows`: Move the current selection.
+- `enter/return`: Pick/trigger the current emoji.
+- `enter/return`+`opt`: Show a skin tone popover.
+- `escape`: Reset the current selection.
+- `space`: Select an emoji within a skin tone popover.
+- `tab`: Move selection within a skin tone popover.
+
+The skin tone popover currently requires that you change selection with tab and selects an emoji with space. This popover should have the same key bindings as the grid.
+
+If you pass in a `frequentEmojiProvider`, this grid will use it to populate a ``EmojiCategory/frequent`` category, and automatically register all picked emojis.

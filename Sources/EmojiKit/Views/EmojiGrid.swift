@@ -14,20 +14,21 @@ import SwiftUI
 /// `ScrollView` that auto-scrolls to any new selections and
 /// injects a `geometryProxy` to enable arrow-key selections.
 ///
-/// This grid can display a list of categories, or a list of
-/// emojis. If multiple categories are provided, it will add
-/// a section title to each category.
+/// This grid can display a list of ``EmojiCategory`` values,
+/// or a list of ``Emoji`` items. If multiple categories are
+/// provided, the grid adds a section title to each category.
 ///
 /// The `section` and `content` view builders can be used to
 /// customize the section titles and grid items. Just return
 /// `0.view` to use the standard views.
 ///
-/// You can use the ``emojiGridStyle(_:)`` modifier to apply
-/// a custom grid style, to customize item size, padding etc.
-///
+/// You can pass in a `query` to filter which emojis to list.
 /// You can tap/click on any emojis to select it and trigger
 /// the provided emoji `action`. You can use arrow/move keys
 /// to move the `selection`, without triggering the `action`.
+///
+/// You can use the ``emojiGridStyle(_:)`` modifier to apply
+/// a custom grid style, to customize item size, padding etc.
 ///
 /// Here's a list of all supported keys and key combinations:
 ///
