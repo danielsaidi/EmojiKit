@@ -11,11 +11,8 @@ import SwiftUI
 /// This scroll grid wraps an ``EmojiGrid`` in a `ScrollView`
 /// and automatically scrolls to the current `selection`.
 ///
-/// See the ``EmojiGrid`` for more information on how to use,
-/// customize, and style this grid.
-///
-/// > Important: When emojis are listed in category sections,
-/// you must use ``Emoji/id(in:)`` to scroll to an emoji.
+/// See the <doc:Views-Article> article for full information
+/// on how to use these grids.
 public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     
     /// Create an emoji grid with multiple category sections.
