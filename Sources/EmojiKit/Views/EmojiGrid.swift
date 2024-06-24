@@ -152,6 +152,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
             grid
                 .focusable(true)
                 .focusEffectDisabled(!style.prefersFocusEffect)
+                #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
                 .onKeyPress {
                     var result: Bool
                     switch $0.key {
@@ -165,6 +166,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
                     }
                     return result ? .handled : .ignored
                 }
+                #endif
                 #if os(tvOS)
                 .onMoveCommand(perform: selectEmoji)
                 #endif
@@ -188,12 +190,14 @@ private extension EmojiGrid {
         return true
     }
 
-    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
+    #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
     func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
         if press.modifiers.isEmpty { return pickSelectedEmoji() }
         if press.modifiers == .option { return showPopoverForSelection() }
         return false
     }
+    #endif
 
     func pickEmoji(_ emoji: Emoji) {
         frequentEmojiProvider?.registerEmoji(emoji)
@@ -493,7 +497,6 @@ struct EmojiGridPreviewButtonStyle: ButtonStyle {
             ScrollView {
                 VStack(spacing: 0) {
                     TextField("Search", text: $query)
-                        .textFieldStyle(.roundedBorder)
                         .padding()
                     Divider()
                     grid(.vertical)

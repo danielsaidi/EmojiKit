@@ -34,12 +34,14 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
                 .onChange(of: popoverSelection) {
                     isPopoverPresented = hasSkinToneVariants && isSelected
                 }
+                #if os(iOS) || os(macOS)
                 .popover(isPresented: $isPopoverPresented) {
                     Emoji.SkintonePopover(emoji: params.emoji) { emoji in
                         action(emoji, params.category)
                         isPopoverPresented = false
                     }
                 }
+                #endif
         } else {
             content()
         }
