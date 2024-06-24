@@ -14,9 +14,15 @@ Note that keyboard selection and focus only works in iOS 17, macOS 14, etc.
 
 ### ✨ New Features
 
+* `Emoji.SkintonePopover` is a new popover view.
+* `EmojiCategory` has a new `.search(query:)` category.
 * `EmojiGrid` & `EmojiScrollGrid` now supports applying a query.
 * `EmojiGrid` & `EmojiScrollGrid` now supports keyboard selection.
 * `EmojiGrid` & `EmojiScrollGrid` now supports showing a skin tone popover.
+
+### 💡 Adjustments
+
+* `EmojiGrid` & `EmojiScrollGrid` have replaced two initializers with a single one.
 
 
 
@@ -52,7 +58,7 @@ This version also adds a demo app to the repository, to make it easier to play a
 * `MostRecentEmojiProvider` now lets you use a custom persistency key.
 * `ScrollViewProxy` can now scroll to a specific `Emoji.GridSelection`.
 
-### 💡 Changes
+### 💡 Adjustments
 
 * `EmojiCategory.frequent` no longer returns any emojis.
 * `EmojiGrid` now lets you inject a custom frequent emoji provider.

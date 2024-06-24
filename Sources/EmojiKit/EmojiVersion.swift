@@ -289,10 +289,10 @@ public extension Emoji {
             Text("Emoji 15.1")
                 .font(.title.bold())
             EmojiGrid(
-                emojis: EmojiVersion.v15_1.emojis
-            ) {
-                $0.view
-            }
+                emojis: EmojiVersion.v15_1.emojis,
+                section: { $0.view },
+                item: { $0.view }
+            )
             .padding()
             .background(Color.white)
             .clipShape(.rect(cornerRadius: 10))

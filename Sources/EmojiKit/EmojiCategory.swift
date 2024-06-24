@@ -268,7 +268,8 @@ extension EmojiCategory {
                         ForEach(EmojiCategory.all) { cat in
                             DisclosureGroup {
                                 EmojiGrid(
-                                    emojis: cat.emojis, 
+                                    emojis: cat.emojis,
+                                    section: { $0.view },
                                     item: { $0.view }
                                 )
                                 .padding(.top)

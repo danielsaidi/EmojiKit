@@ -5,32 +5,32 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.000307">
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.000349">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="8.4e-05">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000163">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to ios version_validate lane" time="0.000106">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios version_validate lane" time="0.000109">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: ensure_git_status_clean" time="0.025382">
+      <testcase classname="fastlane.lanes" name="3: ensure_git_status_clean" time="0.021237">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: ensure_git_branch" time="0.012686">
+      <testcase classname="fastlane.lanes" name="4: ensure_git_branch" time="0.013182">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: swiftlint" time="0.356247">
+      <testcase classname="fastlane.lanes" name="5: swiftlint" time="0.246297">
         
           <failure message="/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:229:in `chdir&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:229:in `execute_action&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:44:in `block (2 levels) in parsing_binding&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:204:in `try_switch_to_lane&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:146:in `trigger_action_by_name&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;../fastlane/Fastfile:30:in `block (2 levels) in parsing_binding&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:49:in `block in execute&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:45:in `chdir&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/runner.rb:45:in `execute&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/command.rb:187:in `call&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/command.rb:157:in `run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:354:in `run&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/commands_generator.rb:43:in `start&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/gems/fastlane-2.212.1/bin/fastlane:23:in `&lt;top (required)&gt;&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/fastlane:25:in `load&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/fastlane:25:in `&lt;main&gt;&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/ruby_executable_hooks:22:in `eval&apos;&#10;/Users/danielsaidi/.rvm/gems/ruby-3.1.1/bin/ruby_executable_hooks:22:in `&lt;main&gt;&apos;&#10;&#10;SwiftLint finished with errors (exit code: 0)" />
         
