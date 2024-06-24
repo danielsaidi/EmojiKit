@@ -288,7 +288,7 @@ private extension EmojiGrid {
         )
         EmojiGridItemWrapper(
             params: params,
-            action: { emoji, cat in pickEmoji(emoji) },
+            action: { emoji, _ in pickEmoji(emoji) },
             popoverSelection: $popoverSelection, 
             content: { item(params) }
         )
