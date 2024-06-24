@@ -102,15 +102,15 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 [OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
-[Documentation]: https://kankoda.github.io/EmojiKit/documentation/emojikit/
-[Getting-Started]: https://kankoda.github.io/EmojiKit/documentation/emojikit/getting-started
+[Documentation]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/
+[Getting-Started]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/getting-started
 
-[Emoji]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emoji-article
-[EmojiCategory]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emojicategory-article
-[EmojiVersion]: https://kankoda.github.io/EmojiKit/documentation/emojikit/emojiversion-article
-[Extensions]: https://kankoda.github.io/EmojiKit/documentation/emojikit/extension-article
-[Localization]: https://kankoda.github.io/EmojiKit/documentation/emojikit/localization-article
-[SkinTones]: https://kankoda.github.io/EmojiKit/documentation/emojikit/skintones-article
-[Views]: https://kankoda.github.io/EmojiKit/documentation/emojikit/views-article
+[Emoji]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emoji-article
+[EmojiCategory]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emojicategory-article
+[EmojiVersion]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emojiversion-article
+[Extensions]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/extension-article
+[Localization]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/localization-article
+[SkinTones]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/skintones-article
+[Views]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/views-article
 
 [License]: https://github.com/EmojiKit/EmojiKit/blob/main/LICENSE
