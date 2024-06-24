@@ -23,6 +23,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - categories: The categories to list, by default `.all`.
+    ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
     ///   - action: An action to trigger when an emoji is tapped or picked.
@@ -31,14 +32,16 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     public init(
         axis: Axis.Set = .vertical,
         categories: [EmojiCategory] = .all,
+        query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         action: @escaping EmojiAction = { _ in },
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
-        self.categories = categories
         self.axis = axis
+        self.categories = categories
+        self.query = query
         self.frequentEmojiProvider = frequentEmojiProvider
         self.action = action
         self.section = section
@@ -51,6 +54,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: The emojis to list.
+    ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
     ///   - action: An action to trigger when an emoji is tapped or picked.
@@ -58,14 +62,16 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
+        query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         action: @escaping EmojiAction = { _ in },
         @ViewBuilder item: @escaping ItemViewBuilder
     ) where SectionView == Emoji.GridSectionTitle {
         let chars = emojis.map { $0.char }.joined()
-        self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.axis = axis
+        self.query = query
+        self.categories = [.custom(id: "", name: "", emojis: chars, iconName: "")]
         self.frequentEmojiProvider = frequentEmojiProvider
         self.action = action
         self.section = { $0.view }
@@ -77,8 +83,9 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     public typealias ItemViewBuilder = (Emoji.GridItemParameters) -> ItemView
     public typealias SectionViewBuilder = (Emoji.GridSectionParameters) -> SectionView
     
-    private let categories: [EmojiCategory]
     private let axis: Axis.Set
+    private let categories: [EmojiCategory]
+    private let query: String
     private let frequentEmojiProvider: (any FrequentEmojiProvider)?
     private let action: EmojiAction
     private let section: SectionViewBuilder
@@ -97,6 +104,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
                     EmojiGrid(
                         axis: axis,
                         categories: categories,
+                        query: query,
                         selection: $selection,
                         frequentEmojiProvider: frequentEmojiProvider,
                         geometryProxy: geo,

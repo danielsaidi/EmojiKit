@@ -10,7 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var selection = Emoji.GridSelection(emoji: .init("🙄"), category: .smileysAndPeople)
+    @State
+    private var query = ""
+
+    @State
+    private var selection = Emoji.GridSelection()
 
     @FocusState var focusState1
     @FocusState var focusState2
@@ -24,6 +28,7 @@ struct ContentView: View {
                 grid(.horizontal)
                     .focused($focusState2)
             }
+            .searchable(text: $query)
         }
         .tint(.orange)
         .emojiGridStyle(.small)
@@ -40,6 +45,7 @@ private extension ContentView {
         EmojiScrollGrid(
             axis: axis,
             categories: .all,
+            query: query,
             selection: $selection,
             frequentEmojiProvider: MostRecentEmojiProvider(),
             action: { print($0) },

@@ -38,7 +38,9 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
     case objects
     case symbols
     case flags
-    
+
+    case search(query: String)
+
     case custom(
         id: String,
         name: String,
@@ -127,6 +129,8 @@ public extension EmojiCategory {
         case .objects: "objects"
         case .symbols: "symbols"
         case .flags: "flags"
+
+        case .search: "search"
         case .custom(let id, _, _, _): id
         }
     }
@@ -143,6 +147,8 @@ public extension EmojiCategory {
         case .objects: "💡"
         case .symbols: "💱"
         case .flags: "🏳️"
+
+        case .search: "🔍"
         case .custom: "-"
         }
     }
@@ -159,6 +165,8 @@ public extension EmojiCategory {
         case .objects: Self.emojisForObjects
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
+
+        case .search(let query): Emoji.all.matching(query)
         case .custom: emojiStringEmojis
         }
     }
@@ -182,6 +190,8 @@ extension EmojiCategory {
         case .objects: Self.objectsChars
         case .symbols: Self.symbolsChars
         case .flags: Self.flagsChars
+
+        case .search: ""
         case .custom(_, _, let emojis, _): emojis
         }
     }

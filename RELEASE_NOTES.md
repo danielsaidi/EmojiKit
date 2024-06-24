@@ -6,6 +6,20 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.7
+
+This version adds support for keyboard selections, queries and a skin tone popover to the grid.
+
+Note that keyboard selection and focus only works in iOS 17, macOS 14, etc. 
+
+### ✨ New Features
+
+* `EmojiGrid` & `EmojiScrollGrid` now supports applying a query.
+* `EmojiGrid` & `EmojiScrollGrid` now supports keyboard selection.
+* `EmojiGrid` & `EmojiScrollGrid` now supports showing a skin tone popover.
+
+
+
 ## 0.6
 
 This version adds support for Emoji 15.1.

@@ -52,6 +52,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - categories: The categories to list, by default `.all`.
+    ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
@@ -61,6 +62,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     public init(
         axis: Axis.Set = .vertical,
         categories: [EmojiCategory] = .all,
+        query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         geometryProxy: GeometryProxy? = nil,
@@ -68,8 +70,10 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         @ViewBuilder section: @escaping SectionViewBuilder,
         @ViewBuilder item: @escaping ItemViewBuilder
     ) {
-        self.categories = categories
         self.axis = axis
+        self.categories = query.isEmpty ? categories : [.search(query: query)]
+
+        self.query = query
         self.frequentEmojiProvider = frequentEmojiProvider
         self.geometryProxy = geometryProxy
         self.action = action
@@ -83,6 +87,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: The emojis to list.
+    ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
@@ -91,6 +96,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji],
+        query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
         geometryProxy: GeometryProxy? = nil,
@@ -101,6 +107,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         self.init(
             axis: axis,
             categories: [.custom(id: "", name: "", emojis: chars, iconName: "")],
+            query: query,
             selection: selection,
             frequentEmojiProvider: frequentEmojiProvider,
             geometryProxy: geometryProxy,
@@ -114,8 +121,9 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     public typealias ItemViewBuilder = (Emoji.GridItemParameters) -> ItemView
     public typealias SectionViewBuilder = (Emoji.GridSectionParameters) -> SectionView
     
-    private let categories: [EmojiCategory]
     private let axis: Axis.Set
+    private let categories: [EmojiCategory]
+    private let query: String
     private let frequentEmojiProvider: (any FrequentEmojiProvider)?
     private let geometryProxy: GeometryProxy?
     private let action: EmojiAction
@@ -124,7 +132,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
 
     @Binding
     private var selection: Emoji.GridSelection
-    
+
     @Environment(\.emojiGridStyle)
     private var style
 
@@ -135,6 +143,11 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private var popoverSelection: Emoji.GridSelection?
 
     public var body: some View {
+        bodyContent.id(query)
+    }
+
+    @ViewBuilder
+    private var bodyContent: some View {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
             grid
                 .focusable(true)
@@ -431,10 +444,13 @@ struct EmojiGridPreviewButtonStyle: ButtonStyle {
 #Preview {
     
     struct Preview: View {
-        
+
+        @State
+        var query = "lollipop"
+
         @State
         var selection = Emoji.GridSelection(emoji: .init("👼"), category: .smileysAndPeople)
-        
+
         func grid(
             _ axis: Axis.Set
         ) -> some View {
@@ -442,6 +458,7 @@ struct EmojiGridPreviewButtonStyle: ButtonStyle {
                 ScrollView(axis) {
                     EmojiGrid(
                         axis: axis,
+                        query: query,
                         selection: $selection,
                         // frequentEmojiProvider: provider,
                         section: { $0.view },
@@ -473,10 +490,18 @@ struct EmojiGridPreviewButtonStyle: ButtonStyle {
         }
         
         var body: some View {
-            VStack(spacing: 0) {
-                grid(.vertical)
-                Divider()
-                grid(.horizontal)
+            ScrollView {
+                VStack(spacing: 0) {
+                    TextField("Search", text: $query)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                    Divider()
+                    grid(.vertical)
+                        .frame(height: 300)
+                    Divider()
+                    grid(.horizontal)
+                        .frame(height: 300)
+                }
             }
         }
     }
