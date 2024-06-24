@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/github/v/release/Kankoda/EmojiKit?color=%2300550&sort=semver" alt="Version" />
+    <img src="https://img.shields.io/github/v/release/danielsaidi/EmojiKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/ApiKit" alt="MIT License" title="MIT License" />
-    <a href="https://twitter.com/kankodahq"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fkankodahq" alt="Twitter: @kankodahq" title="Twitter: @kankodahq" /></a>
-    <a href="https://mastodon.social/@kankoda"><img src="https://img.shields.io/mastodon/follow/110888068770108814?domain=https%3A%2F%2Fmastodon.social&label=Mastodon&style=social" alt="Mastodon: @kankoda@mastodon.social" title="Mastodon: @kankoda@mastodon.social" /></a>
+        <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
+    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
@@ -68,7 +68,7 @@ The demo app lets you explore the library. To try it out, just open and run the 
 
 
 
-## Support my work
+## Support my work 
 
 You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
 
@@ -78,12 +78,12 @@ Your support makes it possible for me to put more work into these projects and m
 
 ## Contact
 
-Feel free to reach out if you have any questions or need help any way:
+Feel free to reach out if you have questions or if you want to contribute in any way:
 
-* Website: [kankoda.com/emojikit][Website]
-* Mastodon: [@kankoda@mastodon.social][Mastodon]
-* Twitter: [@kankodahq][Twitter]
-* E-mail: [info@kankoda.com][Email]
+* Website: [danielsaidi.com][Website]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
+* Twitter: [@danielsaidi][Twitter]
+* E-mail: [daniel.saidi@gmail.com][Email]
 
 
 
@@ -95,10 +95,10 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 
 [Email]: mailto:info@kankoda.com
 
-[Website]: https://kankoda.com/emojikit
+[Website]: https://danielsaidi.com
 [GitHub]: https://github.com/danielsaidi
-[Twitter]: https://twitter.com/kankodahq
-[Mastodon]: https://mastodon.social/@kankoda
+[Twitter]: https://twitter.com/danielsaidi
+[Mastodon]: https://mastodon.social/@danielsaidi
 [OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
@@ -113,4 +113,4 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 [SkinTones]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/skintones-article
 [Views]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/views-article
 
-[License]: https://github.com/EmojiKit/EmojiKit/blob/main/LICENSE
+[License]: https://github.com/danielsaidi/EmojiKit/blob/main/LICENSE
