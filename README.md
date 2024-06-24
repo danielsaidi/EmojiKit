@@ -32,7 +32,7 @@ EmojiKit also provides convenient views like `EmojiGrid` and `EmojiScrollGrid` t
 EmojiKit can be installed with the Swift Package Manager:
 
 ```
-https://github.com/Kankoda/EmojiKit.git
+https://github.com/danielsaidi/EmojiKit.git
 ```
 
 
@@ -93,7 +93,7 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 
 
 
-[Email]: mailto:info@kankoda.com
+[Email]: mailto:daniel.saidi@gmail.com
 
 [Website]: https://danielsaidi.com
 [GitHub]: https://github.com/danielsaidi

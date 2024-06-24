@@ -21,7 +21,7 @@ EmojiKit also provides convenient views like ``EmojiGrid`` and ``EmojiScrollGrid
 EmojiKit can be installed with the Swift Package Manager:
 
 ```
-https://github.com/Kankoda/EmojiKit.git
+https://github.com/danielsaidi/EmojiKit.git
 ```
 
 
@@ -38,7 +38,7 @@ https://github.com/Kankoda/EmojiKit.git
 
 ## Repository
 
-For more information, source code, etc., visit the [project repository](https://github.com/kankoda/emojikit).
+For more information, source code, etc., visit the [project repository](https://github.com/danielsaidi/emojikit).
 
 
 

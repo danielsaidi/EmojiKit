@@ -37,8 +37,3 @@ let emojis = Emoji.all          // 😀😃😄😁😆🥹😅😂🤣🥲...
 ```
 
 The ``Emoji`` type has a lot more capabilities, such as support for <doc:Localization-Article> and <doc:SkinTones-Article>, which are described in separate articles.
-
-
-
-[GitHub]: https://github.com/Kankoda/EmojiKit
-[Website]: https://kankoda.com/emojikit
