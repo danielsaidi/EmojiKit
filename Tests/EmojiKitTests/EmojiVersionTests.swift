@@ -124,12 +124,18 @@ final class Emoji_VersionTests: XCTestCase {
     }
     
     func testCurrentIsTheLatestOne() throws {
-        XCTAssertEqual(EmojiVersion.current, .v15_1)
+        // We need to account for old server runners
+        let current = EmojiVersion.current.version
+        XCTAssertGreaterThanOrEqual(current, 15)
     }
     
-    func testCurrentUnavailableEmojisIsEmpty() throws {
-        XCTAssertEqual(EmojiVersion.currentUnavailableEmojis, [])
-        XCTAssertEqual(EmojiVersion.currentUnavailableEmojis.count, 0)
+    func testCurrentUnavailableEmojisForSomeVersions() throws {
+        let current = EmojiVersion.current
+        let latest = EmojiVersion.v15_1
+        let previous = EmojiVersion.v15
+        XCTAssertEqual(EmojiVersion.currentUnavailableEmojis, current.unavailableEmojis)
+        XCTAssertEqual(latest.unavailableEmojis.count, 0)
+        XCTAssertEqual(previous.unavailableEmojis.count, latest.emojis.count)
     }
     
     func testCanCheckIfEmojiIsAvailableInCurrentVersion() {

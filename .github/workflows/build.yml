@@ -1,6 +1,10 @@
 # This workflow builds and tests the project.
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
+# When we add support for a new Emoji version, the test step
+# must be disabled until the runner environment adds support
+# for all emoji versions.
+
 name: Build Runner
 
 on:
