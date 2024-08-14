@@ -22,11 +22,11 @@ public struct EmojiVersion: Equatable {
     init(
         version: Double,
         emojis: String,
-        emojisRaw: String = "",
         iOS: Double,
         macOS: Double,
         tvOS: Double,
-        watchOS: Double
+        watchOS: Double,
+        comment: String = ""
     ) {
         let allEmojis = emojis.map(String.init).flatMap {
             let emoji = Emoji($0)
@@ -34,15 +34,13 @@ public struct EmojiVersion: Equatable {
             let emojis = emoji.hasSkinToneVariants ? skintones : [emoji]
             return emojis.contains(emoji) ? emojis : [emoji] + emojis
         }
-        let allEmojisRaw = emojisRaw.map(String.init).map {
-            Emoji($0)
-        }
-        self.emojis = allEmojis + allEmojisRaw
+        self.emojis = allEmojis
         self.version = version
         self.iOS = iOS
         self.macOS = macOS
         self.tvOS = tvOS
         self.watchOS = watchOS
+        self.comment = comment
     }
     
     init?(
@@ -94,9 +92,14 @@ public struct EmojiVersion: Equatable {
     
     /// The tvOS version in which emojis became available.
     public let tvOS: Double
-    
+
     /// The watchOS version in which emojis became available.
     public let watchOS: Double
+
+    /// An optional comment, which can be used to discuss if
+    /// the version made any changes that isn't reflected in
+    /// the emojis it provides.
+    public let comment: String?
 }
 
 
@@ -108,11 +111,11 @@ public extension EmojiVersion {
         .init(
             version: 15.1,
             emojis: "🙂‍↕️🙂‍↔️👩‍🦽‍➡️🧑‍🦽‍➡️👨‍🦽‍➡️👩‍🦼‍➡️🧑‍🦼‍➡️👨‍🦼‍➡️🚶‍♀️‍➡️🚶‍➡️🚶‍♂️‍➡️👩‍🦯‍➡️🧑‍🦯‍➡️👨‍🦯‍➡️🧎‍♀️‍➡️🧎‍➡️🧎‍♂️‍➡️🏃‍♀️‍➡️🏃‍➡️🏃‍♂️‍➡️🐦‍🔥🍋‍🟩🍄‍🟫⛓️‍💥",
-            emojisRaw: "🧑‍🧑‍🧒🧑‍🧒‍🧒🧑‍🧒🧑‍🧑‍🧒‍🧒",
             iOS: 17.4,
             macOS: 14.4,
             tvOS: 17.4,
-            watchOS: 10.4
+            watchOS: 10.4,
+            comment: "In this version, Apple removed the illustrated family emojis. Since they can't be rendered from this version and forward, the raw family badges have been added to their new location in the symbols category."
         )
     }
 
