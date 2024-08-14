@@ -12,13 +12,14 @@ This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the 
 
 ### ✨ New Features
 
+* `EmojiProvider` has new provider builders.
 * `EmojiProviders` is a new provider namespace.
+* `EmojiProviders.FavoriteProvider` is a new provider.
 
 ### 🗑️ Deprecations
 
 * `FrequentEmojiProvider` has been renamed to `EmojiProvider`.
-* `MostRecentEmojiProvider` has been renamed to `EmojiProviders.MostRecent`.
-
+* `MostRecentEmojiProvider` has been renamed to `EmojiProviders.MostRecentProvider`.
 
 
 

@@ -31,11 +31,18 @@ EmojiCategory.all      // [.frequent, .smileyAndPeople, ...]
 
 ## Frequent Emojis
 
-Note that the ``EmojiCategory/frequent`` category is only a placeholder category that doesn't define any emojis. Instead, use the category to render a correct title and icon for the category, then use an ``EmojiProvider`` to get a list of emojis to display.
-
-You can use an emoji provider's  ``EmojiProvider/addEmoji(_:)`` function to add news emojis whenever the user interacts with an emoji, if the provider ``EmojiProvider/canAddEmojis``. 
-
-The ``EmojiProviders/MostRecentProvider`` will just display the most recently used emojis, without any sophisticated frequent algorithm.
+The ``EmojiCategory/frequent`` category is only a placeholder category that doesn't contain any emojis from start. You can instead use  it to render a title and icon, then use a ``EmojiProviders/MostRecentProvider`` to get a list of emojis to display.
 
 Views like ``EmojiGrid`` and ``EmojiScrollGrid`` will automatically listen for selection changes, and register the new selection if you have passed in a frequent emoji provider into the view initializer.
  
+
+## Favorite Emojis
+
+The ``EmojiCategory/favorites`` category is a non-standard category that doesn't contain any emojis from start. You can instead use it to render a title and icon, then use a ``EmojiProviders/FavoriteProvider`` to get a list of emojis to display.
+ 
+
+## How to use an emoji provider
+
+You can use an emoji provider's  ``EmojiProvider/addEmoji(_:)`` function to add news emojis whenever the user interacts with an emoji, if the provider ``EmojiProvider/canAddEmojis``.
+
+Both ``EmojiProviders/MostRecentProvider`` and ``EmojiProviders/FavoriteProvider`` can be used to add custom emojis. They use different underlying data stores to avoid conflicts.

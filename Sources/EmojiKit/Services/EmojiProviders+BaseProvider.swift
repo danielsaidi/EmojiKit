@@ -1,35 +1,31 @@
 //
-//  EmojiProviders+MostRecentProvider.swift
+//  EmojiProviders+BaseProvider.swift
 //  EmojiKit
 //
-//  Created by Daniel Saidi on 2023-10-31.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2024-08-14.
+//  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-@available(*, deprecated, renamed: "EmojiProviders.MostRecentProvider")
-public typealias MostRecentEmojiProvider = EmojiProviders.MostRecentProvider
-
 public extension EmojiProviders {
 
-    /// This emoji provider can be used to get the most recently
-    /// used emojis.
-    class MostRecentProvider: EmojiProvider {
+    /// This is an emoji provider base class.
+    class BaseProvider: EmojiProvider {
 
         /// Create an instance of the provider.
         ///
         /// - Parameters:
         ///   - maxCount: The max number of emojis to remember, by default `30`.
         ///   - defaults: The store used to persist emojis, by default `.standard`.
-        ///   - defaultsKey: The store key used to persist emojis, by default an EmojiKit-specific value.
+        ///   - defaultsKey: The store key used to persist emojis.
         public init(
-            maxCount: Int = 30,
-            defaults: UserDefaults = .standard,
-            defaultsKey: String = "com.emojikit.MostRecentEmojiProvider.emojis"
+            maxCount: Int? = nil,
+            defaults: UserDefaults? = nil,
+            defaultsKey: String
         ) {
-            self.maxCount = maxCount
-            self.defaults = defaults
+            self.maxCount = maxCount ?? 30
+            self.defaults = defaults ?? .standard
             self.defaultsKey = defaultsKey
         }
 
@@ -44,7 +40,7 @@ public extension EmojiProviders {
     }
 }
 
-public extension EmojiProviders.MostRecentProvider {
+public extension EmojiProviders.BaseProvider {
 
     var canAddEmojis: Bool { true }
 
