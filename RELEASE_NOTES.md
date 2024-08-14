@@ -12,7 +12,7 @@ This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the 
 
 ### ✨ New Features
 
-* `EmojiProvider` has new provider builders.
+* `EmojiCategory.favorites` is a new category.
 * `EmojiProviders` is a new provider namespace.
 * `EmojiProviders.FavoriteProvider` is a new provider.
 

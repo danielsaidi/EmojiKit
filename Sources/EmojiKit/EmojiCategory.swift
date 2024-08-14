@@ -15,11 +15,10 @@ import SwiftUI
 /// get all standard categories.
 ///
 /// The ``EmojiCategory/frequent`` category is a placeholder
-/// category that is mutable and doesn't contain any default
-/// emojis. Instead, use an ``EmojiProvider`` to provide the
-/// category with emojis, e.g. a ``EmojiProviders/MostRecentProvider``.
-/// You can then call ``EmojiProvider/addEmoji(_:)`` when an
-/// emoji is used, to add it to the frequent category.
+/// category that doesn't contain any emojis from start. Use
+/// an ``EmojiProvider`` to provide the category with emojis
+/// and call ``EmojiProvider/addEmoji(_:)`` when an emoji is
+/// used, to add it to the category.
 ///
 /// Various EmojiKit views, like the ``EmojiGrid``, lets you
 /// pass in a custom provider, and will automatically use it
@@ -36,6 +35,7 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
     case symbols
     case flags
 
+    case favorites
     case search(query: String)
 
     case custom(
@@ -49,6 +49,10 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
 public extension EmojiCategory {
 
     /// Get an ordered list of all standard categories.
+    ///
+    /// There are more emojis in this enum, but this returns
+    /// a list of all emojis that are by default listed in a
+    /// keyboard or picker.
     static var all: [EmojiCategory] {
         [
             .frequent,
@@ -127,7 +131,9 @@ public extension EmojiCategory {
         case .symbols: "symbols"
         case .flags: "flags"
 
+        case .favorites: "favorites"
         case .search: "search"
+
         case .custom(let id, _, _, _): id
         }
     }
@@ -145,7 +151,9 @@ public extension EmojiCategory {
         case .symbols: "💱"
         case .flags: "🏳️"
 
+        case .favorites: "❤️"
         case .search: "🔍"
+
         case .custom: "-"
         }
     }
@@ -163,7 +171,9 @@ public extension EmojiCategory {
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
 
+        case .favorites: []
         case .search(let query): Emoji.all.matching(query)
+
         case .custom: emojiStringEmojis
         }
     }
@@ -188,7 +198,9 @@ extension EmojiCategory {
         case .symbols: Self.symbolsChars
         case .flags: Self.flagsChars
 
+        case .favorites: ""
         case .search: ""
+
         case .custom(_, _, let emojis, _): emojis
         }
     }
