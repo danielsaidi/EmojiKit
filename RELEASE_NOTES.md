@@ -8,7 +8,7 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 0.8
 
-This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the protocol a bit.
+This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the protocol a bit, then groups all implementations within a new namespace.
 
 ### ✨ New Features
 
