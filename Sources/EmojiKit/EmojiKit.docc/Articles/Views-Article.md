@@ -47,7 +47,7 @@ You can pass in a `query` string to filter the emojis in the grid. Passing in a 
 
 The `section` and `content` view builders can be used to define the section and grid content views. Simply return `$0.view` to apply the standard views, or return any custom views for the provided parameters.
 
-You can use the ``emojiGridStyle(_:)`` view modifier to apply a custom emoji grid style, which can be used to customize item sizes, grid padding, etc. This view modifier can be applied to any part of the view hierarchy.
+You can use the ``SwiftUI/View/emojiGridStyle(_:)`` view modifier to apply a custom emoji grid style, which can be used to customize item sizes, grid padding, etc. This view modifier can be applied to any part of the view hierarchy.
 
 
 ### How to change the selection

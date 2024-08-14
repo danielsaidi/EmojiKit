@@ -70,6 +70,15 @@ EmojiKit is available under the MIT license.
 - ``EmojiCategory``
 - ``EmojiVersion``
 
+### Providers
+
+- ``EmojiProvider``
+- ``MostRecentEmojiProvider``
+
+### Localization
+
+- ``Localizable``
+
 ### Views
 
 - ``EmojiGrid``

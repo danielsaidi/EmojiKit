@@ -17,12 +17,6 @@ public typealias FrequentEmojiProvider = EmojiProvider
 /// If an emoji provider's ``canAddEmojis`` property returns
 /// `true`, you can use ``addEmoji(_:)`` to add emojis to it,
 /// and ``reset()`` to remove all emojis from it.
-///
-///
-///
-///
-/// Call ``registerEmoji(_:)`` whenever an emoji is used, to
-/// register the emoji and update the provider.
 public protocol EmojiProvider {
 
     /// Whether the provider can add custom emojis.
