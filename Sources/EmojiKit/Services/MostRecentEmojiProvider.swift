@@ -10,7 +10,7 @@ import SwiftUI
 
 /// This emoji provider can be used to get the most recently
 /// used emojis.
-public class MostRecentEmojiProvider: FrequentEmojiProvider {
+public class MostRecentEmojiProvider: EmojiProvider {
     
     /// Create an instance of the provider.
     ///
@@ -27,7 +27,7 @@ public class MostRecentEmojiProvider: FrequentEmojiProvider {
         self.defaults = defaults
         self.defaultsKey = defaultsKey
     }
-    
+
     /// The max number of emojis to remember.
     public let defaults: UserDefaults
     
@@ -39,19 +39,15 @@ public class MostRecentEmojiProvider: FrequentEmojiProvider {
 }
 
 public extension MostRecentEmojiProvider {
-    
-    /// The most recently used emojis.
+
+    var canAddEmojis: Bool { true }
+
     var emojis: [Emoji] {
-        emojiChars.map { Emoji($0) }
+        let chars = defaults.stringArray(forKey: defaultsKey) ?? []
+        return chars.map { Emoji($0) }
     }
-    
-    /// The persisted emoji characters.
-    var emojiChars: [String] {
-        defaults.stringArray(forKey: defaultsKey) ?? []
-    }
-    
-    /// Register that an emoji has been used.
-    func registerEmoji(_ emoji: Emoji) {
+
+    func addEmoji(_ emoji: Emoji) {
         var emojis = self.emojis.filter { $0.char != emoji.char }
         emojis.insert(emoji, at: 0)
         let result = Array(emojis.prefix(maxCount))
@@ -60,7 +56,6 @@ public extension MostRecentEmojiProvider {
         defaults.synchronize()
     }
     
-    /// Reset the underlying data source.
     func reset() {
         defaults.set([Emoji](), forKey: defaultsKey)
     }

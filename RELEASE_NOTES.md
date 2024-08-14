@@ -6,6 +6,12 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.8
+
+This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the protocol a bit.
+
+
+
 ## 0.7
 
 This version adds support for keyboard selections, queries and a skin tone popover to the grid.

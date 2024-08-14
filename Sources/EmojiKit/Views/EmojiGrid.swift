@@ -29,7 +29,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.all`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - frequentEmojiProvider: The ``FrequentEmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
+    ///   - frequentEmojiProvider: The ``EmojiProvider`` to use, by default a ``MostRecentEmojiProvider``.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - section: A grid section title view builder.
@@ -40,7 +40,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .all,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        frequentEmojiProvider: (any FrequentEmojiProvider)? = MostRecentEmojiProvider(),
+        frequentEmojiProvider: (any EmojiProvider)? = MostRecentEmojiProvider(),
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
@@ -64,7 +64,7 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private let axis: Axis.Set
     private let categories: [EmojiCategory]
     private let query: String
-    private let frequentEmojiProvider: (any FrequentEmojiProvider)?
+    private let frequentEmojiProvider: (any EmojiProvider)?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
     private let section: (Emoji.GridSectionParameters) -> SectionView
@@ -140,7 +140,7 @@ private extension EmojiGrid {
     #endif
 
     func pickEmoji(_ emoji: Emoji) {
-        frequentEmojiProvider?.registerEmoji(emoji)
+        frequentEmojiProvider?.addEmoji(emoji)
         action(emoji)
     }
 
