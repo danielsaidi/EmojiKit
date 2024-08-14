@@ -35,7 +35,7 @@ Note that the ``EmojiCategory/frequent`` category is only a placeholder category
 
 You can use an emoji provider's  ``EmojiProvider/addEmoji(_:)`` function to add news emojis whenever the user interacts with an emoji, if the provider ``EmojiProvider/canAddEmojis``. 
 
-The ``MostRecentEmojiProvider`` will just display the most recently used emojis, without any sophisticated frequent algorithm.
+The ``EmojiProviders/MostRecentProvider`` will just display the most recently used emojis, without any sophisticated frequent algorithm.
 
 Views like ``EmojiGrid`` and ``EmojiScrollGrid`` will automatically listen for selection changes, and register the new selection if you have passed in a frequent emoji provider into the view initializer.
  

@@ -17,7 +17,7 @@ import SwiftUI
 /// The ``EmojiCategory/frequent`` category is a placeholder
 /// category that is mutable and doesn't contain any default
 /// emojis. Instead, use an ``EmojiProvider`` to provide the
-/// category with emojis, e.g. a ``MostRecentEmojiProvider``.
+/// category with emojis, e.g. a ``EmojiProviders/MostRecentProvider``.
 /// You can then call ``EmojiProvider/addEmoji(_:)`` when an
 /// emoji is used, to add it to the frequent category.
 ///

@@ -10,6 +10,16 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the protocol a bit.
 
+### ✨ New Features
+
+* `EmojiProviders` is a new provider namespace.
+
+### 🗑️ Deprecations
+
+* `FrequentEmojiProvider` has been renamed to `EmojiProvider`.
+* `MostRecentEmojiProvider` has been renamed to `EmojiProviders.MostRecent`.
+
+
 
 
 ## 0.7

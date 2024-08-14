@@ -73,7 +73,7 @@ EmojiKit is available under the MIT license.
 ### Providers
 
 - ``EmojiProvider``
-- ``MostRecentEmojiProvider``
+- ``EmojiProviders``
 
 ### Localization
 

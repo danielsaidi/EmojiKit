@@ -32,7 +32,7 @@ public protocol EmojiProvider {
     func reset()
 }
 
-extension EmojiProvider {
+public extension EmojiProvider {
 
     @available(*, deprecated, renamed: "addEmoji")
     func registerEmoji(_ emoji: Emoji) {

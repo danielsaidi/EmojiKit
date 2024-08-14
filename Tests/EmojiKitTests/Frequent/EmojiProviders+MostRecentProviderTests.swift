@@ -1,5 +1,5 @@
 //
-//  MostRecentEmojiProviderTests.swift
+//  EmojiProviders+MostRecentProvider.swift
 //  EmojiKitTests
 //
 //  Created by Daniel Saidi on 2023-10-31.
@@ -9,11 +9,11 @@
 import EmojiKit
 import XCTest
 
-final class MostRecentEmojiProviderTests: XCTestCase {
+final class EmojiProviders_MostRecentProviderTests: XCTestCase {
 
     var defaults: UserDefaults!
-    var provider: MostRecentEmojiProvider!
-    
+    var provider: EmojiProviders.MostRecentProvider!
+
     let key = String.mostRecentPersistencyKey
 
     override func setUp() {
@@ -38,21 +38,21 @@ final class MostRecentEmojiProviderTests: XCTestCase {
     func testMostRecentEmojisPlacesExistingEmojisFirst() {
         let list = ["a", "b", "c"]
         defaults.set(list, forKey: key)
-        provider?.registerEmoji(Emoji("c"))
+        provider?.addEmoji(Emoji("c"))
         XCTAssertEqual(provider.emojis.map { $0.char }, ["c", "a", "b"])
     }
     
     func testMostRecentEmojisPlacesNewEmojiFirst() {
         let list = ["a", "b", "c"]
         defaults.set(list, forKey: key)
-        provider?.registerEmoji(Emoji("d"))
+        provider?.addEmoji(Emoji("d"))
         XCTAssertEqual(provider.emojis.map { $0.char }, ["d", "a", "b", "c"])
     }
     
     func testMostRecentEmojisCapsToMaxCount() {
         let data = (0...100).map { String($0) }
         defaults.set(data, forKey: key)
-        provider?.registerEmoji(Emoji("d"))
+        provider?.addEmoji(Emoji("d"))
         let emojis = provider.emojis.map { $0.char }
         XCTAssertEqual(emojis.first, "d")
         XCTAssertEqual(emojis.prefix(5), ["d", "0", "1", "2", "3"])
