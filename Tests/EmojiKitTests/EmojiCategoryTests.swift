@@ -10,7 +10,12 @@ import EmojiKit
 import XCTest
 
 final class EmojisCategoryTests: XCTestCase {
-    
+
+    override func tearDown() {
+        EmojiCategory.favoriteEmojis = []
+        EmojiCategory.frequentEmojis = []
+    }
+
     func emojiIcon(for cat: EmojiCategory) -> String {
         cat.emojiIcon
     }
@@ -18,9 +23,9 @@ final class EmojisCategoryTests: XCTestCase {
     func firstEmoji(for cat: EmojiCategory) -> String {
         cat.emojis[0].char
     }
-    
+
     func testCanReturnAllCategories() {
-        XCTAssertEqual(EmojiCategory.all, [
+        XCTAssertEqual(EmojiCategory.standard, [
             .frequent,
             .smileysAndPeople,
             .animalsAndNature,
@@ -32,7 +37,21 @@ final class EmojisCategoryTests: XCTestCase {
             .flags
         ])
     }
-    
+
+    func testCanGetAndSetFavoriteCategoryEmojis() async {
+        XCTAssertEqual(EmojiCategory.favorites.emojis, [])
+        let emojis: [Emoji] = [.init("😀")]
+        EmojiCategory.favoriteEmojis = emojis
+        XCTAssertEqual(EmojiCategory.favorites.emojis, emojis)
+    }
+
+    func testCanGetAndSetFrequentCategoryEmojis() async {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        let emojis: [Emoji] = [.init("😀")]
+        EmojiCategory.frequentEmojis = emojis
+        XCTAssertEqual(EmojiCategory.frequent.emojis, emojis)
+    }
+
     func testHasCorrectEmojis() throws {
         XCTAssertEqual(firstEmoji(for: .smileysAndPeople), "😀")
         XCTAssertEqual(firstEmoji(for: .animalsAndNature), "🐶")

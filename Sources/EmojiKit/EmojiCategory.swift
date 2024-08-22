@@ -14,7 +14,9 @@ import SwiftUI
 /// The static ``EmojiCategory/all`` property can be used to
 /// get all standard categories.
 ///
-/// The ``EmojiCategory/frequent`` category is a placeholder
+/// The ``EmojiCategory/frequent`` category will return
+///
+///
 /// category that doesn't contain any emojis from start. Use
 /// an ``EmojiProvider`` to provide the category with emojis
 /// and call ``EmojiProvider/addEmoji(_:)`` when an emoji is
@@ -194,7 +196,7 @@ public extension EmojiCategory {
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
         switch self {
-        case .frequent: []
+        case .frequent: Self.frequentEmojis
         case .smileysAndPeople: Self.emojisForSmileysAndPeople
         case .animalsAndNature: Self.emojisForAnimalsAndNature
         case .foodAndDrink: Self.emojisForFoodAndDrink
@@ -204,7 +206,7 @@ public extension EmojiCategory {
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
 
-        case .favorites: []
+        case .favorites: Self.favoriteEmojis
 
         case .custom(_ , _, let emojis, _): emojis
         }

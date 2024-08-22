@@ -15,6 +15,8 @@ This is the last minor version before the upcoming, first major version. The goa
 ### ✨ New Features
 
 * `EmojiCategory` now implements `CaseIterable`.
+* `EmojiCategory.favoriteEmojis` is a new value that can be used to populate the `.favorites` category.
+* `EmojiCategory.frequentEmojis` is a new value that can be used to populate the `.frequent` category.
 
 ### 💡 Adjustments
 
@@ -23,6 +25,7 @@ This is the last minor version before the upcoming, first major version. The goa
 ### 🗑️ Deprecations
 
 * `EmojiCategory.all` has been renamed to `.standard`.
+* `EmojiProvider` has been deprecated since each custom category can be persisted.
 
 
 
