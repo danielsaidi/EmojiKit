@@ -15,8 +15,3 @@ extension Locale {
     static let finnish = Locale(identifier: "fi")
     static let swedish = Locale(identifier: "sv")
 }
-
-extension String {
-    
-    static let mostRecentPersistencyKey = EmojiProviders.MostRecentProvider().defaultsKey
-}
