@@ -60,14 +60,31 @@ public extension EmojiCategory {
     }
 }
 
+public extension EmojiCategory {
+
     static var allCases: [EmojiCategory] {
-        .all
+        [
+            .frequent,
+            .smileysAndPeople,
+            .animalsAndNature,
+            .foodAndDrink,
+            .activity,
+            .travelAndPlaces,
+            .objects,
+            .symbols,
+            .flags,
+            .favorites,
+        ]
     }
 
     /// Get an ordered list of all standard categories.
-    static var all: [EmojiCategory] {
+    static var standard: [EmojiCategory] {
+        [.frequent] + standardWithoutFrequent
+    }
+
+    /// Get an ordered list of all standard categories.
+    static var standardWithoutFrequent: [EmojiCategory] {
         [
-            .frequent,
             .smileysAndPeople,
             .animalsAndNature,
             .foodAndDrink,
@@ -78,6 +95,9 @@ public extension EmojiCategory {
             .flags
         ]
     }
+
+    @available(*, deprecated, renamed: "standard")
+    static var all: [EmojiCategory] { standard }
 }
 
 public extension Array where Element == EmojiCategory {
@@ -100,8 +120,11 @@ public extension Array where Element == EmojiCategory {
 public extension Collection where Element == EmojiCategory {
 
     /// Get an ordered list of all standard categories.
-    static var all: [Element] { Element.all }
-    
+    static var standard: [Element] { Element.standard }
+
+    @available(*, deprecated, renamed: "standard")
+    static var all: [Element] { Element.standard }
+
     /// Get the first category with a certain ID.
     func category(withId id: Element.ID?) -> Element? {
         guard let id else { return nil }
@@ -163,7 +186,7 @@ public extension EmojiCategory {
         case .flags: "🏳️"
 
         case .favorites: "❤️"
-        
+
         case .custom: "-"
         }
     }

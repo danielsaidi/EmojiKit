@@ -20,10 +20,10 @@ try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
 try EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
 ```
 
-You can use ``EmojiCategory/all`` to get a list of all available categories, in the native, default sort order:
+You can use ``EmojiCategory/standard`` to get a list of all standard categories, in the native sort order:
 
 ```swift
-EmojiCategory.all      // [.frequent, .smileyAndPeople, ...]
+EmojiCategory.standard  // [.frequent, .smileyAndPeople, ...]
 ```
 
 ``EmojiCategory`` uses the ``EmojiVersion`` enum to filter out emojis that are unavailable to the current runtime. This means that your users will only see emojis they can use.

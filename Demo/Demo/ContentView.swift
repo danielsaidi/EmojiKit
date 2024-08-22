@@ -44,7 +44,7 @@ private extension ContentView {
     func grid(_ axis: Axis.Set) -> some View {
         EmojiScrollGrid(
             axis: axis,
-            categories: .all,
+            categories: .standard,
             query: query,
             selection: $selection,
             frequentEmojiProvider: .mostFrequent,

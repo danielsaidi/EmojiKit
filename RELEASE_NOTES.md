@@ -20,7 +20,9 @@ This is the last minor version before the upcoming, first major version. The goa
 
 * `EmojiCategory.search` now resolves to a `.custom` category.
 
+### 🗑️ Deprecations
 
+* `EmojiCategory.all` has been renamed to `.standard`.
 
 
 

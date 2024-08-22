@@ -23,7 +23,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: A custom emoji collection to list, if any.
-    ///   - categories: The categories to list, by default `.all`.
+    ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - frequentEmojiProvider: The ``EmojiProvider`` to use, by default a ``EmojiProviders/MostRecentProvider``.
@@ -34,7 +34,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
-        categories: [EmojiCategory] = .all,
+        categories: [EmojiCategory] = .standard,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
         frequentEmojiProvider: (any EmojiProvider)? = EmojiProviders.MostRecentProvider(),

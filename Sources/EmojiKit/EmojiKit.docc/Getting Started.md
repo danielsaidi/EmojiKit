@@ -42,7 +42,7 @@ EmojiKit has an ``EmojiCategory`` enum that defines all standard emoji categorie
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
-EmojiCategory.all      // [.frequent, .smileyAndPeople, ...]
+EmojiCategory.standard  // [.frequent, .smileyAndPeople, ...]
 ```
 
 You can read more in the <doc:EmojiCategory-Article> article.

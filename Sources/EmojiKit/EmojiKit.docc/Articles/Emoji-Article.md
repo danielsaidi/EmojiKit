@@ -30,7 +30,7 @@ Emoji("👍🏿").unicodeName         // Thumbs Up Sign
 Emoji("🚀").unicodeName         // Rocket
 ```
 
-You can use ``Emoji/all`` to get a list of all emojis from all categories available to the current runtime:
+You can use ``Emoji/all`` to get a list of all available emojis from all standard categories:
 
 ```swift
 let emojis = Emoji.all          // 😀😃😄😁😆🥹😅😂🤣🥲...
