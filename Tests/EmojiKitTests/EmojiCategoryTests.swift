@@ -37,21 +37,6 @@ final class EmojisCategoryTests: XCTestCase {
             .flags
         ])
     }
-
-    func testCanGetAndSetFavoriteCategoryEmojis() async {
-        XCTAssertEqual(EmojiCategory.favorites.emojis, [])
-        let emojis: [Emoji] = [.init("😀")]
-        EmojiCategory.favoriteEmojis = emojis
-        XCTAssertEqual(EmojiCategory.favorites.emojis, emojis)
-    }
-
-    func testCanGetAndSetFrequentCategoryEmojis() async {
-        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
-        let emojis: [Emoji] = [.init("😀")]
-        EmojiCategory.frequentEmojis = emojis
-        XCTAssertEqual(EmojiCategory.frequent.emojis, emojis)
-    }
-
     func testHasCorrectEmojis() throws {
         XCTAssertEqual(firstEmoji(for: .smileysAndPeople), "😀")
         XCTAssertEqual(firstEmoji(for: .animalsAndNature), "🐶")
@@ -73,5 +58,67 @@ final class EmojisCategoryTests: XCTestCase {
         XCTAssertEqual(emojiIcon(for: .objects), "💡")
         XCTAssertEqual(emojiIcon(for: .symbols), "💱")
         XCTAssertEqual(emojiIcon(for: .flags), "🏳️")
+    }
+
+    func testCanGetAndSetFavoriteCategoryEmojis() {
+        XCTAssertEqual(EmojiCategory.favorites.emojis, [])
+        let emojis: [Emoji] = [.init("😀")]
+        EmojiCategory.favoriteEmojis = emojis
+        XCTAssertEqual(EmojiCategory.favorites.emojis, emojis)
+    }
+
+    func testCanGetAndSetFrequentCategoryEmojis() {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        let emojis: [Emoji] = [.init("😀")]
+        EmojiCategory.frequentEmojis = emojis
+        XCTAssertEqual(EmojiCategory.frequent.emojis, emojis)
+    }
+
+    func testCanAddEmojisToPersistedCategory() {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        EmojiCategory.addEmoji(.init("😀"), to: .frequent)
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [.init("😀")])
+    }
+
+    func testCanAddMultipleEmojisWithCapToPersistedCategory() {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        let chars = "💡👑😀📱😀"
+        let maxCount = 3
+        let emojis = chars.map { Emoji($0) }
+        emojis.forEach {
+            EmojiCategory.addEmoji(
+                $0,
+                to: .frequent,
+                maxCount: maxCount
+            )
+        }
+        let expected = "😀📱👑"
+        let expectedEmojis = expected.map { Emoji($0) }
+        XCTAssertEqual(EmojiCategory.frequent.emojis, expectedEmojis)
+    }
+
+    func testCanRemoveEmojisFromPersistedCategory() {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        let chars = "💡👑😀📱😀"
+        let emojis = chars.map { Emoji($0) }
+        emojis.forEach {
+            EmojiCategory.addEmoji($0, to: .frequent)
+        }
+        EmojiCategory.removeEmoji(.init("📱"), from: .frequent)
+        let expected = "😀👑💡"
+        let expectedEmojis = expected.map { Emoji($0) }
+        XCTAssertEqual(EmojiCategory.frequent.emojis, expectedEmojis)
+    }
+
+    func testCanResetEmojisInPersistedCategory() {
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
+        let chars = "💡👑😀"
+        let emojis = chars.map { Emoji($0) }
+        emojis.forEach {
+            EmojiCategory.addEmoji($0, to: .frequent)
+        }
+        XCTAssertEqual(EmojiCategory.frequent.emojis.count, 3)
+        EmojiCategory.resetEmojis(in: .frequent)
+        XCTAssertEqual(EmojiCategory.frequent.emojis, [])
     }
 }
