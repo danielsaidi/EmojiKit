@@ -43,8 +43,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
         @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> ItemView
     ) {
-        let emojiChars = emojis.map { $0.char }.joined()
-        let emojiCat = EmojiCategory.custom(id: "", name: "", emojis: emojiChars, iconName: "")
+        let emojiCat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
         let emojiCategories: [EmojiCategory]? = emojis.isEmpty ? nil : [emojiCat]
         let searchCategories: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
         self.axis = axis
