@@ -29,7 +29,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - frequentEmojiProvider: The ``EmojiProvider`` to use, by default a ``EmojiProviders/MostRecentProvider``.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - section: A grid section title view builder.
@@ -40,7 +39,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .standard,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        frequentEmojiProvider: (any EmojiProvider)? = EmojiProviders.MostRecentProvider(),
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
@@ -52,7 +50,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         self.axis = axis
         self.categories = searchCategories ?? emojiCategories ?? categories
         self.query = query
-        self.frequentEmojiProvider = frequentEmojiProvider
         self.geometryProxy = geometryProxy
         self.action = action
         self.section = section
@@ -63,7 +60,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private let axis: Axis.Set
     private let categories: [EmojiCategory]
     private let query: String
-    private let frequentEmojiProvider: (any EmojiProvider)?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
     private let section: (Emoji.GridSectionParameters) -> SectionView
@@ -139,7 +135,7 @@ private extension EmojiGrid {
     #endif
 
     func pickEmoji(_ emoji: Emoji) {
-        frequentEmojiProvider?.addEmoji(emoji)
+        EmojiCategory.addEmoji(emoji, to: .frequent)
         action(emoji)
     }
 
@@ -323,16 +319,13 @@ private extension EmojiGrid {
     func emojis(
         for category: EmojiCategory
     ) -> [Emoji] {
-        switch category {
-        case .frequent: frequentEmojiProvider?.emojis ?? []
-        default: category.emojis
-        }
+        category.emojis
     }
     
     func hasEmojis(
         for category: EmojiCategory
     ) -> Bool {
-        !emojis(for: category).isEmpty
+        !category.emojis.isEmpty
     }
     
     func isSelected(

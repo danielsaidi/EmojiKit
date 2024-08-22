@@ -8,8 +8,13 @@
 
 import SwiftUI
 
-/// This scroll grid wraps an ``EmojiGrid``, auto-scrolls to
-/// the `selection` and auto-enables keyboard support.
+/// This scroll grid wraps an ``EmojiGrid`` in a `ScrollView`
+/// and will use its scroll proxy to automatically scroll to
+/// the current `selection`.
+///
+/// This grid also enables keyboard support. This means that
+/// you can use the arrow keys to move your selection around,
+/// use the return key to select emojis, etc.
 ///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
@@ -26,7 +31,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - frequentEmojiProvider: The ``EmojiProvider`` to use, by default a ``EmojiProviders/MostRecentProvider``.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked.
     ///   - section: A grid section title view builder.
@@ -37,7 +41,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .standard,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        frequentEmojiProvider: (any EmojiProvider)? = EmojiProviders.MostRecentProvider(),
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
@@ -50,7 +53,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         self.emojis = emojis
         self.categories = searchCategories ?? emojiCategories ?? categories
         self.query = query
-        self.frequentEmojiProvider = frequentEmojiProvider
         self.geometryProxy = geometryProxy
         self.action = action
         self.section = section
@@ -62,7 +64,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     private let emojis: [Emoji]
     private let categories: [EmojiCategory]
     private let query: String
-    private let frequentEmojiProvider: (any EmojiProvider)?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
     private let section: (Emoji.GridSectionParameters) -> SectionView
@@ -84,7 +85,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
                         categories: categories,
                         query: query,
                         selection: $selection,
-                        frequentEmojiProvider: frequentEmojiProvider,
                         geometryProxy: geo,
                         action: action,
                         section: section,
