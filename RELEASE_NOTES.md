@@ -16,6 +16,10 @@ This is the last minor version before the upcoming, first major version. The goa
 
 * `EmojiCategory` now implements `CaseIterable`.
 
+### 💡 Adjustments
+
+* `EmojiCategory.search` now resolves to a `.custom` category.
+
 
 
 

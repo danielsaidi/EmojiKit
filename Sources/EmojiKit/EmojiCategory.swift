@@ -36,19 +36,30 @@ public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifia
     case flags
 
     case favorites
-    case search(query: String)
 
     case custom(
         id: String,
         name: String,
-        emojis: String = "",
+        emojis: [Emoji],
         iconName: String = ""
     )
 }
 
 public extension EmojiCategory {
 
-    /// Get an ordered list of all standard categories.
+    /// A custom category with an emoji search result.
+    static func search(
+        query: String
+    ) -> EmojiCategory {
+        .custom(
+            id: "search",
+            name: "Search",
+            emojis: Emoji.all.matching(query),
+            iconName: "search"
+        )
+    }
+}
+
     static var allCases: [EmojiCategory] {
         .all
     }
@@ -133,7 +144,6 @@ public extension EmojiCategory {
         case .flags: "flags"
 
         case .favorites: "favorites"
-        case .search: "search"
 
         case .custom(let id, _, _, _): id
         }
@@ -153,8 +163,7 @@ public extension EmojiCategory {
         case .flags: "🏳️"
 
         case .favorites: "❤️"
-        case .search: "🔍"
-
+        
         case .custom: "-"
         }
     }
@@ -173,9 +182,8 @@ public extension EmojiCategory {
         case .flags: Self.emojisForFlags
 
         case .favorites: []
-        case .search(let query): Emoji.all.matching(query)
 
-        case .custom: emojiStringEmojis
+        case .custom(_ , _, let emojis, _): emojis
         }
     }
     
@@ -189,7 +197,6 @@ extension EmojiCategory {
     
     var emojiString: String {
         switch self {
-        case .frequent: ""
         case .smileysAndPeople: Self.smileysAndPeopleChars
         case .animalsAndNature: Self.animalsAndNatureChars
         case .foodAndDrink: Self.foodAndDrinkChars
@@ -198,11 +205,7 @@ extension EmojiCategory {
         case .objects: Self.objectsChars
         case .symbols: Self.symbolsChars
         case .flags: Self.flagsChars
-
-        case .favorites: ""
-        case .search: ""
-
-        case .custom(_, _, let emojis, _): emojis
+        default: ""
         }
     }
     
@@ -275,7 +278,7 @@ extension EmojiCategory {
                 
                 ScrollView(.vertical) {
                     VStack {
-                        ForEach(EmojiCategory.all) { cat in
+                        ForEach(EmojiCategory.allCases) { cat in
                             DisclosureGroup {
                                 EmojiGrid(
                                     emojis: cat.emojis,
