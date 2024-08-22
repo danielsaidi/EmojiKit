@@ -19,6 +19,7 @@ This is the last minor version before the upcoming, first major version. The goa
 * `EmojiCategory.PersistedCategory` is a new enum to simplify working with persisted categories.
 * `EmojiCategory.favoriteEmojis` is a new value that can be used to populate the `.favorites` category.
 * `EmojiCategory.frequentEmojis` is a new value that can be used to populate the `.frequent` category.
+* `EmojiGrid` now supports updating any persisted category when emojis are tapped or picked.
 
 ### 💡 Adjustments
 

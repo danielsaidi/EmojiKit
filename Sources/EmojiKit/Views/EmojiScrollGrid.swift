@@ -14,10 +14,6 @@ import SwiftUI
 /// The grid will either render a single list of emojis or a
 /// list of emoji categories.
 ///
-/// The grid supports keyboard commands. This means that you
-/// can use `arrow` keys to move your selection, `return` to
-/// trigger an `action` and `escape` to reset the `selection`.
-///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
 public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {

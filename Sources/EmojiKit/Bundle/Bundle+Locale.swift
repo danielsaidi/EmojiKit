@@ -17,7 +17,7 @@ extension Bundle {
 
     func bundlePath(for locale: Locale) -> String? {
         let localeId = locale.identifier
-        #if os(visionOS)
+        #if os(visionOS) || os(tvOS)
         let language = locale.language.languageCode?.identifier
         #else
         let language = locale.languageCode

@@ -90,6 +90,7 @@ extension MoveCommandDirection {
         case .down: .down
         case .left: .left
         case .right: .right
+        @unknown default: .down
         }
     }
 }

@@ -75,7 +75,7 @@ public extension EmojiCategory {
             .objects,
             .symbols,
             .flags,
-            .favorites,
+            .favorites
         ]
     }
 
@@ -208,7 +208,7 @@ public extension EmojiCategory {
 
         case .favorites: Self.favoriteEmojis
 
-        case .custom(_ , _, let emojis, _): emojis
+        case .custom(_, _, let emojis, _): emojis
         }
     }
     

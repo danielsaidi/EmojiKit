@@ -13,10 +13,6 @@ import SwiftUI
 /// The grid will either render a single list of emojis or a
 /// list of emoji categories.
 ///
-/// The grid supports keyboard commands. This means that you
-/// can use `arrow` keys to move your selection, `return` to
-/// trigger an `action` and `escape` to reset the `selection`.
-///
 /// You can use an ``EmojiScrollGrid`` to wrap the grid in a
 /// `ScrollView` that automatically scrolls to the selection.
 ///
@@ -385,13 +381,6 @@ private extension EmojiGrid {
             ScrollView {
                 VStack(spacing: 0) {
                     TextField("Search", text: $query)
-                        .textFieldStyle(.roundedBorder)
-                        .padding()
-                    Text(selection.emoji?.char ?? "-")
-                        .font(.title)
-                        .padding(5)
-                        .background(Color.green)
-                        .clipShape(.rect(cornerRadius: 5))
                         .padding()
                     Divider()
                     grid(.vertical)
@@ -405,5 +394,4 @@ private extension EmojiGrid {
     }
     
     return Preview()
-        // .emojiGridStyle(.extraLarge)
 }
