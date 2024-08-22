@@ -6,6 +6,20 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9
+
+This version deprecates the `EmojiProvider` concept, makes the `.frequent` and `.favorites` categories use static backing values and makes `EmojiCategory` implement `CaseIterable`.
+
+This is the last minor version before the upcoming, first major version. The goal will be to clean up the library as much as possible before that bump.
+
+### ✨ New Features
+
+* `EmojiCategory` now implements `CaseIterable`.
+
+
+
+
+
 ## 0.8
 
 This version renames `FrequentEmojiProvider` to `EmojiProvider` and changes the protocol a bit, then groups all implementations within a new namespace.

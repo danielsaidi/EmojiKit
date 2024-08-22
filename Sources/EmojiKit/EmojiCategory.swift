@@ -23,8 +23,8 @@ import SwiftUI
 /// Various EmojiKit views, like the ``EmojiGrid``, lets you
 /// pass in a custom provider, and will automatically use it
 /// to register emojis when the user interacts with an emoji.
-public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
-    
+public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifiable {
+
     case frequent
     case smileysAndPeople
     case animalsAndNature
@@ -49,10 +49,11 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
 public extension EmojiCategory {
 
     /// Get an ordered list of all standard categories.
-    ///
-    /// There are more emojis in this enum, but this returns
-    /// a list of all emojis that are by default listed in a
-    /// keyboard or picker.
+    static var allCases: [EmojiCategory] {
+        .all
+    }
+
+    /// Get an ordered list of all standard categories.
     static var all: [EmojiCategory] {
         [
             .frequent,
