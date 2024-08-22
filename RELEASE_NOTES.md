@@ -27,7 +27,7 @@ This is the last minor version before the upcoming, first major version. The goa
 ### 🗑️ Deprecations
 
 * `EmojiCategory.all` has been renamed to `.standard`.
-* `EmojiProvider` has been deprecated since each custom category can be persisted.
+* `EmojiProvider` has been deprecated since each custom category can now be persisted.
 
 
 

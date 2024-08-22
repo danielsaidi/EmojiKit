@@ -70,11 +70,6 @@ EmojiKit is available under the MIT license.
 - ``EmojiCategory``
 - ``EmojiVersion``
 
-### Providers
-
-- ``EmojiProvider``
-- ``EmojiProviders``
-
 ### Localization
 
 - ``Localizable``
