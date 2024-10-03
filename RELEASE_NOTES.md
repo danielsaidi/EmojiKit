@@ -1,8 +1,17 @@
-# Release Notes
+# Release notes
 
-EmojiKit will use semver after 1.0. 
+EmojiKit tries to honor semantic versioning:
 
-Until then, minor updates may remove deprecated features and introduce breaking changes.
+* Deprecations can happen at any time.
+* Deprecations should only be removed in `major` updates.
+* Breaking changes should not occur in `minor` & `patch` updates.
+* Breaking changes *can* occur in `minor` & `patch` updates, if needed.
+
+
+
+## 1.0
+
+This version removes all deprecated code.
 
 
 

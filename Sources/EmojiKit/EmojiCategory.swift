@@ -97,9 +97,6 @@ public extension EmojiCategory {
             .flags
         ]
     }
-
-    @available(*, deprecated, renamed: "standard")
-    static var all: [EmojiCategory] { standard }
 }
 
 public extension Array where Element == EmojiCategory {
@@ -123,9 +120,6 @@ public extension Collection where Element == EmojiCategory {
 
     /// Get an ordered list of all standard categories.
     static var standard: [Element] { Element.standard }
-
-    @available(*, deprecated, renamed: "standard")
-    static var all: [Element] { Element.standard }
 
     /// Get the first category with a certain ID.
     func category(withId id: Element.ID?) -> Element? {
