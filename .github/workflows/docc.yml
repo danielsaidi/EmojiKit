@@ -8,6 +8,9 @@ on:
   push:
     branches: ["main"]
 
+env:
+  SCHEME: EmojiKit
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -36,7 +39,7 @@ jobs:
         with:
           xcode-version: '16.0'
       - name: Build DocC
-        run: bash scripts/docc.sh
+        run: bash scripts/docc.sh $SCHEME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
