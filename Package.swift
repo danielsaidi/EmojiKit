@@ -21,10 +21,7 @@ let package = Package(
     targets: [
         .target(
             name: "EmojiKit",
-            resources: [.process("Resources")],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
-            ]
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "EmojiKitTests",

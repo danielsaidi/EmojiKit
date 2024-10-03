@@ -1,10 +1,6 @@
 # This workflow builds and tests the project.
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-# When we add support for a new Emoji version, the test step
-# must be disabled until the runner environment adds support
-# for all emoji versions.
-
 name: Build Runner
 
 on:
@@ -12,9 +8,6 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
-    
-env:
-  SCHEME: EmojiKit
 
 jobs:
   build:
@@ -24,15 +17,7 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '16.0'
-      - name: Build iOS
-        run: xcodebuild -scheme $SCHEME -derivedDataPath .build -destination 'generic/platform=iOS';
-      - name: Build macOS
-        run: xcodebuild -scheme $SCHEME -derivedDataPath .build -destination 'generic/platform=OS X';
-      - name: Build tvOS
-        run: xcodebuild -scheme $SCHEME -derivedDataPath .build -destination 'generic/platform=tvOS';
-      - name: Build watchOS
-        run: xcodebuild -scheme $SCHEME -derivedDataPath .build -destination 'generic/platform=watchOS';
-      - name: Build visionOS
-        run: xcodebuild -scheme $SCHEME -derivedDataPath .build -destination 'generic/platform=xrOS';
+      - name: Build all platforms
+        run: bash scripts/build.sh ${{ github.event.repository.name }}
       - name: Test iOS
-        run: xcodebuild test -scheme $SCHEME -derivedDataPath .build -destination 'platform=iOS Simulator,name=iPhone 16' -enableCodeCoverage YES;
+        run: bash scripts/test.sh ${{ github.event.repository.name }}
