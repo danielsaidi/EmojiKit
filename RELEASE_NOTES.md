@@ -11,7 +11,7 @@ EmojiKit tries to honor semantic versioning:
 
 ## 1.0
 
-This version removes all deprecated code.
+This version removes all deprecated code and uses Swift 6.
 
 
 
