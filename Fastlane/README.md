@@ -15,38 +15,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios build
-
-```sh
-[bundle exec] fastlane ios build
-```
-
-
-
-### ios build_platform
-
-```sh
-[bundle exec] fastlane ios build_platform
-```
-
-
-
-### ios test
-
-```sh
-[bundle exec] fastlane ios test
-```
-
-
-
-### ios test_platform
-
-```sh
-[bundle exec] fastlane ios test_platform
-```
-
-
-
 ### ios version
 
 ```sh
@@ -54,14 +22,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 ```
 
 Create a new version
-
-### ios version_validate
-
-```sh
-[bundle exec] fastlane ios version_validate
-```
-
-Validate that the repo is valid for release
 
 ----
 
