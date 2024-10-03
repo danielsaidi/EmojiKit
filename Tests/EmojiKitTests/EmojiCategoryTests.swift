@@ -11,6 +11,11 @@ import XCTest
 
 final class EmojisCategoryTests: XCTestCase {
 
+    override class func setUp() {
+        EmojiCategory.favoriteEmojis = []
+        EmojiCategory.frequentEmojis = []
+    }
+
     override func tearDown() {
         EmojiCategory.favoriteEmojis = []
         EmojiCategory.frequentEmojis = []
