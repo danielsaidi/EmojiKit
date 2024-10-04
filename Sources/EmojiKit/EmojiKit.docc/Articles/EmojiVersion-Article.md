@@ -16,7 +16,7 @@ This article describes the EmojiKit emoji version model.
 EmojiKit has an ``EmojiVersion`` type that defines all currently available Emoji versions, their platform availability and included emojis.
 
 
-## How to access emoji versions
+## Emoji versions
 
 You can use ``EmojiVersion/current`` to get the latest available emoji version for the current runtime:
 
@@ -31,7 +31,7 @@ let v15 = EmojiVersion.v15
 let v14 = EmojiVersion.v14
 ```
 
-You can also get the emoji version supported by a certain OS version, for instance:
+You can also get the emoji version supported by a certain OS version:
 
 ```swift
 EmojiVersion(iOS: 15.4).version    // 14.0
@@ -54,7 +54,7 @@ version.tvOS     // 16.4
 version.watchOS  // 9.4
 ```
 
-An emoji version also defines all emojis that were introduced in that version, as well as older and later emoji versions:
+It also defines all emojis that were introduced in that version, as well as older and later emoji versions:
 
 ```swift
 let version = EmojiVersion.v14

@@ -30,7 +30,7 @@ EmojiKit has an ``EmojiGrid`` that can be used to list and pick emojis in a hori
     }
 }
 
-You can also use an ``EmojiScrollGrid`` to wrap an ``EmojiGrid`` in a `ScrollView` and automatically scroll to the current selection, whenever it changes.
+You can also use an ``EmojiScrollGrid`` to wrap an ``EmojiGrid`` in a scroll view that automatically scrolls to the current selection.
 
 
 ### How to list emojis and categories
@@ -42,7 +42,7 @@ The ``EmojiGrid`` can display a list of ``Emoji`` or ``EmojiCategory`` values. I
 
 The `section` and `content` view builders can be used to define the section and grid content views. Simply return `$0.view` to apply the standard views, or return any custom views for the provided parameters.
 
-You can use the ``SwiftUI/View/emojiGridStyle(_:)`` view modifier to apply a custom emoji grid style, which can be used to customize item sizes, grid padding, etc. This view modifier can be applied to any part of the view hierarchy.
+You can use the ``SwiftUICore/View/emojiGridStyle(_:)`` view modifier to apply a custom emoji grid style, which can be used to customize item sizes, grid padding, etc. This view modifier can be applied to any part of the view hierarchy.
 
 
 ### How to change the selection

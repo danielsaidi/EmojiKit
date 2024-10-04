@@ -4,7 +4,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/EmojiKit?color=%2300550&sort=semver" alt="Version" />
-    <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
+    <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/ApiKit" alt="MIT License" title="MIT License" />
         <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
@@ -15,15 +15,13 @@
 
 ## About EmojiKit
 
-EmojiKit is a Swift SDK that lets you use emojis and other emoji-based features on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS).
+EmojiKit is a Swift SDK that lets you build emoji-based features for all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS) and SwiftUI.
 
 <p align="center">
     <img src ="Resources/Demo.gif" width="750" />
 </p>
 
-EmojiKit has all you need to work with emojis, including standard categories, support for localization & skin tones, unicode & version information, grids & pickers, etc.
-
-EmojiKit also provides convenient views like `EmojiGrid` and `EmojiScrollGrid` to let you build emoji-based lists, grids, pickers, etc. in no time.
+EmojiKit has all you need to work with emojis, including categories, support for localization & skin tones, unicode & version information, as well as convenient ``EmojiGrid`` and ``EmojiScrollGrid`` components.
 
 
 
@@ -40,31 +38,49 @@ https://github.com/danielsaidi/EmojiKit.git
 
 EmojiKit provides a bunch of emoji-specific features:
 
-* 😀 [Emojis][Emoji] - EmojiKit defines a structured emoji model.
-* 🐻 [Emoji Categories][EmojiCategory] - EmojiKit defines all standard emoji categories.
-* 📦 [Emoji Versions][EmojiVersion] - EmojiKit defines all emoji versions and their emojis.
-* 🧩 [Extensions][Extensions] - EmojiKit extends native types with emoji support.
-* 🇸🇪 [Localization][Localization] - EmojiKit supports localizing all emojis and categories.
-* 👍🏾 [Skin Tones][SkinTones] - EmojiKit provides emoji skin tone information.
-* 🖼️ [Views][Views] - EmojiKit has emoji-specific views, like grids and pickers.
+* 😀 Emojis - EmojiKit defines a structured emoji model.
+* 🐻 Emoji Categories - EmojiKit defines all standard emoji categories.
+* 📦 Emoji Versions - EmojiKit defines all emoji versions and their emojis.
+* 🧩 Extensions - EmojiKit extends native types with emoji support.
+* 🇸🇪 Localization - EmojiKit supports localizing all emojis and categories.
+* 👍🏾 Skin Tones - EmojiKit provides emoji skin tone information.
+* 🖼️ Views - EmojiKit has emoji-specific views, like grids and pickers.
+
+See the online [documentation][Documentation] for more information.
 
 
 
 ## Getting started
 
-The [online documentation][Documentation] has a [getting-started guide][Getting-Started] that helps you get started.
+The `Emoji` model can be used to parse a bunch of emoji-specific information, for instance:
+
+```swift
+Emoji("👍").unicodeIdentifier       // \\N{THUMBS UP SIGN}
+Emoji("🚀").unicodeIdentifier       // \\N{ROCKET}
+Emoji("👍").unicodeName             // Thumbs Up Sign
+Emoji("👍🏿").unicodeName             // Thumbs Up Sign
+Emoji("🚀").unicodeName             // Rocket
+Emoji("😀").localizedName           // Grinning Face
+Emoji("😀").localizedName(for: .swedish)  // Leende Ansikte
+Emoji("👍").hasSkinToneVariants     // true
+Emoji("🚀").hasSkinToneVariants     // false
+Emoji("👍🏿").neutralSkinToneVariant  // 👍
+Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾👍🏿
+```
+
+See the online [documentation][Documentation] for more information.
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, articles, code examples, etc.
+The online [documentation][Documentation] has more information, articles, code examples, etc.
 
 
 
 ## Demo Application
 
-The demo app lets you explore the library. To try it out, just open and run the `Demo` project. 
+The `Demo` folder has an app that lets you explore the library. 
 
 
 
@@ -102,15 +118,6 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 [OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
-[Documentation]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/
-[Getting-Started]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/getting-started
-
-[Emoji]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emoji-article
-[EmojiCategory]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emojicategory-article
-[EmojiVersion]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/emojiversion-article
-[Extensions]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/extension-article
-[Localization]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/localization-article
-[SkinTones]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/skintones-article
-[Views]: https://danielsaidi.github.io/EmojiKit/documentation/emojikit/views-article
+[Documentation]: https://danielsaidi.github.io/EmojiKit
 
 [License]: https://github.com/danielsaidi/EmojiKit/blob/main/LICENSE
