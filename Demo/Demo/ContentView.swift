@@ -47,7 +47,6 @@ private extension ContentView {
             categories: .standard,
             query: query,
             selection: $selection,
-            frequentEmojiProvider: .mostFrequent,
             action: { print($0) },
             section: { $0.view },
             item: { $0.view }
