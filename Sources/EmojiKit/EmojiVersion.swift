@@ -17,8 +17,8 @@ import SwiftUI
 /// all versions available to the current runtime. This will
 /// be used to let ``EmojiCategory`` just return emojis that
 /// are available to the current runtime.
-public struct EmojiVersion: Equatable {
-    
+public struct EmojiVersion: Equatable, Identifiable {
+
     init(
         version: Double,
         emojis: String,
@@ -77,7 +77,10 @@ public struct EmojiVersion: Equatable {
     ) {
         self.init(lastIn: Self.allAvailableIn(watchOS: version))
     }
-    
+
+    /// The unique version ID.
+    public var id: Double { version }
+
     /// The emojis to include in the information.
     public var emojis: [Emoji]
     
@@ -100,10 +103,15 @@ public struct EmojiVersion: Equatable {
     /// the version made any changes that isn't reflected in
     /// the emojis it provides.
     public let comment: String?
+
+    /// The version's display name, e.g. `15.1`.
+    public var displayName: String {
+        .init(format: "%.1f", version)
+    }
 }
 
 
-// MARK: - Public functions
+// MARK: - Version Builders
 
 public extension EmojiVersion {
 

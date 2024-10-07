@@ -9,6 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.0.1
+
+This version makes `EmojiVersion` implement `Identifiable` and adds a `displayName` property to it.
+
+
+
 ## 1.0
 
 This version removes all deprecated code and uses Swift 6.
