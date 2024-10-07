@@ -289,14 +289,15 @@ extension EmojiCategory {
     NavigationView {
         List {
             ForEach(EmojiCategory.allCases) { cat in
-                DisclosureGroup {
-                    LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(45)), count: 5)) {
-                        ForEach(cat.emojis) {
-                            Text($0.char)
-                                .font(.largeTitle)
+                NavigationLink {
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(60)), count: 5)) {
+                            ForEach(cat.emojis) {
+                                Text($0.char)
+                                    .font(.largeTitle)
+                            }
                         }
                     }
-                    .padding(.top)
                 } label: {
                     Label {
                         Text(cat.localizedName)
@@ -304,7 +305,6 @@ extension EmojiCategory {
                         Text(cat.emojiIcon)
                     }
                 }
-
             }
         }
         .navigationTitle("Emoji Categories")

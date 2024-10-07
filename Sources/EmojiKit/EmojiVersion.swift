@@ -305,14 +305,15 @@ public extension Emoji {
     NavigationView {
         List {
             ForEach(EmojiVersion.all.reversed()) { version in
-                DisclosureGroup {
-                    LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(45)), count: 5)) {
-                        ForEach(version.emojis) {
-                            Text($0.char)
-                                .font(.largeTitle)
+                NavigationLink {
+                    ScrollView(.vertical) {
+                        LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(45)), count: 5)) {
+                            ForEach(version.emojis) {
+                                Text($0.char)
+                                    .font(.largeTitle)
+                            }
                         }
                     }
-                    .padding(.top)
                 } label: {
                     Text(version.displayName)
                 }
