@@ -282,47 +282,31 @@ extension EmojiCategory {
     }()
 }
 
-#if os(iOS) || os(macOS)
 #Preview {
-    
-    struct Preview: View {
-        
-        var columns = [GridItem(.adaptive(minimum: 30))]
-        
-        var body: some View {
-            NavigationView {
-                #if os(macOS)
-                Color.clear
-                #endif
-                
-                ScrollView(.vertical) {
-                    VStack {
-                        ForEach(EmojiCategory.allCases) { cat in
-                            DisclosureGroup {
-                                EmojiGrid(
-                                    emojis: cat.emojis,
-                                    section: { $0.view },
-                                    item: { $0.view }
-                                )
-                                .padding(.top)
-                            } label: {
-                                Label {
-                                    Text(cat.localizedName)
-                                } icon: {
-                                    Text(cat.emojiIcon)
-                                }
-                            }
-                            
-                            Divider()
+
+    /// This preview limits each line to 5 emojis to make it
+    /// easy to compare columns with the native iOS keyboard.
+    NavigationView {
+        List {
+            ForEach(EmojiCategory.allCases) { cat in
+                DisclosureGroup {
+                    LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(45)), count: 5)) {
+                        ForEach(cat.emojis) {
+                            Text($0.char)
+                                .font(.largeTitle)
                         }
                     }
-                    .padding()
+                    .padding(.top)
+                } label: {
+                    Label {
+                        Text(cat.localizedName)
+                    } icon: {
+                        Text(cat.emojiIcon)
+                    }
                 }
-                .navigationTitle("Emoji Category")
+
             }
         }
+        .navigationTitle("Emoji Categories")
     }
-    
-    return Preview()
 }
-#endif

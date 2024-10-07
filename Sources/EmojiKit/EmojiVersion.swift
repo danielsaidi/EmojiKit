@@ -203,7 +203,13 @@ public extension EmojiVersion {
             watchOS: 4.1
         )
     }
-    
+}
+
+
+// MARK: - Version Resolvers
+
+public extension EmojiVersion {
+
     /// The ``EmojiVersion`` that is used by the current OS.
     static var current: Self {
         if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, *) {
@@ -293,21 +299,25 @@ public extension Emoji {
 }
 
 #Preview {
-    ZStack {
-        Color.black.opacity(0.1).ignoresSafeArea()
 
-        VStack(alignment: .leading) {
-            Text("Emoji 15.1")
-                .font(.title.bold())
-            EmojiGrid(
-                emojis: EmojiVersion.v15_1.emojis,
-                section: { $0.view },
-                item: { $0.view }
-            )
-            .padding()
-            .background(Color.white)
-            .clipShape(.rect(cornerRadius: 10))
+    /// This preview limits each line to 5 emojis to make it
+    /// easy to compare columns with the native iOS keyboard.
+    NavigationView {
+        List {
+            ForEach(EmojiVersion.all.reversed()) { version in
+                DisclosureGroup {
+                    LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(45)), count: 5)) {
+                        ForEach(version.emojis) {
+                            Text($0.char)
+                                .font(.largeTitle)
+                        }
+                    }
+                    .padding(.top)
+                } label: {
+                    Text(version.displayName)
+                }
+            }
         }
-        .padding()
+        .navigationTitle("Emoji Versions")
     }
 }

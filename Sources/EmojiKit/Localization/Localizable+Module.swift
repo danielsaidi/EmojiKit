@@ -12,11 +12,6 @@ public extension Localizable {
 
     /// The localized name for a certain locale.
     ///
-    /// This function uses the `.module` bundle, which isn't
-    /// available if you add EmojiKit to a binary SDK. If so,
-    /// just remove this file and replace this function with
-    /// one that uses your SDK's specific bundle.
-    ///
     /// - Parameters:
     ///   - locale: The locale to use, by default `.current`.
     func localizedName(
