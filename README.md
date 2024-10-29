@@ -15,13 +15,13 @@
 
 ## About EmojiKit
 
-EmojiKit lets you use emoji-based features on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS) using Swift & SwiftUI.
+EmojiKit lets you use emoji-based features on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS).
 
 <p align="center">
     <img src ="Resources/Demo.gif" width="750" />
 </p>
 
-EmojiKit has all you need to work with emojis, including categories, support for localization & skin tones, unicode & version information, as well as convenient ``EmojiGrid`` and ``EmojiScrollGrid`` components.
+EmojiKit has all you need to work with emojis, including categories, support for localization & skin tones, unicode & version information, as well as convenient ``EmojiGrid`` and ``EmojiScrollGrid`` components for SwiftUI.
 
 
 
@@ -66,6 +66,22 @@ Emoji("👍").hasSkinToneVariants     // true
 Emoji("🚀").hasSkinToneVariants     // false
 Emoji("👍🏿").neutralSkinToneVariant  // 👍
 Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾👍🏿
+```
+
+The `EmojiCategory` enum defines standard and custom categories and their emojis, for instance:
+
+```swift
+EmojiCategory.smileysAndPeopleChars.emojis // 😀😃😄...
+EmojiCategory.animalsAndNatureChars.emojis // 🐶🐱🐭...
+EmojiCategory.foodAndDrinkChars.emojis     // 🍏🍎🍐...
+```
+
+The `EmojiVersion` enum defines Emoji versions and the emojis they introduced, for instance:
+
+```swift
+EmojiVersion.v15_1.emojis // 🙂‍↕️🙂‍↔️👩‍🦽‍➡️...
+EmojiVersion.v15.emojis   // 🫨🫸🫷
+EmojiVersion.v14.emojis   // 🫠🫢🫣
 ```
 
 See the online [documentation][Documentation] for more information.
