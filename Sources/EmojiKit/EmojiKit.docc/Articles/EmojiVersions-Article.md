@@ -1,4 +1,4 @@
-# Emoji Version
+# Emoji Versions
 
 This article describes the EmojiKit emoji version model.
 
@@ -14,9 +14,6 @@ This article describes the EmojiKit emoji version model.
 }
 
 EmojiKit has an ``EmojiVersion`` type that defines all currently available Emoji versions, their platform availability and included emojis.
-
-
-## Emoji versions
 
 You can use ``EmojiVersion/current`` to get the latest available emoji version for the current runtime:
 

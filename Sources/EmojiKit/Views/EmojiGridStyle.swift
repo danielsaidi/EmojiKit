@@ -12,7 +12,7 @@ import SwiftUI
 /// ``EmojiGrid`` component.
 ///
 /// You can apply the style by using the view style modifier
-/// ``SwiftUI/View/emojiGridStyle(_:)``.
+/// ``SwiftUICore/View/emojiGridStyle(_:)``.
 ///
 /// You can use the ``standard`` style, any other predefined
 /// styles, like ``large`` or ``extraLarge``. You can modify

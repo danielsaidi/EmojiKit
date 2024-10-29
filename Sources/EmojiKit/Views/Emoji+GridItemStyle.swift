@@ -14,7 +14,7 @@ public extension Emoji {
     /// the ``Emoji/GridItem`` component.
     ///
     /// You can apply this view style with the view modifier
-    /// ``SwiftUI/View/emojiGridItemStyle(_:)``.
+    /// ``SwiftUICore/View/emojiGridItemStyle(_:)``.
     ///
     /// You can use the ``standard`` style or your own style.
     struct GridItemStyle {

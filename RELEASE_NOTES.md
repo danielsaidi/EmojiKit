@@ -9,6 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.1
+
+This version improves localization and localizes emojis in Swedish as well.
+
+
+
 ## 1.0.1
 
 This version makes `EmojiVersion` implement `Identifiable` and adds a `displayName` property to it.

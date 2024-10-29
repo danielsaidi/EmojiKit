@@ -1,4 +1,4 @@
-# Emoji Category
+# Emoji Categories
 
 This article describes the EmojiKit emoji category model.
 
@@ -13,20 +13,20 @@ This article describes the EmojiKit emoji category model.
     @PageColor(blue)
 }
 
-EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories and their included emojis:
+EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories and their emojis:
 
 ```swift
 try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
 try EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
 ```
 
-You can use the ``EmojiCategory/standard`` collection to get a list of all standard categories, in their native sort order:
+You can use the ``EmojiCategory/standard`` collection to get a list of all standard categories, in their standard sort order:
 
 ```swift
 EmojiCategory.standard  // [.frequent, .smileyAndPeople, ...]
 ```
 
-``EmojiCategory`` uses the ``EmojiVersion`` enum to filter out emojis that are unavailable to the current runtime. This means that your users will only see emojis they can use.
+``EmojiCategory`` uses ``EmojiVersion`` to filter out emojis that are unavailable to the current runtime. This means that your users will only see emojis that they can use on their device and OS version.
 
 
 ## Localization
@@ -38,7 +38,7 @@ let swedish = Locale(identifier: "sv")
 
 let cat = EmojiCategory.animalsAndNature
 cat.localizedName                         // Animals & Nature
-cat.localizedName(for: .english)          // Djur och natur
+cat.localizedName(for: .swedish)          // Djur och natur
 ```
 
 EmojiKit is currently only localized in English, but anyone can contribute to provide support for more locales. See the `Sources/EmojiKit/Resources` folder for information on how to localize emojis.

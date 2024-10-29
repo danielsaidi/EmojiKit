@@ -36,6 +36,6 @@ final class Emoji_SearchTests: XCTestCase {
         let emojis = emojiChars.map { Emoji($0) }
         let result = emojis.matching("eende ans", for: .swedish)
         let chars = result.map { $0.char }.joined()
-        XCTAssertEqual(chars, "😀😁🤪🤩😸")
+        XCTAssertEqual(chars, "😀😁😸")
     }
 }

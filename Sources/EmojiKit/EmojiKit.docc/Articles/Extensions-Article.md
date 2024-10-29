@@ -28,4 +28,4 @@ There are emoji-related extensions to native types, like ``Swift/String`` and ``
 
 These extensions power many features in the library, but can be used stand-alone utilifties as well.
 
-EmojiKit also extends the native ``SwiftUI/ScrollViewProxy`` with ways to scroll to ``Emoji``, ``EmojiCategory``, and ``Emoji/GridSelection`` values.
+EmojiKit also extends the ``SwiftUI/ScrollViewProxy`` with ways to scroll to ``Emoji``, ``EmojiCategory``, & ``Emoji/GridSelection`` values.

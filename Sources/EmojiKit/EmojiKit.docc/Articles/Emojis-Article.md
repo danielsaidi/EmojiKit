@@ -1,4 +1,4 @@
-# Emoji
+# Emojis
 
 This article describes the EmojiKit emoji model.
 
@@ -19,13 +19,13 @@ EmojiKit has an ``Emoji`` struct that lets you work with emojis in a structured 
 let emoji = Emoji("😀")
 ```
 
-You can use ``Emoji/all`` to get a list of all available emojis from all standard categories:
+You can use ``Emoji/all`` to get a list of all available emojis from all standard ``EmojiCategory`` values:
 
 ```swift
 let emojis = Emoji.all          // 😀😃😄😁😆🥹😅😂🤣🥲...
 ```
 
-You can also get emojis for a specific ``EmojiCategory`` and ``EmojiVersion``. See the <doc:EmojiCategory-Article> and <doc:EmojiVersion-Article> articles for more information.
+You can also get emojis for a specific category and version. See the <doc:EmojiCategories-Article> and <doc:EmojiVersions-Article> articles for more information.
 
 
 ## Unicode Information
@@ -55,7 +55,12 @@ Emoji("😀").localizedName                 // Grinning Face
 Emoji("😀").localizedName(for: .swedish)  // Leende Ansikte
 ```
 
-EmojiKit is currently only localized in English, but anyone can contribute to provide support for more locales. See the `Sources/EmojiKit/Resources` folder for information on how to localize emojis.
+EmojiKit is currently localized in:
+
+* English
+* Swedish
+
+Anyone can contribute to provide support for more locales. See the `Resources` folder for information on how to localize emojis.
 
 
 ## Skin tones
@@ -70,9 +75,3 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 ```
 
 > Note: Skin tone support for emojis with multiple skin tone components are currently not supported, such as two persons kissing.
-
-
-
-
-
-The ``Emoji`` type has a lot more capabilities, such as support for <doc:Localization-Article> and <doc:SkinTones-Article>, which are described in separate articles.
