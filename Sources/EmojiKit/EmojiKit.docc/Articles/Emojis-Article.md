@@ -51,8 +51,8 @@ The ``Emoji`` type can be localized in any locale that has defined translations:
 ```swift
 let swedish = Locale(identifier: "sv")
 
-Emoji("😀").localizedName                 // Grinning Face
-Emoji("😀").localizedName(for: .swedish)  // Leende Ansikte
+Emoji("😀").localizedName                // Grinning Face
+Emoji("😀").localizedName(in: .swedish)  // Leende Ansikte
 ```
 
 EmojiKit is currently localized in:
