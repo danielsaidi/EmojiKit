@@ -15,8 +15,8 @@ public extension Localizable {
     /// - Parameters:
     ///   - locale: The locale to use, by default `.current`.
     func localizedName(
-        for locale: Locale = .current
+        in locale: Locale = .current
     ) -> String {
-        localizedName(for: locale, in: .module)
+        localizedName(in: locale, bundle: .module)
     }
 }

@@ -20,7 +20,7 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
     }
     
     func name(for cat: EmojiCategory, locale: Locale) -> String {
-        cat.localizedName(for: locale)
+        cat.localizedName(in: locale)
     }
     
     func testLocalizationKeyIsValid() {
@@ -71,8 +71,8 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
     func testLocalizedNameHasFallbackForUnsupportedLocales() {
         let emoji = Emoji("😀")
         XCTAssertEqual(
-            emoji.localizedName(for: .finnish),
-            emoji.localizedName(for: .current)
+            emoji.localizedName(in: .finnish),
+            emoji.localizedName(in: .current)
         )
     }
 }

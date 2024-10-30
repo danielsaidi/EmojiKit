@@ -17,6 +17,7 @@ extension Emoji: Localizable {
     }
 }
 
+#if os(iOS)
 #Preview {
 
     struct Preview: View {
@@ -66,3 +67,4 @@ extension Emoji: Localizable {
 
     return Preview()
 }
+#endif

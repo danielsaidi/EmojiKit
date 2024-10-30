@@ -30,12 +30,20 @@ final class Emoji_SearchTests: XCTestCase {
         let chars = result.map { $0.char }.joined()
         XCTAssertEqual(chars, "😀😁🤪🤩😸")
     }
-    
+
     func testCollectionMatchesMultipleQueryComponents() throws {
-        let emojiChars = "😀🥂😁🏬🤪🇪🇸🤩✅😸"
+        let emojiChars = "😀🥂🤶😁🏬🧑‍🎄🤪🇪🇸🤩🎅✅😸"
         let emojis = emojiChars.map { Emoji($0) }
-        let result = emojis.matching("eende ans", in: .swedish)
+        let result = emojis.matching("sant", in: .english)
         let chars = result.map { $0.char }.joined()
-        XCTAssertEqual(chars, "😀😁😸")
+        XCTAssertEqual(chars, "🤶🧑‍🎄🎅")
+    }
+
+    func testCollectionMatchesMultipleQueryComponentsLocalized() throws {
+        let emojiChars = "😀🥂🤶😁🏬🧑‍🎄🤪🇪🇸🤩🎅✅😸"
+        let emojis = emojiChars.map { Emoji($0) }
+        let result = emojis.matching("tomt", in: .swedish)
+        let chars = result.map { $0.char }.joined()
+        XCTAssertEqual(chars, "🤶🧑‍🎄🎅")
     }
 }
