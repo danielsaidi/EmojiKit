@@ -9,6 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.1.1
+
+This version optimizes emoji search and adjusts some localized texts.
+
+
+
 ## 1.1
 
 This version improves localization and localizes emojis in Swedish as well.
