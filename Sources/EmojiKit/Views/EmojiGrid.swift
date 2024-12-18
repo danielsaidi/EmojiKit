@@ -303,6 +303,7 @@ private extension EmojiGrid {
             if popoverSelection != nil { return }
             selectEmoji(emoji, in: category, pick: true)
         }
+        // .prefersDraggable(emoji)     TODO: Fix Conflicts with popover
         .onLongPressGesture {
             selectEmoji(emoji, in: category, skintonePopover: true)
         }
@@ -321,6 +322,20 @@ private extension EmojiGrid {
                 )
             )
             .id(category.id)
+        }
+    }
+}
+
+private extension View {
+    
+    @ViewBuilder
+    func prefersDraggable(
+        _ emoji: Emoji
+    ) -> some View {
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *) {
+            self.draggable(emoji)
+        } else {
+            self
         }
     }
 }
@@ -367,7 +382,7 @@ private extension EmojiGrid {
                         axis: axis,
                         query: query,
                         selection: $selection,
-                        categoryEmojis: { Array($0.emojis.prefix(50)) },
+                        categoryEmojis: { Array($0.emojis.prefix(500)) },
                         section: { $0.view },
                         item: { $0.view }
                     )

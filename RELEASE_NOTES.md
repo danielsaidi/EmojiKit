@@ -9,11 +9,11 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.1.2
+## 1.2
 
-This version optimizes emoji search and adjusts some localized texts.
+This version adds a category emojis builder to the grids.
 
-This version also renames some functions to use `in locale` instead of `for locale` terminology.
+This version also makes `Emoji` and `EmojiCategory` conform to `Transferable`.
 
 
 

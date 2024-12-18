@@ -127,6 +127,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
             EmojiScrollGrid(
                 axis: axis,
                 selection: $selection,
+                categoryEmojis: { Array($0.emojis.prefix(4)) },
                 section: { $0.view },
                 item: { $0.view }
             )

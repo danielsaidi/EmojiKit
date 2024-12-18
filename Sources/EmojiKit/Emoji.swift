@@ -6,7 +6,8 @@
 //  Copyright © 2021-2024 Daniel Saidi. All rights reserved.
 //
 
-import Foundation
+import CoreTransferable
+import UniformTypeIdentifiers
 
 /// This type represents an emoji character and is used as a
 /// namespace for emoji-related types and functionality.
@@ -32,6 +33,14 @@ public extension Emoji {
     var id: String { char }
 }
 
+extension Emoji: Transferable {
+    
+    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *)
+    public static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .emoji)
+        ProxyRepresentation(exporting: \.char)
+    }
+}
 
 public extension Array where Element == Emoji {
 

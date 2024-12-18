@@ -32,6 +32,15 @@ public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifia
     )
 }
 
+extension EmojiCategory: Transferable {
+    
+    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *)
+    public static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .emojiCategory)
+        ProxyRepresentation(exporting: \.emojisString)
+    }
+}
+
 public extension EmojiCategory {
 
     /// A custom category with an emoji search result.
@@ -189,6 +198,12 @@ public extension EmojiCategory {
 
         case .custom(_, _, let emojis, _): emojis
         }
+    }
+    
+    /// A list of all available emojis in the category, as a
+    /// concatenated string.
+    var emojisString: String {
+        emojis.map { $0.char }.joined()
     }
     
     /// Whether or not the category has any emojis.
