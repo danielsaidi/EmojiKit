@@ -9,6 +9,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.1.2
+
+This version optimizes emoji search and adjusts some localized texts.
+
+This version also renames some functions to use `in locale` instead of `for locale` terminology.
+
+
+
 ## 1.1.1
 
 This version optimizes emoji search and adjusts some localized texts.

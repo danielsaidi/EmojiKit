@@ -29,9 +29,10 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - persistedCategory: The persisted category to affect when picking any emoji, if any.
+    ///   - persistedCategory: A persisted category to append to when picking an emoji, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
-    ///   - action: An action to trigger when an emoji is tapped or picked.
+    ///   - action: An action to trigger when an emoji is tapped or picked, if any.
+    ///   - categoryEmojis: An optional function that can determine which emojis to show for a certain category, by default all.
     ///   - section: A grid section title view builder.
     ///   - item: A grid item view builder.
     public init(
@@ -43,6 +44,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         persistedCategory: EmojiCategory.PersistedCategory? = nil,
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
+        categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
         @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
         @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> ItemView
     ) {
@@ -56,6 +58,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         self.persistedCategory = persistedCategory
         self.geometryProxy = geometryProxy
         self.action = action
+        self.categoryEmojis = categoryEmojis
         self.section = section
         self.item = item
         self._selection = selection
@@ -68,6 +71,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     private let persistedCategory: EmojiCategory.PersistedCategory?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
+    private let categoryEmojis: (EmojiCategory) -> [Emoji]
     private let section: (Emoji.GridSectionParameters) -> SectionView
     private let item: (Emoji.GridItemParameters) -> ItemView
 
@@ -90,6 +94,7 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
                         persistedCategory: persistedCategory,
                         geometryProxy: geo,
                         action: action,
+                        categoryEmojis: categoryEmojis,
                         section: section,
                         item: item
                     )

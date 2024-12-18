@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// This style can be used to modify the visual style of the
-/// ``EmojiGrid`` component.
+/// ``EmojiGrid`` and ``EmojiScrollGrid`` views.
 ///
 /// You can apply the style by using the view style modifier
 /// ``SwiftUICore/View/emojiGridStyle(_:)``.
@@ -22,9 +22,6 @@ import SwiftUI
 /// a blue square around itself, to indicate if it has focus.
 /// This is not really needed, since the selected emoji will
 /// already be marked with a blue square, but it's up to you.
-///
-/// When defining custom styles, make sure that the style is
-/// adjusted for different platforms.
 public struct EmojiGridStyle {
 
     /// Create a style with an identical font and item size.
