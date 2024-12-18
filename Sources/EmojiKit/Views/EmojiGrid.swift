@@ -332,11 +332,15 @@ private extension View {
     func prefersDraggable(
         _ emoji: Emoji
     ) -> some View {
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *) {
+        #if os(watchOS) || os(tvOS)
+        self
+        #else
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             self.draggable(emoji)
         } else {
             self
         }
+        #endif
     }
 }
 
