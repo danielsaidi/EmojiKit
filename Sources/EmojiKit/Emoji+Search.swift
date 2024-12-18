@@ -16,6 +16,7 @@ public extension Emoji {
         in locale: Locale = .current
     ) -> Bool {
         guard query.hasContent else { return true }
+        if self.char == query { return true }
         if unicodeName.matches(query) { return true }
         return localizedName(in: locale).matches(query)
     }

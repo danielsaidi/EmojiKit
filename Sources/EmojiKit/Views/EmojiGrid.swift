@@ -377,17 +377,14 @@ private extension EmojiGrid {
             _ axis: Axis.Set
         ) -> some View {
             ScrollViewReader { proxy in
-                ScrollView(axis) {
-                    EmojiGrid(
-                        axis: axis,
-                        query: query,
-                        selection: $selection,
-                        categoryEmojis: { Array($0.emojis.prefix(500)) },
-                        section: { $0.view },
-                        item: { $0.view }
-                    )
-                    .padding(5)
-                }
+                EmojiScrollGrid(
+                    axis: axis,
+                    query: query,
+                    selection: $selection,
+                    categoryEmojis: { Array($0.emojis.prefix(500)) },
+                    section: { $0.view },
+                    item: { $0.view }
+                )
                 .onAppear {
                     proxy.scrollTo(selection)
                 }

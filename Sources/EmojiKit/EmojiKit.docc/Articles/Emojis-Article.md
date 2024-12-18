@@ -75,3 +75,10 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 ```
 
 > Note: Skin tone support for emojis with multiple skin tone components are currently not supported, such as two persons kissing.
+
+
+## Transferable
+
+The ``Emoji`` type conforms to the `Transferable` protocol, which means that it can use many native features like drag & drop, sharing, etc.
+
+Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emoji`` uniform type, to use these features.  

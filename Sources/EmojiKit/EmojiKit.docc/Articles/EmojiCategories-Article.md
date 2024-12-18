@@ -49,3 +49,10 @@ EmojiKit is currently only localized in English, but anyone can contribute to pr
 The ``EmojiCategory/frequent`` category returns the auto-persisted ``EmojiCategory/frequentEmojis`` collection, which you can get and set as you like. The same goes for the ``EmojiCategory/favorites`` category, which returns the auto-persisted ``EmojiCategory/favoriteEmojis`` collection.
 
 You can use ``EmojiCategory/addEmoji(_:to:maxCount:)``, ``EmojiCategory/removeEmoji(_:from:)`` and ``EmojiCategory/resetEmojis(in:)`` to affect any persisted emoji category, and can even define custom categories if you need to.
+
+
+## Transferable
+
+The ``EmojiCategory`` type conforms to the `Transferable` protocol, which means that it can use many native features like drag & drop, sharing, etc.
+
+Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emojiCategory`` uniform type, to use these features.

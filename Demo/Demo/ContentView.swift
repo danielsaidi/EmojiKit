@@ -10,24 +10,24 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State
-    private var query = ""
-
-    @State
-    private var selection = Emoji.GridSelection()
-
-    @FocusState var focusState1
-    @FocusState var focusState2
+    @FocusState var focusState
+    
+    @State var query = ""
+    @State var selection = Emoji.GridSelection()
 
     var body: some View {
         NavigationStack {
-            VStack {
-                grid(.vertical)
-                    .focused($focusState1)
-                Divider()
-                grid(.horizontal)
-                    .focused($focusState2)
-            }
+            EmojiScrollGrid(
+                axis: .vertical,
+                categories: .standard,
+                query: query,
+                selection: $selection,
+                persistedCategory: .frequent,
+                action: { print($0) },
+                section: { $0.view },
+                item: { $0.view }
+                // item: { $0.view.draggable($0.emoji) }
+            )
             .searchable(text: $query)
         }
         .tint(.orange)
@@ -39,18 +39,6 @@ private extension ContentView {
     
     func fillStyle(_ isSelected: Bool) -> AnyShapeStyle {
         isSelected ? .init(.selection) : .init(.clear)
-    }
-    
-    func grid(_ axis: Axis.Set) -> some View {
-        EmojiScrollGrid(
-            axis: axis,
-            categories: .standard,
-            query: query,
-            selection: $selection,
-            action: { print($0) },
-            section: { $0.view },
-            item: { $0.view }
-        )
     }
 }
 

@@ -11,9 +11,14 @@ EmojiKit tries to honor semantic versioning:
 
 ## 1.2
 
-This version adds a category emojis builder to the grids.
+✨ Features
 
-This version also makes `Emoji` and `EmojiCategory` conform to `Transferable`.
+* `Emoji` and `EmojiCategory` conform to `Transferable`.
+* `EmojiGrid` has a new `categoryEmojis` array builder.
+
+💡 Adjustments
+
+* `Emoji` now matches if a query is identical to its char.
 
 
 

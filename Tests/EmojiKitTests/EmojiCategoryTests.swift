@@ -9,7 +9,7 @@
 import EmojiKit
 import XCTest
 
-final class EmojisCategoryTests: XCTestCase {
+static class EmojisCategoryTests: XCTestCase {
 
     override class func setUp() {
         EmojiCategory.favoriteEmojis = []

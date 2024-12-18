@@ -58,6 +58,7 @@ public extension EmojiCategory {
 
 public extension EmojiCategory {
 
+    /// An ordered list with all standard categories.
     static var allCases: [EmojiCategory] {
         [
             .frequent,
@@ -73,12 +74,13 @@ public extension EmojiCategory {
         ]
     }
 
-    /// Get an ordered list of all standard categories.
+    /// An ordered list with all standard categories.
     static var standard: [EmojiCategory] {
         [.frequent] + standardWithoutFrequent
     }
 
-    /// Get an ordered list of all standard categories.
+    /// An ordered list with all standard categories, but no
+    /// frequent category.
     static var standardWithoutFrequent: [EmojiCategory] {
         [
             .smileysAndPeople,
@@ -214,71 +216,60 @@ public extension EmojiCategory {
 
 extension EmojiCategory {
     
-    var emojiString: String {
-        switch self {
-        case .smileysAndPeople: Self.smileysAndPeopleChars
-        case .animalsAndNature: Self.animalsAndNatureChars
-        case .foodAndDrink: Self.foodAndDrinkChars
-        case .activity: Self.activityChars
-        case .travelAndPlaces: Self.travelAndPlacesChars
-        case .objects: Self.objectsChars
-        case .symbols: Self.symbolsChars
-        case .flags: Self.flagsChars
-        default: ""
-        }
-    }
-    
-    var emojiStringEmojis: [Emoji] {
-        emojiString
-            .replacingOccurrences(of: "\n", with: "")
-            .compactMap {
-                let emoji = Emoji(String($0))
-                return emoji.isAvailableInCurrentRuntime ? emoji : nil
-            }
-    }
-    
     /// Whether or not the category contains a certain emoji.
     func hasEmoji(_ emoji: Emoji) -> Bool {
         emojis.firstIndex(of: emoji) != nil
     }
 }
 
+private extension String {
+    
+    func parseEmojis() -> [Emoji] {
+        self.replacingOccurrences(of: "\n", with: "")
+            .compactMap {
+                let emoji = Emoji(String($0))
+                return emoji.isAvailableInCurrentRuntime ? emoji : nil
+            }
+    }
+}
+
+/// A category cache layer to avoid parsing emojis each time.
 extension EmojiCategory {
     
     static let emojisForSmileysAndPeople: [Emoji] = {
-        EmojiCategory.smileysAndPeople.emojiStringEmojis
+        smileysAndPeopleChars.parseEmojis()
     }()
 
     static let emojisForAnimalsAndNature: [Emoji] = {
-        EmojiCategory.animalsAndNature.emojiStringEmojis
+        animalsAndNatureChars.parseEmojis()
     }()
 
     static let emojisForFoodAndDrink: [Emoji] = {
-        EmojiCategory.foodAndDrink.emojiStringEmojis
+        foodAndDrinkChars.parseEmojis()
     }()
 
     static let emojisForActivity: [Emoji] = {
-        EmojiCategory.activity.emojiStringEmojis
+        activityChars.parseEmojis()
     }()
 
     static let emojisForTravelAndPlaces: [Emoji] = {
-        EmojiCategory.travelAndPlaces.emojiStringEmojis
+        travelAndPlacesChars.parseEmojis()
     }()
 
     static let emojisForObjects: [Emoji] = {
-        EmojiCategory.objects.emojiStringEmojis
+        objectsChars.parseEmojis()
     }()
 
     static let emojisForSymbols: [Emoji] = {
-        EmojiCategory.symbols.emojiStringEmojis
+        symbolsChars.parseEmojis()
     }()
 
     static let emojisForFlags: [Emoji] = {
-        EmojiCategory.flags.emojiStringEmojis
+        flagsChars.parseEmojis()
     }()
 
     static let emojisForSmileys: [Emoji] = {
-        EmojiCategory.smileysAndPeople.emojiStringEmojis
+        smileysAndPeopleChars.parseEmojis()
     }()
 }
 
