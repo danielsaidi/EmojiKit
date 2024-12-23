@@ -71,7 +71,7 @@ public struct EmojiGridStyle {
         self.itemSpacing = itemSpacing
         self.items = [GridItem(
             .adaptive(minimum: itemSize),
-            spacing: itemSpacing
+            spacing: sectionSpacing
         )]
         self.padding = padding
         self.prefersFocusEffect = prefersFocusEffect
