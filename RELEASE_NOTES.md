@@ -9,12 +9,13 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.2.1
+## 1.2.1 - 1.2.3
 
 ✨ Features
 
-* `EmojiGrid` now provides category `index` params.
-* `EmojiGridStyle` now has a `sectionSpacing` property.
+* `EmojiGrid` now provides category index to the view builder params.
+* `EmojiGrid` now properly filters out empty categories when created.
+* `EmojiGridStyle` has a new `sectionSpacing` that is applied to the grid section header.
 
 
 

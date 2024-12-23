@@ -33,12 +33,14 @@ public struct EmojiGridStyle {
     ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
     ///   - sectionSpacing: The grid section spacing, by default `20`.
     public init(
-        fontSize: Double = 30,
-        itemSpacing: Double = 5,
-        padding: Double = 5,
+        fontSize: Double? = nil,
+        itemSpacing: Double? = nil,
+        padding: Double? = nil,
         prefersFocusEffect: Bool = false,
-        sectionSpacing: Double = 20
+        sectionSpacing: Double? = nil
     ) {
+        let fontSize = fontSize ?? 30
+        
         self.init(
             font: .system(size: fontSize),
             itemSize: fontSize,
@@ -60,18 +62,23 @@ public struct EmojiGridStyle {
     ///   - sectionSpacing: The grid section spacing, by default `20`.
     public init(
         font: Font? = .title,
-        itemSize: Double = 30,
-        itemSpacing: Double = 5,
-        padding: Double = 5,
+        itemSize: Double? = nil,
+        itemSpacing: Double? = nil,
+        padding: Double? = nil,
         prefersFocusEffect: Bool = false,
-        sectionSpacing: Double = 20
+        sectionSpacing: Double? = nil
     ) {
+        let itemSize = itemSize ?? 30
+        let itemSpacing = itemSpacing ?? 5
+        let padding = padding ?? 5
+        let sectionSpacing = sectionSpacing ?? 15
+        
         self.font = font
         self.itemSize = itemSize
         self.itemSpacing = itemSpacing
         self.items = [GridItem(
             .adaptive(minimum: itemSize),
-            spacing: sectionSpacing
+            spacing: itemSpacing
         )]
         self.padding = padding
         self.prefersFocusEffect = prefersFocusEffect
@@ -82,10 +89,10 @@ public struct EmojiGridStyle {
     public var font: Font?
     
     /// The grid item size to use.
-    public var itemSize: Double
+    public var itemSize: CGFloat
     
     /// The grid item spacing.
-    public var itemSpacing: Double
+    public var itemSpacing: CGFloat
     
     /// The grid items.
     public var items: [GridItem]
@@ -97,7 +104,7 @@ public struct EmojiGridStyle {
     public var prefersFocusEffect: Bool
     
     /// The grid section spacing.
-    public var sectionSpacing: Double
+    public var sectionSpacing: CGFloat
 }
 
 public extension EmojiGridStyle {
