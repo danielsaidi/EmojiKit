@@ -13,6 +13,14 @@ EmojiKit tries to honor semantic versioning:
 
 ✨ Features
 
+* `EmojiGrid` now provides an `index` to the section params.
+
+
+
+## 1.2
+
+✨ Features
+
 * `Emoji` and `EmojiCategory` conform to `Transferable`.
 * `EmojiGrid` has a new `categoryEmojis` array builder.
 

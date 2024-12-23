@@ -255,12 +255,14 @@ private extension EmojiGrid {
     }
     
     func gridContent() -> some View {
-        ForEach(categories) { category in
+        ForEach(Array(categories.enumerated()), id: \.offset) {
+            let offset = $0.offset
+            let category = $0.element
             if hasEmojis(for: category) {
                 Section {
-                    gridContent(for: category)
+                    gridContent(for: category, at: offset)
                 } header: {
-                    gridTitle(for: category)
+                    gridTitle(for: category, at: offset)
                 }
             }
         }
@@ -268,24 +270,32 @@ private extension EmojiGrid {
     
     @ViewBuilder
     func gridContent(
-        for category: EmojiCategory
+        for category: EmojiCategory,
+        at index: Int
     ) -> some View {
         let emojis = emojis(for: category)
         ForEach(Array(emojis.enumerated()), id: \.offset) {
-            gridContent(for: category, emoji: $0.element, offset: $0.offset)
+            gridContent(
+                for: category,
+                at: index,
+                emoji: $0.element,
+                emojiIndex: $0.offset
+            )
         }
     }
 
     @ViewBuilder
     func gridContent(
         for category: EmojiCategory,
+        at categoryIndex: Int,
         emoji: Emoji,
-        offset: Int
+        emojiIndex: Int
     ) -> some View {
         let params = Emoji.GridItemParameters(
             emoji: emoji,
+            emojiIndex: emojiIndex,
             category: category,
-            categoryIndex: offset,
+            categoryIndex: categoryIndex,
             isSelected: isSelected(emoji, in: category),
             view: Emoji.GridItem(
                 emoji,
@@ -312,12 +322,14 @@ private extension EmojiGrid {
 
     @ViewBuilder
     func gridTitle(
-        for category: EmojiCategory
+        for category: EmojiCategory,
+        at index: Int
     ) -> some View {
         if axis == .vertical, categories.count > 1 {
             section(
                 .init(
                     category: category,
+                    index: index,
                     view: Emoji.GridSectionTitle(category)
                 )
             )

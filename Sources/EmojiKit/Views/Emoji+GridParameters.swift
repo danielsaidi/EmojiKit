@@ -13,11 +13,14 @@ public extension Emoji {
 
         /// The emoji to present.
         public let emoji: Emoji
+        
+        /// The emoji index within the category.
+        public let emojiIndex: Int
 
         /// The category of the emoji.
         public let category: EmojiCategory
 
-        /// The category index of the emoji.
+        /// The category section index.
         public let categoryIndex: Int
 
         /// Whether or not the emoji is selected.
@@ -29,11 +32,14 @@ public extension Emoji {
 
     /// This struct defines section view builder parameters.
     struct GridSectionParameters {
-
+        
         /// The category that is to be presented.
         public let category: EmojiCategory
+        
+        /// The category section index.
+        public let index: Int
 
-        /// The standard grid item view.
+        /// The standard category section view.
         public let view: Emoji.GridSectionTitle
     }
 }
