@@ -9,11 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.2
+## 1.2.1
 
 ✨ Features
 
-* `EmojiGrid` now provides an `index` to the section params.
+* `EmojiGrid` now provides category `index` params.
+* `EmojiGridStyle` now has a `sectionSpacing` property.
 
 
 
