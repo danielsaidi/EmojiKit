@@ -29,8 +29,8 @@ public extension EmojiCategory {
         ]
     }
     
-    @available(*, deprecated, renamed: "standardWithoutRecent")
-    static var standardWithoutFrequent: [EmojiCategory] { standardWithoutRecent }
+    @available(*, deprecated, renamed: "standard")
+    static var standardWithoutFrequent: [EmojiCategory] { standard }
 }
 
 public extension Collection where Element == Emoji {

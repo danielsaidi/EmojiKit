@@ -11,10 +11,16 @@ EmojiKit tries to honor semantic versioning:
 
 ## 1.3
 
+This version adds a new `recent` category and changes the `standard` category collection.
+
 ✨ Features
 
 * `EmojiCategory` has a new `recent` category.
 * `EmojiCategory` has translations for `favorites` and `recent` categories.
+
+💡 Adjustments
+
+* `EmojiCategory.standard` no longer includes `.recent` or `.frequent` by default.
 
 ### 🗑️ Deprecations
 

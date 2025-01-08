@@ -31,7 +31,6 @@ class EmojisCategoryTests: XCTestCase {
 
     func testCanReturnAllCategories() {
         XCTAssertEqual(EmojiCategory.standard, [
-            .frequent,
             .smileysAndPeople,
             .animalsAndNature,
             .foodAndDrink,

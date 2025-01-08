@@ -72,15 +72,10 @@ public extension EmojiCategory {
 
     /// An ordered list with all standard categories.
     ///
-    /// This list also contains the ``recent`` category. Use
-    /// ``standardWithoutRecent`` to omit this category.
+    /// This list doesn't contain ``frequent`` or ``recent``,
+    /// only the standard, fixed categories. You can add any
+    /// additional categories that you want to include to it.
     static var standard: [EmojiCategory] {
-        [.recent] + standardWithoutRecent
-    }
-
-    /// An ordered list with all standard categories without
-    /// the ``recent`` category.
-    static var standardWithoutRecent: [EmojiCategory] {
         [
             .smileysAndPeople,
             .animalsAndNature,
@@ -281,7 +276,7 @@ extension EmojiCategory {
     /// easy to compare columns with the native iOS keyboard.
     NavigationView {
         List {
-            ForEach(EmojiCategory.allCases) { cat in
+            ForEach(EmojiCategory.standard) { cat in
                 NavigationLink {
                     ScrollView(.vertical) {
                         LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(60)), count: 5)) {
