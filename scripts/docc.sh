@@ -21,7 +21,7 @@ fi
 
 # Define argument variables
 TARGET=$1
-TARGET_LOWERCASED=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+TARGET_LOWERCASED=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
 # Remove TARGET from arguments list
 shift
@@ -69,14 +69,12 @@ build_platform() {
     xcodebuild docbuild -scheme $TARGET -derivedDataPath .build/docbuild -destination 'generic/platform='$PLATFORM;
 
     # Transform docs for static hosting
-    echo "Transforming $TARGET docs for $PLATFORM for static hosting..."
     $(xcrun --find docc) process-archive \
       transform-for-static-hosting .build/docbuild/Build/Products/$DEBUG_PATH/$TARGET.doccarchive \
       --output-path .build/docs-$PLATFORM \
       --hosting-base-path "$TARGET";
 
     # Inject a root redirect script on the root page
-    echo "Injecting redirect script..."
     echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > .build/docs-$PLATFORM/index.html;
 
     # Complete successfully
