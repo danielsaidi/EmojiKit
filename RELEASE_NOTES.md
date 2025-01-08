@@ -15,7 +15,8 @@ This version adds a new `recent` category and changes the `standard` category co
 
 ✨ Features
 
-* `EmojiCategory` has a new `recent` category.
+* `Emoji` has a new `registerUserSelection` function.
+* `EmojiCategory` has a new `recent` category, for the most recent emojis.
 * `EmojiCategory` has translations for `favorites` and `recent` categories.
 
 💡 Adjustments

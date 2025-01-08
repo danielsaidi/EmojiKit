@@ -17,10 +17,12 @@ import SwiftUI
 /// ``removeEmoji(_:from:)`` and ``resetEmojis(in:)`` static
 /// functions, which take a ``PersistedCategory`` type.
 ///
-/// > Important: Since EmojiKit doesn't have an algorithm to
-/// update the ``frequent`` category in a smart way as emoji
-/// values are used, the ``standard`` category collection is
-/// using the ``recent`` category by default.
+/// > Important: Since EmojiKit doesn't have a way to update
+/// the ``frequent`` category in a proper way, this category
+/// is updated like the ``recent`` category, by adding emoji
+/// values to the beginning of the list. You can however use
+/// the ``frequent`` category to implement a custom frequent
+/// algorithm and update the category accordingly.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
 
     case smileysAndPeople

@@ -79,6 +79,16 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 
 ## Transferable
 
-The ``Emoji`` type conforms to the `Transferable` protocol, which means that it can use many native features like drag & drop, sharing, etc.
+The ``Emoji`` type conforms to the `Transferable` protocol, which means that it can use native features like drag & drop, sharing, etc.
 
 Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emoji`` uniform type, to use these features.  
+
+
+
+## Automatic Category Updates
+
+The ``Emoji`` type has a ``Emoji/registerUserSelection()`` function that can be called whenever a user selects an emoji. This will update the ``EmojiCategory/recent`` and ``EmojiCategory/frequent`` categories accordingly.
+
+This function is automatically called by ``EmojiGrid``, so you don't need to call the function manually when you use the grid component.
+
+> Important: EmojiKit currently doesn't have an algoritm for frequency calculations, so this function will apply the same changes to both the recent and the frequent category. You can however use the ``EmojiCategory/frequent`` category to implement your own frequency logic.
