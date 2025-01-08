@@ -38,6 +38,7 @@ EmojiVersion(macOS: 11.1).version  // 13.0
 This lets you figure out exactly which version you can use for a certain OS and platform version. EmojiKit uses this information to make categories only return the emojis that are available to the current runtime.
 
 
+
 ## Version Information
 
 An emoji version defines in which OS versions it became available:

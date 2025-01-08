@@ -55,12 +55,7 @@ Emoji("😀").localizedName                // Grinning Face
 Emoji("😀").localizedName(in: .swedish)  // Leende Ansikte
 ```
 
-EmojiKit is currently localized in:
-
-* English
-* Swedish
-
-Anyone can contribute to provide support for more locales. See the `Resources` folder for information on how to localize emojis.
+EmojiKit is currently only localized in `English` and `Swedish`, but anyone can contribute to provide support for more locales. See the `Sources/EmojiKit/Resources` folder for information on how to localize emojis and categories.
 
 
 ## Skin tones
@@ -91,4 +86,4 @@ The ``Emoji`` type has a ``Emoji/registerUserSelection()`` function that can be 
 
 This function is automatically called by ``EmojiGrid``, so you don't need to call the function manually when you use the grid component.
 
-> Important: EmojiKit currently doesn't have an algoritm for frequency calculations, so this function will apply the same changes to both the recent and the frequent category. You can however use the ``EmojiCategory/frequent`` category to implement your own frequency logic.
+> Important: Since EmojiKit currently doesn't have an algoritm for frequency calculations, the ``EmojiCategory/frequent`` will currently be updated just like the ``EmojiCategory/recent`` category. You can however use the ``EmojiCategory/frequent`` category to implement your own frequency logic.
