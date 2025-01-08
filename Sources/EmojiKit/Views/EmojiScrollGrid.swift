@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
-public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
+public struct EmojiScrollGrid<SectionTitle: View, GridItem: View>: View {
     
     /// Create an emoji scroll grid.
     ///
@@ -29,7 +29,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - persistedCategory: A persisted category to append to when picking an emoji, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked, if any.
     ///   - categoryEmojis: An optional function that can determine which emojis to show for a certain category, by default all.
@@ -41,12 +40,11 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .standard,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        persistedCategory: EmojiCategory.PersistedCategory? = nil,
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
-        @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
-        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> ItemView
+        @ViewBuilder section: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
+        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> GridItem
     ) {
         let emojiCat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
         let emojiCategories: [EmojiCategory]? = emojis.isEmpty ? nil : [emojiCat]
@@ -55,7 +53,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
         self.emojis = emojis
         self.categories = searchCategories ?? emojiCategories ?? categories
         self.query = query
-        self.persistedCategory = persistedCategory
         self.geometryProxy = geometryProxy
         self.action = action
         self.categoryEmojis = categoryEmojis
@@ -68,12 +65,11 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
     private let emojis: [Emoji]
     private let categories: [EmojiCategory]
     private let query: String
-    private let persistedCategory: EmojiCategory.PersistedCategory?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
     private let categoryEmojis: (EmojiCategory) -> [Emoji]
-    private let section: (Emoji.GridSectionParameters) -> SectionView
-    private let item: (Emoji.GridItemParameters) -> ItemView
+    private let section: (Emoji.GridSectionTitleParameters) -> SectionTitle
+    private let item: (Emoji.GridItemParameters) -> GridItem
 
     @Binding
     private var selection: Emoji.GridSelection
@@ -91,7 +87,6 @@ public struct EmojiScrollGrid<ItemView: View, SectionView: View>: View {
                         categories: categories,
                         query: query,
                         selection: $selection,
-                        persistedCategory: persistedCategory,
                         geometryProxy: geo,
                         action: action,
                         categoryEmojis: categoryEmojis,

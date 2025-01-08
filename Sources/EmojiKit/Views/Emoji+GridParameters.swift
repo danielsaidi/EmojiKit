@@ -8,7 +8,7 @@
 
 public extension Emoji {
 
-    /// This struct defines item view builder parameters.
+    /// This struct defines grid item builder parameters.
     struct GridItemParameters {
 
         /// The emoji to present.
@@ -30,8 +30,8 @@ public extension Emoji {
         public let view: Emoji.GridItem
     }
 
-    /// This struct defines section view builder parameters.
-    struct GridSectionParameters {
+    /// This struct defines section title builder parameters.
+    struct GridSectionTitleParameters {
         
         /// The category that is to be presented.
         public let category: EmojiCategory

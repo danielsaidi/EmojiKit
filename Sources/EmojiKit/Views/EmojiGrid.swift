@@ -18,7 +18,7 @@ import SwiftUI
 ///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
-public struct EmojiGrid<ItemView: View, SectionView: View>: View {
+public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     
     /// Create an emoji grid.
     ///
@@ -31,7 +31,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     ///   - categories: The categories to list, by default `.standard`.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
-    ///   - persistedCategory: A persisted category to append to when picking an emoji, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked, if any.
     ///   - categoryEmojis: An optional function that can customize emojis for a certain category, if any.
@@ -43,12 +42,11 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         categories: [EmojiCategory] = .standard,
         query: String = "",
         selection: Binding<Emoji.GridSelection> = .constant(.init()),
-        persistedCategory: EmojiCategory.PersistedCategory? = nil,
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
-        @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionView,
-        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> ItemView
+        @ViewBuilder section: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
+        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> GridItem
     ) {
         let emojiCategory = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
         let categories: [EmojiCategory] = emojis.isEmpty ? categories : [emojiCategory]
@@ -59,7 +57,6 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
         self.axis = axis
         self.categories = filteredCategories
         self.query = query
-        self.persistedCategory = persistedCategory
         self.geometryProxy = geometryProxy
         self.action = action
         self.categoryEmojis = categoryEmojis
@@ -71,12 +68,11 @@ public struct EmojiGrid<ItemView: View, SectionView: View>: View {
     private let axis: Axis.Set
     private let categories: [EmojiCategory]
     private let query: String
-    private let persistedCategory: EmojiCategory.PersistedCategory?
     private let geometryProxy: GeometryProxy?
     private let action: (Emoji) -> Void
     private let categoryEmojis: (EmojiCategory) -> [Emoji]
-    private let section: (Emoji.GridSectionParameters) -> SectionView
-    private let item: (Emoji.GridItemParameters) -> ItemView
+    private let section: (Emoji.GridSectionTitleParameters) -> SectionTitle
+    private let item: (Emoji.GridItemParameters) -> GridItem
 
     @Binding var selection: Emoji.GridSelection
 
@@ -147,8 +143,7 @@ private extension EmojiGrid {
 
     func pickEmoji(_ emoji: Emoji) {
         action(emoji)
-        guard let cat = persistedCategory else { return }
-        EmojiCategory.addEmoji(emoji, to: cat)
+        emoji.registerUserSelection()
     }
 
     func pickSelectedEmoji() -> Bool {
@@ -404,6 +399,7 @@ private extension EmojiGrid {
             ScrollViewReader { proxy in
                 EmojiScrollGrid(
                     axis: axis,
+                    categories: [.recent] + .standard,
                     query: query,
                     selection: $selection,
                     categoryEmojis: { Array($0.emojis.prefix(500)) },
@@ -424,7 +420,6 @@ private extension EmojiGrid {
                 VStack {
                     TextField("Search", text: $query)
                         .padding(.horizontal, 3)
-                        .textFieldStyle(.roundedBorder)
                     Divider()
                     grid(axis.axisSet)
                 }
