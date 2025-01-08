@@ -8,10 +8,12 @@
 
 import SwiftUI
 
-/// This view can be used to list emojis in a grid.
+/// This grid can be used to list emojis or emoji categories
+/// in a vertical or horizontal grid.
 ///
-/// The grid will either render a single list of emojis or a
-/// list of emoji categories.
+/// The grid supports keyboard navigation, and can customize
+/// the view for both section titles and grid items. You can
+/// trigger a custom `action` when the user selects an emoji.
 ///
 /// You can use an ``EmojiScrollGrid`` to wrap the grid in a
 /// `ScrollView` that automatically scrolls to the selection.
@@ -28,7 +30,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: A custom emoji collection to list, if any.
-    ///   - categories: The categories to list, by default `.standard`.
+    ///   - categories: The categories to list, by default ``EmojiCategory/recent`` and ``EmojiCategory/standard``.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
@@ -38,18 +40,21 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///   - gridItem: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
-        emojis: [Emoji] = [],
-        categories: [EmojiCategory] = .standard,
-        query: String = "",
-        selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        emojis: [Emoji]? = nil,
+        categories: [EmojiCategory]? = nil,
+        query: String? = nil,
+        selection: Binding<Emoji.GridSelection>? = nil,
         geometryProxy: GeometryProxy? = nil,
-        action: @escaping (Emoji) -> Void = { _ in },
-        categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
+        action: ((Emoji) -> Void)? = nil,
+        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
         @ViewBuilder sectionTitle: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
         @ViewBuilder gridItem: @escaping (Emoji.GridItemParameters) -> GridItem
     ) {
+        let emojis = emojis ?? []
         let emojiCategory = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
-        let categories: [EmojiCategory] = emojis.isEmpty ? categories : [emojiCategory]
+        let defaultCategories: [EmojiCategory] = [.recent] + .standard
+        let categories = emojis.isEmpty ? defaultCategories : [emojiCategory]
+        let query = query ?? ""
         let searchCategories: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
         let cats = searchCategories ?? categories
         let filteredCategories = cats.filter { !$0.emojis.isEmpty }
@@ -58,11 +63,11 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         self.categories = filteredCategories
         self.query = query
         self.geometryProxy = geometryProxy
-        self.action = action
-        self.categoryEmojis = categoryEmojis
+        self.action = action ?? { _ in }
+        self.categoryEmojis = categoryEmojis ?? { $0.emojis }
         self.section = sectionTitle
         self.item = gridItem
-        self._selection = selection
+        self._selection = selection ?? .constant(.init())
     }
     
     private let axis: Axis.Set
@@ -76,11 +81,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
 
     @Binding var selection: Emoji.GridSelection
 
-    @Environment(\.emojiGridStyle)
-    private var style
-
-    @Environment(\.layoutDirection)
-    private var layoutDirection
+    @Environment(\.emojiGridStyle) var style
+    @Environment(\.layoutDirection) var layoutDirection
 
     @State var popoverSelection: Emoji.GridSelection?
 

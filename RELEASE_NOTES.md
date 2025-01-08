@@ -11,11 +11,7 @@ EmojiKit tries to honor semantic versioning:
 
 ## 1.3
 
-This version adds a new `recent` category and changes the `standard` category collection.
-
-### Important
-
-Since `EmojiCategory` no longer includes `recent` or `frequent` categories in the `standard` category list, you must manually add any such additional list to the `EmojiGrid`.  
+This version adds a new `recent` category and changes the `standard` category collection.  
 
 ✨ Features
 
@@ -27,6 +23,7 @@ Since `EmojiCategory` no longer includes `recent` or `frequent` categories in th
 💡 Adjustments
 
 * `EmojiCategory.standard` no longer includes `.recent` or `.frequent` by default.
+* `EmojiGrid` uses optional init parameters with `nil` default values, to reduce code duplication.
 
 ### 🗑️ Deprecations
 

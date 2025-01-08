@@ -8,11 +8,15 @@
 
 import SwiftUI
 
-/// This scroll grid wraps an ``EmojiGrid`` in a `ScrollView`
-/// and will automatically scroll to the current `selection`.
+/// This grid can be used to list emojis or emoji categories
+/// in a vertically or horizontally scrolling grid.
 ///
-/// The grid will either render a single list of emojis or a
-/// list of emoji categories.
+/// The grid supports keyboard navigation, and can customize
+/// the view for both section titles and grid items. You can
+/// trigger a custom `action` when the user selects an emoji.
+///
+/// This grid will also automatically scroll to show the new
+/// `selection` as it changes.
 ///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
@@ -26,7 +30,7 @@ public struct EmojiScrollGrid<SectionTitle: View, GridItem: View>: View {
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: A custom emoji collection to list, if any.
-    ///   - categories: The categories to list, by default `.standard`.
+    ///   - categories: The categories to list, by default ``EmojiCategory/recent`` and ``EmojiCategory/standard``.
     ///   - query: The search query to apply, if any.
     ///   - selection: The current grid selection, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
@@ -36,46 +40,41 @@ public struct EmojiScrollGrid<SectionTitle: View, GridItem: View>: View {
     ///   - gridItem: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
-        emojis: [Emoji] = [],
-        categories: [EmojiCategory] = .standard,
-        query: String = "",
-        selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        emojis: [Emoji]? = nil,
+        categories: [EmojiCategory]? = nil,
+        query: String? = nil,
+        selection: Binding<Emoji.GridSelection>? = nil,
         geometryProxy: GeometryProxy? = nil,
-        action: @escaping (Emoji) -> Void = { _ in },
-        categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
+        action: ((Emoji) -> Void)? = nil,
+        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
         @ViewBuilder sectionTitle: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
         @ViewBuilder gridItem: @escaping (Emoji.GridItemParameters) -> GridItem
     ) {
-        let emojiCat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
-        let emojiCategories: [EmojiCategory]? = emojis.isEmpty ? nil : [emojiCat]
-        let searchCategories: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
         self.axis = axis
         self.emojis = emojis
-        self.categories = searchCategories ?? emojiCategories ?? categories
+        self.categories = categories
         self.query = query
         self.geometryProxy = geometryProxy
         self.action = action
         self.categoryEmojis = categoryEmojis
         self.sectionTitle = sectionTitle
         self.gridItem = gridItem
-        self._selection = selection
+        self._selection = selection ?? .constant(.init())
     }
 
     private let axis: Axis.Set
-    private let emojis: [Emoji]
-    private let categories: [EmojiCategory]
-    private let query: String
+    private let emojis: [Emoji]?
+    private let categories: [EmojiCategory]?
+    private let query: String?
     private let geometryProxy: GeometryProxy?
-    private let action: (Emoji) -> Void
-    private let categoryEmojis: (EmojiCategory) -> [Emoji]
+    private let action: ((Emoji) -> Void)?
+    private let categoryEmojis: ((EmojiCategory) -> [Emoji])?
     private let sectionTitle: (Emoji.GridSectionTitleParameters) -> SectionTitle
     private let gridItem: (Emoji.GridItemParameters) -> GridItem
 
-    @Binding
-    private var selection: Emoji.GridSelection
+    @Binding var selection: Emoji.GridSelection
     
-    @Environment(\.emojiGridStyle)
-    private var style
+    @Environment(\.emojiGridStyle) var style
     
     public var body: some View {
         GeometryReader { geo in
