@@ -10,9 +10,19 @@ import SwiftUI
 
 /// This enum defines the standard emoji categories, as well
 /// as their emojis.
+///
+/// The ``frequent``, ``favorites``, and ``recent`` category
+/// cases are special cases, where the category's emojis can
+/// be changed with the various ``addEmoji(_:to:maxCount:)``,
+/// ``removeEmoji(_:from:)`` and ``resetEmojis(in:)`` static
+/// functions, which take a ``PersistedCategory`` type.
+///
+/// > Important: Since EmojiKit doesn't have an algorithm to
+/// update the ``frequent`` category in a smart way as emoji
+/// values are used, the ``standard`` category collection is
+/// using the ``recent`` category by default.
 public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifiable {
 
-    case frequent
     case smileysAndPeople
     case animalsAndNature
     case foodAndDrink
@@ -21,8 +31,10 @@ public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifia
     case objects
     case symbols
     case flags
-
+    
     case favorites
+    case frequent
+    case recent
 
     case custom(
         id: String,
@@ -75,6 +87,8 @@ public extension EmojiCategory {
     }
 
     /// An ordered list with all standard categories.
+    ///
+    ///
     static var standard: [EmojiCategory] {
         [.frequent] + standardWithoutFrequent
     }
@@ -148,7 +162,6 @@ public extension EmojiCategory {
     /// The category's unique identifier.
     var id: String {
         switch self {
-        case .frequent: "frequent"
         case .smileysAndPeople: "smileysAndPeople"
         case .animalsAndNature: "animalsAndNature"
         case .foodAndDrink: "foodAndDrink"
@@ -159,6 +172,8 @@ public extension EmojiCategory {
         case .flags: "flags"
 
         case .favorites: "favorites"
+        case .frequent: "frequent"
+        case .recent: "recent"
 
         case .custom(let id, _, _, _): id
         }
@@ -167,7 +182,6 @@ public extension EmojiCategory {
     /// An emoji-based icon that represents the category.
     var emojiIcon: String {
         switch self {
-        case .frequent: "🕘"
         case .smileysAndPeople: "😀"
         case .animalsAndNature: "🐻"
         case .foodAndDrink: "🍔"
@@ -178,6 +192,8 @@ public extension EmojiCategory {
         case .flags: "🏳️"
 
         case .favorites: "❤️"
+        case .frequent: "🕘"
+        case .recent: "🕘"
 
         case .custom: "-"
         }
@@ -186,7 +202,6 @@ public extension EmojiCategory {
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
         switch self {
-        case .frequent: Self.frequentEmojis
         case .smileysAndPeople: Self.emojisForSmileysAndPeople
         case .animalsAndNature: Self.emojisForAnimalsAndNature
         case .foodAndDrink: Self.emojisForFoodAndDrink
@@ -197,6 +212,8 @@ public extension EmojiCategory {
         case .flags: Self.emojisForFlags
 
         case .favorites: Self.favoriteEmojis
+        case .frequent: Self.frequentEmojis
+        case .recent: Self.recentEmojis
 
         case .custom(_, _, let emojis, _): emojis
         }

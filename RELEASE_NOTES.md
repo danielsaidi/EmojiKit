@@ -9,6 +9,15 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.3
+
+✨ Features
+
+* `EmojiCategory` has a new `recent` category.
+* `EmojiCategory` has translations for `favorites` and `recent` categories.
+
+
+
 ## 1.2.1 - 1.2.3
 
 ✨ Features

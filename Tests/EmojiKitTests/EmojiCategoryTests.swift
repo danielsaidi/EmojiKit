@@ -54,7 +54,6 @@ class EmojisCategoryTests: XCTestCase {
     }
     
     func testHasEmojiBasedIcon() throws {
-        XCTAssertEqual(emojiIcon(for: .frequent), "🕘")
         XCTAssertEqual(emojiIcon(for: .smileysAndPeople), "😀")
         XCTAssertEqual(emojiIcon(for: .animalsAndNature), "🐻")
         XCTAssertEqual(emojiIcon(for: .foodAndDrink), "🍔")
@@ -63,6 +62,10 @@ class EmojisCategoryTests: XCTestCase {
         XCTAssertEqual(emojiIcon(for: .objects), "💡")
         XCTAssertEqual(emojiIcon(for: .symbols), "💱")
         XCTAssertEqual(emojiIcon(for: .flags), "🏳️")
+        
+        XCTAssertEqual(emojiIcon(for: .favorites), "❤️")
+        XCTAssertEqual(emojiIcon(for: .frequent), "🕘")
+        XCTAssertEqual(emojiIcon(for: .recent), "🕘")
     }
 
     func testCanGetAndSetFavoriteCategoryEmojis() {
@@ -71,12 +74,19 @@ class EmojisCategoryTests: XCTestCase {
         EmojiCategory.favoriteEmojis = emojis
         XCTAssertEqual(EmojiCategory.favorites.emojis, emojis)
     }
-
+    
     func testCanGetAndSetFrequentCategoryEmojis() {
         XCTAssertEqual(EmojiCategory.frequent.emojis, [])
         let emojis: [Emoji] = [.init("😀")]
         EmojiCategory.frequentEmojis = emojis
         XCTAssertEqual(EmojiCategory.frequent.emojis, emojis)
+    }
+    
+    func testCanGetAndSetRecentCategoryEmojis() {
+        XCTAssertEqual(EmojiCategory.recent.emojis, [])
+        let emojis: [Emoji] = [.init("😀")]
+        EmojiCategory.recentEmojis = emojis
+        XCTAssertEqual(EmojiCategory.recent.emojis, emojis)
     }
 
     func testCanAddEmojisToPersistedCategory() {
