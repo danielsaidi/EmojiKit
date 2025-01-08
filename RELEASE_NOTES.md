@@ -18,7 +18,8 @@ EmojiKit tries to honor semantic versioning:
 
 ### 🗑️ Deprecations
 
-* Given how customizable categories are, `EmojiCategory` will no longer implement `CaseIterable`.
+* `EmojiCategory` no longer implements `CaseIterable`, since categories are not a definitive list.
+* `EmojiCollection.standardWithoutFrequent` is renamed to `EmojiCollection.standardWithoutRecent`.
 
 
 

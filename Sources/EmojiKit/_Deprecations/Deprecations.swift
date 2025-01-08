@@ -27,7 +27,10 @@ public extension EmojiCategory {
             .symbols,
             .flags
         ]
-    }    
+    }
+    
+    @available(*, deprecated, renamed: "standardWithoutRecent")
+    static var standardWithoutFrequent: [EmojiCategory] { standardWithoutRecent }
 }
 
 public extension Collection where Element == Emoji {

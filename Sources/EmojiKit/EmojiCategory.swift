@@ -71,13 +71,16 @@ public extension EmojiCategory {
 public extension EmojiCategory {
 
     /// An ordered list with all standard categories.
+    ///
+    /// This list also contains the ``recent`` category. Use
+    /// ``standardWithoutRecent`` to omit this category.
     static var standard: [EmojiCategory] {
-        [.frequent] + standardWithoutFrequent
+        [.recent] + standardWithoutRecent
     }
 
-    /// An ordered list with all standard categories, but no
-    /// frequent category.
-    static var standardWithoutFrequent: [EmojiCategory] {
+    /// An ordered list with all standard categories without
+    /// the ``recent`` category.
+    static var standardWithoutRecent: [EmojiCategory] {
         [
             .smileysAndPeople,
             .animalsAndNature,
