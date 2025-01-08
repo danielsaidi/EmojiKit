@@ -113,37 +113,41 @@ public struct EmojiScrollGrid<SectionTitle: View, GridItem: View>: View {
     
     struct Preview: View {
         
-        @State
-        var selection = Emoji.GridSelection()
+        @State var query: String = ""
         
-        func grid(
-            _ axis: Axis.Set
-        ) -> some View {
-            EmojiScrollGrid(
-                axis: axis,
-                selection: $selection,
-                categoryEmojis: { Array($0.emojis.prefix(4)) },
-                sectionTitle: { $0.view },
-                gridItem: { $0.view }
-            )
-        }
-        
-        func select(
-            _ emoji: Emoji,
-            cat: EmojiCategory
-        ) {
-            selection = .init(emoji: emoji, category: cat)
-        }
+        @State var selection = Emoji.GridSelection(
+            emoji: .init("😀"),
+            category: .smileysAndPeople
+        )
         
         var body: some View {
-            VStack(spacing: 0) {
-                grid(.vertical)
+            VStack {
+                TextField("Search", text: $query)
+                    .padding(.horizontal, 3)
+                
                 Divider()
-                grid(.horizontal)
+                
+                ScrollViewReader { proxy in
+                    EmojiScrollGrid(
+                        axis: .vertical,
+                        categories: [.recent] + .standard,
+                        query: query,
+                        selection: $selection,
+                        categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },
+                        sectionTitle: { $0.view },
+                        gridItem: { $0.view }
+                    )
+                    .emojiGridStyle(.small)
+                    .onAppear {
+                        proxy.scrollTo(selection)
+                    }
+                    .onChange(of: selection) { selection in
+                        proxy.scrollTo(selection)
+                    }
+                }
             }
         }
     }
     
     return Preview()
-        // .emojiGridStyle(.extraLarge)
 }

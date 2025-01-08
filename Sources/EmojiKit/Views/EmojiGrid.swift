@@ -380,56 +380,36 @@ private extension EmojiGrid {
     
     struct Preview: View {
         
-        enum GridAxis {
-            case horizontal
-            case vertical
-            
-            var axisSet: Axis.Set {
-                self == .horizontal ? .horizontal : .vertical
-            }
-        }
+        @State var query: String = ""
         
-        @State var axis = GridAxis.vertical
-        @State var query = ""
-        @State var selection = Emoji.GridSelection(emoji: .init("🐶"), category: .animalsAndNature)
-
-        func grid(
-            _ axis: Axis.Set
-        ) -> some View {
-            ScrollViewReader { proxy in
-                EmojiScrollGrid(
-                    axis: axis,
-                    categories: [.recent] + .standard,
-                    query: query,
-                    selection: $selection,
-                    categoryEmojis: { Array($0.emojis.prefix(500)) },
-                    sectionTitle: { $0.view },
-                    gridItem: { $0.view }
-                )
-                .onAppear {
-                    proxy.scrollTo(selection)
-                }
-                .onChange(of: selection) { selection in
-                    proxy.scrollTo(selection)
-                }
-            }
-        }
+        @State var selection = Emoji.GridSelection(
+            emoji: .init("😀"),
+            category: .smileysAndPeople
+        )
         
         var body: some View {
-            NavigationView {
-                VStack {
-                    TextField("Search", text: $query)
-                        .padding(.horizontal, 3)
-                    Divider()
-                    grid(axis.axisSet)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Picker("Axis", selection: $axis) {
-                            Text("Vertical").tag(GridAxis.vertical)
-                            Text("Horizontal").tag(GridAxis.horizontal)
-                        }
-                        .pickerStyle(.segmented)
+            VStack {
+                TextField("Search", text: $query)
+                    .padding(.horizontal, 3)
+                
+                Divider()
+                
+                ScrollViewReader { proxy in
+                    EmojiScrollGrid(
+                        axis: .vertical,
+                        categories: [.recent] + .standard,
+                        query: query,
+                        selection: $selection,
+                        categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },
+                        sectionTitle: { $0.view },
+                        gridItem: { $0.view }
+                    )
+                    .emojiGridStyle(.small)
+                    .onAppear {
+                        proxy.scrollTo(selection)
+                    }
+                    .onChange(of: selection) { selection in
+                        proxy.scrollTo(selection)
                     }
                 }
             }

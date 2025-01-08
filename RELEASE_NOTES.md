@@ -13,6 +13,10 @@ EmojiKit tries to honor semantic versioning:
 
 This version adds a new `recent` category and changes the `standard` category collection.
 
+### Important
+
+Since `EmojiCategory` no longer includes `recent` or `frequent` categories in the `standard` category list, you must manually add any such additional list to the `EmojiGrid`.  
+
 ✨ Features
 
 * `Emoji` has a new `registerUserSelection` function.
