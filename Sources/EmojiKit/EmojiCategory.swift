@@ -21,7 +21,7 @@ import SwiftUI
 /// update the ``frequent`` category in a smart way as emoji
 /// values are used, the ``standard`` category collection is
 /// using the ``recent`` category by default.
-public enum EmojiCategory: CaseIterable, Codable, Equatable, Hashable, Identifiable {
+public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
 
     case smileysAndPeople
     case animalsAndNature
@@ -71,24 +71,6 @@ public extension EmojiCategory {
 public extension EmojiCategory {
 
     /// An ordered list with all standard categories.
-    static var allCases: [EmojiCategory] {
-        [
-            .frequent,
-            .smileysAndPeople,
-            .animalsAndNature,
-            .foodAndDrink,
-            .activity,
-            .travelAndPlaces,
-            .objects,
-            .symbols,
-            .flags,
-            .favorites
-        ]
-    }
-
-    /// An ordered list with all standard categories.
-    ///
-    ///
     static var standard: [EmojiCategory] {
         [.frequent] + standardWithoutFrequent
     }

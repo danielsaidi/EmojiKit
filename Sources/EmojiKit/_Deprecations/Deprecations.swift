@@ -11,6 +11,25 @@ public extension Emoji {
     }
 }
 
+extension EmojiCategory: CaseIterable {}
+
+public extension EmojiCategory {
+    
+    @available(*, deprecated, message: "EmojiCategory will no longer implement CaseIterable")
+    static var allCases: [EmojiCategory] {
+        [
+            .smileysAndPeople,
+            .animalsAndNature,
+            .foodAndDrink,
+            .activity,
+            .travelAndPlaces,
+            .objects,
+            .symbols,
+            .flags
+        ]
+    }    
+}
+
 public extension Collection where Element == Emoji {
 
     @available(*, deprecated, renamed: "matches(_:in:)")

@@ -16,6 +16,10 @@ EmojiKit tries to honor semantic versioning:
 * `EmojiCategory` has a new `recent` category.
 * `EmojiCategory` has translations for `favorites` and `recent` categories.
 
+### 🗑️ Deprecations
+
+* Given how customizable categories are, `EmojiCategory` will no longer implement `CaseIterable`.
+
 
 
 ## 1.2.1 - 1.2.3
