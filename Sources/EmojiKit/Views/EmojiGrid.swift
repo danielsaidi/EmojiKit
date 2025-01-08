@@ -384,12 +384,19 @@ private extension EmojiGrid {
 #Preview {
     
     struct Preview: View {
-
-        @State
-        var query = ""
-
-        @State
-        var selection = Emoji.GridSelection(emoji: .init("🐶"), category: .animalsAndNature)
+        
+        enum GridAxis {
+            case horizontal
+            case vertical
+            
+            var axisSet: Axis.Set {
+                self == .horizontal ? .horizontal : .vertical
+            }
+        }
+        
+        @State var axis = GridAxis.vertical
+        @State var query = ""
+        @State var selection = Emoji.GridSelection(emoji: .init("🐶"), category: .animalsAndNature)
 
         func grid(
             _ axis: Axis.Set
@@ -413,16 +420,22 @@ private extension EmojiGrid {
         }
         
         var body: some View {
-            ScrollView {
-                VStack(spacing: 0) {
+            NavigationView {
+                VStack {
                     TextField("Search", text: $query)
-                        .padding()
+                        .padding(.horizontal, 3)
+                        .textFieldStyle(.roundedBorder)
                     Divider()
-                    grid(.vertical)
-                        .frame(height: 300)
-                    Divider()
-                    grid(.horizontal)
-                        .frame(height: 300)
+                    grid(axis.axisSet)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Picker("Axis", selection: $axis) {
+                            Text("Vertical").tag(GridAxis.vertical)
+                            Text("Horizontal").tag(GridAxis.horizontal)
+                        }
+                        .pickerStyle(.segmented)
+                    }
                 }
             }
         }
