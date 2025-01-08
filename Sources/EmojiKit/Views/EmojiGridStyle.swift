@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// This style can be used to modify the visual style of the
-/// ``EmojiGrid`` and ``EmojiScrollGrid`` views.
+/// ``EmojiGrid`` and ``EmojiGridScrollView``.
 ///
 /// You can apply the style by using the view style modifier
 /// ``SwiftUICore/View/emojiGridStyle(_:)``.

@@ -18,7 +18,7 @@ This version adds a new `recent` category and changes the `standard` category co
 * `Emoji` has a new `registerUserSelection` function.
 * `EmojiCategory` has a new `recent` category, for the most recent emojis.
 * `EmojiCategory` has translations for `favorites` and `recent` categories.
-* `EmojiGrid` will automatically register picked emojis and update the categories.
+* `EmojiGrid` automatically registers emojis and updates affected categories.
 
 💡 Adjustments
 
@@ -30,6 +30,7 @@ This version adds a new `recent` category and changes the `standard` category co
 * `EmojiCategory` no longer implements `CaseIterable`, since categories are not a definitive list.
 * `EmojiCollection.standardWithoutFrequent` is renamed to `EmojiCollection.standardWithoutRecent`.
 * `EmojiGrid` no longer takes a persisted category in the initializer and renames some init parameters.
+* `EmojiScrollGrid` has been renamed to `EmojiGridScrollView`.
 
 
 

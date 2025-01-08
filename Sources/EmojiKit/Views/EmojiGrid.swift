@@ -14,9 +14,11 @@ import SwiftUI
 /// The grid supports keyboard navigation, and can customize
 /// the view for both section titles and grid items. You can
 /// trigger a custom `action` when the user selects an emoji.
+/// See the ``<doc:Views-Article>`` article for more info.
 ///
-/// You can use an ``EmojiScrollGrid`` to wrap the grid in a
-/// `ScrollView` that automatically scrolls to the selection.
+/// You can use an ``EmojiGridScrollView`` to wrap this grid
+/// in a `ScrollView` that applies proper paddings, and that
+/// automatically scrolls to the `selection` when is changes.
 ///
 /// See the <doc:Views-Article> article for full information
 /// on how to use these grids.
@@ -397,9 +399,9 @@ private extension EmojiGrid {
                 Divider()
                 
                 ScrollViewReader { proxy in
-                    EmojiScrollGrid(
+                    EmojiGridScrollView(
                         axis: .vertical,
-                        categories: [.recent] + .standard,
+                        // categories: [.recent] + .standard,
                         query: query,
                         selection: $selection,
                         categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },

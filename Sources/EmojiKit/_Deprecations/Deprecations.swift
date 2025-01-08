@@ -37,6 +37,9 @@ public extension EmojiCategory {
     static var standardWithoutFrequent: [EmojiCategory] { standard }
 }
 
+@available(*, deprecated, renamed: "EmojiGridScrollView")
+public typealias EmojiScrollGrid = EmojiGridScrollView
+
 public extension EmojiGrid {
     
     @available(*, deprecated, message: "The emoji grid no longer takes a persisted category")
@@ -95,7 +98,7 @@ public extension EmojiGrid {
     }
 }
 
-public extension EmojiScrollGrid {
+public extension EmojiGridScrollView {
     
     @available(*, deprecated, message: "The emoji grid no longer takes a persisted category")
     init(

@@ -31,7 +31,7 @@ EmojiKit has an ``EmojiGrid`` that can be used to list and pick emojis in a hori
     }
 }
 
-You can also use an ``EmojiScrollGrid`` to wrap an ``EmojiGrid`` in a scroll view that automatically scrolls to the current selection.
+You can use the ``EmojiGridScrollView`` to wrap the ``EmojiGrid`` in a scroll view that automatically scrolls to the current selection.
 
 
 ### How to list emojis and categories
@@ -70,7 +70,7 @@ Key                  | Description
 
 ### How to scroll to a certain emoji
 
-The ``EmojiScrollGrid`` will automatically scroll to the current `selection`, so you just have to update the binding value that you provide to the grid to make it scroll to that emoji.
+The ``EmojiGridScrollView`` will automatically scroll to the current `selection`, so you just have to update the binding value that you provide to the grid to make it scroll to that specific category and emoji.
 
 If you use a custom `ScrollView`, you must use the emoji's ``Emoji/id(in:)`` property to scroll to a certain emoji when the grid has multiple emoji categories, since the unique emoji IDs will then be adjusted for each category.
 

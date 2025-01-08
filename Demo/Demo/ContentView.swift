@@ -17,16 +17,15 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            EmojiScrollGrid(
+            EmojiGridScrollView(
                 axis: .vertical,
-                categories: .standard,
+                // categories: .standard,
                 query: query,
                 selection: $selection,
-                persistedCategory: .frequent,
                 action: { print($0) },
-                section: { $0.view },
-                item: { $0.view }
-                // item: { $0.view.draggable($0.emoji) }
+                sectionTitle: { $0.view },
+                gridItem: { $0.view }
+                // gridItem: { $0.view.draggable($0.emoji) }
             )
             .searchable(text: $query)
         }
