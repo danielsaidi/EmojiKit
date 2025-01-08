@@ -34,8 +34,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked, if any.
     ///   - categoryEmojis: An optional function that can customize emojis for a certain category, if any.
-    ///   - section: A grid section title view builder.
-    ///   - item: A grid item view builder.
+    ///   - sectionTitle: A grid section title view builder.
+    ///   - gridItem: A grid item view builder.
     public init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
@@ -45,8 +45,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         geometryProxy: GeometryProxy? = nil,
         action: @escaping (Emoji) -> Void = { _ in },
         categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
-        @ViewBuilder section: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
-        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> GridItem
+        @ViewBuilder sectionTitle: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
+        @ViewBuilder gridItem: @escaping (Emoji.GridItemParameters) -> GridItem
     ) {
         let emojiCategory = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
         let categories: [EmojiCategory] = emojis.isEmpty ? categories : [emojiCategory]
@@ -60,8 +60,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         self.geometryProxy = geometryProxy
         self.action = action
         self.categoryEmojis = categoryEmojis
-        self.section = section
-        self.item = item
+        self.section = sectionTitle
+        self.item = gridItem
         self._selection = selection
     }
     
@@ -403,8 +403,8 @@ private extension EmojiGrid {
                     query: query,
                     selection: $selection,
                     categoryEmojis: { Array($0.emojis.prefix(500)) },
-                    section: { $0.view },
-                    item: { $0.view }
+                    sectionTitle: { $0.view },
+                    gridItem: { $0.view }
                 )
                 .onAppear {
                     proxy.scrollTo(selection)

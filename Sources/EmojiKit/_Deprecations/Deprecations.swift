@@ -66,6 +66,33 @@ public extension EmojiGrid {
             item: item
         )
     }
+    
+    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem")
+    init(
+        axis: Axis.Set = .vertical,
+        emojis: [Emoji] = [],
+        categories: [EmojiCategory] = .standard,
+        query: String = "",
+        selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        geometryProxy: GeometryProxy? = nil,
+        action: @escaping (Emoji) -> Void = { _ in },
+        categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
+        @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionTitle,
+        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> GridItem
+    ) {
+        self.init(
+            axis: axis,
+            emojis: emojis,
+            categories: categories,
+            query: query,
+            selection: selection,
+            geometryProxy: geometryProxy,
+            action: action,
+            categoryEmojis: categoryEmojis,
+            sectionTitle: section,
+            gridItem: item
+        )
+    }
 }
 
 public extension EmojiScrollGrid {
@@ -95,6 +122,33 @@ public extension EmojiScrollGrid {
             categoryEmojis: categoryEmojis,
             section: section,
             item: item
+        )
+    }
+    
+    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem")
+    init(
+        axis: Axis.Set = .vertical,
+        emojis: [Emoji] = [],
+        categories: [EmojiCategory] = .standard,
+        query: String = "",
+        selection: Binding<Emoji.GridSelection> = .constant(.init()),
+        geometryProxy: GeometryProxy? = nil,
+        action: @escaping (Emoji) -> Void = { _ in },
+        categoryEmojis: @escaping (EmojiCategory) -> [Emoji] = { $0.emojis },
+        @ViewBuilder section: @escaping (Emoji.GridSectionParameters) -> SectionTitle,
+        @ViewBuilder item: @escaping (Emoji.GridItemParameters) -> GridItem
+    ) {
+        self.init(
+            axis: axis,
+            emojis: emojis,
+            categories: categories,
+            query: query,
+            selection: selection,
+            geometryProxy: geometryProxy,
+            action: action,
+            categoryEmojis: categoryEmojis,
+            sectionTitle: section,
+            gridItem: item
         )
     }
 }
