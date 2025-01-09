@@ -102,12 +102,12 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
                 .onKeyPress {
                     var result: Bool
                     switch $0.key {
-                    case .downArrow: result = handleDirection(.down)
-                    case .leftArrow: result = handleDirection(.left)
+                    case .downArrow: result = handleArrowKeyDirection(.down)
+                    case .leftArrow: result = handleArrowKeyDirection(.left)
                     case .escape: result = handleEscape()
                     case .return: result = handleReturn($0)
-                    case .rightArrow: result = handleDirection(.right)
-                    case .upArrow: result = handleDirection(.up)
+                    case .rightArrow: result = handleArrowKeyDirection(.right)
+                    case .upArrow: result = handleArrowKeyDirection(.up)
                     default: result = false
                     }
                     return result ? .handled : .ignored
@@ -126,7 +126,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
 
 private extension EmojiGrid {
 
-    func handleDirection(_ direction: Emoji.GridDirection) -> Bool {
+    func handleArrowKeyDirection(_ direction: Emoji.GridDirection) -> Bool {
         selectEmoji(with: direction)
         return true
     }
@@ -179,8 +179,8 @@ private extension EmojiGrid {
         with direction: Emoji.GridDirection
     ) {
         guard let geo = geometryProxy else { return }
-        let layoutDirection = direction.transform(for: layoutDirection)
-        let navDirection = layoutDirection.navigationDirection(for: axis)
+        let direction = direction.transform(for: layoutDirection)
+        let navDirection = direction.navigationDirection(for: axis)
         if selection.isEmpty { return selectFirstCategory() }
         guard
             let category = selection.category,
@@ -197,7 +197,7 @@ private extension EmojiGrid {
             style: style
         )
 
-        let newIndex = layoutDirection.destinationIndex(
+        let newIndex = direction.destinationIndex(
             for: axis,
             currentIndex: index,
             itemsPerRow: itemsPerRow

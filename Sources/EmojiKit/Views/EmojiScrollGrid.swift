@@ -93,7 +93,6 @@ public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
                         sectionTitle: sectionTitle,
                         gridItem: gridItem
                     )
-                    .padding(style.padding)
                 }
                 .onAppear {
                     Task {
