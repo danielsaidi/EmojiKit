@@ -9,6 +9,49 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.3.1
+
+This version fixes some bugs and adjusts the grid style accordingly.  
+
+💡 Adjustments
+
+* `Emoji.GridStyle` increases the default padding, after fixing the padding bug.
+* The `.firstIndex(of:)` array extension no longer uses neutral skin tone as ID.
+
+### 🐛 Bug Fixes
+
+* This update removes an additional padding that was applied by the scroll grid.
+* This fixes a random arrow key bug that could cause invalid up/down navigation.
+* The first index adjustment fixes invalid arrow key navigation for some emojis.
+
+
+
+
+## 1.3
+
+This version adds a new `recent` category and changes the `standard` category collection.  
+
+✨ Features
+
+* `Emoji` has a new `registerUserSelection` function.
+* `EmojiCategory` has a new `recent` category, for the most recent emojis.
+* `EmojiCategory` has translations for `favorites` and `recent` categories.
+* `EmojiGrid` automatically registers emojis and updates affected categories.
+
+💡 Adjustments
+
+* `EmojiCategory.standard` no longer includes `.recent` or `.frequent` by default.
+* `EmojiGrid` uses optional init parameters with `nil` default values, to reduce code duplication.
+
+### 🗑️ Deprecations
+
+* `EmojiCategory` no longer implements `CaseIterable`, since categories are not a definitive list.
+* `EmojiCollection.standardWithoutFrequent` is renamed to `EmojiCollection.standardWithoutRecent`.
+* `EmojiGrid` no longer takes a persisted category in the initializer and renames some init parameters.
+* `EmojiScrollGrid` has been renamed to `EmojiGridScrollView`.
+
+
+
 ## 1.3
 
 This version adds a new `recent` category and changes the `standard` category collection.  
