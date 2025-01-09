@@ -56,7 +56,7 @@ public struct EmojiGridStyle {
     /// - Parameters:
     ///   - font: The font to use, by default `.title`.
     ///   - itemSize: The item size to use, by default `30`.
-    ///   - itemSpacing: The grid item spacing, by default `5`.
+    ///   - itemSpacing: The grid item spacing, by default `10`.
     ///   - padding: The padding to apply to the grid, by default `5`.
     ///   - prefersFocusEffect: Whether the grid should disable its focus effect, by default `false`.
     ///   - sectionSpacing: The grid section spacing, by default `20`.
@@ -70,7 +70,7 @@ public struct EmojiGridStyle {
     ) {
         let itemSize = itemSize ?? 30
         let itemSpacing = itemSpacing ?? 5
-        let padding = padding ?? 5
+        let padding = padding ?? 10
         let sectionSpacing = sectionSpacing ?? 15
         
         self.font = font
