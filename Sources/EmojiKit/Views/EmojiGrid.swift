@@ -188,9 +188,7 @@ private extension EmojiGrid {
         else { return }
 
         let emojis = emojis(for: category)
-        guard
-            let index = emojis.firstIndex(of: emoji)
-        else { return }
+        guard let index = emojis.firstIndex(of: emoji) else { return }
 
         let itemsPerRow = geo.itemsPerRow(
             for: axis,
@@ -260,10 +258,16 @@ private extension EmojiGrid {
             let category = $0.element
             if hasEmojis(for: category) {
                 Section {
-                    gridContent(for: category, at: offset)
+                    gridContent(
+                        for: category,
+                        at: offset
+                    )
                 } header: {
-                    gridTitle(for: category, at: offset)
-                        .padding(.top, offset > 0 ? style.sectionSpacing : 0)
+                    sectionTitle(
+                        for: category,
+                        at: offset
+                    )
+                    .padding(.top, offset > 0 ? style.sectionSpacing : 0)
                 }
             }
         }
@@ -322,7 +326,7 @@ private extension EmojiGrid {
     }
 
     @ViewBuilder
-    func gridTitle(
+    func sectionTitle(
         for category: EmojiCategory,
         at index: Int
     ) -> some View {

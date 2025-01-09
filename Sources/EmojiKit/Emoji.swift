@@ -52,8 +52,6 @@ public extension Array where Element == Emoji {
 
     /// The first index of a certain emoji, if any.
     func firstIndex(of emoji: Emoji) -> Int? {
-        firstIndex {
-            $0.neutralSkinToneVariant == emoji.neutralSkinToneVariant
-        }
+        firstIndex { $0 == emoji }
     }
 }
