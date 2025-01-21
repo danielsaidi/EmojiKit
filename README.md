@@ -50,6 +50,18 @@ See the online [documentation][Documentation] for more information.
 
 
 
+## Localization
+
+EmojiKit is localized in:
+
+* 🇺🇸 English (U.S.)
+* 🇪🇸 Spanish
+* 🇸🇪 Swedish
+
+You can contribute by localizing the `Sources/Resources/en.lproj` folder.
+
+
+
 ## Getting started
 
 The `Emoji` model can be used to parse a bunch of emoji-specific information, for instance:
@@ -96,7 +108,7 @@ The online [documentation][Documentation] has more information, articles, code e
 
 ## Demo Application
 
-The `Demo` folder has an app that lets you explore the library. 
+The `Demo` folder has an app that lets you explore the library and its components.
 
 
 

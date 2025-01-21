@@ -9,6 +9,16 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.4
+
+This version adds support for Spanish.  
+
+🌐 Localization
+
+* All emojis and categories have been localized in Spanish. 
+
+
+
 ## 1.3.1
 
 This version fixes some bugs and adjusts the grid style accordingly.  

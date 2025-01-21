@@ -7,6 +7,7 @@
 //
 
 import CoreTransferable
+import SwiftUI
 import UniformTypeIdentifiers
 
 /// This type represents an emoji character and is used as a
@@ -53,5 +54,24 @@ public extension Array where Element == Emoji {
     /// The first index of a certain emoji, if any.
     func firstIndex(of emoji: Emoji) -> Int? {
         firstIndex { $0 == emoji }
+    }
+}
+
+#Preview {
+    
+    List {
+        ForEach(Emoji.all) { emoji in
+            HStack {
+                HStack {
+                    Text(emoji.char)
+                    Spacer()
+                    Text(emoji.localizedName(in: .init(identifier: "es")))
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .truncationMode(.tail)
+                }
+                .lineLimit(1)
+            }
+        }
     }
 }

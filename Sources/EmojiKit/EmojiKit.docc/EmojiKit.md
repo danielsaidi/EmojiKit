@@ -36,6 +36,34 @@ https://github.com/danielsaidi/EmojiKit.git
 
 
 
+## Features
+
+EmojiKit provides a bunch of emoji-specific features:
+
+* 😀 Emojis - EmojiKit defines a structured emoji model.
+* 🐻 Emoji Categories - EmojiKit defines all standard emoji categories.
+* 📦 Emoji Versions - EmojiKit defines all emoji versions and their emojis.
+* 🧩 Extensions - EmojiKit extends native types with emoji support.
+* 🇸🇪 Localization - EmojiKit supports localizing all emojis and categories.
+* 👍🏾 Skin Tones - EmojiKit provides emoji skin tone information.
+* 🖼️ Views - EmojiKit has emoji-specific views, like grids and pickers.
+
+See the articles above for more information.
+
+
+
+## Localization
+
+EmojiKit is localized in:
+
+* 🇺🇸 English (U.S.)
+* 🇪🇸 Spanish
+* 🇸🇪 Swedish
+
+You can contribute by localizing the `Sources/Resources/en.lproj` folder.
+
+
+
 ## Repository
 
 For more information, source code, etc., visit the [project repository](https://github.com/danielsaidi/emojikit).
