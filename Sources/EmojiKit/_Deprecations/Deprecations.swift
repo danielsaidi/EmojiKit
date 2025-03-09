@@ -19,7 +19,7 @@ extension EmojiCategory: CaseIterable {}
 
 public extension EmojiCategory {
     
-    @available(*, deprecated, message: "EmojiCategory will no longer implement CaseIterable")
+    @available(*, deprecated, message: "EmojiCategory will no longer implement CaseIterable.")
     static var allCases: [EmojiCategory] {
         [
             .smileysAndPeople,
@@ -42,7 +42,7 @@ public typealias EmojiScrollGrid = EmojiGridScrollView
 
 public extension EmojiGrid {
     
-    @available(*, deprecated, message: "The emoji grid no longer takes a persisted category")
+    @available(*, deprecated, message: "The emoji grid no longer takes a persisted category.")
     init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
@@ -70,7 +70,7 @@ public extension EmojiGrid {
         )
     }
     
-    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem")
+    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem.")
     init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
@@ -95,12 +95,50 @@ public extension EmojiGrid {
             sectionTitle: section,
             gridItem: item
         )
+    }
+    
+    @available(*, deprecated, message: "Use either the emojis or the categories initializer, not this one which has both.")
+    init(
+        axis: Axis.Set = .vertical,
+        emojis: [Emoji]?,
+        categories: [EmojiCategory]?,
+        query: String? = nil,
+        selection: Binding<Emoji.GridSelection>? = nil,
+        geometryProxy: GeometryProxy? = nil,
+        action: ((Emoji) -> Void)? = nil,
+        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
+        @ViewBuilder sectionTitle: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
+        @ViewBuilder gridItem: @escaping (Emoji.GridItemParameters) -> GridItem
+    ) {
+        if let emojis {
+            self.init(
+                axis: axis,
+                emojis: emojis,
+                selection: selection,
+                geometryProxy: geometryProxy,
+                action: action,
+                categoryEmojis: categoryEmojis,
+                sectionTitle: sectionTitle,
+                gridItem: gridItem
+            )
+        } else {
+            self.init(
+                axis: axis,
+                categories: categories,
+                selection: selection,
+                geometryProxy: geometryProxy,
+                action: action,
+                categoryEmojis: categoryEmojis,
+                sectionTitle: sectionTitle,
+                gridItem: gridItem
+            )
+        }
     }
 }
 
 public extension EmojiGridScrollView {
     
-    @available(*, deprecated, message: "The emoji grid no longer takes a persisted category")
+    @available(*, deprecated, message: "The emoji grid no longer takes a persisted category.")
     init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
@@ -128,7 +166,7 @@ public extension EmojiGridScrollView {
         )
     }
     
-    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem")
+    @available(*, deprecated, message: "section is renamed to sectionTitle and item to gridItem.")
     init(
         axis: Axis.Set = .vertical,
         emojis: [Emoji] = [],
@@ -152,6 +190,32 @@ public extension EmojiGridScrollView {
             categoryEmojis: categoryEmojis,
             sectionTitle: section,
             gridItem: item
+        )
+    }
+    
+    @available(*, deprecated, message: "Use either the emojis or the categories initializer, not this one which has both.")
+    init(
+        axis: Axis.Set = .vertical,
+        emojis: [Emoji]?,
+        categories: [EmojiCategory]?,
+        query: String? = nil,
+        selection: Binding<Emoji.GridSelection>? = nil,
+        geometryProxy: GeometryProxy? = nil,
+        action: ((Emoji) -> Void)? = nil,
+        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
+        @ViewBuilder sectionTitle: @escaping (Emoji.GridSectionTitleParameters) -> SectionTitle,
+        @ViewBuilder gridItem: @escaping (Emoji.GridItemParameters) -> GridItem
+    ) {
+        self.init(
+            axis: axis,
+            emojis: emojis ?? [],
+            query: query,
+            selection: selection,
+            geometryProxy: geometryProxy,
+            action: action,
+            categoryEmojis: categoryEmojis,
+            sectionTitle: sectionTitle,
+            gridItem: gridItem
         )
     }
 }

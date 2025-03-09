@@ -9,6 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.4.1
+
+This version cleans up the emoji grid initializers.
+
+
+
 ## 1.4
 
 This version adds support for Spanish.  
