@@ -13,6 +13,14 @@ EmojiKit tries to honor semantic versioning:
 
 This version cleans up the emoji grid initializers.
 
+💡 Adjustments
+
+* `EmojiGrid` and `EmojiScrollGrid` has separate initializers for emojis and categories.
+
+### 🐛 Bug Fixes
+
+* `EmojiGrid` and `EmojiScrollGrid` now triggers the provided action even if no selection binding is set.
+
 
 
 ## 1.4
