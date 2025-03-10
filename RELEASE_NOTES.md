@@ -9,6 +9,12 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.4.2
+
+This version makes the 1.4.1 bug fix work on iOS 17 and earlier too.
+
+
+
 ## 1.4.1
 
 This version cleans up the emoji grid initializers.

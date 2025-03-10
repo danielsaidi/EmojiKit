@@ -18,6 +18,13 @@ import SwiftUI
 /// without triggering the `action` when users use the arrow
 /// keys to navigate the grid.
 ///
+/// Note that the `selection` binding is used to control the
+/// current selection in the grid. The selection will change
+/// when navigating the grid with the arrow keys and when an
+/// emoji is tapped, but it will not update when selecting a
+/// skin tone from the popup, since the original emoji which
+/// opened the popover will not change.
+///
 /// You can use an ``EmojiGridScrollView`` to wrap this grid
 /// in a `ScrollView` that applies proper paddings, and that
 /// automatically scrolls to the `selection` when is changes.
@@ -32,7 +39,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - emojis: The emojis to list.
     ///   - query: The search query to apply, if any.
-    ///   - selection: An external grid selection binding, if any.
+    ///   - selection: An external binding for the grid's current selection, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked, if any.
     ///   - categoryEmojis: An optional function that can customize emojis for a certain category, if any.
@@ -70,7 +77,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///   - axis: The grid axis, by default `.vertical`.
     ///   - categories: The categories to list, by default ``EmojiCategory/recent`` and ``EmojiCategory/standard`` combined.
     ///   - query: The search query to apply, if any.
-    ///   - selection: An external grid selection binding, if any.
+    ///   - selection: An external binding for the grid's current selection, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is tapped or picked, if any.
     ///   - categoryEmojis: An optional function that can customize emojis for a certain category, if any.
@@ -140,12 +147,12 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
                 .onKeyPress {
                     var result: Bool
                     switch $0.key {
-                    case .downArrow: result = handleArrowKeyDirection(.down)
-                    case .leftArrow: result = handleArrowKeyDirection(.left)
+                    case .downArrow: result = handleArrowKey(.down)
+                    case .leftArrow: result = handleArrowKey(.left)
                     case .escape: result = handleEscape()
                     case .return: result = handleReturn($0)
-                    case .rightArrow: result = handleArrowKeyDirection(.right)
-                    case .upArrow: result = handleArrowKeyDirection(.up)
+                    case .rightArrow: result = handleArrowKey(.right)
+                    case .upArrow: result = handleArrowKey(.up)
                     default: result = false
                     }
                     return result ? .handled : .ignored
@@ -154,25 +161,15 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
                 #if os(tvOS)
                 .onMoveCommand(perform: selectEmoji)
                 #endif
-                .padding(style.padding)
-                .onChange(of: selectionBinding) { oldValue, newValue in
-                    guard selectionBinding != selectionState else { return }
-                    selectionState = newValue
-                }
-                .onChange(of: selectionState) { oldValue, newValue in
-                    guard selectionBinding != selectionState else { return }
-                    selectionBinding = newValue
-                }
         } else {
             grid
-                .padding(style.padding)
         }
     }
 }
 
 private extension EmojiGrid {
 
-    func handleArrowKeyDirection(_ direction: Emoji.GridDirection) -> Bool {
+    func handleArrowKey(_ direction: Emoji.GridDirection) -> Bool {
         selectEmoji(with: direction)
         return true
     }
@@ -278,9 +275,22 @@ private extension EmojiGrid {
 }
 
 private extension EmojiGrid {
+    
+    var grid: some View {
+        gridView
+            .padding(style.padding)
+            .onChange(of: selectionBinding) { newValue in
+                guard selectionBinding != selectionState else { return }
+                selectionState = newValue
+            }
+            .onChange(of: selectionState) { newValue in
+                guard selectionBinding != selectionState else { return }
+                selectionBinding = newValue
+            }
+    }
 
     @ViewBuilder
-    var grid: some View {
+    var gridView: some View {
         if axis == .horizontal {
             LazyHGrid(
                 rows: style.items,
@@ -453,7 +463,7 @@ private extension EmojiGrid {
                         axis: .vertical,
                         // categories: [.recent] + .standard,
                         query: query,
-                        // selection: $selection,
+                        selection: $selection,
                         action: { print($0.char) },
                         categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },
                         sectionTitle: { $0.view },
