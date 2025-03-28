@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension Emoji {
+public extension Emoji {
     
     /// This enum defines the available directions in a grid.
     ///
@@ -17,12 +17,6 @@ extension Emoji {
     enum GridDirection {
         
         case up, down, left, right
-        
-        /// This enum defines the navigation directions that
-        /// a grid direction may be transformed to.
-        enum NavigationDirection: Equatable {
-            case forward, back
-        }
         
         func destinationIndex(
             for axis: Axis.Set,
@@ -58,7 +52,7 @@ extension Emoji {
 
         func navigationDirection(
             for axis: Axis.Set
-        ) -> NavigationDirection {
+        ) -> GridNavigationDirection {
             switch self {
             case .up, .left: .back
             case .down, .right: .forward
@@ -77,6 +71,12 @@ extension Emoji {
             }
             return self
         }
+    }
+    
+    /// This enum defines the navigation directions that
+    /// a grid direction may be transformed to.
+    enum GridNavigationDirection: Equatable {
+        case forward, back
     }
 }
 
