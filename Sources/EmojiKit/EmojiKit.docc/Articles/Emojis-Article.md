@@ -72,13 +72,6 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 > Note: Skin tone support for emojis with multiple skin tone components are currently not supported, such as two persons kissing.
 
 
-## Transferable
-
-The ``Emoji`` type conforms to the `Transferable` protocol, which means that it can use native features like drag & drop, sharing, etc.
-
-Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emoji`` uniform type, to use these features.  
-
-
 
 ## Automatic Category Updates
 
@@ -86,4 +79,12 @@ The ``Emoji`` type has a ``Emoji/registerUserSelection()`` function that can be 
 
 This function is automatically called by ``EmojiGrid``, so you don't need to call the function manually when you use the grid component.
 
-> Important: Since EmojiKit currently doesn't have an algoritm for frequency calculations, the ``EmojiCategory/frequent`` will currently be updated just like the ``EmojiCategory/recent`` category. You can however use the ``EmojiCategory/frequent`` category to implement your own frequency logic.
+> Important: Since EmojiKit doesn't have a frequency algoritm, the ``EmojiCategory/frequent`` will currently be updated just like the ``EmojiCategory/recent`` category. You can however use the ``EmojiCategory/frequent`` category to implement your own frequency logic, or contribute with one by submitting a pull request.
+
+
+## Transferable
+
+The ``Emoji`` type conforms to `Transferable`, which means that it can use native features like drag & drop, sharing, etc.
+
+> Important: Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emoji`` uniform type, to make it able to use all transferable features.
+

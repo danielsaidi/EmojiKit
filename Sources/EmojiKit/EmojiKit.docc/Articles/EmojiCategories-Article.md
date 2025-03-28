@@ -16,8 +16,8 @@ This article describes the EmojiKit emoji category model.
 EmojiKit has an ``EmojiCategory`` enum that defines all available emoji categories and their emojis:
 
 ```swift
-try EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
-try EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
+EmojiCategory.smileysAndPeople.emojis  // 😀😃😄...
+EmojiCategory.animalsAndNature.emojis  // 🐶🐱🐭...
 ```
 
 You can use the ``EmojiCategory/standard`` collection to get a list of all standard categories, in their standard sort order:
@@ -26,7 +26,7 @@ You can use the ``EmojiCategory/standard`` collection to get a list of all stand
 EmojiCategory.standard  // [.smileyAndPeople, .animalsAndNature, ...]
 ```
 
-``EmojiCategory`` uses ``EmojiVersion`` to filter out emojis that are unavailable to the current runtime. This means that your users will only see emojis that they can use on their device and OS version.
+``EmojiCategory`` uses ``EmojiVersion`` to filter out emojis that are unavailable to the current runtime. This means that your users will only see the emojis that they can use on their device and its current runtime.
 
 
 
@@ -48,14 +48,14 @@ EmojiKit is currently only localized in `English` and `Swedish`, but anyone can 
 
 ## Mutable Categories
 
-Some ``EmojiCategory`` cases are mutable, and allows you to mutate their emojis:
+Some emoji categories are mutable, and allow you to set their emojis:
 
-* The ``EmojiCategory/favorites`` category uses the mutable ``EmojiCategory/favoriteEmojis`` collection.
-* The ``EmojiCategory/frequent`` category uses the mutable ``EmojiCategory/frequentEmojis`` collection.
-* The ``EmojiCategory/recent`` category uses the mutable ``EmojiCategory/recentEmojis`` collection.
-* The ``EmojiCategory/custom(id:name:emojis:iconName:)`` category lets you create completely custom categories.
+* ``EmojiCategory/favorites`` uses the mutable ``EmojiCategory/favoriteEmojis`` collection.
+* ``EmojiCategory/frequent`` uses the mutable ``EmojiCategory/frequentEmojis`` collection.
+* ``EmojiCategory/recent`` uses the mutable ``EmojiCategory/recentEmojis`` collection.
+* ``EmojiCategory/custom(id:name:emojis:iconName:)`` lets you create custom categories.
 
-You can use ``EmojiCategory/addEmoji(_:to:maxCount:)``, ``EmojiCategory/removeEmoji(_:from:)`` and ``EmojiCategory/resetEmojis(in:)`` to affect a mutable category.
+You can use ``EmojiCategory/addEmoji(_:to:maxCount:)``, ``EmojiCategory/removeEmoji(_:from:)``, ``EmojiCategory/resetEmojis(for:)``, and ``EmojiCategory/setEmojis(_:for:maxCount:)`` to affect a mutable category. The ``EmojiCategory/getEmojisMaxCount(for:)`` and ``EmojiCategory/setEmojisMaxCount(_:for:)`` can get and set the max number of emojis to persist for each category.
 
 The ``EmojiGrid`` component will automatically update the ``EmojiCategory/frequent`` and ``EmojiCategory/recent`` categories when a user picks emojis in the grid. 
 
@@ -65,6 +65,6 @@ The ``EmojiGrid`` component will automatically update the ``EmojiCategory/freque
 
 ## Transferable
 
-The ``EmojiCategory`` type conforms to the `Transferable` protocol, which means that it can use many native features like drag & drop, sharing, etc.
+The ``EmojiCategory`` type conforms to `Transferable`, which means that it can use native features like drag & drop, sharing, etc.
 
-Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emojiCategory`` uniform type, to use these features.
+> Important: Make sure to specify that your app supports the ``UniformTypeIdentifiers/UTType/emojiCategory`` uniform type, to make it able to use all transferable features.

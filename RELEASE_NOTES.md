@@ -9,9 +9,21 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.4.3
+## 1.5.0
 
-This version makes `Character.isEmoji` check all 15+ version emojis.
+✨ Features
+
+* `EmojiCategory` has made all persisted emoji category functions public.
+* `EmojiCategory` can now set a max count for each persisted emoji category.
+
+💡 Adjustments
+
+* `Character.isEmoji` now checks all emoji versions from 15 and up.
+* `EmojiCategory` now uses the persisted emoji category max count as a default cap.
+
+### 🐛 Bug Fixes
+
+* `EmojiCategory.recentEmojis` now uses the correct persistency key.
 
 
 

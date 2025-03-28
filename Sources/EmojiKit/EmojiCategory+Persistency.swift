@@ -9,23 +9,23 @@
 import SwiftUI
 
 public extension EmojiCategory {
-
+    
     /// A persisted list of emojis, used by ``favorites``.
     static var favoriteEmojis: [Emoji] {
-        get { getPersistedEmojis(for: .favorites) }
-        set { setPersistedEmojis(newValue, for: .favorites) }
+        get { getEmojis(for: .favorites) }
+        set { setEmojis(newValue, for: .favorites) }
     }
     
     /// A persisted list of emojis, used by ``frequent``.
     static var frequentEmojis: [Emoji] {
-        get { getPersistedEmojis(for: .frequent) }
-        set { setPersistedEmojis(newValue, for: .frequent) }
+        get { getEmojis(for: .frequent) }
+        set { setEmojis(newValue, for: .frequent) }
     }
     
     /// A persisted list of emojis, used by ``recent``.
     static var recentEmojis: [Emoji] {
-        get { getPersistedEmojis(for: .frequent) }
-        set { setPersistedEmojis(newValue, for: .frequent) }
+        get { getEmojis(for: .recent) }
+        set { setEmojis(newValue, for: .recent) }
     }
 }
 
@@ -35,13 +35,30 @@ public extension EmojiCategory {
     static func addEmoji(
         _ emoji: Emoji,
         to category: PersistedCategory,
-        maxCount: Int = 10_000
+        maxCount: Int? = nil
     ) {
-        var emojis = getPersistedEmojis(for: category)
+        var emojis = getEmojis(for: category)
             .filter { $0 != emoji }
         emojis.insert(emoji, at: 0)
-        let result = Array(emojis.prefix(maxCount))
-        setPersistedEmojis(result, for: category)
+        setEmojis(emojis, for: category, maxCount: maxCount)
+    }
+    
+    /// Get the persisted emojis for a category.
+    static func getEmojis(
+        for category: PersistedCategory
+    ) -> [Emoji] {
+        let key = storageKey(for: category, value: .emojis)
+        let value = storage.stringArray(forKey: key) ?? []
+        return value.map { Emoji($0) }
+    }
+    
+    /// Get the persisted emoji max count for a category.
+    static func getEmojisMaxCount(
+        for category: PersistedCategory
+    ) -> Int {
+        let key = storageKey(for: category, value: .emojisMaxCount)
+        let value = storage.integer(forKey: key)
+        return value < 1 ? 1_000 : value
     }
 
     /// Remove an emoji from a persisted category.
@@ -49,16 +66,45 @@ public extension EmojiCategory {
         _ emoji: Emoji,
         from category: PersistedCategory
     ) {
-        let emojis = getPersistedEmojis(for: category)
+        let emojis = getEmojis(for: category)
             .filter { $0 != emoji }
-        setPersistedEmojis(emojis, for: category)
+        setEmojis(emojis, for: category)
     }
-
+    
     /// Reset the emojis in a persisted category.
+    static func resetEmojis(
+        for category: PersistedCategory
+    ) {
+        setEmojis([], for: category)
+    }
+    
+    @available(*, deprecated, renamed: "resetEmojis(for:)")
     static func resetEmojis(
         in category: PersistedCategory
     ) {
-        setPersistedEmojis([], for: category)
+        resetEmojis(for: category)
+    }
+
+    /// Set the persisted emojis for a category.
+    static func setEmojis(
+        _ emojis: [Emoji],
+        for category: PersistedCategory,
+        maxCount: Int? = nil
+    ) {
+        let key = storageKey(for: category, value: .emojis)
+        let emojiChars = emojis.map { $0.char }
+        let defaultMaxCount = getEmojisMaxCount(for: category)
+        let value = emojiChars.prefix(maxCount ?? defaultMaxCount)
+        return storage.set(value, forKey: key)
+    }
+
+    /// Set the persisted emojis for a category.
+    static func setEmojisMaxCount(
+        _ count: Int,
+        for category: PersistedCategory
+    ) {
+        let key = storageKey(for: category, value: .emojisMaxCount)
+        return storage.set(count, forKey: key)
     }
 }
 
@@ -85,42 +131,27 @@ public extension EmojiCategory.PersistedCategory {
     }
 }
 
+private extension String {
+    
+    static let emojis = "emojis"
+    static let emojisMaxCount = "emojisMaxCount"
+}
+
 extension EmojiCategory {
-
-    /// Get a persisted list of emojis for a category.
-    static func getPersistedEmojis(
-        for category: PersistedCategory
-    ) -> [Emoji] {
-        let storage = persistedStorage
-        let key = persistedStorageKey(for: category)
-        let string = storage.stringArray(forKey: key) ?? []
-        return string.map { Emoji($0) }
-    }
-
-    /// Get a persisted list of emojis for a category.
-    static func setPersistedEmojis(
-        _ emojis: [Emoji],
-        for category: PersistedCategory
-    ) {
-        let storage = persistedStorage
-        let key = persistedStorageKey(for: category)
-        let chars = emojis.map { $0.char }
-        return storage.set(chars, forKey: key)
-    }
 
     /// Get the emojis storage key for custom category.
     ///
-    /// > Important: This is currently read-only, but should
-    /// be mutable in the future, to be able to customize it
-    /// for other storage requirements, like App Groups.
-    static var persistedStorage: UserDefaults {
+    /// > Note: This should be mutable, to allow customizing
+    /// it for other storage requirements, like App Groups.
+    static var storage: UserDefaults {
         .standard
     }
-
-    /// Get the emojis storage key for custom category.
-    static func persistedStorageKey(
-        for category: PersistedCategory
+    
+    /// Get a storage value key for a certain category.
+    static func storageKey(
+        for category: EmojiCategory.PersistedCategory,
+        value: String
     ) -> String {
-        "com.emojikit.category.\(category.name).emojis"
+        "com.emojikit.category.\(category.name).\(value)"
     }
 }
