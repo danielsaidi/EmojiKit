@@ -19,7 +19,7 @@ import SwiftUI
 /// keys to navigate the grid.
 ///
 /// This grid automaticallys scroll to the `selection` as it
-/// changes. You can use an ``EmojiGridView`` if you want to
+/// changes. You can use an ``EmojiGrid`` if you want to
 /// render a plain grid without scrolling capabilities.
 ///
 /// See the <doc:Views-Article> article for full information
