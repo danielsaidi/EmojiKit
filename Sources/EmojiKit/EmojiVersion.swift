@@ -35,6 +35,7 @@ public struct EmojiVersion: Equatable, Identifiable {
             return emojis.contains(emoji) ? emojis : [emoji] + emojis
         }
         self.emojis = allEmojis
+        self.emojiString = emojis
         self.version = version
         self.iOS = iOS
         self.macOS = macOS
@@ -80,9 +81,12 @@ public struct EmojiVersion: Equatable, Identifiable {
 
     /// The unique version ID.
     public var id: Double { version }
-
-    /// The emojis to include in the information.
+    
+    /// The emojis to that were added in this version.
     public var emojis: [Emoji]
+    
+    /// The emojis to that were added in this version.
+    public var emojiString: String
     
     /// The emoji version in which emojis became available.
     public let version: Double
@@ -114,6 +118,11 @@ public struct EmojiVersion: Equatable, Identifiable {
 // MARK: - Version Builders
 
 public extension EmojiVersion {
+
+    /// All emoji versions that are defined in the library.
+    static var all: [EmojiVersion] {
+        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1]
+    }
 
     static var v15_1: Self {
         .init(
@@ -236,11 +245,6 @@ public extension EmojiVersion {
         let dict = Dictionary(uniqueKeysWithValues: values)
         return dict
     }()
-
-    /// All emoji versions that are defined in the library.
-    static var all: [Self] {
-        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1]
-    }
     
     /// All emoji versions that are available to the runtime.
     static var allAvailable: [Self] {
