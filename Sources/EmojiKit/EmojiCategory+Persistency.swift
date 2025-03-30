@@ -94,9 +94,8 @@ public extension EmojiCategory {
         let key = storageKey(for: category, value: .emojis)
         let emojiChars = emojis.map { $0.char }
         let defaultMaxCount = getEmojisMaxCount(for: category)
-        let value = emojiChars.prefix(maxCount ?? defaultMaxCount)
-        let arrayValue = Array(value)
-        return storage.set(arrayValue, forKey: key)
+        let value = Array(emojiChars.prefix(maxCount ?? defaultMaxCount))
+        return storage.set(value, forKey: key)
     }
 
     /// Set the persisted emojis for a category.
