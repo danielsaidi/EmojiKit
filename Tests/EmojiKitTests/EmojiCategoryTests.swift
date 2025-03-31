@@ -132,7 +132,7 @@ class EmojisCategoryTests: XCTestCase {
             EmojiCategory.addEmoji($0, to: .frequent)
         }
         XCTAssertEqual(EmojiCategory.frequent.emojis.count, 3)
-        EmojiCategory.resetEmojis(in: .frequent)
+        EmojiCategory.resetEmojis(for: .frequent)
         XCTAssertEqual(EmojiCategory.frequent.emojis, [])
     }
 }

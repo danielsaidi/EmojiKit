@@ -107,7 +107,7 @@ The online [documentation][Documentation] has more information, articles, code e
 
 ## Demo Application
 
-The `Demo` folder has an app that lets you explore the library and its components.
+The `Demo` folder has a demo app that lets you explore the library and its components.
 
 
 
