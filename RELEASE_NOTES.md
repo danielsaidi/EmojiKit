@@ -9,6 +9,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.5.1
+
+### 🐛 Bug Fixes
+
+* This version fixes a crash that occurred when persisting emojis.
+
+
+
 ## 1.5.0
 
 ✨ Features
