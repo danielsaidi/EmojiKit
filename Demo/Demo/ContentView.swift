@@ -25,7 +25,7 @@ struct ContentView: View {
                 action: { print($0) },
                 sectionTitle: { $0.view },
                 gridItem: { $0.view }
-                // gridItem: { $0.view.draggable($0.emoji) }
+                // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
             .searchable(text: $query)
         }

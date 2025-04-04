@@ -3,7 +3,7 @@
 //  EmojiKitTests
 //
 //  Created by Daniel Saidi on 2023-12-31.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import EmojiKit
@@ -15,6 +15,16 @@ final class Character_EmojisTests: XCTestCase {
     let nonCombined = "😀".char
     let simple = "😀".char
     let nonSimple = "⌚️".char
+    
+    func testIsEmojiChecksSimpleCombinedAndLaterVersionEmojiState() {
+        XCTAssertTrue(combined.isEmoji)
+        XCTAssertTrue(nonCombined.isEmoji)
+        XCTAssertTrue(simple.isEmoji)
+        XCTAssertTrue(nonSimple.isEmoji)
+        let versions = EmojiVersion.all.filter { $0.version >= 15 }
+        let emojis = versions.map(\.emojiString)
+        emojis.forEach { XCTAssertTrue($0.char.isEmoji) }
+    }
 
     func testIsCombinedEmojiReturnsTrueForSimpleAndCombinedEmojis() {
         XCTAssertTrue(combined.isCombinedEmoji)

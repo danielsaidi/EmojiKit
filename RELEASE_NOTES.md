@@ -9,6 +9,52 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.5.1
+
+### 🐛 Bug Fixes
+
+* This version fixes a crash that occurred when persisting emojis.
+
+
+
+## 1.5.0
+
+✨ Features
+
+* `EmojiCategory` has made all persisted emoji category functions public.
+* `EmojiCategory` can now set a max count for each persisted emoji category.
+
+💡 Adjustments
+
+* `Character.isEmoji` now checks all emoji versions from 15 and up.
+* `EmojiCategory` now uses the persisted emoji category max count as a default cap.
+
+### 🐛 Bug Fixes
+
+* `EmojiCategory.recentEmojis` now uses the correct persistency key.
+
+
+
+## 1.4.2
+
+This version makes the 1.4.1 bug fix work on iOS 17 and earlier too.
+
+
+
+## 1.4.1
+
+This version cleans up the emoji grid initializers.
+
+💡 Adjustments
+
+* `EmojiGrid` and `EmojiScrollGrid` has separate initializers for emojis and categories.
+
+### 🐛 Bug Fixes
+
+* `EmojiGrid` and `EmojiScrollGrid` now triggers the provided action even if no selection binding is set.
+
+
+
 ## 1.4
 
 This version adds support for Spanish.  

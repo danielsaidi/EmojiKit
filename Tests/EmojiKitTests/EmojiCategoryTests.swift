@@ -3,7 +3,7 @@
 //  KeyboardKit
 //
 //  Created by Daniel Saidi on 2021-01-17.
-//  Copyright © 2021-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2021-2025 Daniel Saidi. All rights reserved.
 //
 
 import EmojiKit
@@ -132,7 +132,7 @@ class EmojisCategoryTests: XCTestCase {
             EmojiCategory.addEmoji($0, to: .frequent)
         }
         XCTAssertEqual(EmojiCategory.frequent.emojis.count, 3)
-        EmojiCategory.resetEmojis(in: .frequent)
+        EmojiCategory.resetEmojis(for: .frequent)
         XCTAssertEqual(EmojiCategory.frequent.emojis, [])
     }
 }
