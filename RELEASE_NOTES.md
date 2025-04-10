@@ -2,9 +2,9 @@
 
 EmojiKit tries to honor semantic versioning:
 
-* Deprecations can happen at any time.
-* Deprecations should only be removed in `major` updates.
-* Breaking changes should not occur in `minor` & `patch` updates.
+* Deprecations can happen in any version.
+* Deprecations are only removed in `major` updates.
+* Breaking changes should only occur in `major` updates.
 * Breaking changes *can* occur in `minor` & `patch` updates, if needed.
 
 

@@ -11,6 +11,36 @@ import XCTest
 
 final class Emoji_VersionTests: XCTestCase {
     
+    func testDefinesVersion15_2() throws {
+        let version = EmojiVersion.v15_2
+        let emojis = version.emojis
+        let string = emojis.map { $0.char }.joined()
+        XCTAssertEqual(string, "🫩🫆🪾🫜🫟🪉🪏🇨🇶")
+        XCTAssertEqual(version.version, 15.2)
+        XCTAssertEqual(version.iOS, 18.4)
+        XCTAssertEqual(version.macOS, 15.4)
+        XCTAssertEqual(version.tvOS, 18.4)
+        XCTAssertEqual(version.watchOS, 11.4)
+    }
+    
+    func testDefinesVersion15_1() throws {
+        let version = EmojiVersion.v15_1
+        let emojis = version.emojis
+        let string = emojis.map { $0.char }.joined()
+        XCTAssertTrue(string.contains("🙂‍↕️"))
+        XCTAssertTrue(string.contains("🙂‍↔️"))
+        XCTAssertTrue(string.contains("👩‍🦽‍➡️"))
+        XCTAssertTrue(string.contains("🐦‍🔥"))
+        XCTAssertTrue(string.contains("🍋‍🟩"))
+        XCTAssertTrue(string.contains("🍄‍🟫"))
+        XCTAssertTrue(string.contains("⛓️‍💥"))
+        XCTAssertEqual(version.version, 15.1)
+        XCTAssertEqual(version.iOS, 17.4)
+        XCTAssertEqual(version.macOS, 14.4)
+        XCTAssertEqual(version.tvOS, 17.4)
+        XCTAssertEqual(version.watchOS, 10.4)
+    }
+    
     func testDefinesVersion15() throws {
         let version = EmojiVersion.v15
         let emojis = version.emojis.map { $0.char }
@@ -109,9 +139,9 @@ final class Emoji_VersionTests: XCTestCase {
 
     func testCanSpecifyOlderAndLaterVersions() throws {
         XCTAssertEqual(EmojiVersion.v14.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1])
-        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15, .v15_1])
+        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15, .v15_1, .v15_2])
         XCTAssertEqual(EmojiVersion.v15.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1, .v14])
-        XCTAssertEqual(EmojiVersion.v15_1.laterVersions, [])
+        XCTAssertEqual(EmojiVersion.v15_2.laterVersions, [])
     }
     
     func testCanSpecifyUnavailableEmojis() throws {
@@ -131,8 +161,8 @@ final class Emoji_VersionTests: XCTestCase {
     
     func testCurrentUnavailableEmojisForSomeVersions() throws {
         let current = EmojiVersion.current
-        let latest = EmojiVersion.v15_1
-        let previous = EmojiVersion.v15
+        let latest = EmojiVersion.v15_2
+        let previous = EmojiVersion.v15_1
         XCTAssertEqual(EmojiVersion.currentUnavailableEmojis, current.unavailableEmojis)
         XCTAssertEqual(latest.unavailableEmojis.count, 0)
         XCTAssertEqual(previous.unavailableEmojis.count, latest.emojis.count)

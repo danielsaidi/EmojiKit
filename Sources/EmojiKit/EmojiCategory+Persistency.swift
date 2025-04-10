@@ -111,9 +111,12 @@ public extension EmojiCategory {
 public extension EmojiCategory {
 
     /// This enum defines all standard, persisted categories.
-    enum PersistedCategory: Identifiable, Equatable {
+    enum PersistedCategory: CaseIterable, Identifiable, Equatable {
 
-        case favorites, frequent, recent, custom(name: String)
+        case favorites
+        case frequent
+        case recent
+        case custom(name: String)
     }
 }
 
@@ -128,6 +131,10 @@ public extension EmojiCategory.PersistedCategory {
         case .recent: "recent"
         case .custom(let name): name
         }
+    }
+    
+    static var allCases: [EmojiCategory.PersistedCategory] {
+        [.favorites, .frequent, .recent]
     }
 }
 

@@ -17,7 +17,7 @@ import SwiftUI
 /// all versions available to the current runtime. This will
 /// be used to let ``EmojiCategory`` just return emojis that
 /// are available to the current runtime.
-public struct EmojiVersion: Equatable, Identifiable {
+public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
 
     init(
         version: Double,
@@ -121,7 +121,22 @@ public extension EmojiVersion {
 
     /// All emoji versions that are defined in the library.
     static var all: [EmojiVersion] {
-        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1]
+        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v15_2]
+    }
+    
+    /// All emoji versions that are defined in the library.
+    static var allCases: [EmojiVersion] { all }
+
+    static var v15_2: Self {
+        .init(
+            version: 15.2,
+            emojis: "🫩🫆🪾🫜🫟🪉🪏🇨🇶",
+            iOS: 18.4,
+            macOS: 15.4,
+            tvOS: 18.4,
+            watchOS: 11.4,
+            comment: "This version adds 8 new emojis, with no skin tone variations."
+        )
     }
 
     static var v15_1: Self {

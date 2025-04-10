@@ -10,15 +10,20 @@ import EmojiKit
 import XCTest
 
 class EmojisCategoryTests: XCTestCase {
+    
+    func reset() {
+        let persisted = EmojiCategory.PersistedCategory.allCases
+        persisted.forEach {
+            EmojiCategory.resetEmojis(for: $0)
+        }
+    }
 
-    override class func setUp() {
-        EmojiCategory.favoriteEmojis = []
-        EmojiCategory.frequentEmojis = []
+    override func setUp() {
+        reset()
     }
 
     override func tearDown() {
-        EmojiCategory.favoriteEmojis = []
-        EmojiCategory.frequentEmojis = []
+        reset()
     }
 
     func emojiIcon(for cat: EmojiCategory) -> String {
