@@ -15,6 +15,8 @@ This version adds Emojis 15.1 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
 This version also localizes all emojis in German 🇩🇪.
 
+This version also converts some computed properties to constants to improve performance.
+
 The new `EmojiCategory.Persisted` struct replaces the old `EmojiCategory.PersistedCategory` enum.
 
 ### ‼️ Important
@@ -29,6 +31,7 @@ You need Xcode 16.3 for this version, since it uses new OS checks.
 
 ### 💡 Adjustments
 
+* `Emoji.all` has been converted to a constant.
 * `EmojiCategory.standard` is no longer computed.
 
 🌐 Localization
