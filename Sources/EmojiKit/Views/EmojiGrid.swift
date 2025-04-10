@@ -75,7 +75,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///
     /// - Parameters:
     ///   - axis: The grid axis, by default `.vertical`.
-    ///   - categories: The categories to list, by default ``EmojiCategory/recent`` and ``EmojiCategory/standard`` combined.
+    ///   - categories: The categories to list, by default recent and standard.
     ///   - query: The search query to apply, if any.
     ///   - selection: An external binding for the grid's current selection, if any.
     ///   - geometryProxy: An optional geometry proxy, required to perform arrow/move-based navigation.

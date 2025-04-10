@@ -37,13 +37,12 @@ https://github.com/danielsaidi/EmojiKit.git
 
 EmojiKit provides a bunch of emoji-specific features:
 
-* 😀 Emojis - EmojiKit defines a structured emoji model.
-* 🐻 Emoji Categories - EmojiKit defines all standard emoji categories.
-* 📦 Emoji Versions - EmojiKit defines all emoji versions and their emojis.
-* 🧩 Extensions - EmojiKit extends native types with emoji support.
-* 🇸🇪 Localization - EmojiKit supports localizing all emojis and categories.
-* 👍🏾 Skin Tones - EmojiKit provides emoji skin tone information.
-* 🖼️ Views - EmojiKit has emoji-specific views, like grids and pickers.
+* 😀 Emojis - An emoji model with many features.
+* 🐻 Emoji Categories - Standard and custom emoji categories.
+* 📦 Emoji Versions - All available emoji versions and their emojis.
+* 🧩 Extensions - Emoji-related native type extensions.
+* 👍🏾 Skin Tones - Skin tone information for supported emojis.
+* 🖼️ Views - Emoji-specific views, like grids and pickers.
 
 See the online [documentation][Documentation] for more information.
 
@@ -54,6 +53,7 @@ See the online [documentation][Documentation] for more information.
 EmojiKit is localized in:
 
 * 🇺🇸 English (U.S.)
+* 🇩🇪 German
 * 🇪🇸 Spanish
 * 🇸🇪 Swedish
 

@@ -22,9 +22,17 @@ Note that you need Xcode 16.3 to compile the code, since it uses the latest OS c
 * `EmojiCategory` now implements `Sendable`.
 * `EmojiVersion` has a new `v15_2` version with the latest emojis.
 
+### 💡 Adjustments
+
+* `EmojiCategory.standard` is no longer computed.
+
 🌐 Localization
 
 * All emojis and categories are now localized in German. 
+
+### 🗑️ Deprecations
+
+* `EmojiCategory.standard` has been renamed to `standardCategories`.
 
 
 

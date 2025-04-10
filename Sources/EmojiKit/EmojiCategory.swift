@@ -71,13 +71,13 @@ public extension EmojiCategory {
 }
 
 public extension EmojiCategory {
-
-    /// An ordered list with all standard categories.
+    
+    /// A list with all standard emoji categories, sorted by
+    /// the order in which they appear on Apple platforms.
     ///
     /// This list doesn't contain ``frequent`` or ``recent``,
-    /// only the standard, fixed categories. You can add any
-    /// additional categories that you want to include to it.
-    static var standard: [EmojiCategory] {
+    /// only the standard, fixed categories.
+    static let standardCategories: [EmojiCategory] = {
         [
             .smileysAndPeople,
             .animalsAndNature,
@@ -88,7 +88,7 @@ public extension EmojiCategory {
             .symbols,
             .flags
         ]
-    }
+    }()
 }
 
 public extension Array where Element == EmojiCategory {
@@ -111,7 +111,7 @@ public extension Array where Element == EmojiCategory {
 public extension Collection where Element == EmojiCategory {
 
     /// Get an ordered list of all standard categories.
-    static var standard: [Element] { Element.standard }
+    static var standard: [Element] { Element.standardCategories }
 
     /// Get the first category with a certain ID.
     func category(withId id: Element.ID?) -> Element? {
@@ -278,7 +278,7 @@ extension EmojiCategory {
     /// easy to compare columns with the native iOS keyboard.
     NavigationView {
         List {
-            ForEach(EmojiCategory.standard) { cat in
+            ForEach(EmojiCategory.standardCategories) { cat in
                 NavigationLink {
                     ScrollView(.vertical) {
                         LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(60)), count: 5)) {

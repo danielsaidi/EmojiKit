@@ -19,6 +19,14 @@ extension EmojiCategory: CaseIterable {}
 
 public extension EmojiCategory {
     
+    @available(*, deprecated, renamed: "standardCategories")
+    static var standard: [EmojiCategory] {
+        standardCategories
+    }
+}
+
+public extension EmojiCategory {
+    
     @available(*, deprecated, message: "EmojiCategory will no longer implement CaseIterable.")
     static var allCases: [EmojiCategory] {
         [
