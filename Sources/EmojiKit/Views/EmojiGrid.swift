@@ -11,22 +11,17 @@ import SwiftUI
 /// This grid can be used to list emojis or emoji categories
 /// in a vertical or horizontal grid.
 ///
-/// The grid supports keyboard navigation, and can customize
-/// the section title and grid item views. You can trigger a
-/// custom `action` when emojis are explicitly selected with
-/// a tap or by pressing return. The `selection` will change
-/// without triggering the `action` when users use the arrow
-/// keys to navigate the grid.
+/// This grid can change the `selection` with the arrow keys,
+/// and will trigger the provided `action` when any emoji is
+/// selected by tapping or pressing return.
 ///
-/// Note that the `selection` binding is used to control the
-/// current selection in the grid. The selection will change
-/// when navigating the grid with the arrow keys and when an
-/// emoji is tapped, but it will not update when selecting a
-/// skin tone from the popup, since the original emoji which
-/// opened the popover will not change.
+/// The `selection` will not update when the user selects an
+/// emoji skin tone from the popup, since the original emoji
+/// which opened the popover will not change.
 ///
-/// You can use an ``EmojiGridScrollView`` to wrap this grid
-/// in a `ScrollView` that applies proper paddings, and that
+/// The view will render a plain grid view without scrolling
+/// capabilities. You can use the ``EmojiGridScrollView`` to
+/// render a `ScrollView` that applies correct paddings, and
 /// automatically scrolls to the `selection` when is changes.
 ///
 /// See the <doc:Views-Article> article for full information
@@ -168,113 +163,6 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
 }
 
 private extension EmojiGrid {
-
-    func handleArrowKey(_ direction: Emoji.GridDirection) -> Bool {
-        selectEmoji(with: direction)
-        return true
-    }
-
-    func handleEscape() -> Bool {
-        selectionState.reset()
-        return true
-    }
-
-    #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
-    @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
-    func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
-        if press.modifiers.isEmpty { return pickSelectedEmoji() }
-        if press.modifiers == .option { return showPopoverForSelection() }
-        return false
-    }
-    #endif
-
-    func pickEmoji(_ emoji: Emoji) {
-        action(emoji)
-        emoji.registerUserSelection()
-    }
-
-    func pickSelectedEmoji() -> Bool {
-        guard let emoji = selectionState.emoji else { return false }
-        pickEmoji(emoji)
-        return true
-    }
-
-    func selectEmoji(
-        _ emoji: Emoji,
-        in category: EmojiCategory,
-        pick: Bool = false,
-        skintonePopover: Bool = false
-    ) {
-        selectionState = .init(emoji: emoji, category: category)
-        if pick { _ = pickSelectedEmoji() }
-        if skintonePopover { popoverSelection = selectionState }
-    }
-
-    #if os(macOS) || os(tvOS)
-    func selectEmoji(
-        with direction: MoveCommandDirection
-    ) {
-        selectEmoji(with: direction.emojiGridDirection)
-    }
-    #endif
-
-    func selectEmoji(
-        with direction: Emoji.GridDirection
-    ) {
-        guard let geo = geometryProxy else { return }
-        let direction = direction.transform(for: layoutDirection)
-        let navDirection = direction.navigationDirection(for: axis)
-        if selectionState.isEmpty { return selectFirstCategory() }
-        guard
-            let category = selectionState.category,
-            let emoji = selectionState.emoji
-        else { return }
-
-        let emojis = emojis(for: category)
-        guard let index = emojis.firstIndex(of: emoji) else { return }
-
-        let itemsPerRow = geo.itemsPerRow(
-            for: axis,
-            style: style
-        )
-
-        let newIndex = direction.destinationIndex(
-            for: axis,
-            currentIndex: index,
-            itemsPerRow: itemsPerRow
-        )
-
-        if let emoji = emojis.emoji(at: newIndex) {
-            selectEmoji(emoji, in: category)
-        } else if navDirection == .back {
-            guard
-                let cat = categories.category(before: category),
-                let emoji = self.emojis(for: cat).last
-            else { return }
-            selectEmoji(emoji, in: cat)
-        } else {
-            guard
-                let cat = categories.category(after: category),
-                let emoji = self.emojis(for: cat).first
-            else { return }
-            selectEmoji(emoji, in: cat)
-        }
-    }
-
-    func selectFirstCategory() {
-        let firstNonEmpty = categories.first { !emojis(for: $0).isEmpty }
-        guard let category = firstNonEmpty else { return }
-        let emoji = emojis(for: category).first
-        selectionState.select(emoji: emoji, in: category)
-    }
-
-    func showPopoverForSelection() -> Bool {
-        popoverSelection = selectionState
-        return true
-    }
-}
-
-private extension EmojiGrid {
     
     var grid: some View {
         gridView
@@ -396,6 +284,113 @@ private extension EmojiGrid {
             )
             .id(category.id)
         }
+    }
+}
+
+private extension EmojiGrid {
+
+    func handleArrowKey(_ direction: Emoji.GridDirection) -> Bool {
+        selectEmoji(with: direction)
+        return true
+    }
+
+    func handleEscape() -> Bool {
+        selectionState.reset()
+        return true
+    }
+
+    #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
+    func handleReturn(_ press: SwiftUI.KeyPress) -> Bool {
+        if press.modifiers.isEmpty { return pickSelectedEmoji() }
+        if press.modifiers == .option { return showPopoverForSelection() }
+        return false
+    }
+    #endif
+
+    func pickEmoji(_ emoji: Emoji) {
+        action(emoji)
+        emoji.registerUserSelection()
+    }
+
+    func pickSelectedEmoji() -> Bool {
+        guard let emoji = selectionState.emoji else { return false }
+        pickEmoji(emoji)
+        return true
+    }
+
+    func selectEmoji(
+        _ emoji: Emoji,
+        in category: EmojiCategory,
+        pick: Bool = false,
+        skintonePopover: Bool = false
+    ) {
+        selectionState = .init(emoji: emoji, category: category)
+        if pick { _ = pickSelectedEmoji() }
+        if skintonePopover { popoverSelection = selectionState }
+    }
+
+    #if os(macOS) || os(tvOS)
+    func selectEmoji(
+        with direction: MoveCommandDirection
+    ) {
+        selectEmoji(with: direction.emojiGridDirection)
+    }
+    #endif
+
+    func selectEmoji(
+        with direction: Emoji.GridDirection
+    ) {
+        guard let geo = geometryProxy else { return }
+        let direction = direction.transform(for: layoutDirection)
+        let navDirection = direction.navigationDirection(for: axis)
+        if selectionState.isEmpty { return selectFirstCategory() }
+        guard
+            let category = selectionState.category,
+            let emoji = selectionState.emoji
+        else { return }
+
+        let emojis = emojis(for: category)
+        guard let index = emojis.firstIndex(of: emoji) else { return }
+
+        let itemsPerRow = geo.itemsPerRow(
+            for: axis,
+            style: style
+        )
+
+        let newIndex = direction.destinationIndex(
+            for: axis,
+            currentIndex: index,
+            itemsPerRow: itemsPerRow
+        )
+
+        if let emoji = emojis.emoji(at: newIndex) {
+            selectEmoji(emoji, in: category)
+        } else if navDirection == .back {
+            guard
+                let cat = categories.category(before: category),
+                let emoji = self.emojis(for: cat).last
+            else { return }
+            selectEmoji(emoji, in: cat)
+        } else {
+            guard
+                let cat = categories.category(after: category),
+                let emoji = self.emojis(for: cat).first
+            else { return }
+            selectEmoji(emoji, in: cat)
+        }
+    }
+
+    func selectFirstCategory() {
+        let firstNonEmpty = categories.first { !emojis(for: $0).isEmpty }
+        guard let category = firstNonEmpty else { return }
+        let emoji = emojis(for: category).first
+        selectionState.select(emoji: emoji, in: category)
+    }
+
+    func showPopoverForSelection() -> Bool {
+        popoverSelection = selectionState
+        return true
     }
 }
 
