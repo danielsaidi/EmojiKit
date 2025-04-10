@@ -9,9 +9,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.6.1
+
+This version marks 15.2 as the latest version.
+
+
 ## 1.6
 
-This version adds Emojis 15.1 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
+This version adds Emojis 15.2 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
 This version also localizes all emojis in German 🇩🇪.
 
