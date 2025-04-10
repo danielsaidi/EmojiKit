@@ -35,6 +35,8 @@ class EmojiCategoryPersistedTests {
     @Test func testCanUseAppendingInsertionStrategy() async throws {
         let category = EmojiCategory.Persisted(
             id: "testCanUseAppendingInsertionStrategy",
+            name: "",
+            iconName: "",
             insertionStrategy: .append
         )
         category.reset()
@@ -47,6 +49,8 @@ class EmojiCategoryPersistedTests {
     @Test func testCanUseInsertFirstInsertionStrategy() async throws {
         let category = EmojiCategory.Persisted(
             id: "testCanUseInsertFirstInsertionStrategy",
+            name: "",
+            iconName: "",
             insertionStrategy: .insertFirst
         )
         category.reset()
@@ -59,6 +63,8 @@ class EmojiCategoryPersistedTests {
     @Test func testInsertingRemovesExistingCopy() async throws {
         let category = EmojiCategory.Persisted(
             id: "testInsertingRemovesExistingCopy",
+            name: "",
+            iconName: "",
             insertionStrategy: .append
         )
         category.reset()
@@ -74,6 +80,8 @@ class EmojiCategoryPersistedTests {
     @Test func testCanSpecifyCustomMaxCountWithAppendInsertionStrategy() async throws {
         let category = EmojiCategory.Persisted(
             id: "testCanSpecifyCustomMaxCountWithAppendInsertionStrategy",
+            name: "",
+            iconName: "",
             insertionStrategy: .append
         )
         category.reset()
@@ -88,6 +96,8 @@ class EmojiCategoryPersistedTests {
     @Test func testCanSpecifyCustomMaxCountWithInsertFirstInsertionStrategy() async throws {
         let category = EmojiCategory.Persisted(
             id: "testCanSpecifyCustomMaxCountWithInsertFirstInsertionStrategy",
+            name: "",
+            iconName: "",
             insertionStrategy: .insertFirst
         )
         category.reset()
@@ -99,5 +109,26 @@ class EmojiCategoryPersistedTests {
         category.setEmojisMaxCount(2)
         category.addEmoji(coffee)
         #expect(category.getEmojis() == [coffee, laptop])
+    }
+    
+    @Test func testCanInitializeCategoryWithInitialEmojis() async throws {
+        
+        // Make it a property to ensure that each use is new
+        var category: EmojiCategory.Persisted {
+            .init(
+                id: "testCanInitializeCategoryWithInitialInsertion",
+                name: "",
+                iconName: "",
+                initialEmojis: [coffee],
+                insertionStrategy: .append
+            )
+        }
+        
+        category.reset()
+        #expect(category.getEmojis() == [coffee])
+        category.addEmoji(rocket)
+        #expect(category.getEmojis() == [coffee, rocket])
+        category.reset()
+        #expect(category.getEmojis() == [coffee])
     }
 }

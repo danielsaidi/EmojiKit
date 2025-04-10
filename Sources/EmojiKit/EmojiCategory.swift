@@ -34,7 +34,10 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
     case symbols
     case flags
     
+    @available(*, deprecated, renamed: "persisted(_:)")
     case favorites
+    
+    @available(*, deprecated, renamed: "persisted(_:)")
     case recent
     
     @available(*, deprecated, message: "This category is not implemented. Use `recent` instead.")
@@ -58,7 +61,19 @@ extension EmojiCategory: Transferable {
 }
 
 public extension EmojiCategory {
-
+    
+    /// A custom category that is based on a persisted one.
+    static func persisted(
+        _ cat: Persisted
+    ) -> EmojiCategory {
+        .custom(
+            id: cat.id,
+            name: cat.name,
+            emojis: cat.getEmojis(),
+            iconName: cat.iconName
+        )
+    }
+    
     /// A custom category with an emoji search result.
     static func search(
         query: String
@@ -163,7 +178,25 @@ public extension EmojiCategory {
         }
     }
     
-    /// An emoji-based icon that represents the category.
+    /// An SF Symbol-based icon for the category.
+    var symbolIcon: Image {
+        switch self {
+        case .smileysAndPeople: .init(systemName: "face.smiling")
+        case .animalsAndNature: .init(systemName: "teddybear")
+        case .foodAndDrink: .init(systemName: "fork.knife")
+        case .activity: .init(systemName: "soccerball")
+        case .travelAndPlaces: .init(systemName: "car")
+        case .objects: .init(systemName: "lightbulb")
+        case .symbols: .init(systemName: "heart")
+        case .flags: .init(systemName: "flag")
+        case .favorites: .init(systemName: "heart")
+        case .recent: .init(systemName: "clock")
+        case .frequent: .init(systemName: "clock")
+        case .custom(_, _, _, let iconName):  .init(systemName: iconName)
+        }
+    }
+    
+    @available(*, deprecated, message: "Use symbolIcon instead")
     var emojiIcon: String {
         switch self {
         case .smileysAndPeople: "😀"
@@ -277,11 +310,18 @@ extension EmojiCategory {
 
 #Preview {
 
+    func categories() -> [EmojiCategory] {
+        var emojis = EmojiCategory.standardCategories
+        emojis.append(.persisted(.favorites))
+        emojis.append(.persisted(.recent))
+        return emojis
+    }
+
     /// This preview limits each line to 5 emojis to make it
     /// easy to compare columns with the native iOS keyboard.
-    NavigationView {
+    return NavigationView {
         List {
-            ForEach(EmojiCategory.standardCategories) { cat in
+            ForEach(categories()) { cat in
                 NavigationLink {
                     ScrollView(.vertical) {
                         LazyVGrid(columns: [GridItem].init(repeating: .init(.fixed(60)), count: 5)) {
@@ -295,7 +335,7 @@ extension EmojiCategory {
                     Label {
                         Text(cat.localizedName)
                     } icon: {
-                        Text(cat.emojiIcon)
+                        Text(cat.symbolIcon)
                     }
                 }
             }

@@ -11,10 +11,6 @@ import XCTest
 
 class EmojisCategoryTests: XCTestCase {
     
-    func emojiIcon(for cat: EmojiCategory) -> String {
-        cat.emojiIcon
-    }
-    
     func firstEmoji(for cat: EmojiCategory) -> String {
         cat.emojis[0].char
     }
@@ -31,6 +27,7 @@ class EmojisCategoryTests: XCTestCase {
             .flags
         ])
     }
+    
     func testHasCorrectEmojis() throws {
         XCTAssertEqual(firstEmoji(for: .smileysAndPeople), "😀")
         XCTAssertEqual(firstEmoji(for: .animalsAndNature), "🐶")
@@ -40,19 +37,5 @@ class EmojisCategoryTests: XCTestCase {
         XCTAssertEqual(firstEmoji(for: .objects), "⌚️")
         XCTAssertEqual(firstEmoji(for: .symbols), "🩷")
         XCTAssertEqual(firstEmoji(for: .flags), "🏳️")
-    }
-    
-    func testHasEmojiBasedIcon() throws {
-        XCTAssertEqual(emojiIcon(for: .smileysAndPeople), "😀")
-        XCTAssertEqual(emojiIcon(for: .animalsAndNature), "🐻")
-        XCTAssertEqual(emojiIcon(for: .foodAndDrink), "🍔")
-        XCTAssertEqual(emojiIcon(for: .activity), "⚽️")
-        XCTAssertEqual(emojiIcon(for: .travelAndPlaces), "🏢")
-        XCTAssertEqual(emojiIcon(for: .objects), "💡")
-        XCTAssertEqual(emojiIcon(for: .symbols), "💱")
-        XCTAssertEqual(emojiIcon(for: .flags), "🏳️")
-        
-        XCTAssertEqual(emojiIcon(for: .favorites), "❤️")
-        XCTAssertEqual(emojiIcon(for: .recent), "🕘")
     }
 }

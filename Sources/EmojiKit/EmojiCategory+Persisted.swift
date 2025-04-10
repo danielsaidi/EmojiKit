@@ -22,17 +22,60 @@ public extension EmojiCategory {
         ///
         /// - Parameters:
         ///   - id: The category ID.
-        ///   - insertionStrategy: The insertion strategy to use.
+        ///   - name: The category name.
+        ///   - iconName: The category icon name.
+        ///   - initialEmojis: The emojis to initialize the category with, if any.
+        ///   - insertionStrategy: The insertion strategy to use when adding emojis.
         public init(
             id: String,
+            name: String,
+            iconName: String,
+            initialEmojis: [Emoji] = [],
             insertionStrategy: EmojiInsertionStrategy
         ) {
             self.id = id
+            self.name = name
+            self.iconName = iconName
             self.insertionStrategy = insertionStrategy
+            tryInitEmojis(initialEmojis)
+        }
+        
+        /// Create a custom persisted emoji category with an
+        /// internal, localized name.
+        ///
+        /// - Parameters:
+        ///   - id: The category ID.
+        ///   - iconName: The category icon name.
+        ///   - initialEmojis: The emojis to initialize the category with, if any.
+        ///   - insertionStrategy: The insertion strategy to use when adding emojis.
+        init(
+            id: String,
+            iconName: String,
+            initialEmojis: [Emoji] = [],
+            insertionStrategy: EmojiInsertionStrategy
+        ) {
+            self.id = id
+            self.name = ""
+            self.iconName = iconName
+            self.insertionStrategy = insertionStrategy
+            self.name = Self.localizedText(for: localizationKey)
+            tryInitEmojis(initialEmojis)
+        }
+        
+        func tryInitEmojis(_ emojis: [Emoji]) {
+            let key = storageKey(for: .emojis)
+            guard store.stringArray(forKey: key) == nil else { return }
+            setEmojis(emojis)
         }
         
         /// The category ID.
         public let id: String
+        
+        /// The category name.
+        public private(set) var name: String
+        
+        /// The category icon name.
+        public let iconName: String
         
         /// The insertion strategy to use.
         public let insertionStrategy: EmojiInsertionStrategy
@@ -68,12 +111,14 @@ public extension EmojiCategory.Persisted {
     /// A persisted category for favorite emojis.
     static let favorites = Self.init(
         id: "favorites",
+        iconName: "heart",
         insertionStrategy: .append
     )
     
     /// A persisted category for recent emojis.
     static let recent = Self.init(
         id: "recent",
+        iconName: "clock",
         insertionStrategy: .insertFirst
     )
 }
@@ -120,24 +165,25 @@ public extension EmojiCategory.Persisted {
         resetEmojisMaxCount()
     }
     
-    /// Reset the emojis in the category.
+    /// Reset the category emojis to its initial value.
     func resetEmojis() {
-        setEmojis([])
+        setEmojis(nil)
     }
     
-    /// Reset the emojis max count for the category.
+    /// Reset the category max count.
     func resetEmojisMaxCount() {
         setEmojisMaxCount(0)
     }
 
     /// Set the persisted emojis for the category.
     func setEmojis(
-        _ emojis: [Emoji],
+        _ emojis: [Emoji]?,
         applyMaxCount limit: Bool = true
     ) {
         let key = storageKey(for: .emojis)
-        let emojis = limitEmojisForStorage(emojis)
-        let chars = emojis.map { $0.char }
+        guard let emojis else { return store.set(nil, forKey: key) }
+        let limited = limitEmojisForStorage(emojis)
+        let chars = limited.map { $0.char }
         return store.set(chars, forKey: key)
     }
     

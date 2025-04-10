@@ -94,7 +94,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         @ViewBuilder sectionTitle: @escaping SectionTitleBuilder,
         @ViewBuilder gridItem: @escaping GridItemBuilder
     ) {
-        let defaultCategories: [EmojiCategory] = [.recent] + .standard
+        let defaultCategories: [EmojiCategory] = [.persisted(.recent)] + .standard
         let categories = categories ?? defaultCategories
         let query = query ?? ""
         let searchCategories: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]

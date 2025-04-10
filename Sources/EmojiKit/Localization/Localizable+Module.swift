@@ -20,3 +20,30 @@ public extension Localizable {
         localizedName(in: locale, bundle: .module)
     }
 }
+
+public extension Localizable {
+    
+    /// The localized text for a certain key, locale.
+    ///
+    /// - Parameters:
+    ///   - key:
+    ///   - locale: The locale to use, by default `.current`.
+    static func localizedText(
+        for key: String,
+        in locale: Locale = .current
+    ) -> String {
+        localizedText(for: key, in: locale, bundle: .module)
+    }
+    
+    /// The localized text for a certain key, locale.
+    ///
+    /// - Parameters:
+    ///   - key:
+    ///   - locale: The locale to use, by default `.current`.
+    func localizedText(
+        for key: String,
+        in locale: Locale = .current
+    ) -> String {
+        Self.localizedText(for: key, in: locale)
+    }
+}

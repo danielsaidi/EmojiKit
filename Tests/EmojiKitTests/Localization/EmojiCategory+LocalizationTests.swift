@@ -24,7 +24,6 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
     }
     
     func testLocalizationKeyIsValid() {
-        XCTAssertEqual(key(for: .frequent), "EmojiCategory.frequent")
         XCTAssertEqual(key(for: .smileysAndPeople), "EmojiCategory.smileysAndPeople")
         XCTAssertEqual(key(for: .animalsAndNature), "EmojiCategory.animalsAndNature")
         XCTAssertEqual(key(for: .foodAndDrink), "EmojiCategory.foodAndDrink")
@@ -44,7 +43,6 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
     
     func testLocalizedNameIsAvailableInEnglish() {
         let locale = Locale.english
-        XCTAssertEqual(name(for: .frequent, locale: locale), "Frequently Used")
         XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Smileys & People")
         XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Animals & Nature")
         XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Food & Drink")
@@ -57,7 +55,6 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
     
     func testLocalizedNameIsAvailableInSwedish() {
         let locale = Locale.swedish
-        XCTAssertEqual(name(for: .frequent, locale: locale), "Ofta använda")
         XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Smileys och människor")
         XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Djur och natur")
         XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Mat och dryck")
@@ -70,7 +67,6 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
 
     func testLocalizedNameIsAvailableInGerman() {
         let locale = Locale.german
-        XCTAssertEqual(name(for: .frequent, locale: locale), "Häufig verwendet")
         XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Smileys & Menschen")
         XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Tiere & Natur")
         XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Essen & Trinken")

@@ -9,9 +9,22 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.6.2
+
+This version makes it easier to create and use custom persisted categories.
+
+### ✨ Features
+
+* `EmojiCategory` has a new `.persisted(_.)` builder.
+* `EmojiCategory.Persisted` can now define initial emojis.
+* `EmojiCategory.Persisted` has new name and icon properties.
+
+
+
 ## 1.6.1
 
 This version marks 15.2 as the latest version.
+
 
 
 ## 1.6

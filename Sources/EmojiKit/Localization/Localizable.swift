@@ -30,8 +30,38 @@ public extension Localizable {
         in locale: Locale = .current,
         bundle: Bundle
     ) -> String {
-        let key = localizationKey
+        localizedText(for: localizationKey, in: locale, bundle: bundle)
+    }
+}
+
+public extension Localizable {
+    
+    /// The localized text for a certain key, locale and bundle.
+    ///
+    /// - Parameters:
+    ///   - key:
+    ///   - locale: The locale to use, by default `.current`.
+    ///   - bundle: The bundle that contains the localized content.
+    static func localizedText(
+        for key: String,
+        in locale: Locale = .current,
+        bundle: Bundle
+    ) -> String {
         let localeBundle = bundle.bundle(for: locale) ?? bundle
         return NSLocalizedString(key, bundle: localeBundle, comment: "")
+    }
+    
+    /// The localized text for a certain key, locale and bundle.
+    ///
+    /// - Parameters:
+    ///   - key:
+    ///   - locale: The locale to use, by default `.current`.
+    ///   - bundle: The bundle that contains the localized content.
+    func localizedText(
+        for key: String,
+        in locale: Locale = .current,
+        bundle: Bundle
+    ) -> String {
+        Self.localizedText(for: key, in: locale, bundle: bundle)
     }
 }
