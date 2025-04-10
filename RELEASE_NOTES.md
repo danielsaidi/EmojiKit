@@ -19,6 +19,7 @@ Note that you need Xcode 16.3 to compile the code, since it uses the latest OS c
 
 ### ✨ Features
 
+* `EmojiCategory` now implements `Sendable`.
 * `EmojiVersion` has a new `v15_2` version with the latest emojis.
 
 🌐 Localization

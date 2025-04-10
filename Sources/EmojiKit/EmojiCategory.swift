@@ -23,7 +23,7 @@ import SwiftUI
 /// values to the beginning of the list. You can however use
 /// the ``frequent`` category to implement a custom frequent
 /// algorithm and update the category accordingly.
-public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable {
+public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable {
 
     case smileysAndPeople
     case animalsAndNature
