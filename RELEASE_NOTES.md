@@ -40,6 +40,7 @@ You need Xcode 16.3 for this version, since it uses new OS checks.
 
 ### 🗑️ Deprecations
 
+* `EmojiCategory.frequent` has been deprecated.
 * `EmojiCategory.standard` has been renamed to `standardCategories`.
 * `EmojiCategory.PersistedCategory` has been replaced with `EmojiCategory.Persisted`.
 

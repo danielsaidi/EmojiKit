@@ -11,18 +11,18 @@ import SwiftUI
 /// This enum defines the standard emoji categories, as well
 /// as their emojis.
 ///
-/// The ``frequent``, ``favorites``, and ``recent`` category
-/// cases are special cases, where the category's emojis can
-/// be changed with the various ``addEmoji(_:to:maxCount:)``,
-/// ``removeEmoji(_:from:)`` and ``resetEmojis(in:)`` static
-/// functions, which take a ``PersistedCategory`` type.
+/// The ``favorites``, and ``recent`` categories are special
+/// cases that use the ``Persisted`` categories. You can add
+/// and remove emojis to and from these categories to affect
+/// the emojis that are shown for these categories.
 ///
-/// > Important: Since EmojiKit doesn't have a way to update
-/// the ``frequent`` category in a proper way, this category
-/// is updated like the ``recent`` category, by adding emoji
-/// values to the beginning of the list. You can however use
-/// the ``frequent`` category to implement a custom frequent
-/// algorithm and update the category accordingly.
+/// Use the ``custom(id:name:emojis:iconName:)`` to create a
+/// custom category with static emojis. You can use a custom
+/// name and SF Symbol name to define how it is presented in
+/// various category listings.
+///
+/// You can also create a custom ``Persisted`` category when
+/// you want to be able to add and remove emojis.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable {
 
     case smileysAndPeople
@@ -35,8 +35,10 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
     case flags
     
     case favorites
-    case frequent
     case recent
+    
+    @available(*, deprecated, message: "This category is not implemented. Use `recent` instead.")
+    case frequent
 
     case custom(
         id: String,
@@ -193,9 +195,10 @@ public extension EmojiCategory {
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
 
-        case .favorites: Self.favoriteEmojis
-        case .frequent: Self.frequentEmojis
-        case .recent: Self.recentEmojis
+        case .favorites: Persisted.favorites.getEmojis()
+        case .recent: Persisted.recent.getEmojis()
+            
+        case .frequent: []
 
         case .custom(_, _, let emojis, _): emojis
         }
