@@ -9,6 +9,18 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.6
+
+This version adds Emojis 15.1 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
+
+Note that you need Xcode 16.3 to compile the code, since it uses the latest OS checks. 
+
+### ✨ Features
+
+* `EmojiVersion` has a new `v15_2` version with the latest emojis.
+
+
+
 ## 1.5.1
 
 ### 🐛 Bug Fixes
@@ -17,14 +29,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.5.0
+## 1.5
 
-✨ Features
+### ✨ Features
 
 * `EmojiCategory` has made all persisted emoji category functions public.
 * `EmojiCategory` can now set a max count for each persisted emoji category.
 
-💡 Adjustments
+### 💡 Adjustments
 
 * `Character.isEmoji` now checks all emoji versions from 15 and up.
 * `EmojiCategory` now uses the persisted emoji category max count as a default cap.

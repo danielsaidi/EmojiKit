@@ -110,6 +110,7 @@
 "😮" = "Cara con la boca abierta";
 "😲" = "Cara asombrada";
 "🥱" = "Cara bostezando";
+"🫩" = "Cara con Ojeras";
 "😴" = "Cara durmiendo";
 "🤤" = "Cara babeando";
 "😪" = "Cara somnolienta";
@@ -203,6 +204,7 @@
 "👂" = "Oreja";
 "🦻" = "Oreja con audífono";
 "👃" = "Nariz";
+"🫆" = "Huella Dactilar";
 "👣" = "Huellas";
 "👁" = "Ojo";
 "👀" = "Ojos";
@@ -636,6 +638,7 @@
 "🌲" = "Árbol de hoja perenne";
 "🌳" = "Árbol de hoja caduca";
 "🌴" = "Palmera";
+"🪾" = "Árbol Desnudo";
 "🪵" = "Madera";
 "🌱" = "Brote";
 "🌿" = "Hierba";
@@ -751,6 +754,7 @@
 "🧄" = "Ajo";
 "🧅" = "Cebolla";
 "🥔" = "Patata";
+"🫜" = "Tubérculo";
 "🍠" = "Boniato asado";
 "🫚" = "Raíz de jengibre";
 "🥐" = "Cruasán";
@@ -948,6 +952,7 @@
 "🎭" = "Artes escénicas";
 "🩰" = "Zapatillas de ballet";
 "🎨" = "Paleta de pintura";
+"🫟" = "Salpicadura";
 "🎬" = "Claqueta";
 "🎤" = "Micrófono";
 "🎧" = "Auriculares";
@@ -961,6 +966,7 @@
 "🪗" = "Acordeón";
 "🎸" = "Guitarra";
 "🪕" = "Banjo";
+"🪉" = "Arpa";
 "🎻" = "Violín";
 "🪈" = "Flauta";
 "🎲" = "Dado de juego";
@@ -1175,6 +1181,7 @@
 "⚒️" = "Martillo y pico";
 "🛠" = "Martillo y llave inglesa";
 "⛏" = "Pico";
+"🪏" = "Pala";
 "🪚" = "Sierra de carpintería";
 "🔩" = "Tuerca y tornillo";
 "⚙️" = "Engranaje";
@@ -1840,6 +1847,7 @@
 "🇼🇸" = "Bandera: Samoa";
 "🇸🇲" = "Bandera: San Marino";
 "🇸🇹" = "Bandera: Santo Tomé y Príncipe";
+"🇨🇶" = "Flag: Sark";
 "🇸🇦" = "Bandera: Arabia Saudí";
 "🇨🇭" = "Bandera: Suiza";
 "🇸🇳" = "Bandera: Senegal";

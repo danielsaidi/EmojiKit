@@ -110,6 +110,7 @@
 "😮" = "Ansikte med öppen mun";
 "😲" = "Häpet ansikte";
 "🥱" = "Gäspande ansikte";
+"🫩" = "Ansikte med Påsar under Ögonen";
 "😴" = "Sovande ansikte";
 "🤤" = "Dregglande ansikte";
 "😪" = "Sömnigt ansikte";
@@ -203,6 +204,7 @@
 "👂" = "Öra";
 "🦻" = "Öra med hörapparat";
 "👃" = "Näsa";
+"🫆" = "Fingeravtryck";
 "👣" = "Fotspår";
 "👁" = "Öga";
 "👀" = "Ögon";
@@ -636,6 +638,7 @@
 "🌲" = "Barrträd";
 "🌳" = "Lövträd";
 "🌴" = "Palmträd";
+"🪾" = "Kalt Träd";
 "🪵" = "Ved";
 "🌱" = "Planta";
 "🌿" = "Ört";
@@ -751,6 +754,7 @@
 "🧄" = "Vitlök";
 "🧅" = "Lök";
 "🥔" = "Potatis";
+"🫜" = "Rotfrukt";
 "🍠" = "Rostad sötpotatis";
 "🫚" = "Ingefärsrot";
 "🥐" = "Croissant";
@@ -948,6 +952,7 @@
 "🎭" = "Scenkonst";
 "🩰" = "Balettsko";
 "🎨" = "Konstnärspalett";
+"🫟" = "Stänk";
 "🎬" = "Filmklappa";
 "🎤" = "Mikrofon";
 "🎧" = "Hörlurar";
@@ -962,6 +967,7 @@
 "🎸" = "Gitarr";
 "🪕" = "Banjo";
 "🎻" = "Fiol";
+"🪉" = "Harpa";
 "🪈" = "Flöjt";
 "🎲" = "Tärning";
 "♟" = "Svart schackbonde";
@@ -1175,6 +1181,7 @@
 "⚒️" = "Hammare och hacka";
 "🛠" = "Hammare och skiftnyckel";
 "⛏" = "Hacka";
+"🪏" = "Spade";
 "🪚" = "Såg";
 "🔩" = "Mutter och bult";
 "⚙️" = "Kugghjul";
@@ -1840,6 +1847,7 @@
 "🇼🇸" = "Flagga: Samoa";
 "🇸🇲" = "Flagga: San Marino";
 "🇸🇹" = "Flagga: São Tomé och Príncipe";
+"🇨🇶" = "Flag: Sark";
 "🇸🇦" = "Flagga: Saudiarabien";
 "🇨🇭" = "Flagga: Schweiz";
 "🇸🇳" = "Flagga: Senegal";
