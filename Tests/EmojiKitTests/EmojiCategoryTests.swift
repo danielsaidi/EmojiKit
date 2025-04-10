@@ -53,7 +53,6 @@ class EmojisCategoryTests: XCTestCase {
         XCTAssertEqual(emojiIcon(for: .flags), "🏳️")
         
         XCTAssertEqual(emojiIcon(for: .favorites), "❤️")
-        XCTAssertEqual(emojiIcon(for: .frequent), "🕘")
         XCTAssertEqual(emojiIcon(for: .recent), "🕘")
     }
 }

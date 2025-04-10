@@ -75,7 +75,7 @@ Emoji("👍").skinToneVariants        // 👍👍🏻👍🏼👍🏽👍🏾�
 
 ## Automatic Category Updates
 
-The ``Emoji`` type has a ``Emoji/registerUserSelection()`` function that can be called whenever a user selects an emoji. This will update the ``EmojiCategory/recent`` and ``EmojiCategory/frequent`` categories accordingly.
+The ``Emoji`` type has a ``Emoji/registerUserSelection()`` function that can be called whenever a user selects an emoji. This will update the ``EmojiCategory/recent`` category.
 
 This function is automatically called by ``EmojiGrid``, so you don't need to call the function manually when you use the grid component.
 
