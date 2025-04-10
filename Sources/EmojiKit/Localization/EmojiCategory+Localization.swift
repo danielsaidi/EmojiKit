@@ -15,3 +15,11 @@ extension EmojiCategory: Localizable {
         "EmojiCategory.\(id)"
     }
 }
+
+extension EmojiCategory.Persisted: Localizable {
+    
+    /// The `Localizable.strings` key to use when localizing.
+    public var localizationKey: String {
+        "EmojiCategory.\(id)"
+    }
+}

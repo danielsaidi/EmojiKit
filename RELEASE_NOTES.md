@@ -15,11 +15,16 @@ This version adds Emojis 15.1 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
 This version also localizes all emojis in German 🇩🇪.
 
-Note that you need Xcode 16.3 to compile the code, since it uses the latest OS checks. 
+The new `EmojiCategory.Persisted` struct replaces the old `EmojiCategory.PersistedCategory` enum.
+
+### ‼️ Important
+
+You need Xcode 16.3 for this version, since it uses new OS checks. 
 
 ### ✨ Features
 
 * `EmojiCategory` now implements `Sendable`.
+* `EmojiCategory.Persisted` is a new persisted category type.
 * `EmojiVersion` has a new `v15_2` version with the latest emojis.
 
 ### 💡 Adjustments
@@ -33,6 +38,7 @@ Note that you need Xcode 16.3 to compile the code, since it uses the latest OS c
 ### 🗑️ Deprecations
 
 * `EmojiCategory.standard` has been renamed to `standardCategories`.
+* `EmojiCategory.PersistedCategory` has been replaced with `EmojiCategory.Persisted`.
 
 
 

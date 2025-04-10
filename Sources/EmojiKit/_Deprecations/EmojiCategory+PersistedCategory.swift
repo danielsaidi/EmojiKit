@@ -1,5 +1,5 @@
 //
-//  EmojiCategory+Custom.swift
+//  EmojiCategory+Persisted.swift
 //  EmojiKit
 //
 //  Created by Daniel Saidi on 2024-08-23.
@@ -8,6 +8,20 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use the new EmojiCategory.Persisted instead.")
+public extension EmojiCategory {
+
+    /// This enum defines all standard, persisted categories.
+    enum PersistedCategory: CaseIterable, Identifiable, Equatable {
+
+        case favorites
+        case frequent
+        case recent
+        case custom(name: String)
+    }
+}
+
+@available(*, deprecated, message: "Use the new EmojiCategory.Persisted instead.")
 public extension EmojiCategory {
     
     /// A persisted list of emojis, used by ``favorites``.
@@ -29,6 +43,7 @@ public extension EmojiCategory {
     }
 }
 
+@available(*, deprecated, message: "Use the new EmojiCategory.Persisted instead.")
 public extension EmojiCategory {
 
     /// Add a certain emoji to a persisted category.
@@ -77,13 +92,6 @@ public extension EmojiCategory {
     ) {
         setEmojis([], for: category)
     }
-    
-    @available(*, deprecated, renamed: "resetEmojis(for:)")
-    static func resetEmojis(
-        in category: PersistedCategory
-    ) {
-        resetEmojis(for: category)
-    }
 
     /// Set the persisted emojis for a category.
     static func setEmojis(
@@ -108,18 +116,7 @@ public extension EmojiCategory {
     }
 }
 
-public extension EmojiCategory {
-
-    /// This enum defines all standard, persisted categories.
-    enum PersistedCategory: CaseIterable, Identifiable, Equatable {
-
-        case favorites
-        case frequent
-        case recent
-        case custom(name: String)
-    }
-}
-
+@available(*, deprecated, message: "Use the new EmojiCategory.Persisted instead.")
 public extension EmojiCategory.PersistedCategory {
 
     var id: String { name }
@@ -144,6 +141,7 @@ private extension String {
     static let emojisMaxCount = "emojisMaxCount"
 }
 
+@available(*, deprecated, message: "Use the new EmojiCategory.Persisted instead.")
 extension EmojiCategory {
 
     /// Get the emojis storage key for custom category.

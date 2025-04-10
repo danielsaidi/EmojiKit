@@ -23,11 +23,15 @@ public extension EmojiCategory {
     static var standard: [EmojiCategory] {
         standardCategories
     }
-}
-
-public extension EmojiCategory {
     
-    @available(*, deprecated, message: "EmojiCategory will no longer implement CaseIterable.")
+    @available(*, deprecated, renamed: "resetEmojis(for:)")
+    static func resetEmojis(
+        in category: PersistedCategory
+    ) {
+        resetEmojis(for: category)
+    }
+    
+    @available(*, deprecated, message: "EmojiCategory no longer implements CaseIterable.")
     static var allCases: [EmojiCategory] {
         [
             .smileysAndPeople,
