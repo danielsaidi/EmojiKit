@@ -110,6 +110,7 @@
 "😮" = "Gesicht mit offenem Mund";
 "😲" = "Erstauntes Gesicht";
 "🥱" = "Gähnendes Gesicht";
+"🫩" = "Gesicht mit Augenringen";
 "😴" = "Schlafendes Gesicht";
 "🤤" = "Sabberndes Gesicht";
 "😪" = "Schläfriges Gesicht";
@@ -203,6 +204,7 @@
 "👂" = "Ohr";
 "🦻" = "Ohr mit Hörgerät";
 "👃" = "Nase";
+"🫆" = "Fingerabdruck";
 "👣" = "Fußspuren";
 "👁" = "Auge";
 "👀" = "Augen";
@@ -636,6 +638,7 @@
 "🌲" = "Nadelbaum";
 "🌳" = "Laubbäume";
 "🌴" = "Palme";
+"🪾" = "Kahler Baum";
 "🪵" = "Holz";
 "🌱" = "Setzling";
 "🌿" = "Kräuter";
@@ -751,6 +754,7 @@
 "🧄" = "Knoblauch";
 "🧅" = "Zwiebel";
 "🥔" = "Kartoffel";
+"🫜" = "Wurzelgemüse";
 "🍠" = "Geröstete Süßkartoffel";
 "🫚" = "Ingwerwurzel";
 "🥐" = "Croissant";
@@ -948,6 +952,7 @@
 "🎭" = "Darstellende Künste";
 "🩰" = "Ballettschuhe";
 "🎨" = "Künstlerpalette";
+"🫟" = "Spritzer";
 "🎬" = "Klappbrett";
 "🎤" = "Mikrofon";
 "🎧" = "Kopfhörer";
@@ -961,6 +966,7 @@
 "🪗" = "Akkordeon";
 "🎸" = "Gitarre";
 "🪕" = "Banjo";
+"🪉" = "Harfe";
 "🎻" = "Geige";
 "🪈" = "Flöte";
 "🎲" = "Würfel";
@@ -1175,6 +1181,7 @@
 "⚒️" = "Hammer und Spitzhacke";
 "🛠" = "Hammer und Schraubenschlüssel";
 "⛏" = "Spitzhacke";
+"🪏" = "Schaufel";
 "🪚" = "Säge";
 "🔩" = "Mutter und Bolzen";
 "⚙️" = "Zahnrad";
@@ -1840,6 +1847,7 @@
 "🇼🇸" = "Flagge: Samoa";
 "🇸🇲" = "Flagge: San Marino";
 "🇸🇹" = "Flagge: São Tomé & Príncipe";
+"🇨🇶" = "Flag: Sark";
 "🇸🇦" = "Flagge: Saudi-Arabien";
 "🇨🇭" = "Flagge: Schweiz";
 "🇸🇳" = "Flagge: Senegal";

@@ -13,11 +13,17 @@ EmojiKit tries to honor semantic versioning:
 
 This version adds Emojis 15.1 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
+This version also localizes all emojis in German 🇩🇪.
+
 Note that you need Xcode 16.3 to compile the code, since it uses the latest OS checks. 
 
 ### ✨ Features
 
 * `EmojiVersion` has a new `v15_2` version with the latest emojis.
+
+🌐 Localization
+
+* All emojis and categories are now localized in German. 
 
 
 
