@@ -121,15 +121,15 @@ public extension EmojiVersion {
 
     /// All emoji versions that are defined in the library.
     static var all: [EmojiVersion] {
-        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v15_2]
+        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v16_0]
     }
     
     /// All emoji versions that are defined in the library.
     static var allCases: [EmojiVersion] { all }
 
-    static var v15_2: Self {
+    static var v16_0: Self {
         .init(
-            version: 15.2,
+            version: 16.0,
             emojis: "🫩🫆🪾🫜🫟🪉🪏🇨🇶",
             iOS: 18.4,
             macOS: 15.4,
@@ -237,7 +237,7 @@ public extension EmojiVersion {
     /// The ``EmojiVersion`` that is used by the current OS.
     static var current: Self {
         if #available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *) {
-            return .v15_2
+            return .v16_0
         }
         if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, *) {
             return .v15_1

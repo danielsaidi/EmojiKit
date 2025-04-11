@@ -262,3 +262,10 @@ public extension Localizable {
         localizedName(in: locale)
     }
 }
+
+
+public extension EmojiVersion {
+    
+    @available(*, deprecated, renamed: "v16_0")
+    static var v15_2: Self { .v16_0 }
+}

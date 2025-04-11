@@ -9,6 +9,26 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.6.3
+
+### 🐛 Bug Fixes
+
+This version fixes an incorrect naming of `EmojiVersion.v16_0`.
+
+
+
+## 1.6.2
+
+This version makes it easier to create and use custom persisted categories.
+
+### ✨ Features
+
+* `EmojiCategory` has a new `.persisted(_.)` builder.
+* `EmojiCategory.Persisted` can now define initial emojis.
+* `EmojiCategory.Persisted` has new name and icon properties.
+
+
+
 ## 1.6.2
 
 This version makes it easier to create and use custom persisted categories.
@@ -23,13 +43,13 @@ This version makes it easier to create and use custom persisted categories.
 
 ## 1.6.1
 
-This version marks 15.2 as the latest version.
+This version marks 16.0 as the latest version.
 
 
 
 ## 1.6
 
-This version adds Emojis 15.2 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
+This version adds Emojis 16.0 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
 This version also localizes all emojis in German 🇩🇪.
 
@@ -45,7 +65,7 @@ You need Xcode 16.3 for this version, since it uses new OS checks.
 
 * `EmojiCategory` now implements `Sendable`.
 * `EmojiCategory.Persisted` is a new persisted category type.
-* `EmojiVersion` has a new `v15_2` version with the latest emojis.
+* `EmojiVersion` has a new `v16_0` version with the latest emojis.
 
 ### 💡 Adjustments
 
