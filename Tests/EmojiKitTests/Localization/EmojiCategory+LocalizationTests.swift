@@ -125,6 +125,18 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
         XCTAssertEqual(name(for: .flags, locale: locale), "旗")
     }
 
+    func testLocalizedNameIsAvailableInKorean() {
+        let locale = Locale.korean
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "스마일리 & 사람")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "동물 & 자연")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "음식 & 음료")
+        XCTAssertEqual(name(for: .activity, locale: locale), "활동")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "여행 & 장소")
+        XCTAssertEqual(name(for: .objects, locale: locale), "물건")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "기호")
+        XCTAssertEqual(name(for: .flags, locale: locale), "국기")
+    }
+
     func testLocalizedNameHasFallbackForUnsupportedLocales() {
         let emoji = Emoji("😀")
         XCTAssertEqual(
