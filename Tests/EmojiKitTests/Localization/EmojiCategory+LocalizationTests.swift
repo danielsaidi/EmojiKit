@@ -77,6 +77,18 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
         XCTAssertEqual(name(for: .flags, locale: locale), "Flaggen")
     }
 
+    func testLocalizedNameIsAvailableInRussian() {
+        let locale = Locale.russian
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Смайлы и люди")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Животные и природа")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Еда и напитки")
+        XCTAssertEqual(name(for: .activity, locale: locale), "Активности")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "Путешествия и места")
+        XCTAssertEqual(name(for: .objects, locale: locale), "Объекты")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "Символы")
+        XCTAssertEqual(name(for: .flags, locale: locale), "Флаги")
+    }
+
     func testLocalizedNameHasFallbackForUnsupportedLocales() {
         let emoji = Emoji("😀")
         XCTAssertEqual(
