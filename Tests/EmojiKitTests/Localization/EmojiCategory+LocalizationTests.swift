@@ -77,6 +77,17 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
         XCTAssertEqual(name(for: .flags, locale: locale), "Flaggen")
     }
 
+    func testLocalizedNameIsAvailableInItalian() {
+        let locale = Locale.italian
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Faccine & Persone")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Animali & Natura")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Cibo & Bevande")
+        XCTAssertEqual(name(for: .activity, locale: locale), "Attività")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "Viaggi & Luoghi")
+        XCTAssertEqual(name(for: .objects, locale: locale), "Oggetti")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "Simboli")
+        XCTAssertEqual(name(for: .flags, locale: locale), "Bandiere")
+
     func testLocalizedNameIsAvailableInRussian() {
         let locale = Locale.russian
         XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Смайлы и люди")
