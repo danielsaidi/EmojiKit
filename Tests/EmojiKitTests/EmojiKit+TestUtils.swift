@@ -18,4 +18,5 @@ extension Locale {
     static let italian = Locale(identifier: "it")
     static let russian = Locale(identifier: "ru")
     static let french = Locale(identifier: "fr")
+    static let japanese = Locale(identifier: "ja")
 }
