@@ -37,6 +37,16 @@ https://github.com/danielsaidi/EmojiKit.git
 
 
 
+## Support my work
+
+I love building tools for the Swift & SwiftUI community. By [becoming a sponsor][Sponsors] on GitHub, you directly support the continued development and improvement of my various [open-source projects][OpenSource] projects.
+
+Your sponsorship helps me dedicate more time to building new features, providing thorough documentation and examples, maintaining high code quality and reliability, etc. You can also [reach out][Email] for support and paid projects. 
+
+Every sponsor makes a real difference. Thank you for considering [becoming a sponsor and supporting my work][Sponsors]!
+
+
+
 ## Features
 
 EmojiKit provides a bunch of emoji-specific features:
@@ -56,8 +66,10 @@ See the articles above for more information.
 
 EmojiKit is localized in:
 
-* 🇺🇸 English (U.S.)
+* 🇬🇧 English
 * 🇩🇪 German
+* 🇮🇹 Italian
+* 🇷🇺 Russian
 * 🇪🇸 Spanish
 * 🇸🇪 Swedish
 
@@ -102,3 +114,14 @@ EmojiKit is available under the MIT license.
 - ``EmojiGrid``
 - ``EmojiGridScrollView``
 - ``EmojiGridStyle``
+
+
+
+[Email]: mailto:daniel.saidi@gmail.com
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
+[Twitter]: https://twitter.com/danielsaidi
+[Mastodon]: https://mastodon.social/@danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
+[Sponsors]: https://github.com/sponsors/danielsaidi

@@ -9,24 +9,22 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.7
+
+Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in Italian, and Russian.
+
+🌐 Localization
+
+* 🇮🇹 All emojis and categories are now localized in Italian.
+* 🇷🇺 All emojis and categories are now localized in Russian. 
+
+
+
 ## 1.6.3
 
 ### 🐛 Bug Fixes
 
 This version fixes an incorrect naming of `EmojiVersion.v16_0`.
-
-
-
-## 1.6.2
-
-This version makes it easier to create and use custom persisted categories.
-
-### ✨ Features
-
-* `EmojiCategory` has a new `.persisted(_.)` builder.
-* `EmojiCategory.Persisted` can now define initial emojis.
-* `EmojiCategory.Persisted` has new name and icon properties.
-
 
 
 ## 1.6.2
@@ -51,7 +49,7 @@ This version marks 16.0 as the latest version.
 
 This version adds Emojis 16.0 emojis: 🫩🫆🪾🫜🫟🪉🪏🇨🇶.
 
-This version also localizes all emojis in German 🇩🇪.
+This version also localizes all emojis in German.
 
 This version also converts some computed properties to constants to improve performance.
 
@@ -60,6 +58,10 @@ The new `EmojiCategory.Persisted` struct replaces the old `EmojiCategory.Persist
 ### ‼️ Important
 
 You need Xcode 16.3 for this version, since it uses new OS checks. 
+
+🌐 Localization
+
+* 🇩🇪 All emojis and categories are now localized in German.
 
 ### ✨ Features
 
@@ -70,11 +72,7 @@ You need Xcode 16.3 for this version, since it uses new OS checks.
 ### 💡 Adjustments
 
 * `Emoji.all` has been converted to a constant.
-* `EmojiCategory.standard` is no longer computed.
-
-🌐 Localization
-
-* All emojis and categories are now localized in German. 
+* `EmojiCategory.standard` is no longer computed. 
 
 ### 🗑️ Deprecations
 
@@ -136,7 +134,7 @@ This version adds support for Spanish.
 
 🌐 Localization
 
-* All emojis and categories have been localized in Spanish. 
+* 🇪🇸 All emojis and categories have been localized in Spanish. 
 
 
 

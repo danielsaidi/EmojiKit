@@ -87,6 +87,7 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
         XCTAssertEqual(name(for: .objects, locale: locale), "Oggetti")
         XCTAssertEqual(name(for: .symbols, locale: locale), "Simboli")
         XCTAssertEqual(name(for: .flags, locale: locale), "Bandiere")
+    }
 
     func testLocalizedNameIsAvailableInRussian() {
         let locale = Locale.russian
