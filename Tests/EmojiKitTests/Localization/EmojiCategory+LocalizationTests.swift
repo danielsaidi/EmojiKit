@@ -101,6 +101,42 @@ final class EmojiCategory_LocalizationTests: XCTestCase {
         XCTAssertEqual(name(for: .flags, locale: locale), "Флаги")
     }
 
+    func testLocalizedNameIsAvailableInFrench() {
+        let locale = Locale.french
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "Émoticônes & Personnes")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "Animaux & Nature")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "Nourriture & Boissons")
+        XCTAssertEqual(name(for: .activity, locale: locale), "Activité")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "Voyages & Lieux")
+        XCTAssertEqual(name(for: .objects, locale: locale), "Objets")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "Symboles")
+        XCTAssertEqual(name(for: .flags, locale: locale), "Drapeaux")
+    }
+
+    func testLocalizedNameIsAvailableInJapanese() {
+        let locale = Locale.japanese
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "笑顔と人")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "動物と自然")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "食べ物と飲み物")
+        XCTAssertEqual(name(for: .activity, locale: locale), "活動")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "旅行と場所")
+        XCTAssertEqual(name(for: .objects, locale: locale), "物")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "記号")
+        XCTAssertEqual(name(for: .flags, locale: locale), "旗")
+    }
+
+    func testLocalizedNameIsAvailableInKorean() {
+        let locale = Locale.korean
+        XCTAssertEqual(name(for: .smileysAndPeople, locale: locale), "스마일리 & 사람")
+        XCTAssertEqual(name(for: .animalsAndNature, locale: locale), "동물 & 자연")
+        XCTAssertEqual(name(for: .foodAndDrink, locale: locale), "음식 & 음료")
+        XCTAssertEqual(name(for: .activity, locale: locale), "활동")
+        XCTAssertEqual(name(for: .travelAndPlaces, locale: locale), "여행 & 장소")
+        XCTAssertEqual(name(for: .objects, locale: locale), "물건")
+        XCTAssertEqual(name(for: .symbols, locale: locale), "기호")
+        XCTAssertEqual(name(for: .flags, locale: locale), "국기")
+    }
+
     func testLocalizedNameHasFallbackForUnsupportedLocales() {
         let emoji = Emoji("😀")
         XCTAssertEqual(
