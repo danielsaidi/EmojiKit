@@ -73,7 +73,7 @@ EmojiKit is localized in the following languages:
 * 🇮🇹 Italian
 * 🇯🇵 Japanese
 * 🇰🇷 Korean
-* 🇨🇬 Portuguese (Brazil)
+* 🇧🇷 Portuguese (Brazil)
 * 🇷🇺 Russian
 * 🇪🇸 Spanish
 * 🇸🇪 Swedish

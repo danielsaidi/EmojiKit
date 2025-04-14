@@ -15,7 +15,7 @@ Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in more lo
 
 🌐 Localization
 
-* 🇨🇬 Brazilian Portuguese
+* 🇧🇷 Brazilian Portuguese
 * 🇫🇷 French 
 * 🇯🇵 Japanese
 * 🇰🇷 Korean
