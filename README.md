@@ -60,16 +60,21 @@ See the online [documentation][Documentation] for more information.
 
 ## Localization
 
-EmojiKit is localized in:
+EmojiKit is localized in the following languages:
 
+* 🇨🇳 Chinese (Simplified)
 * 🇬🇧 English
+* 🇫🇷 French
 * 🇩🇪 German
 * 🇮🇹 Italian
+* 🇯🇵 Japanese
+* 🇰🇷 Korean
+* 🇨🇬 Portuguese (Brazil)
 * 🇷🇺 Russian
 * 🇪🇸 Spanish
 * 🇸🇪 Swedish
 
-You can contribute by localizing the `Sources/Resources/en.lproj` folder.
+You can contribute by copying `Sources/Resources/en.lproj` and localizing it in another language.
 
 
 

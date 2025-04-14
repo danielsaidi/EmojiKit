@@ -9,14 +9,28 @@ EmojiKit tries to honor semantic versioning:
 
 
 
-## 1.7
+## 1.7.1
 
-Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in Italian, and Russian.
+Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in more locales.
 
 🌐 Localization
 
-* 🇮🇹 All emojis and categories are now localized in Italian.
-* 🇷🇺 All emojis and categories are now localized in Russian. 
+* 🇨🇬 Brazilian Portuguese
+* 🇫🇷 French 
+* 🇯🇵 Japanese
+* 🇰🇷 Korean
+* 🇨🇳 Simplified Chinese
+
+
+
+## 1.7
+
+Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in more locales.
+
+🌐 Localization
+
+* 🇮🇹 Italian
+* 🇷🇺 Russian
 
 
 
