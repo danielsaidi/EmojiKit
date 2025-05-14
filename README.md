@@ -89,7 +89,7 @@ Emoji("👍").unicodeName             // Thumbs Up Sign
 Emoji("👍🏿").unicodeName             // Thumbs Up Sign
 Emoji("🚀").unicodeName             // Rocket
 Emoji("😀").localizedName           // Grinning Face
-Emoji("😀").localizedName(for: .swedish)  // Leende Ansikte
+Emoji("😀").localizedName(in: .swedish)  // Leende Ansikte
 Emoji("👍").hasSkinToneVariants     // true
 Emoji("🚀").hasSkinToneVariants     // false
 Emoji("👍🏿").neutralSkinToneVariant  // 👍
