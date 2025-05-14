@@ -9,6 +9,16 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.7.2
+
+Thanks to [@MrRavikiran](https://github.com/MrRavikiran), EmojiKit is now located in Dutch.
+
+🌐 Localization
+
+* 🇳🇱 Dutch
+
+
+
 ## 1.7.1
 
 Thanks to [@aidar](https://github.com/Aidar), EmojiKit is now located in more locales.

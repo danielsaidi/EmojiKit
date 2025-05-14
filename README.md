@@ -33,13 +33,11 @@ https://github.com/danielsaidi/EmojiKit.git
 ```
 
 
-## Support my work
+## Support My Work
 
-I love building tools for the Swift & SwiftUI community. By [becoming a sponsor][Sponsors] on GitHub, you directly support the continued development and improvement of my various [open-source projects][OpenSource] projects.
+By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource]. 
 
-Your sponsorship helps me dedicate more time to building new features, providing thorough documentation and examples, maintaining high code quality and reliability, etc. You can also [reach out][Email] for support and paid projects. 
-
-Every sponsor makes a real difference. Thank you for considering [becoming a sponsor and supporting my work][Sponsors]!
+Every sponsor makes a real difference. Thank you for considering [supporting my work][Sponsors]!
 
 
 
@@ -64,6 +62,7 @@ EmojiKit is localized in the following languages:
 
 * 🇨🇳 Chinese (Simplified)
 * 🇬🇧 English
+* 🇳🇱 Dutch
 * 🇫🇷 French
 * 🇩🇪 German
 * 🇮🇹 Italian

@@ -24,6 +24,12 @@ https://github.com/danielsaidi/EmojiKit.git
 
 
 
+## Support My Work
+
+By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource].
+
+
+
 ## Getting Started
 
 @Links(visualStyle: detailedGrid) {
@@ -68,6 +74,7 @@ EmojiKit is localized in the following languages:
 
 * 🇨🇳 Chinese (Simplified)
 * 🇬🇧 English
+* 🇳🇱 Dutch
 * 🇫🇷 French
 * 🇩🇪 German
 * 🇮🇹 Italian
