@@ -144,7 +144,6 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
                     switch $0.key {
                     case .downArrow: result = handleArrowKey(.down)
                     case .leftArrow: result = handleArrowKey(.left)
-                    case .escape: result = handleEscape()
                     case .return: result = handleReturn($0)
                     case .rightArrow: result = handleArrowKey(.right)
                     case .upArrow: result = handleArrowKey(.up)
@@ -291,11 +290,6 @@ private extension EmojiGrid {
 
     func handleArrowKey(_ direction: Emoji.GridDirection) -> Bool {
         selectEmoji(with: direction)
-        return true
-    }
-
-    func handleEscape() -> Bool {
-        selectionState.reset()
         return true
     }
 

@@ -9,6 +9,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.7.4
+
+### 🐛 Bug Fixes
+
+This version removes the escape key selection reset.
+
+
+
 ## 1.7.3
 
 ### 🐛 Bug Fixes
