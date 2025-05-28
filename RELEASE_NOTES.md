@@ -9,6 +9,14 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 1.7.3
+
+### 🐛 Bug Fixes
+
+This version fixes a single-category grid selection check.
+
+
+
 ## 1.7.2
 
 Thanks to [@MrRavikiran](https://github.com/MrRavikiran), EmojiKit is now located in Dutch.

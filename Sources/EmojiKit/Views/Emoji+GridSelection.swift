@@ -52,15 +52,15 @@ public extension Emoji.GridSelection {
     /// Whether or not the selection matches the parameters.
     func matches(
         emoji: Emoji?,
-        category: EmojiCategory? = nil
+        category: EmojiCategory
     ) -> Bool {
         self.emoji == emoji && self.category == category
     }
 
-    /// Whether a certain emoji is selected.
+    /// Whether a certain emoji and category is selected.
     func isSelected(
         emoji: Emoji?,
-        in category: EmojiCategory? = nil
+        in category: EmojiCategory
     ) -> Bool {
         self.emoji == emoji && self.category == category
     }

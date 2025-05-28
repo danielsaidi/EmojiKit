@@ -430,8 +430,7 @@ private extension EmojiGrid {
         _ emoji: Emoji,
         in category: EmojiCategory
     ) -> Bool {
-        if categories.count == 1 { return selectionState.matches(emoji: emoji) }
-        return selectionState.matches(emoji: emoji, category: category)
+        selectionState.isSelected(emoji: emoji, in: category)
     }
 }
 

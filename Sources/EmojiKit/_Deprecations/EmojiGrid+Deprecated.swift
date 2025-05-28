@@ -189,3 +189,22 @@ public extension EmojiGridScrollView {
         )
     }
 }
+
+public extension Emoji.GridSelection {
+
+    @available(*, deprecated, message: "Use the non-empty category variant.")
+    func matches(
+        emoji: Emoji?,
+        category: EmojiCategory? = nil
+    ) -> Bool {
+        self.emoji == emoji && self.category == category
+    }
+
+    @available(*, deprecated, message: "Use the non-empty category variant.")
+    func isSelected(
+        emoji: Emoji?,
+        in category: EmojiCategory? = nil
+    ) -> Bool {
+        self.emoji == emoji && self.category == category
+    }
+}
