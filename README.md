@@ -7,7 +7,8 @@
     <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/EmojiKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <img src="https://img.shields.io/github/license/danielsaidi/EmojiKit" alt="MIT License" title="MIT License" />
+    <a href="https://github.com/danielsaidi/EmojiKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/EmojiKit" alt="MIT License" /></a>
+    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
@@ -35,9 +36,7 @@ https://github.com/danielsaidi/EmojiKit.git
 
 ## Support My Work
 
-By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource]. 
-
-Every sponsor makes a real difference. Thank you for considering [supporting my work][Sponsors]!
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 
@@ -147,11 +146,12 @@ EmojiKit is available under the MIT license. See the [LICENSE][License] file for
 [Email]: mailto:daniel.saidi@gmail.com
 [Website]: https://danielsaidi.com
 [GitHub]: https://github.com/danielsaidi
-[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
-[Twitter]: https://twitter.com/danielsaidi
-[Mastodon]: https://mastodon.social/@danielsaidi
 [OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
+
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
+[Mastodon]: https://mastodon.social/@danielsaidi
+[Twitter]: https://twitter.com/danielsaidi
 
 [Documentation]: https://danielsaidi.github.io/EmojiKit
 [License]: https://github.com/danielsaidi/EmojiKit/blob/main/LICENSE
