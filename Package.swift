@@ -6,10 +6,10 @@ let package = Package(
     name: "EmojiKit",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v14),
-        .macOS(.v11),
+        .iOS(.v16),
+        .macOS(.v13),
         .tvOS(.v16),
-        .watchOS(.v7),
+        .watchOS(.v9),
         .visionOS(.v1)
     ],
     products: [
