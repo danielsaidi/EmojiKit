@@ -9,6 +9,17 @@ EmojiKit tries to honor semantic versioning:
 
 
 
+## 2.0
+
+This version bumps deployment targets and removes deprecated code.
+
+### 💥 Breaking Changes
+
+* EmojiKit now targets iOS 16 and aligned platform versions.
+* All previously deprecated code has been removed.
+
+
+
 ## 1.7.4
 
 ### 🐛 Bug Fixes

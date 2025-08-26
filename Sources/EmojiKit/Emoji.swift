@@ -36,7 +36,6 @@ public extension Emoji {
 
 extension Emoji: Transferable {
     
-    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
     public static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .emoji)
         ProxyRepresentation(exporting: \.char)

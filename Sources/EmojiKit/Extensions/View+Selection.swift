@@ -15,15 +15,10 @@ extension View {
         isSelected: Bool,
         cornerRadius: Double = 10
     ) -> some View {
-        if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-            self.background(selectionBackgroundShape(isSelected: isSelected))
-                .containerShape(.rect(cornerRadius: cornerRadius))
-        } else {
-            self
-        }
+        self.background(selectionBackgroundShape(isSelected: isSelected))
+            .containerShape(.rect(cornerRadius: cornerRadius))
     }
-    
-    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+
     func selectionBackgroundFillStyle(
         isSelected: Bool
     ) -> AnyShapeStyle {
@@ -37,7 +32,6 @@ extension View {
         #endif
     }
     
-    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     func selectionBackgroundShape(
         isSelected: Bool
     ) -> some View {

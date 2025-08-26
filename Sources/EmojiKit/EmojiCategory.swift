@@ -11,15 +11,13 @@ import SwiftUI
 /// This enum defines the standard emoji categories, as well
 /// as their emojis.
 ///
-/// The ``favorites``, and ``recent`` categories are special
-/// cases that use the ``Persisted`` categories. You can add
-/// and remove emojis to and from these categories to affect
-/// the emojis that are shown for these categories.
+/// The ``persisted(_:)`` category uses a ``Persisted`` type
+/// that defines special categories to which you can add and
+/// remove emojis, like ``Persisted/recent``.
 ///
 /// Use the ``custom(id:name:emojis:iconName:)`` to create a
 /// custom category with static emojis. You can use a custom
-/// name and SF Symbol name to define how it is presented in
-/// various category listings.
+/// name and SF Symbol to define how it's presented.
 ///
 /// You can also create a custom ``Persisted`` category when
 /// you want to be able to add and remove emojis.
@@ -34,15 +32,6 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
     case symbols
     case flags
     
-    @available(*, deprecated, renamed: "persisted(_:)")
-    case favorites
-    
-    @available(*, deprecated, renamed: "persisted(_:)")
-    case recent
-    
-    @available(*, deprecated, message: "This category is not implemented. Use `recent` instead.")
-    case frequent
-
     case custom(
         id: String,
         name: String,
@@ -52,8 +41,7 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
 }
 
 extension EmojiCategory: Transferable {
-    
-    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+
     public static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .emojiCategory)
         ProxyRepresentation(exporting: \.emojisString)
@@ -64,13 +52,13 @@ public extension EmojiCategory {
     
     /// A custom category that is based on a persisted one.
     static func persisted(
-        _ cat: Persisted
+        _ category: Persisted
     ) -> EmojiCategory {
         .custom(
-            id: cat.id,
-            name: cat.name,
-            emojis: cat.getEmojis(),
-            iconName: cat.iconName
+            id: category.id,
+            name: category.name,
+            emojis: category.getEmojis(),
+            iconName: category.iconName
         )
     }
     
@@ -169,11 +157,6 @@ public extension EmojiCategory {
         case .objects: "objects"
         case .symbols: "symbols"
         case .flags: "flags"
-
-        case .favorites: "favorites"
-        case .frequent: "frequent"
-        case .recent: "recent"
-
         case .custom(let id, _, _, _): id
         }
     }
@@ -189,30 +172,7 @@ public extension EmojiCategory {
         case .objects: .init(systemName: "lightbulb")
         case .symbols: .init(systemName: "heart")
         case .flags: .init(systemName: "flag")
-        case .favorites: .init(systemName: "heart")
-        case .recent: .init(systemName: "clock")
-        case .frequent: .init(systemName: "clock")
         case .custom(_, _, _, let iconName):  .init(systemName: iconName)
-        }
-    }
-    
-    @available(*, deprecated, message: "Use symbolIcon instead")
-    var emojiIcon: String {
-        switch self {
-        case .smileysAndPeople: "😀"
-        case .animalsAndNature: "🐻"
-        case .foodAndDrink: "🍔"
-        case .activity: "⚽️"
-        case .travelAndPlaces: "🏢"
-        case .objects: "💡"
-        case .symbols: "💱"
-        case .flags: "🏳️"
-
-        case .favorites: "❤️"
-        case .frequent: "🕘"
-        case .recent: "🕘"
-
-        case .custom: "-"
         }
     }
     
@@ -227,12 +187,6 @@ public extension EmojiCategory {
         case .objects: Self.emojisForObjects
         case .symbols: Self.emojisForSymbols
         case .flags: Self.emojisForFlags
-
-        case .favorites: Persisted.favorites.getEmojis()
-        case .recent: Persisted.recent.getEmojis()
-            
-        case .frequent: []
-
         case .custom(_, _, let emojis, _): emojis
         }
     }
