@@ -24,12 +24,6 @@ https://github.com/danielsaidi/EmojiKit.git
 
 
 
-## Support My Work
-
-You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
-
-
-
 ## Getting Started
 
 @Links(visualStyle: detailedGrid) {
@@ -76,6 +70,12 @@ EmojiKit is localized in the following languages:
 * 🇸🇪 Swedish
 
 You can contribute by copying `Sources/Resources/en.lproj` and localizing it in another language.
+
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution makes a real difference in keeping these tools free and actively developed.
 
 
 
