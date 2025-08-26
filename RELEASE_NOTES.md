@@ -1,6 +1,6 @@
 # Release notes
 
-EmojiKit tries to honor semantic versioning:
+[EmojiKit](https://github.com/danielsaidi/EmojiKit) tries to honor semantic versioning:
 
 * Deprecations can happen in any version.
 * Deprecations are only removed in `major` updates.
