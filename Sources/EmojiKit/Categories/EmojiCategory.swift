@@ -49,8 +49,23 @@ extension EmojiCategory: Transferable {
 }
 
 public extension EmojiCategory {
-    
-    /// A custom category that is based on a persisted one.
+
+    /// A persisted favorites category.
+    static var favorites: EmojiCategory {
+        .persisted(.favorites)
+    }
+
+    /// A persisted frequent category.
+    static var frequent: EmojiCategory {
+        .persisted(.frequent)
+    }
+
+    /// A persisted recent category.
+    static var recent: EmojiCategory {
+        .persisted(.recent)
+    }
+
+    /// A custom, persisted category.
     static func persisted(
         _ category: Persisted
     ) -> EmojiCategory {
@@ -76,12 +91,9 @@ public extension EmojiCategory {
 }
 
 public extension EmojiCategory {
-    
-    /// A list with all standard emoji categories, sorted by
-    /// the order in which they appear on Apple platforms.
-    ///
-    /// This list doesn't contain ``frequent`` or ``recent``,
-    /// only the standard, fixed categories.
+
+    /// Get an ordered list of all standard categories, with
+    /// no ``EmojiCategory/frequent`` emojis firstmost.
     static let standardCategories: [EmojiCategory] = {
         [
             .smileysAndPeople,
@@ -115,7 +127,8 @@ public extension Array where Element == EmojiCategory {
 
 public extension Collection where Element == EmojiCategory {
 
-    /// Get an ordered list of all standard categories.
+    /// Get an ordered list of all standard categories, with
+    /// no ``EmojiCategory/frequent`` emojis firstmost.
     static var standard: [Element] { Element.standardCategories }
 
     /// Get the first category with a certain ID.
@@ -264,12 +277,7 @@ extension EmojiCategory {
 
 #Preview {
 
-    func categories() -> [EmojiCategory] {
-        var emojis = EmojiCategory.standardCategories
-        emojis.append(.persisted(.favorites))
-        emojis.append(.persisted(.recent))
-        return emojis
-    }
+    func categories() -> [EmojiCategory] { .standard }
 
     /// This preview limits each line to 5 emojis to make it
     /// easy to compare columns with the native iOS keyboard.

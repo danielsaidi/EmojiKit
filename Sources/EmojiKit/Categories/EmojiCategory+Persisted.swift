@@ -14,8 +14,7 @@ public extension EmojiCategory {
     /// where emojis can be customzied and persisted.
     ///
     /// You can use the predefined emoji categories, such as
-    /// ``favorites``, and ``recent`` and set up custom ones
-    /// to fit your needs.
+    /// ``favorites``, and ``recent`` and set up custom ones.
     struct Persisted: Codable, Equatable, Hashable, Identifiable, Sendable {
         
         /// Create a custom persisted emoji category.
@@ -31,13 +30,13 @@ public extension EmojiCategory {
             name: String,
             iconName: String,
             initialEmojis: [Emoji] = [],
-            insertionStrategy: EmojiInsertionStrategy
+            insertionStrategy: InsertionStrategy
         ) {
             self.id = id
             self.name = name
             self.iconName = iconName
+            self.initialEmojis = initialEmojis
             self.insertionStrategy = insertionStrategy
-            tryInitEmojis(initialEmojis)
         }
         
         /// Create a custom persisted emoji category with an
@@ -52,20 +51,15 @@ public extension EmojiCategory {
             id: String,
             iconName: String,
             initialEmojis: [Emoji] = [],
-            insertionStrategy: EmojiInsertionStrategy
+            insertionStrategy: InsertionStrategy
         ) {
-            self.id = id
-            self.name = ""
-            self.iconName = iconName
-            self.insertionStrategy = insertionStrategy
-            self.name = Self.localizedText(for: localizationKey)
-            tryInitEmojis(initialEmojis)
-        }
-        
-        func tryInitEmojis(_ emojis: [Emoji]) {
-            let key = storageKey(for: .emojis)
-            guard store.stringArray(forKey: key) == nil else { return }
-            setEmojis(emojis)
+            self.init(
+                id: id,
+                name: "",
+                iconName: iconName,
+                initialEmojis: initialEmojis,
+                insertionStrategy: insertionStrategy
+            )
         }
         
         /// The category ID.
@@ -76,9 +70,12 @@ public extension EmojiCategory {
         
         /// The category icon name.
         public let iconName: String
-        
+
+        /// The default emojis to return if no data is saved.
+        public let initialEmojis: [Emoji]
+
         /// The insertion strategy to use.
-        public let insertionStrategy: EmojiInsertionStrategy
+        public let insertionStrategy: InsertionStrategy
         
         /// The store to use.
         public var store: UserDefaults { .standard }
@@ -96,11 +93,14 @@ public extension EmojiCategory {
 public extension EmojiCategory.Persisted {
     
     /// A strategy that defines how new emojis are added.
-    enum EmojiInsertionStrategy: Codable, Equatable, Sendable {
+    enum InsertionStrategy: Codable, Equatable, Sendable {
         
         /// Append new emojis last in the category.
         case append
-        
+
+        /// Insert new emojis with a frequent strategy.
+        case frequent
+
         /// Insert new emojis first in the category.
         case insertFirst
     }
@@ -114,7 +114,14 @@ public extension EmojiCategory.Persisted {
         iconName: "heart",
         insertionStrategy: .append
     )
-    
+
+    /// A persisted category for frequently used emojis.
+    static let frequent = Self.init(
+        id: "frequent",
+        iconName: "clock",
+        insertionStrategy: .frequent
+    )
+
     /// A persisted category for recent emojis.
     static let recent = Self.init(
         id: "recent",
@@ -126,22 +133,26 @@ public extension EmojiCategory.Persisted {
 public extension EmojiCategory.Persisted {
     
     /// Add an emoji to the category.
-    func addEmoji(
-        _ emoji: Emoji
-    ) {
-        var emojis = getEmojis().filter { $0 != emoji }
+    func addEmoji(_ emoji: Emoji) {
         switch insertionStrategy {
-        case .append: emojis.append(emoji)
-        case .insertFirst: emojis.insert(emoji, at: 0)
+        case .frequent: FrequentEmojis.add(emoji: emoji, maxCount: getEmojisMaxCount())
+        case .append, .insertFirst:
+            let emojis = getEmojis()
+            let new = emojis.inserting(emoji, with: insertionStrategy)
+            setEmojis(new)
         }
-        setEmojis(emojis)
     }
-    
+
     /// Get the persisted emojis for the category.
     func getEmojis() -> [Emoji] {
-        let key = storageKey(for: .emojis)
-        let value = store.stringArray(forKey: key) ?? []
-        return value.map { Emoji($0) }
+        switch insertionStrategy {
+        case .frequent: return FrequentEmojis.emojis
+        case .append, .insertFirst:
+            let key = storageKey(for: .emojis)
+            let value = store.stringArray(forKey: key)
+            guard let value else { return initialEmojis }
+            return value.map { Emoji($0) }
+        }
     }
     
     /// Get the max number of emojis to persist.
@@ -152,17 +163,23 @@ public extension EmojiCategory.Persisted {
     }
     
     /// Remove an emoji from the category.
-    func removeEmoji(
-        _ emoji: Emoji
-    ) {
-        let emojis = getEmojis().filter { $0 != emoji }
-        setEmojis(emojis)
+    func removeEmoji(_ emoji: Emoji) {
+        switch insertionStrategy {
+        case .frequent: FrequentEmojis.removeEmoji(emoji)
+        case .append, .insertFirst:
+            let emojis = getEmojis().filter { $0 != emoji }
+            setEmojis(emojis)
+        }
     }
     
     /// Reset the category.
     func reset() {
-        resetEmojis()
-        resetEmojisMaxCount()
+        switch insertionStrategy {
+        case .frequent: FrequentEmojis.reset()
+        case .append, .insertFirst:
+            resetEmojis()
+            resetEmojisMaxCount()
+        }
     }
     
     /// Reset the category emojis to its initial value.
@@ -176,15 +193,17 @@ public extension EmojiCategory.Persisted {
     }
 
     /// Set the persisted emojis for the category.
-    func setEmojis(
-        _ emojis: [Emoji]?,
-        applyMaxCount limit: Bool = true
-    ) {
-        let key = storageKey(for: .emojis)
-        guard let emojis else { return store.set(nil, forKey: key) }
-        let limited = limitEmojisForStorage(emojis)
-        let chars = limited.map { $0.char }
-        return store.set(chars, forKey: key)
+    func setEmojis(_ emojis: [Emoji]?) {
+        switch insertionStrategy {
+        case .frequent: FrequentEmojis.setEmojis(emojis)
+        case .append, .insertFirst:
+            let key = storageKey(for: .emojis)
+            guard let emojis else { return store.removeObject(forKey: key)}
+            let maxCount = getEmojisMaxCount()
+            let capped = emojis.capped(to: maxCount, with: insertionStrategy)
+            let cappedData = capped.map { $0.char }
+            store.set(cappedData, forKey: key)
+        }
     }
     
     /// Set the max number of emojis to persist.
@@ -194,21 +213,29 @@ public extension EmojiCategory.Persisted {
     }
 }
 
-private extension EmojiCategory.Persisted {
-    
-    /// Limit a collection before persisting.
-    func limitEmojisForStorage(
-        _ emojis: [Emoji],
-        applyMaxCount limit: Bool = true
-    ) -> [Emoji] {
-        guard limit else { return emojis }
-        let maxCount = getEmojisMaxCount()
-        guard maxCount > 0 else { return emojis }
-        switch insertionStrategy {
-        case .append: return Array(emojis.suffix(maxCount))
-        case .insertFirst: return Array(emojis.prefix(maxCount))
+private extension Collection where Element == Emoji {
+
+    func capped(to maxCount: Int, with strategy: EmojiCategory.Persisted.InsertionStrategy) -> [Element] {
+        guard maxCount > 0 else { return Array(self) }
+        switch strategy {
+        case .append: return Array(suffix(maxCount))
+        case .frequent: return Array(self)
+        case .insertFirst: return Array(prefix(maxCount))
         }
     }
+
+    func inserting(_ emoji: Emoji, with strategy: EmojiCategory.Persisted.InsertionStrategy) -> [Element] {
+        var emojis = self.filter { $0 != emoji }
+        switch strategy {
+        case .append: emojis.append(emoji)
+        case .frequent: break
+        case .insertFirst: emojis.insert(emoji, at: 0)
+        }
+        return emojis
+    }
+}
+
+private extension EmojiCategory.Persisted {
     
     /// Get a storage key for a certain value.
     func storageKey(

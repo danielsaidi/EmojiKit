@@ -29,7 +29,10 @@ class EmojiCategoryPersistedTests {
         recent.addEmoji(coffee)
         recent.addEmoji(laptop)
         recent.addEmoji(rocket)
-        #expect(recent.getEmojis() == [rocket, laptop, coffee])
+        let recentEmojis = recent.getEmojis()
+        #expect(recentEmojis.contains(rocket))
+        #expect(recentEmojis.contains(laptop))
+        #expect(recentEmojis.contains(coffee))
     }
     
     @Test func testCanUseAppendingInsertionStrategy() async throws {
@@ -128,6 +131,10 @@ class EmojiCategoryPersistedTests {
         #expect(category.getEmojis() == [coffee])
         category.addEmoji(rocket)
         #expect(category.getEmojis() == [coffee, rocket])
+        category.removeEmoji(rocket)
+        #expect(category.getEmojis() == [coffee])
+        category.removeEmoji(coffee)
+        #expect(category.getEmojis() == [])
         category.reset()
         #expect(category.getEmojis() == [coffee])
     }

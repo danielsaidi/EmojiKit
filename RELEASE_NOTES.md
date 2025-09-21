@@ -9,6 +9,26 @@
 
 
 
+## 2.1
+
+This version adds a `frequent` emoji category.
+
+### ✨ Features
+
+* `EmojiCategory` has new `.favorites`, `.frequent` and `.recent` builders.
+
+### 💡 Adjustments
+
+* `EmojiGrid` and `EmojiScrollGrid` only have a single initializer.
+* `EmojiGrid` has a new `registerSelectionFor` init argument.
+* `EmojiGridScrollView` no longer takes a geometry proxy parameter.
+
+### 🗑️ Deprecations
+
+* `Emoji.registerUserSelection` has been deprecated.
+
+
+
 ## 2.0
 
 This version bumps deployment targets and removes deprecated code.
