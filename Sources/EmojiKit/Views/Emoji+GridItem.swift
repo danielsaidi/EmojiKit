@@ -12,8 +12,7 @@ public extension Emoji {
     
     /// This view represents a standard emoji grid item view.
     ///
-    /// You can style this component with the style modifier
-    /// ``emojiGridItemStyle(_:)``.
+    /// This view can be styled with ``emojiGridItemStyle(_:)``.
     struct GridItem: View {
         
         /// Create an emoji grid item view.

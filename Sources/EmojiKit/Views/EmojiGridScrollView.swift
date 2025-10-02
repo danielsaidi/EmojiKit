@@ -8,18 +8,18 @@
 
 import SwiftUI
 
-/// This grid can be used to list emojis or emoji categories
-/// in a vertically or horizontally scrolling grid.
+/// This grid can be used to list emojis or categories in a vertical or horizontal grid.
 ///
-/// This grid can change `selection` with the arrow keys and
-/// will trigger a provided `action` when an emoji is tapped
-/// or selected by pressing return.
+/// This grid can change the `selection` with the arrow keys, and will trigger a
+/// provided `action` when any emoji is selected by tapping or pressing return.
 ///
-/// The view renders a grid view with scrolling capabilities.
-/// You can use the ``EmojiGrid`` for a plain grid view.
+/// The `selection` will not update if the user selects an emoji skin tone from
+/// a popup, since the original emoji that opened the popover will not change.
 ///
-/// See the <doc:Views-Article> article for full information
-/// on how to use these grids.
+/// This view renders a scrolling grid thatautomatically scrolls to the `selection`.
+/// Use ``EmojiGridView`` to render a plain, non- scrolling grid view.
+///
+/// See the <doc:Views-Article> article for information on how to use grids.
 public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
     
     /// Create an emoji grid with a list of emoji categories.

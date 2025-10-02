@@ -24,7 +24,7 @@ public extension Emoji {
 
 public extension Collection where Element == Emoji {
 
-    // Find all emojis that match a certain search query.
+    /// Find all emojis that match a certain search query.
     func matching(
         _ query: String,
         in locale: Locale = .current

@@ -12,8 +12,7 @@ public extension Emoji {
     
     /// This enum defines the available directions in a grid.
     ///
-    /// It is all internal for now, since this interface may
-    /// change in the future.
+    /// It is all internal for now, since this interface may change in the future.
     enum GridDirection {
         
         case up, down, left, right
@@ -73,8 +72,7 @@ public extension Emoji {
         }
     }
     
-    /// This enum defines the navigation directions that
-    /// a grid direction may be transformed to.
+    /// This enum defines the supported grid navigation directions.
     enum GridNavigationDirection: Equatable {
         case forward, back
     }

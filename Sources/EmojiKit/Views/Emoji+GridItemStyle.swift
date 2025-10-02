@@ -10,13 +10,10 @@ import SwiftUI
 
 public extension Emoji {
     
-    /// This style can be used to modify the visual style of
-    /// the ``Emoji/GridItem`` component.
+    /// This style can be used to style the ``Emoji/GridItem``.
     ///
-    /// You can apply this view style with the view modifier
-    /// ``SwiftUICore/View/emojiGridItemStyle(_:)``.
-    ///
-    /// You can use the ``standard`` style or your own style.
+    /// This style can be applied with ``emojiGridItemStyle(_:)``. You
+    /// can use the ``standard`` style or your own style.
     struct GridItemStyle {
         
         /// Create a custom emoji grid item style.

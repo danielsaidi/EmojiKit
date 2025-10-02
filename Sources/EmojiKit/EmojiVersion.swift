@@ -9,14 +9,14 @@
 import Foundation
 import SwiftUI
 
-/// This enum defines all supported Emoji versions, that are
-/// currently available to macOS.
+/// This enum defines all supported Emoji versions.
 ///
-/// The static ``EmojiVersion/all`` property will return all
-/// versions while ``EmojiVersion/allAvailable`` will return
-/// all versions available to the current runtime. This will
-/// be used to let ``EmojiCategory`` just return emojis that
-/// are available to the current runtime.
+/// The static ``EmojiVersion/all`` property returns all emoji versions while
+/// ``EmojiVersion/allAvailable`` returns all versions that are available
+/// in the current runtime's OS version.
+///
+/// This is used to let ``EmojiCategory`` only return emojis that are available
+/// to the current runtime.
 public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
 
     init(
@@ -103,9 +103,8 @@ public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
     /// The watchOS version in which emojis became available.
     public let watchOS: Double
 
-    /// An optional comment, which can be used to discuss if
-    /// the version made any changes that isn't reflected in
-    /// the emojis it provides.
+    /// An optional comment that can be used to discuss if the version made any
+    /// changes that isn't reflected in the emojis it provides.
     public let comment: String?
 
     /// The version's display name, e.g. `15.1`.

@@ -8,19 +8,13 @@
 
 import SwiftUI
 
-/// This enum defines the standard emoji categories, as well
-/// as their emojis.
+/// This enum defines the standard emoji categories, as well as their emojis.
 ///
-/// The ``persisted(_:)`` category uses a ``Persisted`` type
-/// that defines special categories to which you can add and
-/// remove emojis, like ``Persisted/recent``.
+/// The ``persisted(_:)`` category uses a ``Persisted`` category type
+/// that defines special categories to which you can add and remove emojis.
 ///
-/// Use the ``custom(id:name:emojis:iconName:)`` to create a
-/// custom category with static emojis. You can use a custom
-/// name and SF Symbol to define how it's presented.
-///
-/// You can also create a custom ``Persisted`` category when
-/// you want to be able to add and remove emojis.
+/// Use the ``custom(id:name:emojis:iconName:)`` to create a custom
+/// category with static emojis.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable {
 
     case smileysAndPeople
@@ -91,9 +85,12 @@ public extension EmojiCategory {
 }
 
 public extension EmojiCategory {
-
-    /// Get an ordered list of all standard categories, with
-    /// no ``EmojiCategory/frequent`` emojis firstmost.
+    
+    /// A list with all standard emoji categories, sorted by the order in which they
+    /// appear on Apple platforms.
+    ///
+    /// This list doesn't contain the ``frequent`` or ``recent`` categories,
+    /// only the standard, fixed categories.
     static let standardCategories: [EmojiCategory] = {
         [
             .smileysAndPeople,
@@ -146,11 +143,7 @@ public extension Collection where Element == EmojiCategory {
 
 public extension Emoji {
     
-    /// The emoji's unique identifier with a category prefix.
-    ///
-    /// This can be used to get a unique identifier for each
-    /// category, e.g. when listing multiple categories that
-    /// can contain the same emoji.
+    /// The emoji's unique identifier to use within a certain category.
     func id(in category: EmojiCategory) -> String {
         if category.id.isEmpty { return id }
         return "\(category.id).\(id)"
@@ -204,8 +197,7 @@ public extension EmojiCategory {
         }
     }
     
-    /// A list of all available emojis in the category, as a
-    /// concatenated string.
+    /// A list of all available emojis in the category, as a concatenated string.
     var emojisString: String {
         emojis.map { $0.char }.joined()
     }
@@ -279,8 +271,8 @@ extension EmojiCategory {
 
     func categories() -> [EmojiCategory] { .standard }
 
-    /// This preview limits each line to 5 emojis to make it
-    /// easy to compare columns with the native iOS keyboard.
+    /// This preview limits each line to 5 emojis to simplify compareing columns
+    /// with the native iOS keyboard.
     return NavigationView {
         List {
             ForEach(categories()) { cat in

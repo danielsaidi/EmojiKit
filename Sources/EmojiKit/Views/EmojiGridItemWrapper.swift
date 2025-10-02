@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-/// This internal view is used to apply additional modifiers
-/// to the emoji grid item, to allow for view-specific state.
+/// This internal view is used to apply additional modifiers to the emoji grid item.
 struct EmojiGridItemWrapper<ItemView: View>: View {
 
     let params: Emoji.GridItemParameters

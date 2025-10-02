@@ -10,11 +10,11 @@ import SwiftUI
 
 public extension EmojiCategory {
     
-    /// This type can be used to handle persisted categories,
-    /// where emojis can be customzied and persisted.
+    /// This type can be used to handle persisted categories, where emojis can
+    /// be customzied and persisted.
     ///
-    /// You can use the predefined emoji categories, such as
-    /// ``favorites``, and ``recent`` and set up custom ones.
+    /// You can use the predefined emoji categories, such as ``favorites``,
+    /// and set up custom ones to fit your needs.
     struct Persisted: Codable, Equatable, Hashable, Identifiable, Sendable {
         
         /// Create a custom persisted emoji category.
@@ -39,8 +39,7 @@ public extension EmojiCategory {
             self.insertionStrategy = insertionStrategy
         }
         
-        /// Create a custom persisted emoji category with an
-        /// internal, localized name.
+        /// Create a custom persisted emoji category with an internal name.
         ///
         /// - Parameters:
         ///   - id: The category ID.
@@ -82,8 +81,8 @@ public extension EmojiCategory {
         
         /// Get the emojis storage key for custom category.
         ///
-        /// > Note: This should be mutable, to allow customizing
-        /// it for other storage requirements, like App Groups.
+        /// > Note: This should be mutable, to allow us to customize it for other
+        /// storage requirements, like App Groups.
         static var storage: UserDefaults {
             .standard
         }

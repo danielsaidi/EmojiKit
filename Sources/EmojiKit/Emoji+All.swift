@@ -12,8 +12,7 @@ public extension Emoji {
 
     /// Get all emojis from all standard categories.
     ///
-    /// This property only returns emojis that are available
-    /// the current runtime.
+    /// This property only returns emojis that are available the current runtime.
     static let all: [Emoji] = {
         EmojiCategory.standardCategories.flatMap {
             $0.emojis
@@ -25,8 +24,7 @@ public extension Collection where Element == Emoji {
 
     /// Get all available emojis from all categories.
     ///
-    /// This property only returns emojis that are available
-    /// the current runtime. 
+    /// This property only returns emojis that are available the current runtime. 
     static var all: [Element] {
         Element.all
     }

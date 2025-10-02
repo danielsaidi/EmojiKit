@@ -10,8 +10,9 @@ import CoreTransferable
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// This type represents an emoji character and is used as a
-/// namespace for emoji-related types and functionality.
+/// This type represents an emoji character.
+///
+/// This type is also used as a namespace for emoji-related types and functionality.
 public struct Emoji: Equatable, Codable, Hashable, Identifiable, Sendable {
     
     /// Create an emoji from a certain character.

@@ -17,7 +17,8 @@ public extension Emoji {
     
     /// The emoji's full, readable unicode name.
     ///
-    /// Note that this name may not always be what you want to display to users. For that, use the localized name instead.
+    /// Note that this name may not always be what you want to display to users.
+    /// For that case, use the localized name instead.
     var unicodeName: String {
         unicodeNameComponents
             .joined(separator: " ")

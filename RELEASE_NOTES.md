@@ -9,6 +9,16 @@
 
 
 
+## 2.1.1
+
+This version bumps deployment targets and removes deprecated code.
+
+### ✨ Features
+
+* `Emoji.registerUserSelection` can now customize categories.
+
+
+
 ## 2.1
 
 This version adds a `frequent` emoji category.

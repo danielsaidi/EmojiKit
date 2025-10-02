@@ -10,8 +10,7 @@ import SwiftUI
 
 public extension Emoji {
 
-    /// This popover can be used to show skintone variations
-    /// for any emoji.
+    /// This popover can be used to show skintone variations for any emoji.
     struct SkintonePopover: View {
 
         /// Create a skintone popover for the provided emoji.

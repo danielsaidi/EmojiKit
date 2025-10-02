@@ -15,11 +15,7 @@ public extension Emoji {
         
         /// Create a grid selection value.
         ///
-        /// If you don't provide a selected emoji, the first
-        /// emoji in the first category will be used.
-        ///
-        /// The initializer will return `nil` if no matching
-        /// emoji is found in the category.
+        /// If you don't provide an emoji, the very first emoji will be used.
         public init(
             emoji: Emoji? = nil,
             category: EmojiCategory? = nil
