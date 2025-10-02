@@ -18,7 +18,7 @@
 EmojiKit lets you use emoji-based features on all major Apple platforms (iOS, macOS, tvOS, watchOS & visionOS).
 
 <p align="center">
-    <img src ="Resources/Demo.gif" width="750" />
+    <img src ="https://github.com/danielsaidi/EmojiKit/releases/download/2.2.0/Demo.gif" />
 </p>
 
 EmojiKit supports emojis, categories, unicode versions, localization, skin tones, etc. and has convenient SwiftUI components like ``EmojiGrid`` and ``EmojiScrollGrid``.
