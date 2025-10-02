@@ -9,18 +9,12 @@
 
 
 
-## 2.1.1
-
-This version bumps deployment targets and removes deprecated code.
-
-### ✨ Features
-
-* `Emoji.registerUserSelection` can now customize categories.
+## 2.2
 
 ### 💡 Adjustments
 
 * The package now uses Swift 6.1. 
-* There is a new demo app that targets iOS 26.
+* The demo app now targets iOS 26.
 
 
 
