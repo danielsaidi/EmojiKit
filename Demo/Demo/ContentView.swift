@@ -3,6 +3,7 @@
 //  Demo
 //
 //  Created by Daniel Saidi on 2024-06-07.
+//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
 //
 
 import EmojiKit
@@ -10,10 +11,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @FocusState var focusState
-    
+    @FocusState var isFocused
+
     @State var query = ""
     @State var selection = Emoji.GridSelection()
+    @State var sizeMode = 1.0
 
     var body: some View {
         NavigationStack {
@@ -27,17 +29,50 @@ struct ContentView: View {
                 gridItem: { $0.view }
                 // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
-            .searchable(text: $query)
+            .focused($isFocused)
+            .navigationTitle("EmojiKit")
+            .searchable(text: $query, placement: .navigationBarDrawer)
+        }
+        .emojiGridStyle(gridStyle)
+        .onKeyPress(.return) {
+            print(selection.emoji?.char ?? "-")
+            return .handled
         }
         .tint(.orange)
-        .emojiGridStyle(.small)
+        .task { isFocused = true }
+        .safeAreaInset(edge: .bottom) { slider }
     }
 }
 
 private extension ContentView {
-    
-    func fillStyle(_ isSelected: Bool) -> AnyShapeStyle {
-        isSelected ? .init(.selection) : .init(.clear)
+
+    var gridStyle: EmojiGridStyle {
+        switch sizeMode {
+        case 0: .small
+        case 1: .medium
+        case 2: .large
+        case 3: .extraLarge
+        case 4: .extraExtraLarge
+        default: .medium
+        }
+    }
+}
+
+private extension ContentView {
+
+    var slider: some View {
+        Slider(
+            value: $sizeMode,
+            in: 0...4,
+            step: 1,
+            minimumValueLabel: Text("Small"),
+            maximumValueLabel: Text("Large")
+        ) {
+            Text("Emoji size")
+        }
+        .padding()
+        .glassEffect()
+        .padding()
     }
 }
 

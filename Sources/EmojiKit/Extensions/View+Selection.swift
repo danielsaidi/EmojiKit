@@ -40,3 +40,14 @@ extension View {
             .aspectRatio(1, contentMode: .fill)
     }
 }
+
+#Preview {
+
+    Image(systemName: "face.smiling")
+        .font(.largeTitle)
+        .selectionBackground(
+            isSelected: true,
+            cornerRadius: 10
+        )
+        .tint(.orange)
+}
