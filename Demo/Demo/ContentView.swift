@@ -34,9 +34,8 @@ struct ContentView: View {
             .searchable(text: $query, placement: .navigationBarDrawer)
         }
         .emojiGridStyle(gridStyle)
-        .onKeyPress(.return) {
+        .onReturnKeyPressIfAvailable {
             print(selection.emoji?.char ?? "-")
-            return .handled
         }
         .tint(.orange)
         .task { isFocused = true }
@@ -71,8 +70,33 @@ private extension ContentView {
             Text("Emoji size")
         }
         .padding()
-        .glassEffect()
+        .glassEffectIfAvailable()
         .padding()
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func glassEffectIfAvailable() -> some View {
+        if #available(iOS 26.0, *) {
+            self.glassEffect()
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func onReturnKeyPressIfAvailable(
+        _ handler: @escaping () -> Void
+    ) -> some View {
+        if #available(iOS 17.0, *) {
+            self.onKeyPress(.return) {
+                handler()
+                return .handled
+            }
+        } else {
+            self
+        }
     }
 }
 
