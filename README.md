@@ -8,9 +8,7 @@
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/EmojiKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <a href="https://github.com/danielsaidi/EmojiKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/EmojiKit" alt="MIT License" /></a>
-    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
-
 
 
 # EmojiKit
@@ -24,7 +22,6 @@ EmojiKit lets you use emoji-based features on all major Apple platforms (iOS, ma
 EmojiKit supports emojis, categories, unicode versions, localization, skin tones, etc. and has convenient SwiftUI components like ``EmojiGrid`` and ``EmojiScrollGrid``.
 
 
-
 ## Installation
 
 EmojiKit can be installed with the Swift Package Manager:
@@ -32,12 +29,6 @@ EmojiKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/EmojiKit.git
 ```
-
-
-## Support My Work
-
-You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
-
 
 
 ## Features
@@ -52,7 +43,6 @@ EmojiKit provides a bunch of emoji-specific features:
 * 🖼️ Views - Emoji-specific views, like grids and pickers.
 
 See the online [documentation][Documentation] for more information.
-
 
 
 ## Localization
@@ -73,7 +63,6 @@ EmojiKit is localized in the following languages:
 * 🇸🇪 Swedish
 
 You can contribute by copying `Sources/Resources/en.lproj` and localizing it in another language.
-
 
 
 ## Getting started
@@ -113,17 +102,19 @@ EmojiVersion.v14.emojis   // 🫠🫢🫣
 See the online [documentation][Documentation] for more information.
 
 
-
 ## Documentation
 
 The online [documentation][Documentation] has more information, articles, code examples, etc.
-
 
 
 ## Demo Application
 
 The `Demo` folder has a demo app that lets you explore the library and its components.
 
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 ## Contact
@@ -136,11 +127,9 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
-
 ## License
 
 EmojiKit is available under the MIT license. See the [LICENSE][License] file for more info.
-
 
 
 [Email]: mailto:daniel.saidi@gmail.com
