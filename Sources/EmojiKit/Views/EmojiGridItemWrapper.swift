@@ -30,7 +30,7 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
                     if isPresented { return }
                     popoverSelection = nil
                 }
-                .onChange(of: popoverSelection) { gridSelection in
+                .onChange(of: popoverSelection) { _ in
                     isPopoverPresented = hasSkinToneVariants && isSelected
                 }
                 #if os(iOS) || os(macOS)
