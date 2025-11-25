@@ -9,6 +9,15 @@
 
 
 
+## 2.2.1
+
+### 🐛 Bug Fixes
+
+Thanks to [@josselin-oudry](https://github.com/josselin-oudry) the emoji grid skintone popover now works on iOS 16.
+
+
+
+
 ## 2.2
 
 ### 💡 Adjustments
