@@ -3,7 +3,7 @@
 //  EmojiKit
 //
 //  Created by Daniel Saidi on 2024-03-25.
-//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2026 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
