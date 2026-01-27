@@ -17,6 +17,8 @@ This version improves grid selection and adds some styling options.
 
 * `EmojiCategory` has a new `.standardGridCategories` value.
 * `EmojiGrid` and `EmojiGridScrollView` has a new `visibleCategoryId` binding.
+* `Emoji.SkintonePopover` has a new `.emojiSkintonePopoverStyle` view modifier.
+* `Emoji.SkintonePopoverStyle` can be used to set the visual style of a popover.
 
 ### 💡 Changes
 

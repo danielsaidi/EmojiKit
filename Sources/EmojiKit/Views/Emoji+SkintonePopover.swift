@@ -25,8 +25,9 @@ public extension Emoji {
         private let emoji: Emoji
         private let action: (Emoji) -> Void
 
-        @State
-        private var hoverEmoji: Emoji?
+        @Environment(\.emojiSkintonePopoverStyle) private var style
+
+        @State private var hoverEmoji: Emoji?
 
         public var body: some View {
             HStack {
@@ -38,8 +39,42 @@ public extension Emoji {
                 }
             }
             .padding(5)
+            .popoverColorIfAvailable(style.backgroundColor)
             .popoverSizeIfAvailable()
         }
+    }
+
+    /// This style can be used to style a skintone popover.
+    struct SkintonePopoverStyle {
+
+        /// Create a skintone popover for the provided emoji.
+        public init(
+            backgroundColor: Color = .clear
+        ) {
+            self.backgroundColor = backgroundColor
+        }
+
+        public var backgroundColor: Color
+    }
+}
+
+public extension Emoji.SkintonePopoverStyle {
+
+    static var standard: Self { .init() }
+}
+
+public extension EnvironmentValues {
+
+    @Entry var emojiSkintonePopoverStyle: Emoji.SkintonePopoverStyle = .standard
+}
+
+public extension View {
+
+    /// Apply an emoji skintone popover style.
+    func emojiSkintonePopoverStyle(
+        _ style: Emoji.SkintonePopoverStyle
+    ) -> some View {
+        self.environment(\.emojiSkintonePopoverStyle, style)
     }
 }
 
