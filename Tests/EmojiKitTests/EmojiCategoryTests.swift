@@ -26,6 +26,8 @@ class EmojisCategoryTests: XCTestCase {
             .symbols,
             .flags
         ])
+
+        XCTAssertEqual(EmojiCategory.standardCategories, [EmojiCategory].standard)
     }
     
     func testHasCorrectEmojis() throws {

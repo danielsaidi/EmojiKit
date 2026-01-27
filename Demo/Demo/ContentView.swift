@@ -14,6 +14,7 @@ struct ContentView: View {
     @FocusState var isFocused
 
     @State var query = ""
+    @State var category: EmojiCategory?
     @State var selection: Emoji.GridSelection?
     @State var sizeMode = 1.0
 
@@ -21,9 +22,9 @@ struct ContentView: View {
         NavigationStack {
             EmojiGridScrollView(
                 axis: .vertical,
-                // categories: .standard,
-                query: query,
+                category: $category,
                 selection: $selection,
+                query: query,
                 action: { print($0) },
                 sectionTitle: { $0.view },
                 gridItem: { $0.view }

@@ -9,44 +9,13 @@ import SwiftUI
 
 public extension EmojiGrid {
 
-    @available(*, deprecated, message: "registerSelectionFor has been renamed to addSelectedEmojiTo")
+    @available(*, deprecated, message: "Do not use! Use the category/selection initializer.")
     init(
-        axis: Axis.Set = .vertical,
+        axis: Axis.Set? = nil,
         categories: [EmojiCategory]? = nil,
         emojis: [Emoji]? = nil,
         query: String? = nil,
-        selection: Binding<Emoji.GridSelection?>? = nil,
-        visibleCategoryId: Binding<EmojiCategory.ID?>? = nil,
-        registerSelectionFor: [EmojiCategory.Persisted],
-        geometryProxy: GeometryProxy? = nil,
-        action: ((Emoji) -> Void)? = nil,
-        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
-        @ViewBuilder sectionTitle: @escaping SectionTitleBuilder,
-        @ViewBuilder gridItem: @escaping GridItemBuilder
-    ) {
-        self.init(
-            axis: axis,
-            categories: categories,
-            emojis: emojis,
-            query: query,
-            selection: selection,
-            visibleCategoryId: visibleCategoryId,
-            addSelectedEmojiTo: registerSelectionFor,
-            geometryProxy: geometryProxy,
-            action: action,
-            categoryEmojis: categoryEmojis,
-            sectionTitle: sectionTitle,
-            gridItem: gridItem
-        )
-    }
-
-    @available(*, deprecated, message: "selection now uses an optional value.")
-    init(
-        axis: Axis.Set = .vertical,
-        categories: [EmojiCategory]? = nil,
-        emojis: [Emoji]? = nil,
-        query: String? = nil,
-        selection: Binding<Emoji.GridSelection>,
+        selection: Binding<Emoji.GridSelection>? = nil,
         registerSelectionFor: [EmojiCategory.Persisted]? = nil,
         geometryProxy: GeometryProxy? = nil,
         action: ((Emoji) -> Void)? = nil,
@@ -57,17 +26,15 @@ public extension EmojiGrid {
         self.init(
             axis: axis,
             categories: categories,
-            emojis: emojis,
-            query: query,
+            category: .constant(nil),
             selection: Binding(
-                get: { selection.wrappedValue },
-                set: { selection.wrappedValue = $0 ?? .init() }
+                get: { selection?.wrappedValue },
+                set: { selection?.wrappedValue = $0 ?? .init() }
             ),
-            visibleCategoryId: nil,
-            addSelectedEmojiTo:         registerSelectionFor,
+            query: query,
+            addSelectedEmojisTo: registerSelectionFor,
             geometryProxy: geometryProxy,
             action: action,
-            categoryEmojis: categoryEmojis,
             sectionTitle: sectionTitle,
             gridItem: gridItem
         )
@@ -76,42 +43,13 @@ public extension EmojiGrid {
 
 public extension EmojiGridScrollView {
 
-    @available(*, deprecated, message: "registerSelectionFor has been renamed to addSelectedEmojiTo")
+    @available(*, deprecated, message: "Do not use! Use the category/selection initializer.")
     init(
-        axis: Axis.Set = .vertical,
+        axis: Axis.Set? = nil,
         categories: [EmojiCategory]? = nil,
         emojis: [Emoji]? = nil,
         query: String? = nil,
-        selection: Binding<Emoji.GridSelection?>? = nil,
-        visibleCategoryId: Binding<EmojiCategory.ID?>? = nil,
-        registerSelectionFor: [EmojiCategory.Persisted],
-        action: ((Emoji) -> Void)? = nil,
-        categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
-        @ViewBuilder sectionTitle: @escaping SectionTitleBuilder,
-        @ViewBuilder gridItem: @escaping GridItemBuilder
-    ) {
-        self.init(
-            axis: axis,
-            categories: categories,
-            emojis: emojis,
-            query: query,
-            selection: selection,
-            visibleCategoryId: visibleCategoryId,
-            addSelectedEmojiTo: registerSelectionFor,
-            action: action,
-            categoryEmojis: categoryEmojis,
-            sectionTitle: sectionTitle,
-            gridItem: gridItem
-        )
-    }
-
-    @available(*, deprecated, message: "selection now uses an optional value.")
-    init(
-        axis: Axis.Set = .vertical,
-        categories: [EmojiCategory]? = nil,
-        emojis: [Emoji]? = nil,
-        query: String? = nil,
-        selection: Binding<Emoji.GridSelection>,
+        selection: Binding<Emoji.GridSelection>? = nil,
         registerSelectionFor: [EmojiCategory.Persisted]? = nil,
         action: ((Emoji) -> Void)? = nil,
         categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
@@ -121,16 +59,14 @@ public extension EmojiGridScrollView {
         self.init(
             axis: axis,
             categories: categories,
-            emojis: emojis,
-            query: query,
+            category: .constant(nil),
             selection: Binding(
-                get: { selection.wrappedValue },
-                set: { selection.wrappedValue = $0 ?? .init() }
+                get: { selection?.wrappedValue },
+                set: { selection?.wrappedValue = $0 ?? .init() }
             ),
-            visibleCategoryId: nil,
-            addSelectedEmojiTo: registerSelectionFor,
+            query: query,
+            addSelectedEmojisTo: registerSelectionFor,
             action: action,
-            categoryEmojis: categoryEmojis,
             sectionTitle: sectionTitle,
             gridItem: gridItem
         )
@@ -138,7 +74,7 @@ public extension EmojiGridScrollView {
 
     @available(*, deprecated, message: "Do not pass in a geometry proxy manually.")
     init(
-        axis: Axis.Set = .vertical,
+        axis: Axis.Set? = nil,
         categories: [EmojiCategory]? = nil,
         emojis: [Emoji]? = nil,
         query: String? = nil,

@@ -100,31 +100,9 @@ public extension EmojiCategory {
             .flags
         ]
     }()
-
-    /// A list with all standard emoji categories, as listed
-    /// by default in an ``EmojiGrid``.
-    static let standardGridCategories: [EmojiCategory] = {
-        [.frequent] + standardCategories
-    }()
 }
 
 public extension Array where Element == EmojiCategory {
-
-    /// Adjust a collection of categories for a grid display.
-    func adjustedForGrid(
-        leadingEmojis emojis: [Emoji]?,
-        query: String?
-    ) -> Self {
-        var result = self
-        if let emojis {
-            let cat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
-            result.insert(cat, at: 0)
-        }
-        let query = query ?? ""
-        let searchCategory: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
-        let cats = searchCategory ?? result
-        return cats.filter { !$0.emojis.isEmpty }
-    }
 
     /// Get the category after the provided category.
     func category(after category: Element) -> Element? {
@@ -139,20 +117,27 @@ public extension Array where Element == EmojiCategory {
         let newIndex = index - 1
         return newIndex >= 0 ? self[newIndex] : nil
     }
+
+    /// Adjust a collection of categories for a grid display.
+    func gridCategories(forQuery query: String?) -> Self {
+        guard let query else { return self }
+        if query.trimmingCharacters(in: .whitespaces).isEmpty { return self }
+        let search: [EmojiCategory] = [.search(query: query)]
+        return search.filter { !$0.emojis.isEmpty }
+    }
 }
 
 public extension Collection where Element == EmojiCategory {
 
-    /// Get an ordered list of all standard categories, with
-    /// no ``EmojiCategory/frequent`` category firstmost.
+    /// An ordered list of all standard categories.
     static var standard: [Element] {
         Element.standardCategories
     }
 
-    /// Get an ordered list of all standard categories, with
+    /// An ordered list of all ``standard`` categories, with
     /// a ``EmojiCategory/frequent`` category firstmost.
     static var standardGrid: [Element] {
-        Element.standardGridCategories
+        [.frequent] + .standard
     }
 
     /// Get the first category with a certain ID.
