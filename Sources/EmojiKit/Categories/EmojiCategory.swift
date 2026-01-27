@@ -85,12 +85,9 @@ public extension EmojiCategory {
 }
 
 public extension EmojiCategory {
-    
-    /// A list with all standard emoji categories, sorted by the order in which they
-    /// appear on Apple platforms.
-    ///
-    /// This list doesn't contain the ``frequent`` or ``recent`` categories,
-    /// only the standard, fixed categories.
+
+    /// A list with all standard emoji categories, sorted by
+    /// the order in which they appear on Apple platforms.
     static let standardCategories: [EmojiCategory] = {
         [
             .smileysAndPeople,
@@ -103,9 +100,31 @@ public extension EmojiCategory {
             .flags
         ]
     }()
+
+    /// A list with all standard emoji categories, as listed
+    /// by default in an ``EmojiGrid``.
+    static let standardGridCategories: [EmojiCategory] = {
+        [.frequent] + standardCategories
+    }()
 }
 
 public extension Array where Element == EmojiCategory {
+
+    /// Adjust a collection of categories for a grid display.
+    func adjustedForGrid(
+        leadingEmojis emojis: [Emoji]?,
+        query: String?
+    ) -> Self {
+        var result = self
+        if let emojis {
+            let cat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
+            result.insert(cat, at: 0)
+        }
+        let query = query ?? ""
+        let searchCategory: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
+        let cats = searchCategory ?? result
+        return cats.filter { !$0.emojis.isEmpty }
+    }
 
     /// Get the category after the provided category.
     func category(after category: Element) -> Element? {
@@ -125,8 +144,16 @@ public extension Array where Element == EmojiCategory {
 public extension Collection where Element == EmojiCategory {
 
     /// Get an ordered list of all standard categories, with
-    /// no ``EmojiCategory/frequent`` emojis firstmost.
-    static var standard: [Element] { Element.standardCategories }
+    /// no ``EmojiCategory/frequent`` category firstmost.
+    static var standard: [Element] {
+        Element.standardCategories
+    }
+
+    /// Get an ordered list of all standard categories, with
+    /// a ``EmojiCategory/frequent`` category firstmost.
+    static var standardGrid: [Element] {
+        Element.standardGridCategories
+    }
 
     /// Get the first category with a certain ID.
     func category(withId id: Element.ID?) -> Element? {

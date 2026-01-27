@@ -24,7 +24,17 @@ public extension Emoji {
             self.category = category
             self.emoji = emoji
         }
-        
+
+        public init(
+            emoji: String,
+            category: EmojiCategory
+        ) {
+            self.init(
+                emoji: Emoji(emoji),
+                category: category
+            )
+        }
+
         /// The currently selected emoji.
         public var emoji: Emoji?
 
@@ -61,13 +71,13 @@ public extension Emoji.GridSelection {
         self.emoji == emoji && self.category == category
     }
 
-    /// Reset the current selection.
+    @available(*, deprecated, message: "This is no longer used.")
     mutating func reset() {
         self.emoji = nil
         self.category = nil
     }
 
-    /// Select a certain emoji in a certain category.
+    @available(*, deprecated, message: "This is no longer used.")
     mutating func select(
         emoji: Emoji?,
         in category: EmojiCategory?

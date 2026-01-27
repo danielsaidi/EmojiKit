@@ -14,7 +14,7 @@ struct ContentView: View {
     @FocusState var isFocused
 
     @State var query = ""
-    @State var selection = Emoji.GridSelection()
+    @State var selection: Emoji.GridSelection?
     @State var sizeMode = 1.0
 
     var body: some View {
@@ -30,12 +30,14 @@ struct ContentView: View {
                 // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
             .focused($isFocused)
-            .navigationTitle("EmojiKit")
+            .navigationTitle(selection?.category?.localizedName ?? "EmojiKit")
+            #if os(iOS)
             .searchable(text: $query, placement: .navigationBarDrawer)
+            #endif
         }
         .emojiGridStyle(gridStyle)
         .onReturnKeyPressIfAvailable {
-            print(selection.emoji?.char ?? "-")
+            print(selection?.emoji?.char ?? "-")
         }
         .tint(.orange)
         .task { isFocused = true }

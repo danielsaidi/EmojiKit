@@ -8,19 +8,21 @@
 
 import SwiftUI
 
-/// This grid can be used to list emojis or categories in a vertical or horizontal grid.
+/// This grid can be used to list emojis and categories in a
+/// non-scrolling vertical or horizontal grid.
 ///
-/// This grid can change the `selection` with the arrow keys, and will trigger a
-/// provided `action` when any emoji is selected by tapping or pressing return.
+/// This grid can change the `selection` with the arrow keys
+/// and triggers an `action` when any emoji is selected. The
+/// `selection` will not update when selecting an emoji skin
+/// tone from the popover.
 ///
-/// The `selection` will not update if the user selects an emoji skin tone from
-/// a popup, since the original emoji that opened the popover will not change.
+/// The optional `visibleCategoryId` binding will be updated
+/// when a category title is displayed, but only for iOS 18+
+/// and aligned versions. You can observe this value to show
+/// the current category, and set it to scroll to a category
+/// without selecting.
 ///
-/// This view renders a non-scrolling grid. Use ``EmojiGridScrollView`` to
-/// render a `ScrollView`-wrapped grid view that applies correct grid paddings
-/// and automatically scrolls to the `selection`.
-///
-/// See the <doc:Views-Article> article for information on how to use grids.
+/// See <doc:Views-Article> for more information about grids.
 public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     
     /// Create an emoji grid with a list of emoji categories.
@@ -33,8 +35,9 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     ///   - categories: The categories to list, by default frequent and standard.
     ///   - emojis: A custom list of emojis to add firstmost, if any.
     ///   - query: The search query to apply, if any.
-    ///   - selection: An external binding for the grid's current selection, if any.
-    ///   - registerSelectionFor: The categories to update on selection, by default `frequent`.
+    ///   - selection: An grid selection binging, if any.
+    ///   - visibleCategoryId: The currently visible category, if any.
+    ///   - addSelectedEmojiTo: The categories to update on selection, by default `frequent` and `recent`.
     ///   - geometryProxy: An optional geometry proxy for arrow/move-based navigation.
     ///   - action: An action to trigger when an emoji is selected, if any.
     ///   - categoryEmojis: An optional function that can customize emojis for a category.
@@ -45,45 +48,40 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         categories: [EmojiCategory]? = nil,
         emojis: [Emoji]? = nil,
         query: String? = nil,
-        selection: Binding<Emoji.GridSelection>? = nil,
-        registerSelectionFor: [EmojiCategory.Persisted]? = nil,
+        selection: Binding<Emoji.GridSelection?>? = nil,
+        visibleCategoryId: Binding<EmojiCategory.ID?>? = nil,
+        addSelectedEmojiTo: [EmojiCategory.Persisted]? = nil,
         geometryProxy: GeometryProxy? = nil,
         action: ((Emoji) -> Void)? = nil,
         categoryEmojis: ((EmojiCategory) -> [Emoji])? = nil,
         @ViewBuilder sectionTitle: @escaping SectionTitleBuilder,
         @ViewBuilder gridItem: @escaping GridItemBuilder
     ) {
-        let defaultCategories: [EmojiCategory] = [.frequent] + .standard
-        var categories = categories ?? defaultCategories
-        if let emojis {
-            let cat = EmojiCategory.custom(id: "", name: "", emojis: emojis, iconName: "")
-            categories.insert(cat, at: 0)
-        }
-        let query = query ?? ""
-        let searchCategories: [EmojiCategory]? = query.isEmpty ? nil : [.search(query: query)]
-        let cats = searchCategories ?? categories
-        let filteredCategories = cats.filter { !$0.emojis.isEmpty }
-
+        let categories = categories ?? .standardGrid
         self.axis = axis
-        self.categories = filteredCategories
-        self.query = query
-        self._selectionBinding = selection ?? .constant(.init())
+        self.categories = categories.adjustedForGrid(leadingEmojis: emojis, query: query)
+        self.query = query ?? ""
+        self._selectionBinding = selection ?? .constant(nil)
         self.selectionState = selection?.wrappedValue ?? .init()
-        self.registerSelectionFor = registerSelectionFor ?? [.frequent]
+        self._visibleCategoryId =  visibleCategoryId ?? .constant(nil)
+        self.addSelectedEmojiTo = addSelectedEmojiTo ?? [.frequent, .recent]
         self.geometryProxy = geometryProxy
         self.action = action ?? { _ in }
         self.categoryEmojis = categoryEmojis ?? { $0.emojis }
         self.section = sectionTitle
         self.item = gridItem
     }
-    
+
+    @Binding var selectionBinding: Emoji.GridSelection?
+    @Binding var visibleCategoryId: EmojiCategory.ID?
+
     private let action: (Emoji) -> Void
     private let axis: Axis.Set
     private let categories: [EmojiCategory]
     private let categoryEmojis: (EmojiCategory) -> [Emoji]
     private let geometryProxy: GeometryProxy?
     private let query: String
-    private let registerSelectionFor: [EmojiCategory.Persisted]
+    private let addSelectedEmojiTo: [EmojiCategory.Persisted]
 
     private let section: (Emoji.GridSectionTitleParameters) -> SectionTitle
     private let item: (Emoji.GridItemParameters) -> GridItem
@@ -91,13 +89,11 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     public typealias SectionTitleBuilder = (Emoji.GridSectionTitleParameters) -> SectionTitle
     public typealias GridItemBuilder = (Emoji.GridItemParameters) -> GridItem
 
-    @Binding var selectionBinding: Emoji.GridSelection
-
     @Environment(\.emojiGridStyle) var style
     @Environment(\.layoutDirection) var layoutDirection
 
     @State var popoverSelection: Emoji.GridSelection?
-    @State var selectionState: Emoji.GridSelection
+    @State var selectionState: Emoji.GridSelection?
 
     public var body: some View {
         bodyContent.id(query)
@@ -177,11 +173,15 @@ private extension EmojiGrid {
                         at: offset
                     )
                 } header: {
-                    sectionTitle(
-                        for: category,
-                        at: offset
-                    )
-                    .padding(.top, offset > 0 ? style.sectionSpacing : 0)
+                    if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                        sectionTitle(for: category, at: offset)
+                            .onScrollVisibilityChange { isVisible in
+                                guard isVisible else { return }
+                                visibleCategoryId = category.id
+                            }
+                    } else {
+                        sectionTitle(for: category, at: offset)
+                    }
                 }
             }
         }
@@ -253,6 +253,7 @@ private extension EmojiGrid {
                 )
             )
             .id(category.id)
+            .padding(.top, index > 0 ? style.sectionSpacing : 0)
         }
     }
 }
@@ -275,13 +276,13 @@ private extension EmojiGrid {
 
     func pickEmoji(_ emoji: Emoji) {
         action(emoji)
-        registerSelectionFor.forEach {
+        addSelectedEmojiTo.forEach {
             $0.addEmoji(emoji)
         }
     }
 
     func pickSelectedEmoji() -> Bool {
-        guard let emoji = selectionState.emoji else { return false }
+        guard let emoji = selectionState?.emoji else { return false }
         pickEmoji(emoji)
         return true
     }
@@ -311,7 +312,7 @@ private extension EmojiGrid {
         guard let geo = geometryProxy else { return }
         let direction = direction.transform(for: layoutDirection)
         let navDirection = direction.navigationDirection(for: axis)
-        if selectionState.isEmpty { return selectFirstCategory() }
+        guard let selectionState, !selectionState.isEmpty else { return selectFirstCategory() }
         guard
             let category = selectionState.category,
             let emoji = selectionState.emoji
@@ -352,7 +353,7 @@ private extension EmojiGrid {
         let firstNonEmpty = categories.first { !emojis(for: $0).isEmpty }
         guard let category = firstNonEmpty else { return }
         let emoji = emojis(for: category).first
-        selectionState.select(emoji: emoji, in: category)
+        selectionState = .init(emoji: emoji, category: category)
     }
 
     func showPopoverForSelection() -> Bool {
@@ -397,7 +398,7 @@ private extension EmojiGrid {
         _ emoji: Emoji,
         in category: EmojiCategory
     ) -> Bool {
-        selectionState.isSelected(emoji: emoji, in: category)
+        selectionState?.isSelected(emoji: emoji, in: category) == true
     }
 }
 
@@ -406,44 +407,44 @@ private extension EmojiGrid {
     struct Preview: View {
         
         @State var query: String = ""
-        
-        @State var selection = Emoji.GridSelection(
-            emoji: .init("😀"),
-            category: .smileysAndPeople
-        )
+        @State var visibleCategoryId: EmojiCategory.ID?
+        @State var selection: Emoji.GridSelection?
         
         var body: some View {
-            VStack {
-                TextField("Search", text: $query)
-                    .padding(.horizontal, 3)
-                
-                Divider()
-                
-                ScrollViewReader { proxy in
-                    EmojiGridScrollView(
-                        axis: .vertical,
-                        // categories: [.recent] + .standard,
-                        query: query,
-                        selection: $selection,
-                        action: { print($0.char) },
-                        categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },
-                        sectionTitle: { $0.view },
-                        gridItem: { $0.view }
-                    )
-                    .emojiGridStyle(.small)
-                    .onAppear {
-                        proxy.scrollTo(selection)
+            NavigationStack {
+                VStack(spacing: 0) {
+                    TextField("Search", text: $query)
+                        .padding(.horizontal, 3)
+
+                    Divider()
+
+                    ScrollViewReader { proxy in
+                        EmojiGridScrollView(
+                            axis: .vertical,
+                            query: query,
+                            selection: $selection,
+                            visibleCategoryId: $visibleCategoryId,
+                            action: { print($0.char) },
+                            categoryEmojis: { $0.emojis /*Array($0.emojis.prefix(4))*/ },
+                            sectionTitle: { $0.view },
+                            gridItem: { $0.view }
+                        )
+                        .emojiGridStyle(.small)
+                        .onAppear {
+                            proxy.scrollTo(selection)
+                        }
+                        .onChange(of: selection) { selection in
+                            proxy.scrollTo(selection)
+                        }
                     }
-                    .onChange(of: selection) { selection in
-                        proxy.scrollTo(selection)
+
+                    Divider()
+
+                    Button("Change") {
+                        selection = .init(emoji: .init("🤯"), category: .smileysAndPeople)
                     }
                 }
-                
-                Divider()
-                
-                Button("Change") {
-                    selection = .init(emoji: .init("🤯"), category: .smileysAndPeople)
-                }
+                .navigationTitle(visibleCategoryId ?? "Preview")
             }
         }
     }
