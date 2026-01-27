@@ -11,11 +11,14 @@ import SwiftUI
 public extension Emoji {
     
     /// This struct can be used to handle grid selections.
+    ///
+    /// `TODO` Make the emoji and category non-optional when
+    /// bumping to 3.0.
     struct GridSelection: Equatable, Hashable {
         
         /// Create a grid selection value.
         ///
-        /// If you don't provide an emoji, the very first emoji will be used.
+        /// If you don't provide an emoji, the first emoji will be used.
         public init(
             emoji: Emoji? = nil,
             category: EmojiCategory? = nil

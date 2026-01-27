@@ -25,8 +25,10 @@ extension ScrollViewProxy {
     func scrollToSelection(
         _ selection: Emoji.GridSelection?
     ) {
-        guard let category = selection?.category else { return }
-        guard let emoji = selection?.emoji else { return }
+        guard
+            let category = selection?.category,
+            let emoji = selection?.emoji
+        else { return }
         scrollTo(emoji.id(in: category), anchor: .top)
     }
 }

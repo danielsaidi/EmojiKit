@@ -11,29 +11,32 @@
 
 ## 2.3
 
-This version improves the grid performance and adds some styling options.
+This version improves the grid performance and adds more bindings and styling options.
 
 To improve grid performance and make grid selection more reliable, a `selection` binding is now required. Make sure to address all warnings to avoid any faulty behavior.
 
-In the notes below, `EmojiGridScrollView` has the same changes as `EmojiGrid`.
+In the notes below, `EmojiGridScrollView` has the same design changes as `EmojiGrid`.
 
 ### ✨ Features
 
 * `Collection<EmojiCategory>` has a new `.standardGrid` value.
-* `EmojiGrid` has a new `category` binding and makes it´s `selection` mandatory.
+* `EmojiGrid` has a new `category` binding and makes the `selection` mandatory.
+* `EmojiGrid` has a new `scrollViewProxy` property injected by the scroll view.
 * `Emoji.SkintonePopover` has a new `.emojiSkintonePopoverStyle` view modifier.
 * `Emoji.SkintonePopoverStyle` can be used to set the visual style of a popover.
 
 ### 💡 Changes
 
-* `EmojiGrid` has a much faster selection handling.
-* `EmojiGrid` renames and removes some init parameters.
-* `EmojiGrid` now persists to `.frequent` and `.recent` by default.
+* `EmojiGrid` has a much better performance than before.
+* `EmojiGrid` renames and removes some initializer parameters.
+* `EmojiGrid` by default adds emojis to `.frequent` and `.recent`.
+* `EmojiGrid` now only *picks* and emojis on taps, and doesn't *select*.
+* `EmojiScrollGrid` has moved all its scroll proxy logic to `EmojiGrid`.
 
 ### 🗑️ Deprecations
 
-* `EmojiGrid` no longer takes an `emojis` list - modify `categories` instead.
-* `EmojiGrid` no longer takes an `categoryEmojis` list - modify `categories` instead.
+* `EmojiGrid` no longer takes `emojis` - modify `categories` instead.
+* `EmojiGrid` no longer takes `categoryEmojis` - modify `categories` instead.
 
 
 

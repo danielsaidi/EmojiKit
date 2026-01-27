@@ -8,20 +8,19 @@
 
 import SwiftUI
 
-/// This internal view is used to apply additional modifiers to the emoji grid item.
+/// This internal view is used to apply additional modifiers
+/// to a grid item, to avoid redrawing the entire grid.
 struct EmojiGridItemWrapper<ItemView: View>: View {
 
-    let params: Emoji.GridItemParameters
+    let emoji: Emoji
+    let category: EmojiCategory
     let action: (Emoji, EmojiCategory) -> Void
 
-    @Binding 
-    var popoverSelection: Emoji.GridSelection?
+    @Binding var popoverSelection: Emoji.GridSelection?
 
-    @ViewBuilder 
-    let content: () -> ItemView
+    @ViewBuilder let content: () -> ItemView
 
-    @State
-    private var isPopoverPresented = false
+    @State private var isPopoverPresented = false
 
     var body: some View {
         if #available(iOS 16.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
@@ -35,8 +34,8 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
                 }
                 #if os(iOS) || os(macOS)
                 .popover(isPresented: $isPopoverPresented) {
-                    Emoji.SkintonePopover(emoji: params.emoji) { emoji in
-                        action(emoji, params.category)
+                    Emoji.SkintonePopover(emoji: emoji) { emoji in
+                        action(emoji, category)
                         isPopoverPresented = false
                     }
                 }
@@ -47,10 +46,13 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
     }
 
     private var hasSkinToneVariants: Bool {
-        params.emoji.hasSkinToneVariants
+        emoji.hasSkinToneVariants
     }
 
     private var isSelected: Bool {
-        popoverSelection?.matches(emoji: params.emoji, category: params.category) ?? false
+        popoverSelection?.matches(
+            emoji: emoji,
+            category: category
+        ) ?? false
     }
 }
