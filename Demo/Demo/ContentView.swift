@@ -31,7 +31,7 @@ struct ContentView: View {
                 // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
             .focused($isFocused)
-            .navigationTitle(selection?.category?.localizedName ?? "EmojiKit")
+            .navigationTitle(category?.localizedName ?? "EmojiKit")
             #if os(iOS)
             .searchable(text: $query, placement: .navigationBarDrawer)
             #endif

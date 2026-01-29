@@ -11,9 +11,11 @@
 
 ## 2.3
 
-This version improves the grid performance and adds more bindings and styling options.
+This version improves the grid performance and adds more bindings and styling options to both grids.
 
-To improve grid performance and make grid selection more reliable, a `selection` binding is now required. Make sure to address all warnings to avoid any faulty behavior.
+You can now pass in a `category` binding to be able to scroll to a certain category, and use it to observe the currently visible category. To improve grid performance and make grid selection more reliable, the `selection` binding is now required. 
+
+Some old init parameters have been deprecated and no longer works, so make sure to address all warnings to avoid any faulty behavior. The deprecated logic will be removed in the next major version. 
 
 In the notes below, `EmojiGridScrollView` has the same design changes as `EmojiGrid`.
 
