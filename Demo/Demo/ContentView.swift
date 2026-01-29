@@ -36,8 +36,9 @@ struct ContentView: View {
             .searchable(text: $query, placement: .navigationBarDrawer)
             #endif
             .toolbar {
-                ToolbarItem { categoryPicker }
-                ToolbarItem { sizePicker }
+                ToolbarItem { categoryPickerItem }
+                ToolbarSpacer()
+                ToolbarItem { sizePickerItem }
             }
         }
         .emojiGridStyle(sizeMode.gridStyle)
@@ -74,13 +75,9 @@ private extension ContentView {
     }
 
     var categoryPicker: some View {
-        Menu {
-            Picker(selection: $category) {
-                ForEach(EmojiCategory.standardCategories) {
-                    $0.label.tag($0)
-                }
-            } label: {
-                categoryLabel
+        Picker(selection: $category) {
+            ForEach(EmojiCategory.standardCategories) {
+                $0.label.tag($0)
             }
         } label: {
             categoryLabel
@@ -88,24 +85,46 @@ private extension ContentView {
         .labelStyle(.iconOnly)
     }
 
+    var categoryPickerItem: some View {
+        #if os(macOS)
+        categoryPicker
+        #else
+        Menu {
+            categoryPicker
+        } label: {
+            categoryLabel
+        }
+        .labelStyle(.iconOnly)
+        #endif
+    }
+
     var sizeLabel: some View {
         Label("Size", systemImage: "square.resize")
     }
 
     var sizePicker: some View {
-        Menu {
-            Picker(selection: $sizeMode) {
-                ForEach(SizeMode.allCases) {
-                    Text($0.rawValue.camelCaseAsDisplayName())
-                        .tag($0)
-                }
-            } label: {
-                sizeLabel
+        Picker(selection: $sizeMode) {
+            ForEach(SizeMode.allCases) {
+                Text($0.rawValue.camelCaseAsDisplayName())
+                    .tag($0)
             }
         } label: {
             sizeLabel
         }
         .labelStyle(.iconOnly)
+    }
+
+    var sizePickerItem: some View {
+        #if os(macOS)
+        sizePicker
+        #else
+        Menu {
+            sizePicker
+        } label: {
+            sizeLabel
+        }
+        .labelStyle(.iconOnly)
+        #endif
     }
 }
 

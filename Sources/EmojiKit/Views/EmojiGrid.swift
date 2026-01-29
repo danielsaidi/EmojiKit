@@ -430,4 +430,3 @@ private extension EmojiGrid {
 
     return Preview()
 }
-

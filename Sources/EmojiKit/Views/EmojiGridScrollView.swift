@@ -129,4 +129,3 @@ public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
 
     return Preview()
 }
-
