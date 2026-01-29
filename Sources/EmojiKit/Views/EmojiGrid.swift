@@ -92,7 +92,6 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
 
     public var body: some View {
         bodyWithPreferredModifiers
-            .id(query)
             .onAppear(perform: setSelectionOnAppear)
             .onChange(of: category, perform: setCategoryExternal)
             .onChange(of: selection, perform: setSelectionExternal)
@@ -242,7 +241,7 @@ private extension EmojiGrid {
     func setCategoryExternal(_ category: EmojiCategory?) {
         defer { isInternalChange = false }
         if isInternalChange { return }
-        scrollViewProxy?.scrollToCategory(category, in: categories)
+        scrollViewProxy?.scrollToCategory(category)
     }
 
     func setCategoryInternal(_ category: EmojiCategory) {
@@ -315,6 +314,7 @@ private extension EmojiGrid {
         } header: {
             gridSectionHeader(for: category, at: index)
         }
+        .id(category.id)
     }
 
     @ViewBuilder

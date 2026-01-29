@@ -12,35 +12,33 @@ public extension ScrollViewProxy {
 
     /// Scroll to a certain emoji category.
     func scrollToCategory(
-        _ category: EmojiCategory
-    ) {
-        scrollTo(category.id)
-    }
-
-    /// Scroll to a certain emoji category, provided that it
-    /// exists in a certain category collection.
-    func scrollToCategory(
         _ category: EmojiCategory?,
-        in categories: [EmojiCategory]
+        anchor: UnitPoint = .top
     ) {
         guard let category else { return }
-        let match = categories.first { $0.id == category.id }
-        guard let match, let emoji = match.emojis.first else { return }
-        scrollToSelection(.init(emoji: emoji, category: match))
+        scrollTo(category.id, anchor: anchor)
     }
 
-    /// Calculate the number of items per emoji grid row.
+    /// Scroll to a certain emoji in a certain category.
+    ///
+    /// > Note: This will not work reliably, since the emoji
+    /// must be rendered for scrolling to work.
     func scrollToEmoji(
-        _ category: EmojiCategory?,
-        in categories: [EmojiCategory]
+        _ emoji: Emoji?,
+        in category: EmojiCategory?,
+        anchor: UnitPoint = .top
     ) {
-        guard let category else { return }
-        let match = categories.first { $0.id == category.id }
-        guard let match, let emoji = match.emojis.first else { return }
-        scrollToSelection(.init(emoji: emoji, category: match))
+        guard let emoji, let category else { return }
+        scrollToSelection(
+            .init(emoji: emoji, category: category),
+            anchor: anchor
+        )
     }
 
-    /// Calculate the number of items per emoji grid row.
+    /// Scroll to a certain selection.
+    ///
+    /// > Note: This will not work reliably, since the emoji
+    /// must be rendered for scrolling to work.
     func scrollToSelection(
         _ selection: Emoji.GridSelection?,
         anchor: UnitPoint = .top
@@ -49,6 +47,7 @@ public extension ScrollViewProxy {
             let category = selection?.category,
             let emoji = selection?.emoji
         else { return }
-        scrollTo(emoji.id(in: category), anchor: anchor)
+        let scrollId = emoji.id(in: category)
+        scrollTo(scrollId, anchor: anchor)
     }
 }
