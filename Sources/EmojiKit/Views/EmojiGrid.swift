@@ -88,6 +88,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
 
     @State private var isInternalChange: Bool = false
     @State private var popoverSelection: Emoji.GridSelection?
+    @State private var visibleEmojiIds: Set<String> = []
 
     public var body: some View {
         bodyWithPreferredModifiers
@@ -101,8 +102,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     @ViewBuilder
     private var bodyWithPreferredModifiers: some View {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
-            grid
-                .focusable(true)
+            grid.focusable(true)
                 .focusEffectDisabled(!style.prefersFocusEffect)
                 #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
                 .onKeyPress { handleKeyPress($0) }
@@ -124,7 +124,7 @@ private extension EmojiGrid {
     @MainActor
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
     func handleKeyPress(_ keyPress: KeyPress) -> KeyPress.Result {
-        // The functions return booleans to avoid version checks.
+        guard keyPress.phase == .down else { return .ignored }
         let result: Bool
         switch keyPress.key {
         case .downArrow: result = handleKeyPressOnArrow(.down)
@@ -154,15 +154,33 @@ private extension EmojiGrid {
         showPopover(for: .init(emoji: emoji, category: category))
     }
 
-    func handleScrollSectionVisibility(_ isVisible: Bool, for category: EmojiCategory) {
-        guard isVisible else { return }
-        setCategoryInternal(category)
-    }
-
     func handleTap(on emoji: Emoji, in category: EmojiCategory) {
         if popoverSelection != nil { return }
         pickEmoji(emoji)
         setSelectionInternal(.init(emoji: emoji, category: category))
+    }
+
+    func handleVisibility(_ isVisible: Bool, for emoji: Emoji, in category: EmojiCategory) {
+        let id = emoji.id(in: category)
+        if isVisible {
+            visibleEmojiIds.insert(id)
+        } else {
+            visibleEmojiIds.remove(id)
+        }
+    }
+
+    func handleVisibility(_ isVisible: Bool, for category: EmojiCategory) {
+        guard isVisible else { return }
+        setCategoryInternal(category)
+    }
+
+    func isSelectionVisible(_ selection: Emoji.GridSelection?) -> Bool {
+        guard
+            let emoji = selection?.emoji,
+            let category = selection?.category
+        else { return false }
+        let id = emoji.id(in: category)
+        return visibleEmojiIds.contains(id)
     }
 
     func pickEmoji(_ emoji: Emoji) {
@@ -209,13 +227,13 @@ private extension EmojiGrid {
         } else if navDirection == .back {
             guard
                 let cat = categories.category(before: category),
-                let emoji = emojis.last
+                let emoji = cat.emojis.last
             else { return }
             selectEmoji(emoji, in: cat)
         } else {
             guard
                 let cat = categories.category(after: category),
-                let emoji = emojis.first
+                let emoji = cat.emojis.first
             else { return }
             selectEmoji(emoji, in: cat)
         }
@@ -233,13 +251,11 @@ private extension EmojiGrid {
     }
 
     func setSelectionExternal(_ selection: Emoji.GridSelection?) {
-        defer { isInternalChange = false }
-        if isInternalChange { return }
+        if isSelectionVisible(selection) { return }
         scrollViewProxy?.scrollToSelection(selection)
     }
 
     func setSelectionInternal(_ selection: Emoji.GridSelection) {
-        isInternalChange = true
         self.selection = selection
     }
 
@@ -306,7 +322,7 @@ private extension EmojiGrid {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
             gridSectionTitle(for: category, at: index)
                 .onScrollVisibilityChange {
-                    handleScrollSectionVisibility($0, for: category)
+                    handleVisibility($0, for: category)
                 }
         } else {
             gridSectionTitle(for: category, at: index)
@@ -322,12 +338,24 @@ private extension EmojiGrid {
         }
     }
 
+    @ViewBuilder
     func gridItem(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            gridItemView(for: category, emoji: emoji)
+                .onScrollVisibilityChange {
+                    handleVisibility($0, for: emoji.0, in: category.0)
+                }
+        } else {
+            gridItemView(for: category, emoji: emoji)
+        }
+    }
+
+    func gridItemView(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
         EmojiGridItemWrapper(
             emoji: emoji.0,
             category: category.0,
             action: { emoji, _ in pickEmoji(emoji) },
-            popoverSelection: $popoverSelection, 
+            popoverSelection: $popoverSelection,
             content: {
                 let isSelected = isSelected(emoji.0, in: category.0)
                 gridItem(Emoji.GridItemParameters(

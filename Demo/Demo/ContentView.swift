@@ -37,9 +37,6 @@ struct ContentView: View {
             #endif
         }
         .emojiGridStyle(gridStyle)
-        .onReturnKeyPressIfAvailable {
-            print(selection?.emoji?.char ?? "-")
-        }
         .tint(.orange)
         .task { isFocused = true }
         .safeAreaInset(edge: .bottom) { slider }
@@ -83,20 +80,6 @@ extension View {
     func glassEffectIfAvailable() -> some View {
         if #available(iOS 26.0, *) {
             self.glassEffect()
-        } else {
-            self
-        }
-    }
-
-    @ViewBuilder
-    func onReturnKeyPressIfAvailable(
-        _ handler: @escaping () -> Void
-    ) -> some View {
-        if #available(iOS 17.0, *) {
-            self.onKeyPress(.return) {
-                handler()
-                return .handled
-            }
         } else {
             self
         }

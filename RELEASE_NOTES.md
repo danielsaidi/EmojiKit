@@ -24,6 +24,7 @@ In the notes below, `EmojiGridScrollView` has the same design changes as `EmojiG
 * `EmojiGrid` has a new `scrollViewProxy` property injected by the scroll view.
 * `Emoji.SkintonePopover` has a new `.emojiSkintonePopoverStyle` view modifier.
 * `Emoji.SkintonePopoverStyle` can be used to set the visual style of a popover.
+* `ScrollViewProxy` has new scroll capabilities.
 
 ### 💡 Changes
 

@@ -46,7 +46,7 @@ The ``EmojiGrid`` has section title and grid item view builders that can be used
 
 ### How to style the grid
 
-The ``EmojiGrid`` can be styled with a ``SwiftUICore/View/emojiGridStyle(_:)`` modifier, which can customize grid item sizes, grid padding, etc. This modifier can be applied to any part of the view hierarchy.
+The ``EmojiGrid`` can be styled with a ``SwiftUICore/View/emojiGridStyle(_:)`` modifier, which can customize grid item sizes, grid padding, etc. This modifier can be applied to any part of the view hierarchy. You can also use ``SwiftUICore/View/emojiSkintonePopoverStyle(_:)`` to style popovers.
 
 
 ### How to change the grid selection
@@ -58,14 +58,13 @@ The `selection` parameter can be used to bind the ``EmojiGrid`` to an external s
 
 The ``EmojiGrid`` supports the following keyboard commands:
 
-Key                  | Description                          
--------------------- | ------------------------------------- 
-`arrow keys`         | Move the current selection.  
-`enter/return`       | Pick/trigger the current emoji.           
-`enter/return`+`opt` | Show a skin tone popover, where applicable.            
-`escape`             | Reset the current selection.            
-`space`              | Select an emoji within a skin tone popover.            
-`tab`                | Move selection within a skin tone popover.
+Key             | Description                          
+--------------- | ------------------------------------- 
+`arrows`        | Move the current selection.  
+`return`        | Pick/trigger the current emoji.           
+`return`+`opt`  | Show a skin tone popover, where applicable.
+`space`         | (Skintone Popover) Select an emoji            
+`tab`           | (Skintone Popover) Move the current popover selection
 
 
 ### How to scroll to a certain emoji
@@ -73,6 +72,8 @@ Key                  | Description
 The ``EmojiGridScrollView`` will automatically scroll to the current `selection`, so you just have to update the binding value that you provide to the grid to make it scroll to that specific category and emoji.
 
 If you use a custom `ScrollView`, you must use the emoji's ``Emoji/id(in:)`` property to scroll to a certain emoji when the grid has multiple emoji categories, since the unique emoji IDs will then be adjusted for each category.
+
+The ``SwiftUI/ScrollViewProxy`` has extensions like ``SwiftUI/ScrollViewProxy/scrollTo(_:)`` fe
 
 
 ### How to filter the grid content

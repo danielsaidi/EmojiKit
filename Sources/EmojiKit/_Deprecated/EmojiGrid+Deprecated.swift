@@ -1,10 +1,3 @@
-//
-//  EmojiGridScrollView+Deprecated.swift
-//  EmojiKit
-//
-//  Created by Daniel Saidi on 2025-09-21.
-//
-
 import SwiftUI
 
 public extension EmojiGrid {
