@@ -13,10 +13,10 @@ struct ContentView: View {
     
     @FocusState var isFocused
 
-    @State var query = ""
-    @State var category: EmojiCategory?
-    @State var selection: Emoji.GridSelection?
-    @State var sizeMode = 1.0
+    @State private var query = ""
+    @State private var category: EmojiCategory?
+    @State private var selection: Emoji.GridSelection?
+    @State private var sizeMode = SizeMode.medium
 
     var body: some View {
         NavigationStack {
@@ -35,43 +35,77 @@ struct ContentView: View {
             #if os(iOS)
             .searchable(text: $query, placement: .navigationBarDrawer)
             #endif
+            .toolbar {
+                ToolbarItem { categoryPicker }
+                ToolbarItem { sizePicker }
+            }
         }
-        .emojiGridStyle(gridStyle)
+        .emojiGridStyle(sizeMode.gridStyle)
         .tint(.orange)
         .task { isFocused = true }
-        .safeAreaInset(edge: .bottom) { slider }
     }
 }
 
 private extension ContentView {
 
-    var gridStyle: EmojiGridStyle {
-        switch sizeMode {
-        case 0: .small
-        case 1: .medium
-        case 2: .large
-        case 3: .extraLarge
-        case 4: .extraExtraLarge
-        default: .medium
+    enum SizeMode: String, CaseIterable, Identifiable {
+
+        case small, medium, large, extraLarge, extraExtraLarge
+
+        var id: String { rawValue }
+
+        var gridStyle: EmojiGridStyle {
+            switch self {
+            case .small: .small
+            case .medium: .medium
+            case .large: .large
+            case .extraLarge: .extraLarge
+            case .extraExtraLarge: .extraExtraLarge
+            }
         }
     }
 }
 
 private extension ContentView {
 
-    var slider: some View {
-        Slider(
-            value: $sizeMode,
-            in: 0...4,
-            step: 1,
-            minimumValueLabel: Text("Small"),
-            maximumValueLabel: Text("Large")
-        ) {
-            Text("Emoji size")
+    var categoryLabel: some View {
+        let symbol = category?.symbolIconName ?? "face.smiling"
+        return Label("Categories", systemImage: symbol)
+    }
+
+    var categoryPicker: some View {
+        Menu {
+            Picker(selection: $category) {
+                ForEach(EmojiCategory.standardCategories) {
+                    $0.label.tag($0)
+                }
+            } label: {
+                categoryLabel
+            }
+        } label: {
+            categoryLabel
         }
-        .padding()
-        .glassEffectIfAvailable()
-        .padding()
+        .labelStyle(.iconOnly)
+    }
+
+    var sizeLabel: some View {
+        Label("Size", systemImage: "square.resize")
+    }
+
+    var sizePicker: some View {
+        Menu {
+            Picker(selection: $sizeMode) {
+                ForEach(SizeMode.allCases) {
+                    Text($0.rawValue.camelCaseAsDisplayName())
+                        .tag($0)
+                }
+            } label: {
+                sizeLabel
+            }
+        } label: {
+            sizeLabel
+        }
+        .labelStyle(.iconOnly)
     }
 }
 
@@ -83,6 +117,18 @@ extension View {
         } else {
             self
         }
+    }
+}
+
+extension String {
+
+    func camelCaseAsDisplayName() -> String {
+        replacingOccurrences(
+            of: "([a-z])([A-Z])",
+            with: "$1 $2",
+            options: .regularExpression
+        )
+        .capitalized
     }
 }
 

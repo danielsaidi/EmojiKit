@@ -9,6 +9,21 @@
 import SwiftUI
 
 public extension EmojiCategory {
+
+    /// A custom, persisted category.
+    static func persisted(
+        _ category: Persisted
+    ) -> EmojiCategory {
+        .custom(
+            id: category.id,
+            name: category.name,
+            emojis: category.getEmojis(),
+            iconName: category.iconName
+        )
+    }
+}
+
+public extension EmojiCategory {
     
     /// This type can be used to handle persisted categories, where emojis can
     /// be customzied and persisted.

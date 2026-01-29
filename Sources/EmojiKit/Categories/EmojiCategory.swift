@@ -58,18 +58,6 @@ public extension EmojiCategory {
     static var recent: EmojiCategory {
         .persisted(.recent)
     }
-
-    /// A custom, persisted category.
-    static func persisted(
-        _ category: Persisted
-    ) -> EmojiCategory {
-        .custom(
-            id: category.id,
-            name: category.name,
-            emojis: category.getEmojis(),
-            iconName: category.iconName
-        )
-    }
     
     /// A custom category with an emoji search result.
     static func search(
@@ -178,22 +166,37 @@ public extension EmojiCategory {
         case .custom(let id, _, _, _): id
         }
     }
-    
+
+    /// A display label for the current locale.
+    var label: some View {
+        Label(localizedName, systemImage: symbolIconName)
+    }
+
+    /// A display label for the a certain locale.
+    func label(for locale: Locale) -> some View {
+        Label(localizedName(in: locale), systemImage: symbolIconName)
+    }
+
     /// An SF Symbol-based icon for the category.
     var symbolIcon: Image {
+        .init(systemName: symbolIconName)
+    }
+
+    /// An SF Symbol-based icon name for the category.
+    var symbolIconName: String {
         switch self {
-        case .smileysAndPeople: .init(systemName: "face.smiling")
-        case .animalsAndNature: .init(systemName: "teddybear")
-        case .foodAndDrink: .init(systemName: "fork.knife")
-        case .activity: .init(systemName: "soccerball")
-        case .travelAndPlaces: .init(systemName: "car")
-        case .objects: .init(systemName: "lightbulb")
-        case .symbols: .init(systemName: "heart")
-        case .flags: .init(systemName: "flag")
-        case .custom(_, _, _, let iconName):  .init(systemName: iconName)
+        case .smileysAndPeople: "face.smiling"
+        case .animalsAndNature: "teddybear"
+        case .foodAndDrink: "fork.knife"
+        case .activity: "soccerball"
+        case .travelAndPlaces: "car"
+        case .objects: "lightbulb"
+        case .symbols: "heart"
+        case .flags: "flag"
+        case .custom(_, _, _, let iconName): iconName
         }
     }
-    
+
     /// A list of all available emojis in the category.
     var emojis: [Emoji] {
         switch self {
