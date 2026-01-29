@@ -36,9 +36,9 @@ struct ContentView: View {
             .searchable(text: $query, placement: .navigationBarDrawer)
             #endif
             .toolbar {
-                ToolbarItem { categoryPickerItem }
+                ToolbarItem { categoryPicker }
                 ToolbarSpacer()
-                ToolbarItem { sizePickerItem }
+                ToolbarItem { sizePicker }
             }
         }
         .emojiGridStyle(sizeMode.gridStyle)
@@ -75,56 +75,42 @@ private extension ContentView {
     }
 
     var categoryPicker: some View {
-        Picker(selection: $category) {
+        let symbol = category?.symbolIconName ?? "face.smiling"
+        return ToolbarPicker(title: "Category", image: symbol, selection: $category) {
             ForEach(EmojiCategory.standardCategories) {
                 $0.label.tag($0)
             }
-        } label: {
-            categoryLabel
         }
         .labelStyle(.iconOnly)
-    }
-
-    var categoryPickerItem: some View {
-        #if os(macOS)
-        categoryPicker
-        #else
-        Menu {
-            categoryPicker
-        } label: {
-            categoryLabel
-        }
-        .labelStyle(.iconOnly)
-        #endif
-    }
-
-    var sizeLabel: some View {
-        Label("Size", systemImage: "square.resize")
     }
 
     var sizePicker: some View {
-        Picker(selection: $sizeMode) {
+        ToolbarPicker(title: "Size", image: "square.resize", selection: $sizeMode) {
             ForEach(SizeMode.allCases) {
                 Text($0.rawValue.camelCaseAsDisplayName())
                     .tag($0)
             }
-        } label: {
-            sizeLabel
         }
         .labelStyle(.iconOnly)
     }
+}
 
-    var sizePickerItem: some View {
-        #if os(macOS)
-        sizePicker
-        #else
+struct ToolbarPicker<Value: Hashable, Content: View>: View {
+
+    let title: String
+    let image: String
+    let selection: Binding<Value>
+    let content: () -> Content
+
+    var body: some View {
         Menu {
-            sizePicker
+            Picker(title, selection: selection) {
+                content()
+            }
+            .pickerStyle(.inline)
         } label: {
-            sizeLabel
+            Label(title, systemImage: image)
         }
-        .labelStyle(.iconOnly)
-        #endif
     }
 }
 
