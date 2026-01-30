@@ -9,6 +9,12 @@
 
 
 
+## 2.3.1
+
+This version fixes a category selection bug where the internal state was triggered when externally setting a category.
+
+
+
 ## 2.3
 
 This version improves the grid performance and adds more bindings and styling options to both grids.

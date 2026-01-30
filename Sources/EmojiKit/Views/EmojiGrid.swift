@@ -86,7 +86,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     @Environment(\.emojiGridStyle) var style
     @Environment(\.layoutDirection) var layoutDirection
 
-    @State private var isInternalChange: Bool = false
+    @State private var isInternalCategoryChange = false
+    @State private var isExternalCategoryChange = false
     @State private var popoverSelection: Emoji.GridSelection?
     @State private var visibleEmojiIds: Set<String> = []
 
@@ -169,7 +170,7 @@ private extension EmojiGrid {
     }
 
     func handleVisibility(_ isVisible: Bool, for category: EmojiCategory) {
-        guard isVisible else { return }
+        guard isVisible, category != self.category else { return }
         setCategoryInternal(category)
     }
 
@@ -238,14 +239,24 @@ private extension EmojiGrid {
         }
     }
 
+    func resetCategoryState() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            isExternalCategoryChange = false
+            isInternalCategoryChange = false
+        }
+    }
+
     func setCategoryExternal(_ category: EmojiCategory?) {
-        defer { isInternalChange = false }
-        if isInternalChange { return }
+        defer { resetCategoryState() }
+        if isInternalCategoryChange { return }
+        isExternalCategoryChange = true
         scrollViewProxy?.scrollToCategory(category)
     }
 
     func setCategoryInternal(_ category: EmojiCategory) {
-        isInternalChange = true
+        defer { resetCategoryState() }
+        if isExternalCategoryChange { return }
+        isInternalCategoryChange = true
         self.category = category
     }
 
