@@ -16,11 +16,9 @@ import SwiftUI
 /// or by tapping an emoji. Note that some bindings only has
 /// a visible effect on iOS 18+ and aligned versions.
 ///
-/// > Important: Note that the `selection` changing does NOT
-/// mean that the user has *picked* the emoji. The selection
-/// will for instance change when navigating using the arrow
-/// keys and the action is then only triggered when pressing
-/// the return key on an emoji.
+/// > Important: The selection will for instance change when
+/// navigating using the arrow keys. The action is then only
+/// triggered when pressing the return key on an emoji.
 ///
 /// See <doc:Views-Article> for more information about grids.
 public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
@@ -86,13 +84,14 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     @Environment(\.emojiGridStyle) var style
     @Environment(\.layoutDirection) var layoutDirection
 
-    @State private var isInternalChange: Bool = false
+    @State private var isInternalChange = false
+    @State private var isScrollingToSelection = false
     @State private var popoverSelection: Emoji.GridSelection?
     @State private var visibleEmojiIds: Set<String> = []
 
     public var body: some View {
         bodyWithPreferredModifiers
-            .onAppear(perform: setSelectionOnAppear)
+            .onAppear(perform: setup)
             .onChange(of: category, perform: setCategoryExternal)
             .onChange(of: selection, perform: setSelectionExternal)
             .padding(style.padding)
@@ -169,7 +168,7 @@ private extension EmojiGrid {
     }
 
     func handleVisibility(_ isVisible: Bool, for category: EmojiCategory) {
-        guard isVisible else { return }
+        guard isVisible, !isScrollingToSelection else { return }
         setCategoryInternal(category)
     }
 
@@ -258,10 +257,17 @@ private extension EmojiGrid {
         self.selection = selection
     }
 
-    func setSelectionOnAppear() {
+    func setup() {
+        setupInitialCategory()
+    }
+
+    func setupInitialCategory() {
+        let category = category ?? selection?.category
+        guard let category else { return }
+        isScrollingToSelection = true
         Task {
-            try await Task.sleep(for: .seconds(0.1))
-            setSelectionExternal(selection)
+            scrollViewProxy?.scrollToCategory(category)
+            isScrollingToSelection = false
         }
     }
 
@@ -394,9 +400,9 @@ private extension EmojiGrid {
 
         let axis = Axis.Set.vertical
 
-        @State var category: EmojiCategory?
+        @State var category: EmojiCategory? = .smileysAndPeople
         @State var query: String = ""
-        @State var selection: Emoji.GridSelection?
+        @State var selection: Emoji.GridSelection? = nil // .init(emoji: .init("🍵"), category: .foodAndDrink)
 
         var body: some View {
             NavigationStack {
@@ -418,7 +424,7 @@ private extension EmojiGrid {
                             .navigationTitle(category?.localizedName ?? "EmojiPicker")
                             .toolbar {
                                 Button("Select") {
-                                    category = EmojiCategory.flags
+                                    selection = .init(emoji: .init("🍵"), category: .foodAndDrink)
                                 }
                             }
                         }

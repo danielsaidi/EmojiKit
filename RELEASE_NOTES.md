@@ -9,6 +9,14 @@
 
 
 
+## 2.3.1
+
+### 🐛 Bug Fixes
+
+* `EmojiGrid` now scrolls to an initial category or selection.
+
+
+
 ## 2.3
 
 This version improves the grid performance and adds more bindings and styling options to both grids.
