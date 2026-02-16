@@ -34,6 +34,24 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
     )
 }
 
+public extension EmojiCategory {
+
+    /// Create a category with a string that contains emojis.
+    static func custom(
+        id: String,
+        name: String,
+        emojis: String,
+        iconName: String = ""
+    ) -> Self {
+        .custom(
+            id: id,
+            name: name,
+            emojis: emojis.parseEmojis(),
+            iconName: iconName
+        )
+    }
+}
+
 extension EmojiCategory: Transferable {
 
     public static var transferRepresentation: some TransferRepresentation {

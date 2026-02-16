@@ -16,6 +16,7 @@ This version adds some emoji category functionality.
 ### ✨ Features
 
 * `EmojiCategory` has new label properties and functions.
+* `EmojiCategory` has new string-based `.custom` builder.
 
 
 
