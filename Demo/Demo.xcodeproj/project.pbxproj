@@ -11,6 +11,7 @@
 		A9623BDD2C13976D003BF6D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9623BDC2C13976D003BF6D4 /* ContentView.swift */; };
 		A9623BE32C13976F003BF6D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9623BE22C13976F003BF6D4 /* Preview Assets.xcassets */; };
 		A9623C2E2C13985C003BF6D4 /* EmojiKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9623C2D2C13985C003BF6D4 /* EmojiKit */; };
+		A9BD20822F437762000A1166 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9BD20812F437762000A1166 /* SwiftUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9623C2E2C13985C003BF6D4 /* EmojiKit in Frameworks */,
+				A9BD20822F437762000A1166 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,7 @@
 			name = Demo;
 			packageProductDependencies = (
 				A9623C2D2C13985C003BF6D4 /* EmojiKit */,
+				A9BD20812F437762000A1166 /* SwiftUIKit */,
 			);
 			productName = Demo;
 			productReference = A9623BD72C13976D003BF6D4 /* Demo.app */;
@@ -127,6 +130,7 @@
 			mainGroup = A9623BCE2C13976D003BF6D4;
 			packageReferences = (
 				A9623C2C2C13985C003BF6D4 /* XCLocalSwiftPackageReference "../" */,
+				A9BD20802F437762000A1166 /* XCRemoteSwiftPackageReference "swiftuikit" */,
 			);
 			productRefGroup = A9623BD82C13976D003BF6D4 /* Products */;
 			projectDirPath = "";
@@ -395,10 +399,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		A9BD20802F437762000A1166 /* XCRemoteSwiftPackageReference "swiftuikit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/swiftuikit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		A9623C2D2C13985C003BF6D4 /* EmojiKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EmojiKit;
+		};
+		A9BD20812F437762000A1166 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9BD20802F437762000A1166 /* XCRemoteSwiftPackageReference "swiftuikit" */;
+			productName = SwiftUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

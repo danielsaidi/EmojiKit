@@ -8,28 +8,48 @@
 
 import EmojiKit
 import SwiftUI
+import SwiftUIKit
 
 struct ContentView: View {
     
     @FocusState var isFocused
 
     @State private var query = ""
-    @State private var category: EmojiCategory?
-    @State private var selection: Emoji.GridSelection?
     @State private var sizeMode = SizeMode.medium
+
+    // Persisted Category - Uncomment to use this **********
+
+//    @AppStorage("com.danielsaidi.emojikit.demo.category")
+//    private var categoryValue: StorageValue<EmojiCategory> = .init()
+//
+//    @State private var selection: Emoji.GridSelection?
+//
+//    private var category: EmojiCategory? { categoryValue.value }
+//    private var categoryBinding: Binding<EmojiCategory?> { $categoryValue.value }
+//    private var selectionBinding: Binding<Emoji.GridSelection?> { $selection }
+
+    // Persisted Selection - Uncomment to use this *********
+
+    @AppStorage("com.danielsaidi.emojikit.demo.selection")
+    private var selectionValue: StorageValue<Emoji.GridSelection> = .init()
+    @State private var category: EmojiCategory?
+
+    private var categoryBinding: Binding<EmojiCategory?> { $category }
+    private var selectionBinding: Binding<Emoji.GridSelection?> { $selectionValue.value }
 
     var body: some View {
         NavigationStack {
             EmojiGridScrollView(
                 axis: .vertical,
-                category: $category,
-                selection: $selection,
+                category: categoryBinding,
+                selection: selectionBinding,
                 query: query,
                 action: { print($0) },
                 sectionTitle: { $0.view },
                 gridItem: { $0.view }
                 // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
+
             .focused($isFocused)
             .navigationTitle(category?.localizedName ?? "EmojiKit")
             #if os(iOS)
@@ -76,7 +96,7 @@ private extension ContentView {
 
     var categoryPicker: some View {
         let symbol = category?.symbolIconName ?? "face.smiling"
-        return ToolbarPicker(title: "Category", image: symbol, selection: $category) {
+        return ToolbarPicker(title: "Category", image: symbol, selection: categoryBinding) {
             ForEach(EmojiCategory.standardCategories) {
                 $0.label.tag($0)
             }

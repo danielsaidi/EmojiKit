@@ -1,0 +1,15 @@
+{
+  "originHash" : "5fa258b06f152589126b581c1848778f9a2e355df816dcb5e519b6f8d24f3657",
+  "pins" : [
+    {
+      "identity" : "swiftuikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/swiftuikit",
+      "state" : {
+        "revision" : "20732e7a835e05a9aa3b437549b58b4ba79ac38e",
+        "version" : "6.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}

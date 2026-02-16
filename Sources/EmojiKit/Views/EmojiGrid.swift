@@ -410,7 +410,7 @@ private extension EmojiGrid {
 
         let axis = Axis.Set.vertical
 
-        @State var category: EmojiCategory? = nil //.smileysAndPeople
+        @State var category: EmojiCategory? // = .smileysAndPeople
         @State var query: String = ""
         @State var selection: Emoji.GridSelection? = .init(emoji: .init("🍵"), category: .foodAndDrink)
 

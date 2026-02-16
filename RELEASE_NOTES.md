@@ -11,9 +11,12 @@
 
 ## 2.3.1
 
+This version fixes some scroll-related bugs.
+
 ### 🐛 Bug Fixes
 
 * `EmojiGrid` now scrolls to an initial category or selection.
+* `ScrollViewProxy` now scrolls to a selection in a more reliable way.
 
 
 
