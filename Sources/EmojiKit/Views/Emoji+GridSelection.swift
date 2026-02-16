@@ -14,7 +14,7 @@ public extension Emoji {
     ///
     /// `TODO` Make the emoji and category non-optional when
     /// bumping to 3.0.
-    struct GridSelection: Equatable, Hashable {
+    struct GridSelection: Codable, Equatable, Hashable {
         
         /// Create a grid selection value.
         ///

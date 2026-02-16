@@ -49,7 +49,7 @@ public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
         @ViewBuilder gridItem: @escaping GridItemBuilder
     ) {
         self.axis = axis ?? .vertical
-        self.categories = categories ?? .standardGrid
+        self.categories = categories
         self._category = category
         self._selection = selection
         self.query = query
@@ -63,7 +63,7 @@ public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
     @Binding var selection: Emoji.GridSelection?
 
     private let axis: Axis.Set
-    private let categories: [EmojiCategory]
+    private let categories: [EmojiCategory]?
     private let query: String?
     private let addSelectedEmojisTo: [EmojiCategory.Persisted]?
     private let action: ((Emoji) -> Void)?
