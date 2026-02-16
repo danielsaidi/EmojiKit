@@ -169,12 +169,31 @@ public extension EmojiCategory {
 
     /// A display label for the current locale.
     var label: some View {
-        Label(localizedName, systemImage: symbolIconName)
+        label(for: labelText)
+    }
+
+    var labelText: String {
+        switch self {
+        case .custom(_, let name, _, _): name
+        default: localizedName
+        }
     }
 
     /// A display label for the a certain locale.
     func label(for locale: Locale) -> some View {
-        Label(localizedName(in: locale), systemImage: symbolIconName)
+        label(for: labelText(for: locale))
+    }
+
+    /// A display label for the a certain locale.
+    func label(for text: String) -> some View {
+        Label(text, systemImage: symbolIconName)
+    }
+
+    func labelText(for locale: Locale) -> String {
+        switch self {
+        case .custom(_, let name, _, _): name
+        default: localizedName(in: locale)
+        }
     }
 
     /// An SF Symbol-based icon for the category.

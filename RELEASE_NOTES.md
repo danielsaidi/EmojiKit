@@ -9,6 +9,16 @@
 
 
 
+## 2.3.3
+
+This version adds some emoji category functionality.
+
+### ✨ Features
+
+* `EmojiCategory` has new label properties and functions.
+
+
+
 ## 2.3.1, 2.3.2
 
 This version fixes some scroll-related bugs.
