@@ -15,6 +15,7 @@ This version adds some emoji category functionality.
 
 ### ✨ Features
 
+* `Emoji.GridSectionTitle` has a `locale` init parameter.
 * `EmojiCategory` has new label properties and functions.
 * `EmojiCategory` has new string-based `.custom` builder.
 

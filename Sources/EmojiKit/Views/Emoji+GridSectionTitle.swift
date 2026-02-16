@@ -17,15 +17,18 @@ public extension Emoji {
     struct GridSectionTitle: View {
         
         public init(
-            _ category: EmojiCategory
+            _ category: EmojiCategory,
+            locale: Locale = .current
         ) {
             self.category = category
+            self.locale = locale
         }
         
-        var category: EmojiCategory
-        
+        private let category: EmojiCategory
+        private let locale: Locale
+
         public var body: some View {
-            Text(category.localizedName.uppercased())
+            Text(category.localizedName(in: locale).uppercased())
                 .font(.callout)
                 .foregroundColor(.secondary)
                 .padding(4)
