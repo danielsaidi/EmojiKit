@@ -9,6 +9,14 @@
 
 
 
+## 2.3.4
+
+### 🐛 Bug Fixes
+
+* `Emoji.GridSectionTitle` now shows a correct section title.
+
+
+
 ## 2.3.3
 
 This version adds some emoji category functionality.

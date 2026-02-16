@@ -28,7 +28,7 @@ public extension Emoji {
         private let locale: Locale
 
         public var body: some View {
-            Text(category.localizedName(in: locale).uppercased())
+            Text(category.labelText(for: locale).uppercased())
                 .font(.callout)
                 .foregroundColor(.secondary)
                 .padding(4)
@@ -37,5 +37,8 @@ public extension Emoji {
 }
 
 #Preview {
-    Emoji.GridSectionTitle(.activity)
+    VStack {
+        Emoji.GridSectionTitle(.activity)
+        Emoji.GridSectionTitle(.custom(id: "foo", name: "My Category", emojis: [], iconName: "face.smiling"))
+    }
 }
