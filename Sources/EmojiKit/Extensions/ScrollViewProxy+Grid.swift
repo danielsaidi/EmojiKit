@@ -21,24 +21,20 @@ public extension ScrollViewProxy {
 
     /// Scroll to a certain emoji in a certain category.
     ///
-    /// > Note: This will not work reliably, since the emoji
-    /// must be rendered for scrolling to work.
+    /// > Note: For this to work, the emoji category must be
+    /// visible. If not, first scroll to the category.
     func scrollToEmoji(
-        _ emoji: Emoji?,
-        in category: EmojiCategory?,
+        _ emoji: Emoji,
+        in category: EmojiCategory,
         anchor: UnitPoint = .top
     ) {
-        guard let emoji, let category else { return }
-        scrollToSelection(
-            .init(emoji: emoji, category: category),
-            anchor: anchor
-        )
+        scrollTo(emoji.id(in: category), anchor: anchor)
     }
 
     /// Scroll to a certain selection.
     ///
-    /// > Note: This will not work reliably, since the emoji
-    /// must be rendered for scrolling to work.
+    /// > Note: For this to work, the emoji category must be
+    /// visible. If not, first scroll to the category.
     func scrollToSelection(
         _ selection: Emoji.GridSelection?,
         anchor: UnitPoint = .top
@@ -47,7 +43,6 @@ public extension ScrollViewProxy {
             let category = selection?.category,
             let emoji = selection?.emoji
         else { return }
-        let scrollId = emoji.id(in: category)
-        scrollTo(scrollId, anchor: anchor)
+        scrollToEmoji(emoji, in: category)
     }
 }
