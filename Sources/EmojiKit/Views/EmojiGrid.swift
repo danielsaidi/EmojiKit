@@ -22,7 +22,7 @@ import SwiftUI
 ///
 /// See <doc:Views-Article> for more information about grids.
 public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
-    
+
     /// Create an emoji grid.
     ///
     /// - Parameters:
@@ -249,11 +249,16 @@ private extension EmojiGrid {
     }
 
     func setSelectionExternal(_ selection: Emoji.GridSelection?) {
+        defer { isInternalChange = false }
         if isSelectionVisible(selection) { return }
-        scrollViewProxy?.scrollToSelection(selection)
+        scrollViewProxy?.scrollToSelection(
+            selection,
+            isArrowNavigation: isInternalChange
+        )
     }
 
     func setSelectionInternal(_ selection: Emoji.GridSelection) {
+        isInternalChange = true
         self.selection = selection
     }
 
@@ -400,9 +405,9 @@ private extension EmojiGrid {
 
         let axis = Axis.Set.vertical
 
-        @State var category: EmojiCategory? = .smileysAndPeople
+        @State var category: EmojiCategory? = nil //.smileysAndPeople
         @State var query: String = ""
-        @State var selection: Emoji.GridSelection? = nil // .init(emoji: .init("🍵"), category: .foodAndDrink)
+        @State var selection: Emoji.GridSelection? = .init(emoji: .init("🍵"), category: .foodAndDrink)
 
         var body: some View {
             NavigationStack {
@@ -424,7 +429,7 @@ private extension EmojiGrid {
                             .navigationTitle(category?.localizedName ?? "EmojiPicker")
                             .toolbar {
                                 Button("Select") {
-                                    selection = .init(emoji: .init("🍵"), category: .foodAndDrink)
+                                    selection = .init(emoji: .init("🏳️‍🌈"), category: .flags)
                                 }
                             }
                         }
