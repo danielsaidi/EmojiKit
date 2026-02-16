@@ -9,7 +9,7 @@
 
 
 
-## 2.3.1
+## 2.3.1, 2.3.2
 
 This version fixes some scroll-related bugs.
 
