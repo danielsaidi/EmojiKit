@@ -64,6 +64,10 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         self.gridItem = gridItem
     }
 
+    final class VisibleEmojiState: ObservableObject {
+        var emojiIds: Set<String> = []
+    }
+
     @Binding var category: EmojiCategory?
     @Binding var selection: Emoji.GridSelection?
 
@@ -87,7 +91,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     @State private var isInternalChange = false
     @State private var isScrollingToSelection = false
     @State private var popoverSelection: Emoji.GridSelection?
-    @State private var visibleEmojiIds: Set<String> = []
+
+    @StateObject private var visibleEmojiState = VisibleEmojiState()
 
     public var body: some View {
         bodyWithPreferredModifiers
@@ -161,9 +166,9 @@ private extension EmojiGrid {
     func handleVisibility(_ isVisible: Bool, for emoji: Emoji, in category: EmojiCategory) {
         let id = emoji.id(in: category)
         if isVisible {
-            visibleEmojiIds.insert(id)
+            visibleEmojiState.emojiIds.insert(id)
         } else {
-            visibleEmojiIds.remove(id)
+            visibleEmojiState.emojiIds.remove(id)
         }
     }
 
@@ -178,7 +183,7 @@ private extension EmojiGrid {
             let category = selection?.category
         else { return false }
         let id = emoji.id(in: category)
-        return visibleEmojiIds.contains(id)
+        return visibleEmojiState.emojiIds.contains(id)
     }
 
     func pickEmoji(_ emoji: Emoji) {
