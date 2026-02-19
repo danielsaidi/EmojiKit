@@ -30,10 +30,14 @@ public extension Emoji {
         @State private var hoverEmoji: Emoji?
 
         public var body: some View {
-            HStack {
+            HStack(spacing: 8) {
                 button(for: emoji.neutralSkinToneVariant)
                 let variants = emoji.skinToneVariants.dropFirst()
-                Divider().padding(5)
+                if let dividerStyle = style.dividerStyle {
+                    dividerStyle.color
+                        .frame(width: dividerStyle.thickness)
+                        .padding(.vertical, dividerStyle.verticalPadding)
+                }
                 ForEach(variants) {
                     button(for: $0)
                 }
@@ -49,16 +53,42 @@ public extension Emoji {
 
         /// Create a skintone popover for the provided emoji.
         public init(
-            backgroundColor: Color = .clear
+            backgroundColor: Color = .clear,
+            dividerStyle: DividerStyle? = .standard
         ) {
             self.backgroundColor = backgroundColor
+            self.dividerStyle = dividerStyle
         }
 
         public var backgroundColor: Color
+        public var dividerStyle: DividerStyle?
+    }
+
+    /// This style can be used to style the divider within a skintone popover.
+    struct DividerStyle {
+
+        public init(
+            color: Color = .secondary.opacity(0.25),
+            thickness: CGFloat = 0.5,
+            verticalPadding: CGFloat = 12
+        ) {
+            self.color = color
+            self.thickness = thickness
+            self.verticalPadding = verticalPadding
+        }
+
+        public var color: Color
+        public var thickness: CGFloat
+        public var verticalPadding: CGFloat
     }
 }
 
 public extension Emoji.SkintonePopoverStyle {
+
+    static var standard: Self { .init() }
+}
+
+public extension Emoji.DividerStyle {
 
     static var standard: Self { .init() }
 }
@@ -121,6 +151,7 @@ private extension Emoji.SkintonePopover {
                     action: { _ in isPopoverPresented.toggle() }
                 )
             }
+            .emojiSkintonePopoverStyle(.init(backgroundColor: .white, dividerStyle: .standard))
         }
     }
 

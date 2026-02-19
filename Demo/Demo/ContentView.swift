@@ -62,6 +62,10 @@ struct ContentView: View {
             }
         }
         .emojiGridStyle(sizeMode.gridStyle)
+        .emojiSkintonePopoverStyle(.init(
+            backgroundColor: .white,
+            dividerStyle: .standard //.init(color: .red)  //nil
+        ))
         .tint(.orange)
         .task { isFocused = true }
     }
