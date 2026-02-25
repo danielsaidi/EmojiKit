@@ -63,6 +63,11 @@ public extension Emoji {
         public var backgroundColor: Color
         public var dividerStyle: DividerStyle?
     }
+}
+
+public extension Emoji.SkintonePopoverStyle {
+
+    static var standard: Self { .init() }
 
     /// This style can be used to style the divider within a skintone popover.
     struct DividerStyle {
@@ -83,12 +88,7 @@ public extension Emoji {
     }
 }
 
-public extension Emoji.SkintonePopoverStyle {
-
-    static var standard: Self { .init() }
-}
-
-public extension Emoji.DividerStyle {
+public extension Emoji.SkintonePopoverStyle.DividerStyle {
 
     static var standard: Self { .init() }
 }
