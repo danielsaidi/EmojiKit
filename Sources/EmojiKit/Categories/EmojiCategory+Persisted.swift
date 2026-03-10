@@ -25,11 +25,11 @@ public extension EmojiCategory {
 
 public extension EmojiCategory {
     
-    /// This type can be used to handle persisted categories, where emojis can
-    /// be customzied and persisted.
+    /// This type can be used to handle persisted categories,
+    /// where emojis can be customzied and persisted.
     ///
-    /// You can use the predefined emoji categories, such as ``favorites``,
-    /// and set up custom ones to fit your needs.
+    /// You can use the predefined emoji categories, such as
+    /// ``favorites``, and set up custom ones.
     struct Persisted: Codable, Equatable, Hashable, Identifiable, Sendable {
         
         /// Create a custom persisted emoji category.
@@ -67,20 +67,18 @@ public extension EmojiCategory {
             initialEmojis: [Emoji] = [],
             insertionStrategy: InsertionStrategy
         ) {
-            self.init(
-                id: id,
-                name: "",
-                iconName: iconName,
-                initialEmojis: initialEmojis,
-                insertionStrategy: insertionStrategy
-            )
+            self.id = id
+            self.name = nil
+            self.iconName = iconName
+            self.initialEmojis = initialEmojis
+            self.insertionStrategy = insertionStrategy
         }
         
         /// The category ID.
         public let id: String
         
         /// The category name.
-        public private(set) var name: String
+        public private(set) var name: String?
         
         /// The category icon name.
         public let iconName: String

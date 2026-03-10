@@ -28,7 +28,7 @@ public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable 
     
     case custom(
         id: String,
-        name: String,
+        name: String?,
         emojis: [Emoji],
         iconName: String = ""
     )
@@ -39,7 +39,7 @@ public extension EmojiCategory {
     /// Create a category with a string that contains emojis.
     static func custom(
         id: String,
-        name: String,
+        name: String?,
         emojis: String,
         iconName: String = ""
     ) -> Self {
@@ -192,7 +192,7 @@ public extension EmojiCategory {
 
     var labelText: String {
         switch self {
-        case .custom(_, let name, _, _): name
+        case .custom(_, let name, _, _): name ?? localizedName
         default: localizedName
         }
     }
@@ -209,7 +209,7 @@ public extension EmojiCategory {
 
     func labelText(for locale: Locale) -> String {
         switch self {
-        case .custom(_, let name, _, _): name
+        case .custom(_, let name, _, _): name ?? localizedName(in: locale)
         default: localizedName(in: locale)
         }
     }

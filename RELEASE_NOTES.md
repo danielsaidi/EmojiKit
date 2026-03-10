@@ -9,6 +9,14 @@
 
 
 
+## 2.3.5
+
+### 🐛 Bug Fixes
+
+* `EmojiCategory.Persisted` now uses localized titles if no name is provided.
+
+
+
 ## 2.3.4
 
 ### 🐛 Bug Fixes

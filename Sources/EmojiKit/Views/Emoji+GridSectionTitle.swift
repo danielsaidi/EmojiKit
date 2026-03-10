@@ -38,6 +38,7 @@ public extension Emoji {
 
 #Preview {
     VStack {
+        Emoji.GridSectionTitle(.favorites)
         Emoji.GridSectionTitle(.activity)
         Emoji.GridSectionTitle(.custom(id: "foo", name: "My Category", emojis: [], iconName: "face.smiling"))
     }
