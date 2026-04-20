@@ -18,6 +18,7 @@ This adds the 🫪🧑‍🩰🫍🫈🛘🫯🪊🪎 emojis to the full collect
 ### ✨ Features
 
 * `EmojiVersion` has a new `v17` version.
+* `Emoji.SkintonePopoverStyle` has a new `dividerStyle`.
 
 ### 🐛 Bug Fixes
 
