@@ -9,6 +9,14 @@
 
 
 
+## 2.4
+
+### 🐛 Bug Fixes
+
+* `EmojiGrid` now handles the initial selection scroll better.
+
+
+
 ## 2.3.5
 
 ### 🐛 Bug Fixes

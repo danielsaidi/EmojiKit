@@ -32,6 +32,7 @@ struct ContentView: View {
 
     @AppStorage("com.danielsaidi.emojikit.demo.selection")
     private var selectionValue: StorageValue<Emoji.GridSelection> = .init()
+
     @State private var category: EmojiCategory?
 
     private var categoryBinding: Binding<EmojiCategory?> { $category }
@@ -49,7 +50,6 @@ struct ContentView: View {
                 gridItem: { $0.view }
                 // gridItem: { $0.view.draggable($0.emoji) } Dragging conflicts with skintone popover.
             )
-
             .focused($isFocused)
             .navigationTitle(category?.localizedName ?? "EmojiKit")
             #if os(iOS)

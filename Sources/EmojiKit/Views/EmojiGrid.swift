@@ -97,8 +97,12 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     public var body: some View {
         bodyWithPreferredModifiers
             .onAppear(perform: setup)
-            .onChange(of: category, perform: setCategoryExternal)
-            .onChange(of: selection, perform: setSelectionExternal)
+            .onChange(of: category) {
+              self.setCategoryExternal($0)
+            }//, perform: setCategoryExternal)
+            .onChange(of: selection) {
+              self.setSelectionExternal($0)
+            }//, perform: setSelectionExternal)
             .padding(style.padding)
     }
 
@@ -268,16 +272,31 @@ private extension EmojiGrid {
     }
 
     func setup() {
-        setupInitialCategory()
+        setupInitialSelection()
     }
 
-    func setupInitialCategory() {
-        let category = category ?? selection?.category
-        guard let category else { return }
-        isScrollingToSelection = true
-        Task {
-            scrollViewProxy?.scrollToCategory(category)
-            isScrollingToSelection = false
+    func setupInitialSelection() {
+        if let selection {
+            isScrollingToSelection = true
+            Task {
+                // The short sleep is used to fix an initial
+                // scroll error when the emoji isn't visible
+                // from the category start point. Using this
+                // sleep hack triggers a first scroll to the
+                // category, after which the sleep gives the
+                // grid enough time to load emojis, which is
+                // what makes the second scroll work.
+                scrollViewProxy?.scrollToCategory(selection.category)
+                try? await Task.sleep(for: .milliseconds(100))
+                scrollViewProxy?.scrollToSelection(selection, isArrowNavigation: false)
+                isScrollingToSelection = false
+            }
+        } else if let category {
+            isScrollingToSelection = true
+            Task {
+                scrollViewProxy?.scrollToCategory(category)
+                isScrollingToSelection = false
+            }
         }
     }
 
