@@ -97,12 +97,8 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     public var body: some View {
         bodyWithPreferredModifiers
             .onAppear(perform: setup)
-            .onChange(of: category) {
-              self.setCategoryExternal($0)
-            }//, perform: setCategoryExternal)
-            .onChange(of: selection) {
-              self.setSelectionExternal($0)
-            }//, perform: setSelectionExternal)
+            .onChange(of: category, perform: setCategoryExternal)
+            .onChange(of: selection, perform: setSelectionExternal)
             .padding(style.padding)
     }
 

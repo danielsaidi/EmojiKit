@@ -101,7 +101,7 @@ public struct EmojiGridScrollView<SectionTitle: View, GridItem: View>: View {
 
     struct Preview: View {
 
-        @State var category: EmojiCategory? = nil // .flags
+        @State var category: EmojiCategory?
         @State var query: String = ""
         @State var selection: Emoji.GridSelection?
 
