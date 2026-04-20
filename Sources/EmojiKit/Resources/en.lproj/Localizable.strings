@@ -111,6 +111,7 @@
 "😲" = "Astonished Face";
 "🥱" = "Yawning Face";
 "🫩" = "Undereye Bags Face";
+"🫪" = "Distorted Face";
 "😴" = "Sleeping Face";
 "🤤" = "Drooling Face";
 "😪" = "Sleepy Face";
@@ -400,6 +401,7 @@
 "🤳" = "Selfie";
 "💃" = "Dancer";
 "🕺" = "Man Dancing";
+"🧑‍🩰" = "Ballet Dancer";
 "👯‍♀️" = "Women With Bunny Ears";
 "👯" = "Persons With Bunny Ears";
 "👯‍♂️" = "Men With Bunny Ears";
@@ -574,6 +576,7 @@
 "🐬" = "Dolphin";
 "🐳" = "Spouting Whale";
 "🐋" = "Whale";
+"🫍" = "Orca";
 "🦈" = "Shark";
 "🦭" = "Seal";
 "🐊" = "Crocodile";
@@ -582,6 +585,7 @@
 "🦓" = "Zebra Face";
 "🦍" = "Gorilla";
 "🦧" = "Orangutan";
+"🫈" = "Hairy Creature, Bigfoot, Yeti";
 "🦣" = "Mammoth";
 "🐘" = "Elephant";
 "🦛" = "Hippopotamus";
@@ -657,6 +661,7 @@
 "🐚" = "Spiral Shell";
 "🪸" = "Coral";
 "🪨" = "Rock";
+"🛘" = "Landslide";
 "🌾" = "Ear Of Rice";
 "💐" = "Bouquet";
 "🌷" = "Tulip";
@@ -694,6 +699,7 @@
 "☄️" = "Comet";
 "💥" = "Collision Symbol";
 "🔥" = "Fire";
+"🫯" = "Fight Cloud";
 "🌪" = "Cloud With Tornado";
 "🌈" = "Rainbow";
 "☀️" = "Black Sun With Rays";
@@ -963,6 +969,7 @@
 "🪘" = "Long Drum";
 "🎷" = "Saxophone";
 "🎺" = "Trumpet";
+"🪊" = "Trombone";
 "🪗" = "Accordion";
 "🎸" = "Guitar";
 "🪕" = "Banjo";
@@ -1172,6 +1179,7 @@
 "💳" = "Credit Card";
 "🪪" = "Identification Card";
 "💎" = "Gem Stone";
+"🪎" = "Treasure Chest";
 "⚖️" = "Scales";
 "🪜" = "Ladder";
 "🧰" = "Toolbox";

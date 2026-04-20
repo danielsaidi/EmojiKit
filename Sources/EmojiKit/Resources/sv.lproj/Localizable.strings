@@ -111,6 +111,7 @@
 "😲" = "Häpet ansikte";
 "🥱" = "Gäspande ansikte";
 "🫩" = "Ansikte med Påsar under Ögonen";
+"🫪" = "Förvrängt ansikte";
 "😴" = "Sovande ansikte";
 "🤤" = "Dregglande ansikte";
 "😪" = "Sömnigt ansikte";
@@ -400,6 +401,7 @@
 "🤳" = "Selfie";
 "💃" = "Dansare";
 "🕺" = "Dansande man";
+"🧑‍🩰" = "Balettdansör";
 "👯‍♀️" = "Kvinnor med kaninöron";
 "👯" = "Personer med kaninöron";
 "👯‍♂️" = "Män med kaninöron";
@@ -574,6 +576,7 @@
 "🐬" = "Delfin";
 "🐳" = "Sprutande val";
 "🐋" = "Val";
+"🫍" = "Orca";
 "🦈" = "Haj";
 "🦭" = "Säl";
 "🐊" = "Krokodil";
@@ -582,6 +585,7 @@
 "🦓" = "Zebra";
 "🦍" = "Gorilla";
 "🦧" = "Orangutang";
+"🫈" = "Hårig varelse";
 "🦣" = "Mammut";
 "🐘" = "Elefant";
 "🦛" = "Flodhäst";
@@ -657,6 +661,7 @@
 "🐚" = "Snäckskal";
 "🪸" = "Korall";
 "🪨" = "Sten";
+"🛘" = "Jordskred";
 "🌾" = "Risax";
 "💐" = "Bukett";
 "🌷" = "Tulpan";
@@ -694,6 +699,7 @@
 "☄️" = "Komet";
 "💥" = "Kollision";
 "🔥" = "Eld";
+"🫯" = "Slagsmålsmoln";
 "🌪" = "Tornado";
 "🌈" = "Regnbåge";
 "☀️" = "Sol";
@@ -963,6 +969,7 @@
 "🪘" = "Långtrumma";
 "🎷" = "Saxofon";
 "🎺" = "Trumpet";
+"🪊" = "Trombon";
 "🪗" = "Dragspel";
 "🎸" = "Gitarr";
 "🪕" = "Banjo";
@@ -1172,6 +1179,7 @@
 "💳" = "Kreditkort";
 "🪪" = "ID-kort";
 "💎" = "Ädelsten";
+"🪎" = "Skattkista";
 "⚖️" = "Våg";
 "🪜" = "Stege";
 "🧰" = "Verktygslåda";

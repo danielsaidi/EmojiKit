@@ -111,6 +111,7 @@
 "😲" = "Erstauntes Gesicht";
 "🥱" = "Gähnendes Gesicht";
 "🫩" = "Gesicht mit Augenringen";
+"🫪" = "Verzerrtes Gesicht";
 "😴" = "Schlafendes Gesicht";
 "🤤" = "Sabberndes Gesicht";
 "😪" = "Schläfriges Gesicht";
@@ -400,6 +401,7 @@
 "🤳" = "Selfie";
 "💃" = "Tänzerin";
 "🕺" = "Tanzender Mann";
+"🧑‍🩰" = "Balletttänzer";
 "👯‍♀️" = "Frauen mit Hasenohren";
 "👯" = "Personen mit Hasenohren";
 "👯‍♂️" = "Männer mit Hasenohren";
@@ -574,6 +576,7 @@
 "🐬" = "Delfin";
 "🐳" = "Spritzender Wal";
 "🐋" = "Wal";
+"🫍" = "Orca";
 "🦈" = "Hai";
 "🦭" = "Robbe";
 "🐊" = "Krokodil";
@@ -582,6 +585,7 @@
 "🦓" = "Zebra-Gesicht";
 "🦍" = "Gorilla";
 "🦧" = "Orang-Utan";
+"🫈" = "Haariges Wesen, Bigfoot, Yeti";
 "🦣" = "Mammut";
 "🐘" = "Elefant";
 "🦛" = "Flusspferd";
@@ -657,6 +661,7 @@
 "🐚" = "Schneckenhaus";
 "🪸" = "Koralle";
 "🪨" = "Felsen";
+"🛘" = "Erdrutsch";
 "🌾" = "Reisähre";
 "💐" = "Blumenstrauß";
 "🌷" = "Tulpe";
@@ -694,6 +699,7 @@
 "☄️" = "Komet";
 "💥" = "Kollisionssymbol";
 "🔥" = "Feuer";
+"🫯" = "Kampfwolke";
 "🌪" = "Wolke mit Tornado";
 "🌈" = "Regenbogen";
 "☀️" = "Schwarze Sonne mit Strahlen";
@@ -963,6 +969,7 @@
 "🪘" = "Langtrommel";
 "🎷" = "Saxophon";
 "🎺" = "Trompete";
+"🪊" = "Posaune";
 "🪗" = "Akkordeon";
 "🎸" = "Gitarre";
 "🪕" = "Banjo";
@@ -1172,6 +1179,7 @@
 "💳" = "Kreditkarte";
 "🪪" = "Ausweis";
 "💎" = "Edelstein";
+"🪎" = "Schatztruhe";
 "⚖️" = "Waage";
 "🪜" = "Leiter";
 "🧰" = "Werkzeugkasten";

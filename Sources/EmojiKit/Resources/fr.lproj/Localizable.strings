@@ -111,6 +111,7 @@
 "😲" = "Visage étonné";
 "🥱" = "Visage bâillant";
 "🫩" = "Visage avec cernes";
+"🫪" = "Visage déformé";
 "😴" = "Visage dormant";
 "🤤" = "Visage bavant";
 "😪" = "Visage somnolent";
@@ -400,6 +401,7 @@
 "🤳" = "Selfie";
 "💃" = "Danseuse";
 "🕺" = "Homme qui danse";
+"🧑‍🩰" = "Danseur de ballet";
 "👯‍♀️" = "Femmes avec des oreilles de lapin";
 "👯" = "Personnes avec des oreilles de lapin";
 "👯‍♂️" = "Hommes avec des oreilles de lapin";
@@ -574,6 +576,7 @@
 "🐬" = "Dauphin";
 "🐳" = "Baleine qui souffle";
 "🐋" = "Baleine";
+"🫍" = "Orque";
 "🦈" = "Requin";
 "🦭" = "Phoque";
 "🐊" = "Crocodile";
@@ -582,6 +585,7 @@
 "🦓" = "Tête de zèbre";
 "🦍" = "Gorille";
 "🦧" = "Orang-outan";
+"🫈" = "Créature poilue";
 "🦣" = "Mammouth";
 "🐘" = "Éléphant";
 "🦛" = "Hippopotame";
@@ -657,6 +661,7 @@
 "🐚" = "Coquillage spiralé";
 "🪸" = "Corail";
 "🪨" = "Roche";
+"🛘" = "Glissement de terrain";
 "🌾" = "Épi de riz";
 "💐" = "Bouquet";
 "🌷" = "Tulipe";
@@ -694,6 +699,7 @@
 "☄️" = "Comète";
 "💥" = "Symbole de collision";
 "🔥" = "Feu";
+"🫯" = "Nuage de bagarre";
 "🌪" = "Nuage avec tornade";
 "🌈" = "Arc-en-ciel";
 "☀️" = "Soleil noir avec rayons";
@@ -963,6 +969,7 @@
 "🪘" = "Tambour long";
 "🎷" = "Saxophone";
 "🎺" = "Trompette";
+"🪊" = "Trombone";
 "🪗" = "Accordéon";
 "🎸" = "Guitare";
 "🪕" = "Banjo";
@@ -1172,6 +1179,7 @@
 "💳" = "Carte de crédit";
 "🪪" = "Carte d'identité";
 "💎" = "Pierre précieuse";
+"🪎" = "Coffre au trésor";
 "⚖️" = "Balance";
 "🪜" = "Échelle";
 "🧰" = "Boîte à outils";

@@ -166,9 +166,8 @@ final class Emoji_VersionTests: XCTestCase {
     }
     
     func testCurrentIsTheLatestOne() throws {
-        // We need to account for old server runners
         let current = EmojiVersion.current.version
-        XCTAssertGreaterThanOrEqual(current, 15)
+        XCTAssertGreaterThanOrEqual(current, 16)            // Old CI workaround
     }
     
     func testCurrentUnavailableEmojisForSomeVersions() throws {

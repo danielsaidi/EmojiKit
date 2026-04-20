@@ -1,8 +1,10 @@
-/* 
-  Localizable.strings
-  EmojiPicker
-*/
+/*
+ Localizable.strings
+ EmojiKit
 
+ Created by Daniel Saidi on 2021-02-15.
+ Copyright © 2021-2026 Daniel Saidi. All rights reserved.
+ */
 
 "locale" = "nl";
 
@@ -112,6 +114,7 @@
 "😴" = "Slapend Gezicht";
 "🤤" = "Kwijlend Gezicht";
 "😪" = "Slaperig Gezicht";
+"🫪" = "Vervormd gezicht";
 "😮‍💨" = "Gezicht met Open Mond";
 "😵" = "Duizelig Gezicht";
 "😵‍💫" = "Duizelig Gezicht";
@@ -398,6 +401,7 @@
 "🤳" = "Selfie";
 "💃" = "Danseres";
 "🕺" = "Dansende Man";
+"🧑‍🩰" = "Balletdanser";
 "👯‍♀️" = "Vrouwen met Konijnenoren";
 "👯" = "Personen met Konijnenoren";
 "👯‍♂️" = "Mannen met Konijnenoren";
@@ -499,6 +503,9 @@
 "🕶" = "Donkere Zonnebril";
 "🥽" = "Beschermbril";
 "🌂" = "Gesloten Paraplu";
+
+
+
 "🐶" = "Hondengezicht";
 "🐱" = "Kattengezicht";
 "🐭" = "Muizengezicht";
@@ -569,6 +576,7 @@
 "🐬" = "Dolfijn";
 "🐳" = "Spuitende Walvis";
 "🐋" = "Walvis";
+"🫍" = "Orka";
 "🦈" = "Haai";
 "🦭" = "Zeehond";
 "🐊" = "Krokodil";
@@ -577,6 +585,7 @@
 "🦓" = "Zebragezicht";
 "🦍" = "Gorilla";
 "🦧" = "Orang-oetan";
+"🫈" = "Harig wezen";
 "🦣" = "Mammoet";
 "🐘" = "Olifant";
 "🦛" = "Nijlpaard";
@@ -652,6 +661,7 @@
 "🐚" = "Spiraalschelp";
 "🪸" = "Koraal";
 "🪨" = "Rots";
+"🛘" = "Aardverschuiving";
 "🌾" = "Rijstoor";
 "💐" = "Boeket";
 "🌷" = "Tulp";
@@ -689,6 +699,7 @@
 "☄️" = "Komeet";
 "💥" = "Botsing Symbool";
 "🔥" = "Vuur";
+"🫯" = "Vechtswolk";
 "🌪" = "Wolk met Tornado";
 "🌈" = "Regenboog";
 "☀️" = "Zwarte Zon met Stralen";
@@ -713,6 +724,9 @@
 "☂️" = "Paraplu";
 "🌊" = "Watergolf";
 "🌫" = "Mist";
+
+
+
 "🍏" = "Groene Appel";
 "🍎" = "Rode Appel";
 "🍐" = "Peer";
@@ -843,6 +857,9 @@
 "🥡" = "Afhaalbox";
 "🥢" = "Eetstokjes";
 "🧂" = "Zoutstrooier";
+
+
+
 "⚽️" = "Voetbal";
 "🏀" = "Basketbal en Hoepel";
 "🏈" = "American Football";
@@ -952,6 +969,7 @@
 "🪘" = "Lange Trommel";
 "🎷" = "Saxofoon";
 "🎺" = "Trompet";
+"🪊" = "Trombone";
 "🪗" = "Accordeon";
 "🎸" = "Gitaar";
 "🪕" = "Banjo";
@@ -965,6 +983,9 @@
 "🎮" = "Videogame";
 "🎰" = "Gokautomaat";
 "🧩" = "Puzzelstukje";
+
+
+
 "🚗" = "Auto";
 "🚕" = "Taxi";
 "🚙" = "Recreatievoertuig";
@@ -1096,6 +1117,9 @@
 "🌌" = "Melkweg";
 "🌉" = "Brug bij Nacht";
 "🌁" = "Mistig";
+
+
+
 "⌚️" = "Horloge";
 "📱" = "Mobiele Telefoon";
 "📲" = "Mobiele Telefoon met Pijl naar Rechts";
@@ -1155,6 +1179,7 @@
 "💳" = "Creditcard";
 "🪪" = "Identificatiekaart";
 "💎" = "Edelsteen";
+"🪎" = "Schatkist";
 "⚖️" = "Weegschaal";
 "🪜" = "Ladder";
 "🧰" = "Gereedschapskist";
