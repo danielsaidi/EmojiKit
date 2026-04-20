@@ -10,9 +10,21 @@ import EmojiKit
 import XCTest
 
 final class Emoji_VersionTests: XCTestCase {
-    
-    func testDefinesVersion16_0() throws {
-        let version = EmojiVersion.v16_0
+
+    func testDefinesVersion17() throws {
+        let version = EmojiVersion.v17
+        let emojis = version.emojis
+        let string = emojis.map { $0.char }.joined()
+        XCTAssertEqual(string, "🫪🧑‍🩰🧑🏻‍🩰🧑🏼‍🩰🧑🏽‍🩰🧑🏾‍🩰🧑🏿‍🩰🫍🫈🛘🫯🪊🪎")
+        XCTAssertEqual(version.version, 17.0)
+        XCTAssertEqual(version.iOS, 26.4)
+        XCTAssertEqual(version.macOS, 26.4)
+        XCTAssertEqual(version.tvOS, 26.4)
+        XCTAssertEqual(version.watchOS, 26.4)
+    }
+
+    func testDefinesVersion16() throws {
+        let version = EmojiVersion.v16
         let emojis = version.emojis
         let string = emojis.map { $0.char }.joined()
         XCTAssertEqual(string, "🫩🫆🪾🫜🫟🪉🪏🇨🇶")
@@ -22,7 +34,7 @@ final class Emoji_VersionTests: XCTestCase {
         XCTAssertEqual(version.tvOS, 18.4)
         XCTAssertEqual(version.watchOS, 11.4)
     }
-    
+
     func testDefinesVersion15_1() throws {
         let version = EmojiVersion.v15_1
         let emojis = version.emojis
@@ -139,9 +151,9 @@ final class Emoji_VersionTests: XCTestCase {
 
     func testCanSpecifyOlderAndLaterVersions() throws {
         XCTAssertEqual(EmojiVersion.v14.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1])
-        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15, .v15_1, .v16_0])
+        XCTAssertEqual(EmojiVersion.v14.laterVersions, [.v15, .v15_1, .v16, .v17])
         XCTAssertEqual(EmojiVersion.v15.olderVersions, [.v11, .v12, .v12_1, .v13, .v13_1, .v14])
-        XCTAssertEqual(EmojiVersion.v16_0.laterVersions, [])
+        XCTAssertEqual(EmojiVersion.v16.laterVersions, [.v17])
     }
     
     func testCanSpecifyUnavailableEmojis() throws {
@@ -161,8 +173,8 @@ final class Emoji_VersionTests: XCTestCase {
     
     func testCurrentUnavailableEmojisForSomeVersions() throws {
         let current = EmojiVersion.current
-        let latest = EmojiVersion.v16_0
-        let previous = EmojiVersion.v15_1
+        let latest = EmojiVersion.v17
+        let previous = EmojiVersion.v16
         XCTAssertEqual(EmojiVersion.currentUnavailableEmojis, current.unavailableEmojis)
         XCTAssertEqual(latest.unavailableEmojis.count, 0)
         XCTAssertEqual(previous.unavailableEmojis.count, latest.emojis.count)

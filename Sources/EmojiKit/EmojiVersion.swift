@@ -120,13 +120,25 @@ public extension EmojiVersion {
 
     /// All emoji versions that are defined in the library.
     static var all: [EmojiVersion] {
-        [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v16_0]
+      [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v16, .v17]
     }
     
     /// All emoji versions that are defined in the library.
     static var allCases: [EmojiVersion] { all }
 
-    static var v16_0: Self {
+    static var v17: Self {
+        .init(
+            version: 17.0,
+            emojis: "🫪🧑‍🩰🫍🫈🛘🫯🪊🪎",
+            iOS: 26.4,
+            macOS: 26.4,
+            tvOS: 26.4,
+            watchOS: 26.4,
+            comment: "Released in 2026, this version adds 8 emojis."
+        )
+    }
+
+    static var v16: Self {
         .init(
             version: 16.0,
             emojis: "🫩🫆🪾🫜🫟🪉🪏🇨🇶",
@@ -134,7 +146,7 @@ public extension EmojiVersion {
             macOS: 15.4,
             tvOS: 18.4,
             watchOS: 11.4,
-            comment: "This version adds 8 new emojis, with no skin tone variations."
+            comment: "Released in 2025, this version adds 8 emojis."
         )
     }
 
@@ -146,7 +158,7 @@ public extension EmojiVersion {
             macOS: 14.4,
             tvOS: 17.4,
             watchOS: 10.4,
-            comment: "In this version, Apple removed the illustrated family emojis. Since they can't be rendered from this version and forward, the raw family badges have been added to their new location in the symbols category."
+            comment: "Released in 2024, this version removes the illustrated family emojis from Apple platforms."
         )
     }
 
@@ -235,10 +247,13 @@ public extension EmojiVersion {
 
     /// The ``EmojiVersion`` that is used by the current OS.
     static var current: Self {
-        if #available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *) {
-            return .v16_0
-        }
-        if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, *) {
+      if #available(iOS 26.4, macOS 26.4, tvOS 26.4, watchOS 26.4, *) {
+          return .v17
+      }
+      if #available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, *) {
+          return .v16
+      }
+      if #available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, *) {
             return .v15_1
         }
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {

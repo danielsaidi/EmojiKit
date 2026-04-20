@@ -11,6 +11,14 @@
 
 ## 2.4
 
+This version adds support for Emojis 17.0.
+
+This adds the 🫪🧑‍🩰🫍🫈🛘🫯🪊🪎 emojis to the full collection.
+
+### ✨ Features
+
+* `EmojiVersion` has a new `v17` version.
+
 ### 🐛 Bug Fixes
 
 * `EmojiGrid` now handles the initial selection scroll better.
