@@ -36,10 +36,10 @@ public extension Localizable {
 
 public extension Localizable {
     
-    /// The localized text for a certain key, locale and bundle.
+    /// Localized text for a certain key, locale and bundle.
     ///
     /// - Parameters:
-    ///   - key:
+    ///   - key: The localization key.
     ///   - locale: The locale to use, by default `.current`.
     ///   - bundle: The bundle that contains the localized content.
     static func localizedText(
@@ -51,10 +51,10 @@ public extension Localizable {
         return NSLocalizedString(key, bundle: localeBundle, comment: "")
     }
     
-    /// The localized text for a certain key, locale and bundle.
+    /// Localized text for a certain key, locale and bundle.
     ///
     /// - Parameters:
-    ///   - key:
+    ///   - key: The localization key.
     ///   - locale: The locale to use, by default `.current`.
     ///   - bundle: The bundle that contains the localized content.
     func localizedText(

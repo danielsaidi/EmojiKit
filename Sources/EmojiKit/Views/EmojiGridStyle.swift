@@ -8,15 +8,17 @@
 
 import SwiftUI
 
-/// This style can be used to style the ``EmojiGrid`` and ``EmojiGridScrollView``.
+/// This style can be used to style an ``EmojiGrid`` and the
+/// ``EmojiGridScrollView``.
 ///
-/// This style can be applied with ``emojiGridStyle(_:)``. You can use the
-/// ``standard`` style or any of the predefined sizes like ``large``. You can
-/// also create completely custom styles.
+/// This style can be applied with the ``emojiGridStyle(_:)``
+/// view modifier. You can use the ``standard`` style or any
+/// predefined size like ``large`` or completely custom ones.
 ///
-/// When ``prefersFocusEffect`` is `true`, the grid will get a blue square
-/// around itself, to indicate focus. This is not needed, since the selected emoji will
-/// already be marked with a blue square, but it's up to you if you want to disable it.
+/// When ``prefersFocusEffect`` is `true`, the grid will get
+/// a blue square to indicate focus. This visual style isn't
+/// needed, since the selected emoji is marked with a square,
+/// but it's up to you if you want to disable it.
 public struct EmojiGridStyle {
 
     /// Create a style with an identical font and item size.

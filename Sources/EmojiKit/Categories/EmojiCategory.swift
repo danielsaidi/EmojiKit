@@ -8,13 +8,15 @@
 
 import SwiftUI
 
-/// This enum defines the standard emoji categories, as well as their emojis.
+/// This enum defines the standard emoji categories, as well
+/// as their emojis.
 ///
-/// The ``persisted(_:)`` category uses a ``Persisted`` category type
-/// that defines special categories to which you can add and remove emojis.
+/// The ``persisted(_:)`` category uses a ``Persisted`` type
+/// that can add and remove emojis. Changes are stored in an
+/// internal user defaults storage.
 ///
-/// Use the ``custom(id:name:emojis:iconName:)`` to create a custom
-/// category with static emojis.
+/// Use the ``custom(id:name:emojis:iconName:)`` to create a
+/// custom category with static emojis.
 public enum EmojiCategory: Codable, Equatable, Hashable, Identifiable, Sendable {
 
     case smileysAndPeople

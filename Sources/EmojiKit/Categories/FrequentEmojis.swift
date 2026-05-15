@@ -130,8 +130,8 @@ private extension FrequentEmojis {
 
 private extension FrequentEmojis {
 
-    /// Finds the correct insertion index to maintain frequency-based sorting
-    /// Uses binary search for O(log n) performance
+    /// Finds the correct insertion index to honor frequency
+    /// based sorting. Uses binary search, for O(log n) perf.
     static func findInsertionIndex(for frequency: Int, in emojis: [Emoji], frequencies: [String: Int]) -> Int {
         var left = 0
         var right = emojis.count

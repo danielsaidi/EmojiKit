@@ -54,7 +54,8 @@ public extension EmojiCategory {
             self.insertionStrategy = insertionStrategy
         }
         
-        /// Create a custom persisted emoji category with an internal name.
+        /// Create a custom persisted emoji category with an
+        /// internal name.
         ///
         /// - Parameters:
         ///   - id: The category ID.
@@ -94,8 +95,8 @@ public extension EmojiCategory {
         
         /// Get the emojis storage key for custom category.
         ///
-        /// > Note: This should be mutable, to allow us to customize it for other
-        /// storage requirements, like App Groups.
+        /// > TODO: This should be made mutable, to allow us
+        /// to customize it to support e.g. App Groups.
         static var storage: UserDefaults {
             .standard
         }

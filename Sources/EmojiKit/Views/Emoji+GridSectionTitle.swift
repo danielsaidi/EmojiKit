@@ -10,10 +10,11 @@ import SwiftUI
 
 public extension Emoji {
     
-    /// This view can be used as a category section title in e.g. ``EmojiGrid``.
+    /// This view can be used as a category section title in
+    /// e.g. an ``EmojiGrid``.
     ///
-    /// This view is currently not customizable, since views in this library will let
-    /// you customize their section view instead of customizing this view.
+    /// This view is currently not customizable, since views
+    /// will instead let you customize the section view.
     struct GridSectionTitle: View {
         
         public init(

@@ -9,14 +9,13 @@
 import Foundation
 import SwiftUI
 
-/// This enum defines all supported Emoji versions.
+/// This enum defines all supported emoji versions, with the
+/// emojis that were introduced in each version.
 ///
-/// The static ``EmojiVersion/all`` property returns all emoji versions while
-/// ``EmojiVersion/allAvailable`` returns all versions that are available
-/// in the current runtime's OS version.
-///
-/// This is used to let ``EmojiCategory`` only return emojis that are available
-/// to the current runtime.
+/// The static ``EmojiVersion/all`` will return all versions,
+/// including the ones that are not available to the current
+/// runtime. ``EmojiVersion/allAvailable`` will only returns
+/// the ones that are available to the current runtime.
 public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
 
     init(

@@ -12,8 +12,8 @@ public extension Character {
 
     /// Whether the character is a an emoji.
     ///
-    /// This will manually add later version emojis to the check, since they don't
-    /// work with the basic unicode logic.
+    /// This will manually add explicit checks for all later
+    /// versions, since they don't support the unicode logic.
     var isEmoji: Bool {
         if isCombinedEmoji || isSimpleEmoji { return true }
         return isVersion15OrLaterEmoji
@@ -26,7 +26,8 @@ public extension Character {
         return scalars.first?.properties.isEmoji ?? false
     }
     
-    /// Whether the character is an emoji that was released in version 15 or later.
+    /// Whether this character is an emoji that was released
+    /// in version 15 or later.
     var isVersion15OrLaterEmoji: Bool {
         let versions = EmojiVersion.all.filter { $0.version >= 15 }
         let emojis = versions.flatMap { $0.emojiString }

@@ -12,8 +12,8 @@ public extension Emoji {
     
     /// This style can be used to style the ``Emoji/GridItem``.
     ///
-    /// This style can be applied with ``emojiGridItemStyle(_:)``. You
-    /// can use the ``standard`` style or your own style.
+    /// This style can be applied with ``emojiGridItemStyle(_:)``.
+    /// You can use the ``standard`` style or your own style.
     struct GridItemStyle {
         
         /// Create a custom emoji grid item style.
@@ -37,7 +37,7 @@ public extension Emoji.GridItemStyle {
 
 public extension View {
 
-    /// Apply a ``Emoji/GridItemStyle``.
+    /// Apply a custom ``Emoji/GridItemStyle``.
     func emojiGridItemStyle(
         _ style: Emoji.GridItemStyle
     ) -> some View {

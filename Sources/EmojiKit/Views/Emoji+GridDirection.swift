@@ -12,7 +12,7 @@ public extension Emoji {
     
     /// This enum defines the available directions in a grid.
     ///
-    /// It is all internal for now, since this interface may change in the future.
+    /// This is internal, since it may change in the future.
     enum GridDirection {
         
         case up, down, left, right
