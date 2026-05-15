@@ -9,6 +9,18 @@
 
 
 
+## 2.5
+
+This version adds extended skintone support for bi-person emojis.
+
+To reduce complexity, the support only covers the same skintones.
+
+### ✨ Features
+
+* 👯‍♀️👯👯‍♂️👫👭👬👩‍❤️‍👨👩‍❤️‍👩🧑‍❤️‍🧑👨‍❤️‍👨👩‍❤️‍💋‍👨👩‍❤️‍💋‍👩🧑‍❤️‍💋‍🧑👨‍❤️‍💋‍👨 are extended with skin tone adjustments.
+
+
+        
 ## 2.4
 
 This version adds support for Emojis 17.0.
