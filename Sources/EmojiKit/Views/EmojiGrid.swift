@@ -381,7 +381,19 @@ private extension EmojiGrid {
         }
     }
 
+    @ViewBuilder
     func gridItemView(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
+        if emoji.0.hasSkinToneVariants {
+            gridItemViewBase(for: category, emoji: emoji)
+                .onLongPressGesture { handleLongPress(on: emoji.0, in: category.0) }
+                .onTapGesture { handleTap(on: emoji.0, in: category.0) }
+        } else {
+            gridItemViewBase(for: category, emoji: emoji)
+                .onTapGesture { handleTap(on: emoji.0, in: category.0) }
+        }
+    }
+
+    func gridItemViewBase(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
         EmojiGridItemWrapper(
             emoji: emoji.0,
             category: category.0,
@@ -401,8 +413,6 @@ private extension EmojiGrid {
         )
         // .draggable(emoji) TODO: Fix Conflicts with popover
         .font(style.font)
-        .onLongPressGesture { handleLongPress(on: emoji.0, in: category.0) }
-        .onTapGesture { handleTap(on: emoji.0, in: category.0) }
         .id(emoji.0.id(in: category.0))
     }
 }
