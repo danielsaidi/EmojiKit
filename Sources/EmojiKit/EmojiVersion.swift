@@ -16,7 +16,7 @@ import SwiftUI
 /// including the ones that are not available to the current
 /// runtime. ``EmojiVersion/allAvailable`` will only returns
 /// the ones that are available to the current runtime.
-public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
+public struct EmojiVersion: CaseIterable, Equatable, Identifiable, Sendable {
 
     init(
         version: Double,
@@ -118,10 +118,9 @@ public struct EmojiVersion: CaseIterable, Equatable, Identifiable {
 public extension EmojiVersion {
 
     /// All emoji versions that are defined in the library.
-    static var all: [EmojiVersion] {
+    static let all: [EmojiVersion] =
       [.v11, .v12, .v12_1, .v13, .v13_1, .v14, .v15, .v15_1, .v16, .v17]
-    }
-    
+
     /// All emoji versions that are defined in the library.
     static var allCases: [EmojiVersion] { all }
 

@@ -32,7 +32,7 @@ public extension String {
 
     /// Extract all emojis in the string.
     var emojiString: String {
-        emojis.map { String($0) }.reduce("", +)
+        emojis.map(String.init).joined()
     }
 
     /// Whether the string is a single emoji.

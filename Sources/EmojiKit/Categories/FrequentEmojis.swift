@@ -100,9 +100,8 @@ extension FrequentEmojis {
         }
 
         // Filter frequencies to only include emojis we're setting
-        let frequencies = frequencies.filter { key, _ in
-            emojis.contains { $0.char == key }
-        }
+        let emojiChars = Set(emojis.map(\.char))
+        let frequencies = frequencies.filter { emojiChars.contains($0.key) }
 
         // Sort the emojis by frequency
         let sortedEmojis = emojis.sorted { lhs, rhs in

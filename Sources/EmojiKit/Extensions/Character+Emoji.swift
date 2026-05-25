@@ -29,10 +29,15 @@ public extension Character {
     /// Whether this character is an emoji that was released
     /// in version 15 or later.
     var isVersion15OrLaterEmoji: Bool {
-        let versions = EmojiVersion.all.filter { $0.version >= 15 }
-        let emojis = versions.flatMap { $0.emojiString }
-        return emojis.contains(self)
+        Self.version15PlusEmojiSet.contains(self)
     }
+
+    private static let version15PlusEmojiSet: Set<Character> = {
+        EmojiVersion.all
+            .filter { $0.version >= 15 }
+            .flatMap { $0.emojiString }
+            .reduce(into: Set<Character>()) { $0.insert($1) }
+    }()
 
     /// Whether the character is a one-scalar emoji.
     var isSimpleEmoji: Bool {

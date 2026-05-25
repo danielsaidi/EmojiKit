@@ -9,6 +9,12 @@
 
 
 
+## 2.5.1
+
+This version contains misc performance improvements.
+
+
+        
 ## 2.5
 
 This version adds extended skintone support for bi-person emojis.
