@@ -10,7 +10,7 @@ import SwiftUI
 
 /// This internal view is used to apply additional modifiers
 /// to a grid item, to avoid redrawing the entire grid.
-struct EmojiGridItemWrapper<ItemView: View>: View {
+struct EmojiGridItemWrapper<Content: View>: View {
 
     let emoji: Emoji
     let category: EmojiCategory
@@ -18,7 +18,7 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
 
     @Binding var popoverSelection: Emoji.GridSelection?
 
-    @ViewBuilder let content: () -> ItemView
+    @ViewBuilder let content: () -> Content
 
     @State private var isPopoverPresented = false
 
@@ -28,8 +28,12 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
                 if isPresented { return }
                 popoverSelection = nil
             }
-            .onChange(of: popoverSelection) { _ in
-                isPopoverPresented = hasSkinToneVariants && isSelected
+            .onChange(of: popoverSelection) { newValue in
+                let shouldPresent = emoji.hasSkinToneVariants
+                    && (newValue?.matches(emoji: emoji, category: category) ?? false)
+                if isPopoverPresented != shouldPresent {
+                    isPopoverPresented = shouldPresent
+                }
             }
             #if os(iOS) || os(macOS)
             .popover(isPresented: $isPopoverPresented) {
@@ -39,16 +43,5 @@ struct EmojiGridItemWrapper<ItemView: View>: View {
                 }
             }
             #endif
-    }
-
-    private var hasSkinToneVariants: Bool {
-        emoji.hasSkinToneVariants
-    }
-
-    private var isSelected: Bool {
-        popoverSelection?.matches(
-            emoji: emoji,
-            category: category
-        ) ?? false
     }
 }

@@ -64,7 +64,7 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
         self.gridItem = gridItem
     }
 
-    final class VisibleEmojiState: ObservableObject {
+    final class VisibleEmojiState {
         var emojiIds: Set<String> = []
     }
 
@@ -92,30 +92,26 @@ public struct EmojiGrid<SectionTitle: View, GridItem: View>: View {
     @State private var isScrollingToSelection = false
     @State private var popoverSelection: Emoji.GridSelection?
 
-    @StateObject private var visibleEmojiState = VisibleEmojiState()
+    @State private var visibleEmojiState = VisibleEmojiState()
 
     public var body: some View {
         bodyWithPreferredModifiers
             .onAppear(perform: setup)
-            .onChange(of: category, perform: setCategoryExternal)
-            .onChange(of: selection, perform: setSelectionExternal)
+            .onChange(of: category) { setCategoryExternal($1) }
+            .onChange(of: selection) { setSelectionExternal($1) }
             .padding(style.padding)
     }
 
     @ViewBuilder
     private var bodyWithPreferredModifiers: some View {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *) {
-            grid.focusable(true)
-                .focusEffectDisabled(!style.prefersFocusEffect)
-                #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
-                .onKeyPress { handleKeyPress($0) }
-                #endif
-                #if os(tvOS)
-                .onMoveCommand { selectEmoji(with: $0.emojiGridDirection) }
-                #endif
-        } else {
-            grid
-        }
+        grid.focusable(true)
+            .focusEffectDisabled(!style.prefersFocusEffect)
+            #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
+            .onKeyPress { handleKeyPress($0) }
+            #endif
+            #if os(tvOS)
+            .onMoveCommand { selectEmoji(with: $0.emojiGridDirection) }
+            #endif
     }
 }
 
@@ -125,7 +121,6 @@ private extension EmojiGrid {
 
     #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS)
     @MainActor
-    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
     func handleKeyPress(_ keyPress: KeyPress) -> KeyPress.Result {
         guard keyPress.phase == .down else { return .ignored }
         let result: Bool
@@ -145,7 +140,6 @@ private extension EmojiGrid {
         return true
     }
 
-    @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
     func handleKeyPressOnReturn(_ press: SwiftUI.KeyPress) -> Bool {
         if press.modifiers.isEmpty { return pickSelectedEmoji() }
         if press.modifiers == .option { return showPopover(for: selection) }
@@ -164,6 +158,9 @@ private extension EmojiGrid {
     }
 
     func handleVisibility(_ isVisible: Bool, for emoji: Emoji, in category: EmojiCategory) {
+        let selectionEmoji = selection?.emoji
+        let selectionCategory = selection?.category
+        guard emoji == selectionEmoji, category == selectionCategory else { return }
         let id = emoji.id(in: category)
         if isVisible {
             visibleEmojiState.emojiIds.insert(id)
@@ -328,36 +325,28 @@ private extension EmojiGrid {
     }
     
     func gridContent() -> some View {
-        ForEach(Array(categories.enumerated()), id: \.offset) {
-            let category = $0.element
-            if category.hasEmojis {
-                gridSection(for: category, at: $0.offset)
-            }
+        ForEach(categories.filter(\.hasEmojis), id: \.id) { category in
+            gridSection(for: category)
         }
     }
 
-    func gridSection(for category: EmojiCategory, at index: Int) -> some View {
-        Section {
-            let emojis = category.emojis.enumerated()
-            ForEach(Array(emojis), id: \.offset) {
-                gridItem(for: (category, index), emoji: ($0.element, $0.offset))
+    func gridSection(for category: EmojiCategory) -> some View {
+        let categoryIndex = categories.firstIndex(of: category) ?? 0
+        let items = category.emojis.enumerated().map { (index: $0.offset, emoji: $0.element, categoryId: $0.element.id(in: category)) }
+        return Section {
+            ForEach(items, id: \.categoryId) { item in
+                gridItem(for: (category, categoryIndex), emoji: (item.emoji, item.index))
             }
         } header: {
-            gridSectionHeader(for: category, at: index)
+            gridSectionHeader(for: category, at: categoryIndex)
         }
-        .id(category.id)
     }
 
-    @ViewBuilder
     func gridSectionHeader(for category: EmojiCategory, at index: Int) -> some View {
-        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            gridSectionTitle(for: category, at: index)
-                .onScrollVisibilityChange {
-                    handleVisibility($0, for: category)
-                }
-        } else {
-            gridSectionTitle(for: category, at: index)
-        }
+        gridSectionTitle(for: category, at: index)
+            .onScrollVisibilityChange {
+                handleVisibility($0, for: category)
+            }
     }
 
     @ViewBuilder
@@ -369,16 +358,11 @@ private extension EmojiGrid {
         }
     }
 
-    @ViewBuilder
     func gridItem(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
-        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-            gridItemView(for: category, emoji: emoji)
-                .onScrollVisibilityChange {
-                    handleVisibility($0, for: emoji.0, in: category.0)
-                }
-        } else {
-            gridItemView(for: category, emoji: emoji)
-        }
+        gridItemView(for: category, emoji: emoji)
+            .onScrollVisibilityChange {
+                handleVisibility($0, for: emoji.0, in: category.0)
+            }
     }
 
     @ViewBuilder
@@ -394,38 +378,53 @@ private extension EmojiGrid {
     }
 
     func gridItemViewBase(for category: (EmojiCategory, Int), emoji: (Emoji, Int)) -> some View {
-        EmojiGridItemWrapper(
+        let isSelectedBinding = Binding<Bool>(
+            get: { selection?.isSelected(emoji: emoji.0, in: category.0) == true },
+            set: { _ in }
+        )
+        return EmojiGridItemWrapper(
             emoji: emoji.0,
             category: category.0,
             action: { emoji, _ in pickEmoji(emoji) },
             popoverSelection: $popoverSelection,
             content: {
-                let isSelected = isSelected(emoji.0, in: category.0)
-                gridItem(Emoji.GridItemParameters(
+                EmojiGridCellContent(
                     emoji: emoji.0,
                     emojiIndex: emoji.1,
                     category: category.0,
                     categoryIndex: category.1,
-                    isSelected: isSelected,
-                    view: Emoji.GridItem(emoji.0, isSelected: isSelected)
-                ))
+                    isSelected: isSelectedBinding,
+                    gridItem: { gridItem($0) }
+                )
             }
         )
         // .draggable(emoji) TODO: Fix Conflicts with popover
         .font(style.font)
-        .id(emoji.0.id(in: category.0))
     }
 }
 
-// MARK: - Functions
 
-private extension EmojiGrid {
-    
-    func isSelected(
-        _ emoji: Emoji,
-        in category: EmojiCategory
-    ) -> Bool {
-        selection?.isSelected(emoji: emoji, in: category) == true
+
+// MARK: - Cell Content
+
+private struct EmojiGridCellContent<GridItemContent: View>: View {
+
+    let emoji: Emoji
+    let emojiIndex: Int
+    let category: EmojiCategory
+    let categoryIndex: Int
+    @Binding var isSelected: Bool
+    @ViewBuilder let gridItem: (Emoji.GridItemParameters) -> GridItemContent
+
+    var body: some View {
+        gridItem(Emoji.GridItemParameters(
+            emoji: emoji,
+            emojiIndex: emojiIndex,
+            category: category,
+            categoryIndex: categoryIndex,
+            isSelected: isSelected,
+            view: Emoji.GridItem(emoji, isSelected: isSelected)
+        ))
     }
 }
 

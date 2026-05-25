@@ -12,7 +12,11 @@ public extension Emoji {
 
     /// Whether or not the emoji has any skin tone variants.
     var hasSkinToneVariants: Bool {
-        char.hasEmojiSkinToneVariants
+        Self.skinToneVariantCache[char] ?? {
+            let result = char.hasEmojiSkinToneVariants
+            Self.skinToneVariantCache[char] = result
+            return result
+        }()
     }
 
     /// The emoji's neutral skin tone variant.
@@ -33,6 +37,8 @@ public extension Emoji {
 }
 
 extension Emoji {
+
+    nonisolated(unsafe) static var skinToneVariantCache: [String: Bool] = [:]
 
     var neutralSkinToneVariantOverride: Emoji? {
         skinToneVariantOverrides?.first

@@ -9,9 +9,13 @@
 
 
 
-## 2.5.1
+## 3.0
 
-This version contains misc performance improvements.
+This version bumps all deployment targets to be able to exclusively use modern APIs.
+
+This leads to less availability checks which boosts performance in the grid.
+
+The result is more optimal code, with the drawback that it requires iOS 18 and aligned OS versions.
 
 
         

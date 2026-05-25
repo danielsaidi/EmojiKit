@@ -16,12 +16,8 @@ extension View {
         @ViewBuilder view: @escaping () -> Popover
     ) -> some View {
         #if os(iOS) || os(macOS)
-        if #available(iOS 16.4, tvOS 16.4, *) {
-            self.popover(isPresented: isPresented) {
-                view().popoverSizeIfAvailable()
-            }
-        } else {
-            self
+        self.popover(isPresented: isPresented) {
+            view().popoverSizeIfAvailable()
         }
         #else
         self
@@ -31,11 +27,7 @@ extension View {
     @ViewBuilder
     func popoverSizeIfAvailable() -> some View {
         #if os(iOS)
-        if #available(iOS 16.4, tvOS 16.4, *) {
-            self.presentationCompactAdaptation(.popover)
-        } else {
-            self
-        }
+        self.presentationCompactAdaptation(.popover)
         #else
         self
         #endif
@@ -46,11 +38,7 @@ extension View {
         _ color: Color
     ) -> some View {
         #if os(iOS)
-        if #available(iOS 16.4, tvOS 16.4, *) {
-            self.presentationBackground(color)
-        } else {
-            self
-        }
+        self.presentationBackground(color)
         #else
         self
         #endif

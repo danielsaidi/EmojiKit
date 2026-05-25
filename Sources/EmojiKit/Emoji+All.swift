@@ -15,9 +15,9 @@ public extension Emoji {
     /// This property only returns emojis that are available
     /// to the current runtime.
     static let all: [Emoji] = {
-        EmojiCategory.standardCategories.flatMap {
-            $0.emojis
-        }
+        let emojis = EmojiCategory.standardCategories.flatMap { $0.emojis }
+        emojis.forEach { _ = $0.hasSkinToneVariants }
+        return emojis
     }()
 }
 
@@ -63,23 +63,11 @@ public extension Collection where Element == Emoji {
                     }
                     .padding()
                 }
-                .prefersSearchable(with: $query)
+                .searchable(text: $query)
             }
         }
     }
     
     return Preview()
-}
-
-private extension View {
-    
-    @ViewBuilder
-    func prefersSearchable(with query: Binding<String>) -> some View {
-        if #available(iOS 15.0, macOS 12.0, *) {
-            searchable(text: query)
-        } else {
-            // Fallback on earlier versions
-        }
-    }
 }
 #endif
