@@ -1,11 +1,11 @@
 # Release notes
 
-[EmojiKit](https://github.com/danielsaidi/EmojiKit) tries to honor semantic versioning:
+[EmojiKit](https://github.com/danielsaidi/EmojiKit) uses semantic versioning with the following strategy:
 
 * Deprecations can happen in any version.
 * Deprecations are only removed in `major` updates.
-* Breaking changes should only occur in `major` updates.
-* Breaking changes *can* occur in `minor` & `patch` updates, if needed.
+* Breaking changes must only occur in `major` updates.
+* Breaking changes *can* occur in non-major updates, if the alternative is worse.
 
 
 
