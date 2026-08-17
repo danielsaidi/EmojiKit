@@ -49,4 +49,26 @@ final class Emoji_SkinToneTests: XCTestCase {
     func testSkinToneVariantIsEmptyForSomeEmojis() throws {
         XCTAssertEqual(variants(for: "🚀").count, 0)
     }
+
+    /// This test races threads on emojis that are not cached
+    /// yet, so that they all take the cache-populating write
+    /// path at the same time. It must not warm the cache up
+    /// first, since concurrent reads alone are harmless.
+    func testHasSkinToneVariantsIsSafeToResolveConcurrently() {
+        let emojis = "👍✌️👏🙏💪👋🤙👌🤝☝️✍️💅👂👃🧠🫀🦷👀🤳💃".map { Emoji(String($0)) }
+        let expectation = expectation(description: "Concurrent resolves")
+        expectation.expectedFulfillmentCount = 20
+
+        for _ in 0..<20 {
+            DispatchQueue.global().async {
+                _ = emojis.map { $0.hasSkinToneVariants }
+                expectation.fulfill()
+            }
+        }
+
+        wait(for: [expectation], timeout: 30)
+
+        XCTAssertTrue(hasVariants("👍"))
+        XCTAssertFalse(hasVariants("🚀"))
+    }
 }

@@ -12,11 +12,12 @@ public extension Emoji {
 
     /// Whether or not the emoji has any skin tone variants.
     var hasSkinToneVariants: Bool {
-        Self.skinToneVariantCache[char] ?? {
-            let result = char.hasEmojiSkinToneVariants
-            Self.skinToneVariantCache[char] = result
-            return result
-        }()
+        if let cached = Self.skinToneVariantCache.value(for: char) {
+            return cached
+        }
+        let result = char.hasEmojiSkinToneVariants
+        Self.skinToneVariantCache.setValue(result, for: char)
+        return result
     }
 
     /// The emoji's neutral skin tone variant.
@@ -38,7 +39,35 @@ public extension Emoji {
 
 extension Emoji {
 
-    nonisolated(unsafe) static var skinToneVariantCache: [String: Bool] = [:]
+    /// A thread-safe cache for ``Emoji/hasSkinToneVariants``.
+    ///
+    /// The lock is only held while reading and writing to a
+    /// dictionary, never while the value is resolved, since
+    /// a resolve involves text measuring that mustn't block.
+    static let skinToneVariantCache = SkinToneVariantCache()
+
+    /// A lock-backed cache that can be safely used from any
+    /// number of threads at once.
+    ///
+    /// This uses `NSLock` instead of `Mutex`, since a mutex
+    /// requires iOS 18, macOS 15 and aligned versions.
+    final class SkinToneVariantCache: @unchecked Sendable {
+
+        private var storage = [String: Bool]()
+        private let lock = NSLock()
+
+        func value(for key: String) -> Bool? {
+            lock.lock()
+            defer { lock.unlock() }
+            return storage[key]
+        }
+
+        func setValue(_ value: Bool, for key: String) {
+            lock.lock()
+            defer { lock.unlock() }
+            storage[key] = value
+        }
+    }
 
     var neutralSkinToneVariantOverride: Emoji? {
         skinToneVariantOverrides?.first

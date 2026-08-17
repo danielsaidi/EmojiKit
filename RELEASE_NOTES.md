@@ -9,6 +9,12 @@
 
 
 
+## 3.0.1
+
+This version reimplements the skin variant cache to avoid random crashes.
+
+
+
 ## 3.0
 
 This version bumps all deployment targets to be able to exclusively use modern APIs.
