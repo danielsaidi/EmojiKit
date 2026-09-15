@@ -9,6 +9,16 @@
 
 
 
+## 3.1
+
+This version adds support for more languages.
+
+### 🌐 Localization
+
+* Thanks to [abdummm](https://github.com/abdummm), EmojiKit is now localized in Arabic.
+
+
+
 ## 3.0.1
 
 This version reimplements the skin variant cache to avoid random crashes.

@@ -49,8 +49,8 @@ See the online [documentation][Documentation] for more information.
 
 EmojiKit is localized in the following languages:
 
-*  🇸🇦 Arabic
-- 🇨🇳 Chinese (Simplified)
+* 🇸🇦 Arabic
+* 🇨🇳 Chinese (Simplified)
 * 🇬🇧 English
 * 🇳🇱 Dutch
 * 🇫🇷 French
